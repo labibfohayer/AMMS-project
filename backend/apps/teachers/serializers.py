@@ -8,7 +8,11 @@ User = get_user_model()
 class TeacherListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = ['id', 'teacher_id', 'name', 'name_bn', 'phone', 'designation', 'designation_bn', 'is_active']
+        fields = [
+            'id', 'teacher_id', 'name', 'name_bn', 'phone', 'photo', 
+            'staff_type', 'designation', 'designation_bn', 'qualification', 
+            'joining_date', 'monthly_salary', 'address', 'is_active'
+        ]
 
 class TeacherDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,12 +34,15 @@ class TeacherCreateSerializer(serializers.ModelSerializer):
         # Determine role based on staff_type
         role = 'teacher' if staff_type == 'teacher' else 'staff'
         
+        photo = validated_data.get('photo', None)
+        
         user = User(
             phone=phone,
             name=name,
             name_bn=name_bn,
             role=role,
-            is_active=True
+            is_active=True,
+            photo=photo
         )
         user.set_password(phone) # default password is phone
         user.save() # This triggers ID generation

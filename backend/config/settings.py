@@ -6,7 +6,7 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-default')
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-amms-madrasah-mgmt-system-secret-key-32bytes-secure')
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
 if ENVIRONMENT == 'production':
@@ -23,6 +23,7 @@ if ENVIRONMENT == 'production':
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
     DEBUG = True
+    ALLOWED_HOSTS = ['*']
     DATABASES = {
         'default': {
             'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
@@ -105,7 +106,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 # STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

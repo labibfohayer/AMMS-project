@@ -16,3 +16,22 @@ class HostelRoom(models.Model):
 
     def __str__(self):
         return self.room_number
+
+class HostelMeal(models.Model):
+    student = models.ForeignKey('students.Student', on_delete=models.CASCADE, related_name='hostel_meals')
+    date = models.DateField()
+    breakfast = models.BooleanField(default=True)
+    lunch = models.BooleanField(default=True)
+    dinner = models.BooleanField(default=True)
+    note = models.CharField(max_length=255, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['student', 'date']
+
+    @property
+    def total_meals(self):
+        return (1 if self.breakfast else 0) + (1 if self.lunch else 0) + (1 if self.dinner else 0)
+
+    def __str__(self):
+        return f"{self.student.name} - {self.date} ({self.total_meals} meals)"

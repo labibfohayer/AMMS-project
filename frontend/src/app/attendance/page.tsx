@@ -2,6 +2,8 @@
 import AppLayout from '@/components/layout/AppLayout';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
+import { UserCheck, ShieldCheck } from 'lucide-react';
 
 export default function Attendance() {
     const [attendance, setAttendance] = useState<Record<number, boolean>>({ 1: true, 2: true, 3: false });
@@ -21,6 +23,19 @@ export default function Attendance() {
 
     return (
         <AppLayout title="উপস্থিতি">
+            <div className="flex flex-wrap items-center gap-2 mb-4 bg-slate-100 p-1 rounded-xl text-xs font-bold">
+                <button className="flex-1 py-2 rounded-lg bg-white shadow-sm text-emerald-900 font-extrabold text-center">
+                    ছাত্রদের উপস্থিতি
+                </button>
+                <Link href="/students/leaves" className="flex-1 py-2 rounded-lg text-slate-600 hover:text-emerald-800 text-center flex items-center justify-center gap-1.5 transition-colors">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <span>ছুটি ও গেটপাস</span>
+                </Link>
+                <Link href="/teachers" className="flex-1 py-2 rounded-lg text-slate-600 hover:text-emerald-800 text-center flex items-center justify-center gap-1.5 transition-colors">
+                    <UserCheck className="w-4 h-4 text-emerald-600" />
+                    <span>শিক্ষক হাজিরা ও বেতন</span>
+                </Link>
+            </div>
             <div className="bg-white p-4 rounded-xl shadow-sm mb-4">
                 <select className="w-full p-2 border border-gray-200 rounded-lg focus:outline-none focus:border-primary mb-3">
                     <option>শ্রেণী নির্বাচন করুন</option>

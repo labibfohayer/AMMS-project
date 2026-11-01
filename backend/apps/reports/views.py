@@ -238,3 +238,104 @@ class ExamResultReportView(views.APIView):
         response = HttpResponse(buffer.getvalue(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename="exam_result_report.xlsx"'
         return response
+
+class AnnualFinancialAuditView(views.APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        year_str = request.query_params.get('year')
+        try:
+            year = int(year_str) if year_str else date.today().year
+        except ValueError:
+            year = date.today().year
+
+        from apps.fees.models import FeePayment, Expense
+        from apps.fees.utils import BANGLA_MONTHS
+
+        # 1. Total income & expense for the year
+        payments_qs = FeePayment.objects.filter(payment_date__year=year)
+        expenses_qs = Expense.objects.filter(expense_date__year=year)
+
+        total_income = payments_qs.aggregate(total=Sum('amount_paid'))['total'] or Decimal('0.00')
+        total_expense = expenses_qs.aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
+        net_surplus = total_income - total_expense
+        is_surplus = net_surplus >= 0
+
+        total_receipts = payments_qs.count()
+        total_vouchers = expenses_qs.count()
+
+        # 2. 12-Month Breakdown (Monthly trend)
+        monthly_trend = []
+        for m in range(1, 13):
+            m_inc = payments_qs.filter(payment_date__month=m).aggregate(total=Sum('amount_paid'))['total'] or Decimal('0.00')
+            m_exp = expenses_qs.filter(expense_date__month=m).aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
+            monthly_trend.append({
+                'month': m,
+                'month_name': BANGLA_MONTHS.get(m, str(m)),
+                'month_short': BANGLA_MONTHS.get(m, str(m))[:3],
+                'income': m_inc,
+                'expense': m_exp,
+                'net': m_inc - m_exp
+            })
+
+        # 3. Expense Breakdown by Category
+        CATEGORY_NAMES = dict(Expense.EXPENSE_CATEGORIES)
+        expense_by_cat = []
+        for item in expenses_qs.values('category').annotate(total=Sum('amount'), count=Count('id')).order_by('-total'):
+            cat = item['category']
+            tot = item['total']
+            pct = round((float(tot) / float(total_expense) * 100), 1) if total_expense > 0 else 0
+            expense_by_cat.append({
+                'category': cat,
+                'name': CATEGORY_NAMES.get(cat, cat),
+                'total': tot,
+                'percentage': pct,
+                'count': item['count']
+            })
+
+        # 4. Income Breakdown by Payment Type
+        TYPE_NAMES = {
+            'monthly': 'মাসিক বেতন ও টিউশন ফি',
+            'hostel': 'হোস্টেল ও খাবার মেস ফি',
+            'exam': 'পরীক্ষা ফি ও রেজাল্ট কার্ড',
+            'admission': 'নতুন ভর্তি ও সেশন ফি',
+            'other': 'বিবিধ অনুদান ও অন্যান্য'
+        }
+        income_by_type = []
+        for item in payments_qs.values('payment_type').annotate(total=Sum('amount_paid'), count=Count('id')).order_by('-total'):
+            ptype = item['payment_type']
+            tot = item['total']
+            pct = round((float(tot) / float(total_income) * 100), 1) if total_income > 0 else 0
+            income_by_type.append({
+                'type': ptype,
+                'name': TYPE_NAMES.get(ptype, ptype),
+                'total': tot,
+                'percentage': pct,
+                'count': item['count']
+            })
+
+        # 5. Key Financial Ratios & Stats
+        active_months = len([m for m in monthly_trend if m['income'] > 0 or m['expense'] > 0]) or 1
+        avg_monthly_income = round(total_income / Decimal(active_months), 2)
+        avg_monthly_expense = round(total_expense / Decimal(active_months), 2)
+
+        highest_income_month = max(monthly_trend, key=lambda x: x['income'])
+        highest_expense_month = max(monthly_trend, key=lambda x: x['expense'])
+
+        return Response({
+            'year': year,
+            'total_income': total_income,
+            'total_expense': total_expense,
+            'net_surplus': net_surplus,
+            'is_surplus': is_surplus,
+            'total_receipts': total_receipts,
+            'total_vouchers': total_vouchers,
+            'active_months': active_months,
+            'avg_monthly_income': avg_monthly_income,
+            'avg_monthly_expense': avg_monthly_expense,
+            'highest_income_month': highest_income_month,
+            'highest_expense_month': highest_expense_month,
+            'monthly_trend': monthly_trend,
+            'expense_by_category': expense_by_cat,
+            'income_by_type': income_by_type
+        })

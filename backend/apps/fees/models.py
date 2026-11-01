@@ -38,3 +38,28 @@ class FeeReminder(models.Model):
     year = models.IntegerField()
     sent_at = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
+
+class Expense(models.Model):
+    EXPENSE_CATEGORIES = [
+        ('salary', 'শিক্ষক ও স্টাফ বেতন (Salary)'),
+        ('food', 'মেস ও খাদ্য সামগ্রী (Hostel & Food)'),
+        ('utility', 'বিদ্যুৎ, গ্যাস ও পানি বিল (Utility Bills)'),
+        ('maintenance', 'ক্যাম্পাস মেরামত ও পরিচ্ছন্নতা (Maintenance)'),
+        ('stationery', 'প্রিন্টিং ও স্টেশনারি (Printing & Stationery)'),
+        ('entertainment', 'আপ্যায়ন ও মেহমানদারি (Refreshments)'),
+        ('conveyance', 'যাতায়াত ও পরিবহন (Conveyance)'),
+        ('other', 'বিবিধ পরিচালনা ব্যয় (Miscellaneous)'),
+    ]
+    
+    title = models.CharField(max_length=255)
+    category = models.CharField(max_length=50, choices=EXPENSE_CATEGORIES, default='other')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    expense_date = models.DateField()
+    voucher_number = models.CharField(max_length=50, unique=True)
+    spent_by = models.CharField(max_length=255, blank=True)
+    note = models.TextField(blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.voucher_number} - {self.title} (৳{self.amount})"

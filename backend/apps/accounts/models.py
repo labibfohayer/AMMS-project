@@ -53,7 +53,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         else:
             prefix = 'USR'
         
-        ids = User.objects.filter(user_id__startswith=prefix).values_list('user_id', flat=True)
+        ids = list(User.objects.filter(user_id__startswith=prefix).values_list('user_id', flat=True))
+        if prefix in ['TCH', 'STF']:
+            try:
+                from apps.teachers.models import Teacher
+                ids += list(Teacher.objects.filter(teacher_id__startswith=prefix).values_list('teacher_id', flat=True))
+            except Exception:
+                pass
+        elif prefix.startswith('STU'):
+            try:
+                from apps.students.models import Student
+                ids += list(Student.objects.filter(student_id__startswith=prefix).values_list('student_id', flat=True))
+            except Exception:
+                pass
+
         max_seq = 0
         for uid in ids:
             try:

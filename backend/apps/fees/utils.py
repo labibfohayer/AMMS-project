@@ -23,6 +23,20 @@ def generate_receipt_number():
         seq = 1
     return f"RCP-{year}-{seq:04d}"
 
+def generate_voucher_number():
+    year = datetime.date.today().year
+    from .models import Expense
+    last_exp = Expense.objects.filter(voucher_number__startswith=f"VCH-{year}-").order_by('-id').first()
+    if last_exp:
+        try:
+            last_seq = int(last_exp.voucher_number.split('-')[-1])
+            seq = last_seq + 1
+        except Exception:
+            seq = Expense.objects.filter(voucher_number__startswith=f"VCH-{year}-").count() + 1
+    else:
+        seq = 1
+    return f"VCH-{year}-{seq:04d}"
+
 def generate_receipt_pdf(payment):
     buffer = io.BytesIO()
     p = canvas.Canvas(buffer, pagesize=A4)

@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/exams/', include('apps.exams.urls')),
     path('api/library/', include('apps.library.urls')),
     path('api/notices/', include('apps.notices.urls')),
+    path('api/notifications/', include('apps.notifications.urls')),
     path('api/reports/', include('apps.reports.urls')),
     path('api/force-setup/', force_setup),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
