@@ -4,7 +4,7 @@
 import { useState, useMemo } from 'react';
 import AppLayout from '@/components/layout/AppLayout';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '@/lib/api';
+import api, { getMediaUrl } from '@/lib/api';
 import { 
   UserCircle, Plus, Search, Calendar, DollarSign, Printer, 
   CheckCircle2, XCircle, Clock, CalendarCheck, CreditCard, 
@@ -82,11 +82,7 @@ export default function Teachers() {
   const handleOpenEditTeacher = (t: any) => {
     setEditingTeacher(t);
     setEditPhotoFile(null);
-    setEditPhotoPreview(
-      t.photo
-        ? (t.photo.startsWith('http') ? t.photo : `http://127.0.0.1:8001${t.photo.startsWith('/') ? '' : '/'}${t.photo}`)
-        : null
-    );
+    setEditPhotoPreview(getMediaUrl(t.photo));
   };
 
   const deleteTeacherMutation = useMutation({
@@ -560,7 +556,7 @@ export default function Teachers() {
                     t.designation_bn?.includes('অধ্যক্ষ');
                   const photoUrl = isChiefPrincipal 
                     ? '/principal.jpg' 
-                    : (t.photo ? (t.photo.startsWith('http') ? t.photo : `http://127.0.0.1:8001${t.photo.startsWith('/') ? '' : '/'}${t.photo}`) : null);
+                    : (t.photo ? getMediaUrl(t.photo) : null);
 
                   return (
                     <div

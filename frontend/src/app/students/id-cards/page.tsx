@@ -4,7 +4,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import api from '@/lib/api';
+import api, { getMediaUrl } from '@/lib/api';
 import { 
   Printer, ArrowLeft, Filter, Search, CheckSquare, Square, 
   Layers, Scissors, ShieldCheck, Phone, MapPin, Sparkles, Award, User, RefreshCw
@@ -353,7 +353,7 @@ export default function BulkIdCardsPage() {
                                   {student.photo ? (
                                     /* eslint-disable-next-line @next/next/no-img-element */
                                     <img 
-                                      src={student.photo.startsWith('http') ? student.photo : `http://127.0.0.1:8001${student.photo.startsWith('/') ? '' : '/'}${student.photo}`} 
+                                      src={getMediaUrl(student.photo)} 
                                       alt={student.name} 
                                       className="w-full h-full object-cover" 
                                     />
@@ -519,7 +519,7 @@ export default function BulkIdCardsPage() {
                                 {student.photo ? (
                                   /* eslint-disable-next-line @next/next/no-img-element */
                                   <img 
-                                    src={student.photo.startsWith('http') ? student.photo : `http://127.0.0.1:8001${student.photo.startsWith('/') ? '' : '/'}${student.photo}`} 
+                                    src={getMediaUrl(student.photo)} 
                                     alt={student.name} 
                                     className="w-full h-full object-cover" 
                                   />

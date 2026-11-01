@@ -7,7 +7,7 @@ import {
   CreditCard, ArrowLeft, Trash2, Edit, AlertOctagon, X, Check, ShieldAlert
 } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '@/lib/api';
+import api, { getMediaUrl } from '@/lib/api';
 import { use, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
@@ -210,7 +210,7 @@ export default function StudentDetailClient({ params }: { params?: Promise<{ id:
                                 {student.photo ? (
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img 
-                                        src={student.photo.startsWith('http') ? student.photo : `http://127.0.0.1:8001${student.photo.startsWith('/') ? '' : '/'}${student.photo}`} 
+                                        src={getMediaUrl(student.photo)} 
                                         alt={student.name} 
                                         className="w-full h-full object-cover" 
                                     />

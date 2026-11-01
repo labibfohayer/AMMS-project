@@ -1,7 +1,14 @@
 /* eslint-disable */
 import axios from 'axios';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
+export const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://amms-backend-8zzi.onrender.com';
+
+export function getMediaUrl(path: string | null | undefined): string {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `${API_BASE}${cleanPath}`;
+}
 
 const api = axios.create({ baseURL: API_BASE });
 

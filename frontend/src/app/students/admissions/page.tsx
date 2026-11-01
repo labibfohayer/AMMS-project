@@ -5,7 +5,7 @@ import { useState, useMemo, useEffect } from 'react';
 import AppLayout from '@/components/layout/AppLayout';
 import Link from 'next/link';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '@/lib/api';
+import api, { getMediaUrl } from '@/lib/api';
 import toast from 'react-hot-toast';
 import {
   CheckCircle2, AlertCircle, Clock, Search, Filter, Plus, Printer,
@@ -590,7 +590,7 @@ export default function AdmissionApprovalPortal() {
                         <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-emerald-500/30 shadow-xs shrink-0">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
-                            src={app.photo.startsWith('http') ? app.photo : `http://localhost:8001${app.photo.startsWith('/') ? '' : '/'}${app.photo}`}
+                            src={getMediaUrl(app.photo)}
                             alt={app.name}
                             className="w-full h-full object-cover"
                           />
@@ -775,7 +775,7 @@ export default function AdmissionApprovalPortal() {
                     <div className="w-10 h-10 rounded-xl overflow-hidden border border-emerald-500/40 shrink-0">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={selectedApp.photo.startsWith('http') ? selectedApp.photo : `http://localhost:8001${selectedApp.photo.startsWith('/') ? '' : '/'}${selectedApp.photo}`}
+                        src={getMediaUrl(selectedApp.photo)}
                         alt={selectedApp.name}
                         className="w-full h-full object-cover"
                       />

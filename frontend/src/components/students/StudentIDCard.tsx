@@ -3,6 +3,7 @@
 import React from 'react';
 import { Printer, ShieldCheck, User, QrCode, Phone, MapPin, Droplets, Calendar, Award } from 'lucide-react';
 import { toBanglaDigit } from '@/lib/numberToBanglaWords';
+import { getMediaUrl } from '@/lib/api';
 
 export interface StudentIDData {
   id: number | string;
@@ -135,7 +136,7 @@ export default function StudentIDCard({ student, onClose }: StudentIDCardProps) 
                       {student.photo ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img 
-                          src={student.photo.startsWith('http') ? student.photo : `http://127.0.0.1:8001${student.photo.startsWith('/') ? '' : '/'}${student.photo}`} 
+                          src={getMediaUrl(student.photo)} 
                           alt={student.name} 
                           className="w-full h-full object-cover"
                         />
