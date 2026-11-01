@@ -13,6 +13,10 @@ def force_setup(request):
             {'phone': '01712633264', 'role': 'principal', 'name': 'Maulana Omar Faruk Mujahidi', 'name_bn': 'প্রিন্সিপাল মাওলানা ওমর ফারুক মুজাহিদী'},
             {'phone': '01580506445', 'role': 'managing_director', 'name': 'Labib Fohayer', 'name_bn': 'লাবিব ফোহায়ের'},
             {'phone': '01711000010', 'role': 'vice_principal', 'name': 'Mufti Habibur Rahman', 'name_bn': 'মুফতি হাবিবুর রহমান'},
+            {'phone': '01711000001', 'role': 'teacher', 'name': 'Hafez Maulana Abdur Rahman', 'name_bn': 'হাফেজ মাওলানা আবদুর রহমান'},
+            {'phone': '01711000004', 'role': 'staff', 'name': 'Muhammad Billal Hossain', 'name_bn': 'মুহাম্মদ বিল্লাল হোসেন'},
+            {'phone': '01811223344', 'role': 'guardian', 'name': 'Muhammad Rafiqul Islam', 'name_bn': 'মুহাম্মদ রফিকুল ইসলাম'},
+            {'phone': '01900000001', 'role': 'student', 'name': 'Abdullah Al Mahdi', 'name_bn': 'আবদুল্লাহ আল মাহদী'},
         ]
         results = []
         for udata in users_to_ensure:
@@ -24,17 +28,17 @@ def force_setup(request):
                     name=udata['name'],
                     name_bn=udata['name_bn'],
                     role=udata['role'],
-                    is_staff=True
+                    is_staff=(udata['role'] in ['principal', 'managing_director', 'vice_principal', 'teacher', 'staff'])
                 )
-                results.append(f"created {udata['role']} ({udata['phone']}) with id {user.user_id}")
+                results.append(f"created {udata['role']} ({udata['phone']})")
             else:
                 user.name = udata['name']
                 user.name_bn = udata['name_bn']
                 user.role = udata['role']
-                user.is_staff = True
+                user.is_staff = (udata['role'] in ['principal', 'managing_director', 'vice_principal', 'teacher', 'staff'])
                 user.set_password('admin123')
                 user.save()
-                results.append(f"updated {udata['role']} ({udata['phone']}) with id {user.user_id}")
+                results.append(f"updated {udata['role']} ({udata['phone']})")
         return JsonResponse({"status": "success", "results": results})
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)})

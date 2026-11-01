@@ -373,6 +373,22 @@ def seed_database():
         )
         students.append(student)
 
+    # 7.1 Guardians for Students
+    for s in students_spec:
+        g_phone = s[5]
+        g_name = s[3]
+        g_user, _ = User.objects.get_or_create(
+            phone=g_phone,
+            defaults={
+                'name': s[2],
+                'name_bn': g_name,
+                'role': 'guardian',
+                'is_active': True
+            }
+        )
+        g_user.set_password('admin123')
+        g_user.save()
+
     print(f"✓ Students created: {len(students)} active students")
 
     # 8. Student Attendance (For today)
