@@ -8,28 +8,37 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-amms-madrasah-mgmt-system-secret-key-32bytes-secure')
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
+DEBUG = config('DEBUG', default=(ENVIRONMENT != 'production'), cast=bool)
+ALLOWED_HOSTS = ['*']
 
-if ENVIRONMENT == 'production':
-    DEBUG = False
+DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL:
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.getenv('DATABASE_URL'),
+            default=DATABASE_URL,
             conn_max_age=600,
-            ssl_require=True
+            ssl_require=not ('localhost' in DATABASE_URL or '127.0.0.1' in DATABASE_URL or 'sqlite' in DATABASE_URL)
         )
     }
-    ALLOWED_HOSTS = ['*']
-    STATIC_ROOT = BASE_DIR / 'staticfiles'
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
-    DEBUG = True
-    ALLOWED_HOSTS = ['*']
     DATABASES = {
         'default': {
             'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
             'NAME': BASE_DIR / config('DB_NAME', default='amms.sqlite3'),
         }
     }
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -102,9 +111,6 @@ LANGUAGE_CODE = 'bn'
 TIME_ZONE = 'Asia/Dhaka'
 USE_I18N = True
 USE_TZ = True
-
-STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: amms-backend
+    env: python
+    rootDir: backend
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ENVIRONMENT
+        value: "production"
