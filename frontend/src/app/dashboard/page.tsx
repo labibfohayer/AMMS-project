@@ -143,10 +143,11 @@ function PrincipalDashboard() {
     queryFn: async () => {
       const res = await api.get('/api/reports/dashboard/');
       return res.data;
-    }
+    },
+    placeholderData: (previousData) => previousData,
   });
 
-  if (isLoading) {
+  if (isLoading && !data) {
     return (
       <div className="flex flex-col items-center justify-center p-12 text-emerald-800">
         <div className="w-8 h-8 border-4 border-emerald-500/30 border-t-emerald-600 rounded-full animate-spin mb-3" />

@@ -35,16 +35,19 @@ class DashboardStatsView(views.APIView):
         total_teachers = Teacher.objects.filter(is_active=True, staff_type='teacher').count()
         total_staff = Teacher.objects.filter(is_active=True).exclude(staff_type='teacher').count()
 
-        # Fee dues
-        all_active_students = Student.objects.filter(status='active').select_related()
-        total_due = Decimal('0')
-        for s in all_active_students:
-            months_elapsed = current_month
-            expected = s.monthly_fee * months_elapsed
-            paid = FeePayment.objects.filter(student=s, payment_type='monthly', year=current_year).aggregate(total=Sum('amount_paid'))['total'] or Decimal('0')
-            due = expected - paid
-            if due > 0:
-                total_due += due
+        # Fee dues: fast bulk aggregate queries (O(1) instead of O(N) student loop)
+        total_monthly_rate = Student.objects.filter(status='active').aggregate(
+            total=Sum('monthly_fee')
+        )['total'] or Decimal('0')
+        expected_total = total_monthly_rate * current_month
+
+        total_paid = FeePayment.objects.filter(
+            student__status='active',
+            payment_type='monthly', 
+            year=current_year
+        ).aggregate(total=Sum('amount_paid'))['total'] or Decimal('0')
+
+        total_due = max(Decimal('0'), expected_total - total_paid)
 
         # Latest notices (5)
         latest_notices = Notice.objects.filter(is_active=True).order_by('-created_at')[:5]

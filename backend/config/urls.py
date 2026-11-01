@@ -57,6 +57,7 @@ urlpatterns = [
     path('api/notices/', include('apps.notices.urls')),
     path('api/notifications/', include('apps.notifications.urls')),
     path('api/reports/', include('apps.reports.urls')),
+    path('api/health/', lambda r: JsonResponse({'status': 'ok', 'message': 'AMMS Backend Active'})),
     path('api/force-setup/', force_setup),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
 

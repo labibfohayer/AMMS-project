@@ -1,0 +1,15 @@
+name: Keep Backend Alive (Zero Cold Starts)
+
+on:
+  schedule:
+    # Ping every 10 minutes so Render never spins down
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping AMMS Backend Health
+        run: |
+          curl -s -f -m 15 "https://amms-backend-8zzi.onrender.com/api/health/" || true

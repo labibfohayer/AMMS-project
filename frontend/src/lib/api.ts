@@ -13,6 +13,11 @@ export function getMediaUrl(path: string | null | undefined): string {
 const api = axios.create({ baseURL: API_BASE });
 
 if (typeof window !== 'undefined') {
+    // 🚀 Background Warmup: Prime backend immediately on page load so it never sleeps
+    try {
+        fetch(`${API_BASE}/api/health/`, { method: 'GET', keepalive: true }).catch(() => {});
+    } catch (_) {}
+
     api.interceptors.request.use((config) => {
         const token = localStorage.getItem('access_token');
         if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
