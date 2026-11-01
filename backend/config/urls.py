@@ -10,9 +10,9 @@ def force_setup(request):
     try:
         from apps.accounts.models import User
         users_to_ensure = [
-            {'phone': '01712633264', 'role': 'principal', 'name': 'Maulana Omar Faruk Mujahidi', 'name_bn': 'প্রিন্সিপাল মাওলানা ওমর ফারুক মুজাহিদী', 'user_id': 'PRIN-001'},
-            {'phone': '01580506445', 'role': 'managing_director', 'name': 'Labib Fohayer', 'name_bn': 'লাবিব ফোহায়ের', 'user_id': 'MD-001'},
-            {'phone': '01711000010', 'role': 'vice_principal', 'name': 'Mufti Habibur Rahman', 'name_bn': 'মুফতি হাবিবুর রহমান', 'user_id': 'VP-001'},
+            {'phone': '01712633264', 'role': 'principal', 'name': 'Maulana Omar Faruk Mujahidi', 'name_bn': 'প্রিন্সিপাল মাওলানা ওমর ফারুক মুজাহিদী'},
+            {'phone': '01580506445', 'role': 'managing_director', 'name': 'Labib Fohayer', 'name_bn': 'লাবিব ফোহায়ের'},
+            {'phone': '01711000010', 'role': 'vice_principal', 'name': 'Mufti Habibur Rahman', 'name_bn': 'মুফতি হাবিবুর রহমান'},
         ]
         results = []
         for udata in users_to_ensure:
@@ -24,19 +24,17 @@ def force_setup(request):
                     name=udata['name'],
                     name_bn=udata['name_bn'],
                     role=udata['role'],
-                    user_id=udata['user_id'],
                     is_staff=True
                 )
-                results.append(f"created {udata['role']}")
+                results.append(f"created {udata['role']} ({udata['phone']}) with id {user.user_id}")
             else:
                 user.name = udata['name']
                 user.name_bn = udata['name_bn']
                 user.role = udata['role']
-                user.user_id = udata['user_id']
                 user.is_staff = True
                 user.set_password('admin123')
                 user.save()
-                results.append(f"updated {udata['role']}")
+                results.append(f"updated {udata['role']} ({udata['phone']}) with id {user.user_id}")
         return JsonResponse({"status": "success", "results": results})
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)})

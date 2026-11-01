@@ -117,14 +117,12 @@ def seed_database():
             name='Labib Fohayer',
             name_bn='লাবিব ফোহায়ের',
             role='managing_director',
-            user_id='MD-001',
             is_staff=True
         )
     else:
         md_user.name = 'Labib Fohayer'
         md_user.name_bn = 'লাবিব ফোহায়ের'
         md_user.role = 'managing_director'
-        md_user.user_id = 'MD-001'
         md_user.is_staff = True
         md_user.set_password('admin123')
         md_user.save()
@@ -138,14 +136,12 @@ def seed_database():
             name='Mufti Habibur Rahman',
             name_bn='মুফতি হাবিবুর রহমান (ভাইস প্রিন্সিপাল)',
             role='vice_principal',
-            user_id='VP-001',
             is_staff=True
         )
     else:
         vp_user.name = 'Mufti Habibur Rahman'
         vp_user.name_bn = 'মুফতি হাবিবুর রহমান (ভাইস প্রিন্সিপাল)'
         vp_user.role = 'vice_principal'
-        vp_user.user_id = 'VP-001'
         vp_user.is_staff = True
         vp_user.set_password('admin123')
         vp_user.save()
