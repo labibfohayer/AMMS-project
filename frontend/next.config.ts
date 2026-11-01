@@ -12,6 +12,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  turbopack: {},
   ...(process.env.NODE_ENV === 'development'
     ? {
         async rewrites() {
