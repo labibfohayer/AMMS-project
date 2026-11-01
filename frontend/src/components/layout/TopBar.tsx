@@ -1,12 +1,22 @@
 /* eslint-disable */
-import { Bell, UserCircle, Globe, Calendar, Sparkles } from 'lucide-react';
+import { Bell, UserCircle, Globe, Calendar, Sparkles, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { getMediaUrl } from '@/lib/api';
 
-export default function TopBar({ title }: { title: string }) {
+interface TopBarProps {
+  title: string;
+  onToggleMobileMenu?: () => void;
+  isMobileMenuOpen?: boolean;
+}
+
+export default function TopBar({ 
+  title, 
+  onToggleMobileMenu, 
+  isMobileMenuOpen = false 
+}: TopBarProps) {
   const { user } = useAuth();
   const { t, isBangla } = useLanguage();
   
@@ -35,11 +45,21 @@ export default function TopBar({ title }: { title: string }) {
     title;
 
   return (
-    <header className="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 px-4 md:px-8 py-3.5 transition-all shadow-xs">
+    <header className="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 px-3.5 sm:px-6 md:px-8 py-3 transition-all shadow-xs">
       <div className="flex justify-between items-center">
-        {/* Title & Date */}
-        <div className="flex items-center gap-3">
-          <Link href="/dashboard" className="w-10 h-10 rounded-full p-[1px] bg-gradient-to-tr from-amber-400 to-emerald-500 flex items-center justify-center md:hidden shrink-0 shadow-sm">
+        {/* Title, Date & Mobile Hamburger Button */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Mobile Hamburger ☰ Button */}
+          <button
+            type="button"
+            onClick={onToggleMobileMenu}
+            aria-label={isMobileMenuOpen ? (isBangla ? "মেনু বন্ধ করুন" : "Close menu") : (isBangla ? "মেনু খুলুন" : "Open menu")}
+            className="md:hidden p-2 -ml-1 text-gray-700 hover:text-emerald-700 hover:bg-emerald-50 active:bg-emerald-100 rounded-xl transition-colors cursor-pointer shrink-0"
+          >
+            {isMobileMenuOpen ? <X size={22} className="text-emerald-700" /> : <Menu size={22} className="text-gray-800" />}
+          </button>
+
+          <Link href="/dashboard" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1px] bg-gradient-to-tr from-amber-400 to-emerald-500 flex items-center justify-center md:hidden shrink-0 shadow-sm">
             <img 
               src="/logo.jpg" 
               alt="আল মদিনা মডেল মাদ্রাসা" 
@@ -47,7 +67,7 @@ export default function TopBar({ title }: { title: string }) {
             />
           </Link>
           <div>
-            <h1 className="font-bold text-lg md:text-xl text-gray-900 tracking-tight leading-tight">
+            <h1 className="font-bold text-base sm:text-lg md:text-xl text-gray-900 tracking-tight leading-tight">
               {localizedTitle}
             </h1>
             <p suppressHydrationWarning className="hidden sm:block text-[11px] text-gray-400 font-medium">
