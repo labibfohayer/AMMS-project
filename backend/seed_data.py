@@ -104,7 +104,51 @@ def seed_database():
     else:
         principal_user.name = 'Maulana Omar Faruk Mujahidi'
         principal_user.name_bn = 'প্রিন্সিপাল মাওলানা ওমর ফারুক মুজাহিদী'
+        principal_user.role = 'principal'
+        principal_user.set_password('admin123')
         principal_user.save()
+
+    # Managing Director (MD)
+    md_user = User.objects.filter(phone='01580506445').first()
+    if not md_user:
+        md_user = User.objects.create_user(
+            phone='01580506445',
+            password='admin123',
+            name='Labib Fohayer',
+            name_bn='লাবিব ফোহায়ের',
+            role='managing_director',
+            user_id='MD-001',
+            is_staff=True
+        )
+    else:
+        md_user.name = 'Labib Fohayer'
+        md_user.name_bn = 'লাবিব ফোহায়ের'
+        md_user.role = 'managing_director'
+        md_user.user_id = 'MD-001'
+        md_user.is_staff = True
+        md_user.set_password('admin123')
+        md_user.save()
+
+    # Vice Principal (VP)
+    vp_user = User.objects.filter(phone='01711000010').first()
+    if not vp_user:
+        vp_user = User.objects.create_user(
+            phone='01711000010',
+            password='admin123',
+            name='Mufti Habibur Rahman',
+            name_bn='মুফতি হাবিবুর রহমান (ভাইস প্রিন্সিপাল)',
+            role='vice_principal',
+            user_id='VP-001',
+            is_staff=True
+        )
+    else:
+        vp_user.name = 'Mufti Habibur Rahman'
+        vp_user.name_bn = 'মুফতি হাবিবুর রহমান (ভাইস প্রিন্সিপাল)'
+        vp_user.role = 'vice_principal'
+        vp_user.user_id = 'VP-001'
+        vp_user.is_staff = True
+        vp_user.set_password('admin123')
+        vp_user.save()
 
     # Principal Teacher Profile
     principal_teacher, _ = Teacher.objects.get_or_create(
