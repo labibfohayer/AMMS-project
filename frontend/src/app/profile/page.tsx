@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import AppLayout from '@/components/layout/AppLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { isLoggedIn } from '@/lib/auth';
 import api, { getMediaUrl } from '@/lib/api';
 import toast from 'react-hot-toast';
 import { 
@@ -13,8 +15,17 @@ import {
 } from 'lucide-react';
 
 export default function ProfilePage() {
-  const { user, setUser } = useAuth();
+  const { user, setUser, isMounted, isAuthenticated } = useAuth();
   const { t, isBangla } = useLanguage();
+  const router = useRouter();
+
+  // Redirect to login if user is not authenticated
+  useEffect(() => {
+    if (!isMounted) return;
+    if (!isAuthenticated && !isLoggedIn()) {
+      router.replace('/login');
+    }
+  }, [isMounted, isAuthenticated, router]);
 
   // Profile Information States
   const [name, setName] = useState('');
@@ -231,13 +242,19 @@ export default function ProfilePage() {
 
   const avatarSrc = getAvatarSrc();
 
-  if (!user && !isLoadingProfile) {
+  if (!isMounted) {
     return (
-      <AppLayout title={isBangla ? "প্রোফাইল" : "Profile"}>
-        <div className="p-8 text-center text-gray-500">
-          {isBangla ? 'অনুগ্রহ করে প্রথমে লগইন করুন' : 'Please login first'}
-        </div>
-      </AppLayout>
+      <div className="min-h-screen bg-[#FAF6ED] flex items-center justify-center p-8">
+        <div className="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-600 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user && !isLoggedIn()) {
+    return (
+      <div className="min-h-screen bg-[#FAF6ED] flex items-center justify-center p-8">
+        <div className="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-600 rounded-full animate-spin" />
+      </div>
     );
   }
 

@@ -1,1 +1,12 @@
-/*    /index.html   200
+/profile/*    /profile/index.html   200
+/dashboard/*  /dashboard/index.html 200
+/guardian/*   /guardian/index.html  200
+/student/*    /student/index.html   200
+/students/*   /students/index.html  200
+/teachers/*   /teachers/index.html  200
+/fees/*       /fees/index.html      200
+/attendance/* /attendance/index.html 200
+/exams/*      /exams/index.html     200
+/notices/*    /notices/index.html   200
+/login/*      /login/index.html     200
+/*            /index.html           200
