@@ -29,3 +29,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'user_id', 'phone', 'name', 'name_bn', 'role', 'photo']
         read_only_fields = ['id', 'user_id', 'role']
+        extra_kwargs = {
+            'phone': {
+                'error_messages': {
+                    'unique': 'এই মোবাইল নম্বরটি ইতিমধ্যে অন্য অ্যাকাউন্টে ব্যবহৃত হচ্ছে।'
+                }
+            }
+        }

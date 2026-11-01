@@ -3,6 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import { getMediaUrl } from '@/lib/api';
 import { 
   Home, Users, CalendarCheck, DollarSign, MoreHorizontal, 
   FileText, Bell, Globe, LogOut, Award, Shield, UserCheck, UserPlus, MessageSquare, ShieldCheck
@@ -20,7 +21,7 @@ export default function BottomNav() {
   const role = user.role;
   let tabs = [];
 
-  if (['principal', 'vice_principal', 'managing_director', 'teacher'].includes(role)) {
+  if (['principal', 'vice_principal', 'managing_director', 'teacher', 'staff'].includes(role)) {
     tabs = [
       { name: isBangla ? 'ড্যাশবোর্ড' : 'Dashboard', href: '/dashboard', icon: Home },
       { name: isBangla ? 'শিক্ষার্থী' : 'Students', href: '/students', icon: Users },
@@ -32,6 +33,7 @@ export default function BottomNav() {
       { name: isBangla ? 'হোয়াটসঅ্যাপ ও বার্তা' : 'WhatsApp & SMS', href: '/notifications', icon: MessageSquare },
       { name: isBangla ? 'নোটিশ বোর্ড' : 'Notice Board', href: '/notices', icon: Bell },
       { name: isBangla ? 'ক্যাশ খাতা ও রিপোর্ট' : 'Reports & Print', href: '/reports', icon: FileText },
+      { name: isBangla ? 'প্রোফাইল সেটিংস' : 'Profile Settings', href: '/profile', icon: Shield },
     ];
   } else if (role === 'guardian') {
     tabs = [
@@ -40,6 +42,7 @@ export default function BottomNav() {
       { name: isBangla ? 'বেতন পরিশোধ' : 'Pay Fees', href: '/guardian/fees', icon: DollarSign },
       { name: isBangla ? 'রেজাল্ট কার্ড' : 'Results', href: '/guardian/results', icon: FileText },
       { name: isBangla ? 'নোটিশ' : 'Notices', href: '/notices', icon: Bell },
+      { name: isBangla ? 'প্রোফাইল সেটিংস' : 'Profile Settings', href: '/profile', icon: Shield },
     ];
   } else {
     tabs = [
@@ -48,6 +51,7 @@ export default function BottomNav() {
       { name: isBangla ? 'র‍্যাংকিং' : 'Rankings', href: '/student/ranking', icon: Award },
       { name: isBangla ? 'উপস্থিতি' : 'Attendance', href: '/student/attendance', icon: CalendarCheck },
       { name: isBangla ? 'নোটিশ' : 'Notices', href: '/notices', icon: Bell },
+      { name: isBangla ? 'প্রোফাইল সেটিংস' : 'Profile Settings', href: '/profile', icon: Shield },
     ];
   }
 
@@ -118,7 +122,9 @@ export default function BottomNav() {
         <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.03] border border-emerald-500/15">
           <Link href="/profile" className="flex items-center gap-2.5 overflow-hidden flex-1 group">
             <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-400 to-emerald-500 p-[1px] shrink-0 overflow-hidden">
-              {user.role === 'managing_director' ? (
+              {user.photo ? (
+                <img src={getMediaUrl(user.photo)} alt={user.name_bn || user.name || 'User'} className="w-full h-full object-cover rounded-full" />
+              ) : user.role === 'managing_director' ? (
                 <img src="/md.jpg" alt={user.name_bn || 'লাবিব ফোহায়ের'} className="w-full h-full object-cover object-top rounded-full" />
               ) : user.role === 'principal' || user.name_bn?.includes('ফারুক') || !user.role ? (
                 <img src="/principal.jpg" alt="মাওলানা ওমর ফারুক" className="w-full h-full object-cover rounded-full" />

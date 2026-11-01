@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import { getMediaUrl } from '@/lib/api';
 
 export default function TopBar({ title }: { title: string }) {
   const { user } = useAuth();
@@ -87,17 +88,35 @@ export default function TopBar({ title }: { title: string }) {
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-500 rounded-full ring-2 ring-white"></span>
           </Link>
 
-          {/* Mobile Profile Icon */}
+          {/* Profile Icon */}
           <Link 
             href="/profile" 
-            title="প্রোফাইল"
-            className="w-9 h-9 rounded-full p-[1px] bg-gradient-to-tr from-amber-400 to-emerald-500 overflow-hidden flex items-center justify-center cursor-pointer md:hidden shadow-sm"
+            title="প্রোফাইল সেটিংস"
+            className="w-9 h-9 rounded-full p-[1px] bg-gradient-to-tr from-amber-400 to-emerald-500 overflow-hidden flex items-center justify-center cursor-pointer shadow-sm hover:ring-2 hover:ring-emerald-400 transition-all shrink-0"
           >
-            <img 
-              src={user?.role === 'managing_director' ? '/md.jpg' : '/principal.jpg'} 
-              alt={user?.name_bn || (user?.role === 'managing_director' ? 'লাবিব ফোহায়ের' : 'মাওলানা ওমর ফারুক')} 
-              className="w-full h-full object-cover object-top rounded-full"
-            />
+            {user?.photo ? (
+              <img 
+                src={getMediaUrl(user.photo)} 
+                alt={user?.name_bn || user?.name || 'User'} 
+                className="w-full h-full object-cover rounded-full"
+              />
+            ) : user?.role === 'managing_director' ? (
+              <img 
+                src="/md.jpg" 
+                alt={user?.name_bn || 'লাবিব ফোহায়ের'} 
+                className="w-full h-full object-cover object-top rounded-full"
+              />
+            ) : user?.role === 'principal' ? (
+              <img 
+                src="/principal.jpg" 
+                alt="মাওলানা ওমর ফারুক" 
+                className="w-full h-full object-cover rounded-full"
+              />
+            ) : (
+              <div className="w-full h-full rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center text-xs">
+                {user?.name_bn?.charAt(0) || user?.name?.charAt(0) || 'U'}
+              </div>
+            )}
           </Link>
         </div>
       </div>

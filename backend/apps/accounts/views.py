@@ -1,6 +1,7 @@
 from rest_framework import generics, status, views
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import (
@@ -143,9 +144,47 @@ class LogoutView(views.APIView):
 class ProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     
     def get_object(self):
         return self.request.user
+
+    def perform_update(self, serializer):
+        old_phone = self.request.user.phone
+        user = serializer.save()
+
+        # 1. Sync Teacher profile if exists
+        try:
+            if hasattr(user, 'teacher_profile'):
+                tp = user.teacher_profile
+                tp.phone = user.phone
+                if user.name:
+                    tp.name = user.name
+                if user.name_bn:
+                    tp.name_bn = user.name_bn
+                if user.photo:
+                    tp.photo = user.photo
+                tp.save()
+        except Exception:
+            pass
+
+        # 2. Sync Student profile if exists
+        try:
+            if hasattr(user, 'student_profile'):
+                sp = user.student_profile
+                if user.photo:
+                    sp.photo = user.photo
+                sp.save()
+        except Exception:
+            pass
+
+        # 3. Sync Guardian children if guardian changed phone
+        try:
+            if user.role == 'guardian' and old_phone != user.phone:
+                from apps.students.models import Student
+                Student.objects.filter(guardian_phone=old_phone).update(guardian_phone=user.phone)
+        except Exception:
+            pass
 
 class PasswordChangeView(views.APIView):
     permission_classes = [IsAuthenticated]
@@ -154,11 +193,34 @@ class PasswordChangeView(views.APIView):
         serializer = PasswordChangeSerializer(data=request.data)
         if serializer.is_valid():
             user = request.user
-            if user.check_password(serializer.validated_data['old_password']):
-                user.set_password(serializer.validated_data['new_password'])
+            old_pass = serializer.validated_data['old_password'].strip()
+            new_pass = serializer.validated_data['new_password'].strip()
+
+            is_valid_old = user.check_password(old_pass)
+            # If student, allow DOB or student123 as initial password
+            if not is_valid_old and user.role == 'student':
+                try:
+                    from apps.students.models import Student
+                    st = Student.objects.filter(user=user).first()
+                    if st and st.date_of_birth:
+                        dob_variants = [
+                            st.date_of_birth.strftime('%d%m%Y'),
+                            st.date_of_birth.strftime('%Y-%m-%d'),
+                            st.date_of_birth.strftime('%d-%m-%Y'),
+                            st.date_of_birth.strftime('%d/%m/%Y'),
+                        ]
+                        if old_pass in dob_variants or old_pass == 'student123':
+                            is_valid_old = True
+                except Exception:
+                    pass
+
+            if is_valid_old:
+                if len(new_pass) < 6:
+                    return Response({'detail': 'নতুন পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।'}, status=status.HTTP_400_BAD_REQUEST)
+                user.set_password(new_pass)
                 user.save()
-                return Response({'detail': 'Password changed successfully.'})
-            return Response({'detail': 'Incorrect old password.'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'detail': 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!'})
+            return Response({'detail': 'বর্তমান (পুরোনো) পাসওয়ার্ডটি সঠিক নয়!'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserListView(generics.ListAPIView):
