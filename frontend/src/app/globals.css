@@ -488,3 +488,19 @@ html[lang="en"] .font-mono {
 .ft-bottom__links a:hover{color:var(--ft-teal);}
 @media (max-width:560px){.ft-bottom__inner{flex-direction:column;align-items:flex-start;}}
 
+/* Header Navigation & Dropdown Animations */
+.dropdown-menu {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+.group:hover .dropdown-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0);
+}
+
+

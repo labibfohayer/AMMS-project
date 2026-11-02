@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { 
-  Phone, Mail, ChevronDown, ChevronRight, 
+  Phone, Mail, ChevronDown, ChevronRight, ChevronLeft,
   MapPin, Clock, BookOpen, Layers, MessageSquare, HeartHandshake, 
   Tv, Users, ShieldCheck, Utensils, Award, Send, CheckCircle2,
-  Menu, X
+  Menu, X, Sparkles, Building2, School
 } from 'lucide-react';
 
 export default function Home() {
@@ -17,13 +17,33 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  // Auto-play for Hero Slider
+  // Real Al-Madina Model Madrasah Photos & Captions
   const slides = [
-    { src: '/images/slider/1.webp', alt: 'Assembly & Campus Grounds' },
-    { src: '/principal-class.png', alt: 'Principal Classroom Teaching' },
-    { src: '/images/slider/7.webp', alt: 'Islamic Learning' },
-    { src: '/quran-class.png', alt: 'Hifzul Quran Department' },
-    { src: '/images/slider/2.webp', alt: 'Students Academic Activities' },
+    { 
+      src: '/images/students-group.png', 
+      title: 'আল-মদিনা মডেল মাদ্রাসার শিক্ষার্থীবৃন্দ',
+      subtitle: 'নৈতিক তারবিয়াহ ও আনন্দঘন পরিবেশে যুগোপযোগী পাঠদান'
+    },
+    { 
+      src: '/images/smart-classroom.png', 
+      title: 'ডিজিটাল ও স্মার্ট মাল্টিমিডিয়া ক্লাসরুম',
+      subtitle: 'আধুনিক প্রযুক্তিনির্ভর সৃজনশীল শ্রেণি কার্যক্রম'
+    },
+    { 
+      src: '/images/principal-class.png', 
+      title: 'অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদীর পাঠদান',
+      subtitle: 'অভিজ্ঞ ও নিবেদিতপ্রাণ ওস্তাদগণের সরাসরি সার্বক্ষণিক তত্ত্বাবধান'
+    },
+    { 
+      src: '/images/quran-class.png', 
+      title: 'হিফজুল কুরআন ও নাজেরা বিভাগ',
+      subtitle: 'আন্তর্জাতিক মানসম্পন্ন তাজবিদ চর্চা ও সহীহ বিশুদ্ধ কুরআন শিক্ষা'
+    },
+    { 
+      src: '/images/guardians-meeting-1.png', 
+      title: 'নিয়মিত অভিভাবক সমাবেশ ও মতবিনিময়',
+      subtitle: 'শিক্ষার্থী অগ্রগতি মূল্যায়নে শিক্ষক-অভিভাবক যৌথ সমন্বয়'
+    },
   ];
 
   useEffect(() => {
@@ -127,44 +147,44 @@ export default function Home() {
           <div className="nav-desktop hidden md:flex items-center gap-4 text-gray-700 font-medium text-sm">
             <Link href="/" className="hover:text-teal-600 text-teal-700 font-bold">হোম</Link>
 
-            <div className="relative group">
-              <a href="#about" className="hover:text-teal-600 inline-flex items-center gap-0.5">
+            <div className="relative group py-2">
+              <a href="#about" className="hover:text-teal-600 inline-flex items-center gap-0.5 cursor-pointer">
                 আমাদের সম্পর্কে <ChevronDown size={14} className="ml-0.5" />
               </a>
-              <div className="absolute left-0 mt-2 p-2 w-48 bg-white rounded-md shadow-lg dropdown-menu z-50">
-                <a href="#about" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-xs font-semibold">
+              <div className="dropdown-menu absolute left-0 top-full p-2 w-52 bg-white rounded-xl shadow-xl border border-slate-100 z-50">
+                <a href="#about" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
                   অধ্যক্ষ মহোদয়ের বাণী
                 </a>
-                <a href="#why" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-xs font-semibold">
+                <a href="#why" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
                   আমাদের বিশেষত্ব
                 </a>
               </div>
             </div>
 
-            <div className="relative group">
-              <a href="#branches" className="hover:text-teal-600 inline-flex items-center gap-0.5">
+            <div className="relative group py-2">
+              <a href="#branches" className="hover:text-teal-600 inline-flex items-center gap-0.5 cursor-pointer">
                 ক্যাম্পাস <ChevronDown size={14} className="ml-0.5" />
               </a>
-              <div className="absolute left-0 mt-2 p-2 w-48 bg-white rounded-md shadow-lg dropdown-menu z-50">
-                <a href="#branches" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-xs font-semibold">
+              <div className="dropdown-menu absolute left-0 top-full p-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 z-50">
+                <a href="#branches" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
                   মহাখালী মূল ক্যাম্পাস
                 </a>
-                <a href="#branches" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-xs font-semibold">
-                  রিসার্চ ইনস্টিটিউট
+                <a href="#branches" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
+                  আসন্ন মহিলা শাখা (পরিকল্পনাধীন)
                 </a>
               </div>
             </div>
 
-            <div className="relative group">
-              <a href="#fac" className="hover:text-teal-600 inline-flex items-center gap-0.5">
+            <div className="relative group py-2">
+              <a href="#fac" className="hover:text-teal-600 inline-flex items-center gap-0.5 cursor-pointer">
                 সুযোগ-সুবিধা <ChevronDown size={14} className="ml-0.5" />
               </a>
-              <div className="absolute left-0 mt-2 p-2 w-48 bg-white rounded-md shadow-lg dropdown-menu z-50">
-                <a href="#fac" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-xs font-semibold">
+              <div className="dropdown-menu absolute left-0 top-full p-2 w-52 bg-white rounded-xl shadow-xl border border-slate-100 z-50">
+                <a href="#fac" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
                   শীতাতপ নিয়ন্ত্রিত ক্যাম্পাস
                 </a>
-                <a href="#fac" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-xs font-semibold">
-                  মাল্টিমিডিয়া প্রজেক্টর
+                <a href="#fac" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
+                  স্মার্ট মাল্টিমিডিয়া ক্লাসরুম
                 </a>
               </div>
             </div>
@@ -249,42 +269,83 @@ export default function Home() {
             {/* Hero Grid (.hm-hero__grid) */}
             <div className="hm-hero__grid" style={{ marginTop: '20px' }}>
               
-              {/* Left Column: Hero Slider (.hm-hero__slider) */}
-              <div className="hm-hero__slider">
-                <div className="swiper mySwiper" style={{ height: '420px', position: 'relative' }}>
-                  <div className="swiper-wrapper h-full relative">
-                    {slides.map((slide, idx) => (
-                      <div 
-                        key={idx}
-                        className={`swiper-slide absolute inset-0 transition-opacity duration-1000 ${
-                          activeSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                        }`}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img 
-                          src={slide.src} 
-                          alt={slide.alt} 
-                          className="w-full h-full object-cover rounded-xl"
-                        />
-                      </div>
-                    ))}
+              {/* Left Column: Hero Slider */}
+              <div className="relative w-full h-[340px] sm:h-[400px] lg:h-[430px] rounded-2xl overflow-hidden shadow-lg bg-slate-900 group">
+                {slides.map((slide, idx) => (
+                  <div 
+                    key={idx}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      width: '100%',
+                      height: '100%',
+                      opacity: activeSlide === idx ? 1 : 0,
+                      zIndex: activeSlide === idx ? 10 : 0,
+                      transition: 'opacity 0.75s ease-in-out, transform 0.75s ease-in-out',
+                      transform: activeSlide === idx ? 'scale(1)' : 'scale(1.03)',
+                      pointerEvents: activeSlide === idx ? 'auto' : 'none'
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                      src={slide.src} 
+                      alt={slide.title} 
+                      className="w-full h-full object-cover"
+                    />
+                    
+                    {/* Gradient Overlay for Text Readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                    
+                    {/* Caption Overlay */}
+                    <div className="absolute bottom-6 left-6 right-16 text-white z-20 pointer-events-none">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-teal-600/90 text-white text-[11px] font-bold mb-1.5 backdrop-blur-xs">
+                        ক্যাম্পাস দৃশ্যপট • ০{idx + 1}/০{slides.length}
+                      </span>
+                      <h3 className="text-base sm:text-xl font-extrabold text-white leading-snug drop-shadow-sm">
+                        {slide.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-200 mt-1 line-clamp-1 drop-shadow-xs">
+                        {slide.subtitle}
+                      </p>
+                    </div>
                   </div>
+                ))}
 
-                  {/* Slider Pagination Bullets */}
-                  <div className="swiper-pagination flex items-center justify-center gap-2 absolute bottom-3.5 left-0 right-0 z-20">
-                    {slides.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setActiveSlide(i)}
-                        className={`transition-all duration-300 ${
-                          activeSlide === i 
-                            ? 'w-6 h-2 rounded-full bg-teal-400' 
-                            : 'w-2 h-2 rounded-full bg-white/70'
-                        }`}
-                        aria-label={`Slide ${i + 1}`}
-                      />
-                    ))}
-                  </div>
+                {/* Left Navigation Arrow */}
+                <button
+                  type="button"
+                  onClick={() => setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/45 hover:bg-teal-600 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 backdrop-blur-xs cursor-pointer shadow-md"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+
+                {/* Right Navigation Arrow */}
+                <button
+                  type="button"
+                  onClick={() => setActiveSlide((prev) => (prev + 1) % slides.length)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/45 hover:bg-teal-600 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 backdrop-blur-xs cursor-pointer shadow-md"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight size={20} />
+                </button>
+
+                {/* Slider Pagination Bullets */}
+                <div className="flex items-center justify-center gap-1.5 absolute bottom-3 right-6 z-30">
+                  {slides.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setActiveSlide(i)}
+                      className={`transition-all duration-300 rounded-full cursor-pointer ${
+                        activeSlide === i 
+                          ? 'w-7 h-2 bg-teal-400 shadow-sm' 
+                          : 'w-2 h-2 bg-white/60 hover:bg-white/90'
+                      }`}
+                      aria-label={`Go to slide ${i + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
 
@@ -636,36 +697,134 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SECTION 7: CAMPUS & BRANCHES (.hm-branch) */}
-        <section className="hm-section hm-section--tint hm-branch" id="branches">
+        {/* SECTION 7: CAMPUS & EXPANSION PLAN */}
+        <section className="hm-section hm-section--tint" id="branches">
           <div className="hm-container">
             
-            <div className="hm-sec-head">
-              <h2 className="hm-h2">আমাদের ক্যাম্পাস ও শাখা</h2>
+            <div className="hm-sec-head text-center max-w-2xl mx-auto mb-10">
+              <span className="hm-eyebrow">ক্যাম্পাস ও সম্প্রসারণ পরিকল্পনা</span>
+              <h2 className="hm-h2">আমাদের ক্যাম্পাস ও শাখা পরিকল্পনা</h2>
+              <p className="hm-sub text-sm sm:text-base leading-relaxed text-slate-600 mt-2">
+                আল-মদিনা মডেল মাদ্রাসার শিক্ষা কার্যক্রম বর্তমানে মহাখালী মূল ক্যাম্পাসে পরিচালিত হচ্ছে। অভিভাবকদের দীর্ঘদিনের দাবি ও শিক্ষার্থীদের ক্রমবর্ধমান চাহিদার প্রেক্ষিতে অত্র এলাকায় একটি স্বতন্ত্র আধুনিক মহিলা শাখা খোলার বিশেষ পরিকল্পনা গ্রহণ করা হয়েছে।
+              </p>
             </div>
 
-            <div className="swiper myBranchSwiper">
-              <div className="swiper-wrapper">
-                
-                <div className="swiper-slide">
-                  <div className="hm-branch__card">
-                    <h4>মহাখালী মূল ক্যাম্পাস</h4>
-                    <p className="hm-branch__addr">ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২</p>
-                    <a href="tel:01712633264">হটলাইন: ০১৭১২-৬৩৩২৬৪</a>
-                    <a href="mailto:info@almadinamadrasa.edu.bd">info@almadinamadrasa.edu.bd</a>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              
+              {/* Card 1: Mohakhali Main Campus (Active) */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-md p-6 sm:p-7 border-t-4 border-t-teal-600 flex flex-col justify-between hover:shadow-lg transition-shadow">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      সক্রিয় মূল ক্যাম্পাস
+                    </span>
+                    <span className="text-xs text-slate-400 font-mono">ক্যাম্পাস ০১</span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                    <Building2 className="w-5 h-5 text-teal-600 shrink-0" />
+                    <span>মহাখালী মূল ক্যাম্পাস (বালক ও হিফজ শাখা)</span>
+                  </h3>
+                  
+                  <p className="text-xs text-teal-700 font-medium mb-4">
+                    প্লে - ৬ষ্ঠ শ্রেণি জেনারেল ও আন্তর্জাতিক মানের হিফজুল কুরআন বিভাগ
+                  </p>
+
+                  <div className="space-y-2.5 text-xs text-slate-600 mb-6">
+                    <div className="flex items-start gap-2">
+                      <MapPin className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                      <span><strong>ঠিকানা:</strong> ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২ (মহাখালী ওয়্যারলেস গেট সংলগ্ন)</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                      <span><strong>সুবিধাসমূহ:</strong> সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত আধুনিক ক্যাম্পাস, স্মার্ট মাল্টিমিডিয়া ক্লাসরুম, নিরিবিলি লাইব্রেরি ও আবাসিক হোস্টেল</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-teal-600 shrink-0" />
+                      <span><strong>হটলাইন:</strong> <a href="tel:01712633264" className="text-teal-700 font-bold hover:underline">০১৭১২-৬৩৩২৬৪</a></span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-teal-600 shrink-0" />
+                      <span><strong>ইমেইল:</strong> <a href="mailto:info@almadinamadrasa.edu.bd" className="text-teal-700 font-bold hover:underline">info@almadinamadrasa.edu.bd</a></span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="swiper-slide">
-                  <div className="hm-branch__card">
-                    <h4>রিসার্চ ইনস্টিটিউট ও হিফজখানা</h4>
-                    <p className="hm-branch__addr">দক্ষিণপাড়া, বনানী, ঢাকা (সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত আবাসিক কমপ্লেক্স)</p>
-                    <a href="tel:01712633264">যোগাযোগ: ০১৭১২-৬৩৩২৬৪</a>
-                    <a href="mailto:info@almadinamadrasa.edu.bd">info@almadinamadrasa.edu.bd</a>
-                  </div>
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <a 
+                    href="#contact" 
+                    className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1 hover:underline"
+                  >
+                    ম্যাপ লোকেশন দেখুন <ChevronRight size={14} />
+                  </a>
+                  <Link 
+                    href="/admission" 
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold transition shadow-xs"
+                  >
+                    <span>ভর্তি আবেদন</span>
+                    <ChevronRight size={14} />
+                  </Link>
                 </div>
-
               </div>
+
+              {/* Card 2: Upcoming Female Branch (Planned) */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-md p-6 sm:p-7 border-t-4 border-t-amber-500 flex flex-col justify-between hover:shadow-lg transition-shadow bg-gradient-to-b from-amber-50/20 to-white">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                      ভবিষ্যৎ সম্প্রসারণ পরিকল্পনা
+                    </span>
+                    <span className="text-xs text-amber-600 font-mono font-semibold">আসন্ন শাখা</span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                    <School className="w-5 h-5 text-amber-600 shrink-0" />
+                    <span>আসন্ন মহিলা শাখা (পরিকল্পনাধীন)</span>
+                  </h3>
+                  
+                  <p className="text-xs text-amber-700 font-medium mb-4">
+                    ছাত্রীদের জন্য সম্পূর্ণ পর্দাপূর্ণ ও স্বতন্ত্র ইসলামিক আধুনিক শিক্ষাকেন্দ্র
+                  </p>
+
+                  <div className="space-y-2.5 text-xs text-slate-600 mb-6">
+                    <div className="flex items-start gap-2">
+                      <BookOpen className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                      <span><strong>পরিকল্পনার উদ্দেশ্য:</strong> দ্বীনি ইলম ও নৈতিক তারবিয়াহর সাথে সাধারণ শিক্ষার সমন্বয়ে আদর্শ নারী নেতৃত্ব গড়ে তোলা</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Layers className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                      <span><strong>প্রস্তাবিত বিভাগ:</strong> নূরানী, নাজেরা, বালিকা হিফজুল কুরআন ও স্কুল কারিকুলাম ভিত্তিক জেনারেল বিভাগ</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Users className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                      <span><strong>পরিচালনা পর্ষদ:</strong> দক্ষ ও অভিজ্ঞ নারী শিক্ষিকাবৃন্দের সার্বক্ষণিক তত্ত্বাবধান ও নিরবচ্ছিন্ন নিরাপত্তা</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+                      <span><strong>বর্তমান অবস্থা:</strong> প্রাথমিক রূপরেখা প্রণয়ন সম্পন্ন; ইনশাআল্লাহ দ্রুত বিস্তারিত জানানো হবে</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <a 
+                    href="#contact" 
+                    className="text-xs font-bold text-amber-700 hover:text-amber-800 flex items-center gap-1 hover:underline"
+                  >
+                    মতামত ও পরামর্শ দিন <ChevronRight size={14} />
+                  </a>
+                  <a 
+                    href="tel:01712633264" 
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-xs"
+                  >
+                    <span>যোগাযোগ করুন</span>
+                    <Phone size={12} />
+                  </a>
+                </div>
+              </div>
+
             </div>
 
           </div>
