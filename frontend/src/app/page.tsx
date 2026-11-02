@@ -51,7 +51,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, 4000);
+    }, 6000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
@@ -325,7 +325,11 @@ export default function Home() {
                       height: '100%',
                       opacity: activeSlide === idx ? 1 : 0,
                       zIndex: activeSlide === idx ? 10 : 0,
-                      transition: 'opacity 0.6s ease-in-out',
+                      transform: activeSlide === idx ? 'scale(1) translate3d(0, 0, 0)' : 'scale(1.025) translate3d(0, 0, 0)',
+                      transition: 'opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1), transform 1.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                      willChange: 'opacity, transform',
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
                       pointerEvents: activeSlide === idx ? 'auto' : 'none'
                     }}
                   >

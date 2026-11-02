@@ -612,14 +612,16 @@ body {
   overflow-x: hidden;
 }
 
-/* Base state: shifted down by 45px, invisible */
+/* Base state: shifted down by 45px, invisible (120 FPS Spring Motion Physics) */
 html.enable-scroll-reveal [data-aos="fade-up"],
 html.enable-scroll-reveal .scroll-reveal {
   opacity: 0;
   transform: translate3d(0, 45px, 0);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.25s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Active state: slid up to original position, fully visible */
