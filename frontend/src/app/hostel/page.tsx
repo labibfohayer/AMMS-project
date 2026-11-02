@@ -791,7 +791,7 @@ export default function HostelPage() {
                     saveCurfewMutation.mutate({ date: curfewDate, records: payload });
                   }}
                   disabled={saveCurfewMutation.isPending}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-700 to-purple-800 hover:from-indigo-800 hover:to-purple-900 text-white text-xs sm:text-sm font-extrabold shadow-md transition-all active:scale-95 disabled:opacity-50"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1B4332] hover:bg-[#132A20] text-white text-xs sm:text-sm font-extrabold shadow-sm transition-all active:scale-95 disabled:opacity-50"
                 >
                   {saveCurfewMutation.isPending ? (
                     <>

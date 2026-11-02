@@ -207,19 +207,19 @@ export default function StudentLeavesPage() {
       <div className="space-y-6 pb-20">
         
         {/* Page Top Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-emerald-950 via-emerald-900 to-slate-900 text-white p-6 rounded-2xl border border-emerald-500/20 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#132A20] text-white p-6 rounded-2xl border border-[#1F4233] shadow-md">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-semibold">
+              <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-emerald-100 border border-white/15 text-xs font-semibold">
                 নাজেরা • হিফজ • কিতাব • আবাসিক
               </span>
-              <span className="text-amber-400 text-xs font-mono">GATE-PASS ENGINE</span>
+              <span className="text-[#C5A059] text-xs font-mono font-bold">GATE-PASS ENGINE</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2.5">
-              <CalendarCheck className="w-8 h-8 text-amber-400" />
+              <CalendarCheck className="w-8 h-8 text-[#C5A059]" />
               শিক্ষার্থী ছুটির আবেদন ও ডিজিটাল গেটপাস
             </h1>
-            <p className="text-sm text-emerald-200/80">
+            <p className="text-sm text-emerald-100/80">
               অভিভাবকদের ছুটির দরখাস্ত যাচাই, ওস্তাদজির অনুমোদন এবং আবাসিক শিক্ষার্থীদের তাৎক্ষণিক কিউআর গেটপাস স্লিপ
             </p>
           </div>
@@ -227,9 +227,9 @@ export default function StudentLeavesPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsNewLeaveModalOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm shadow-lg hover:shadow-amber-500/25 transition group shrink-0"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#C5A059] hover:bg-[#B38E46] text-slate-900 font-bold text-xs sm:text-sm shadow-sm transition group shrink-0 cursor-pointer"
             >
-              <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
+              <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform text-slate-900" />
               <span>নতুন ছুটির এন্ট্রি</span>
             </button>
           </div>
@@ -238,49 +238,49 @@ export default function StudentLeavesPage() {
         {/* Bento Metric Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-xl bg-slate-100 text-[#1B4332] flex items-center justify-center shrink-0 border border-slate-200">
               <CalendarCheck className="w-6 h-6" />
             </div>
             <div>
               <p className="text-xs text-slate-500 font-medium">মোট আবেদন</p>
-              <p className="text-2xl font-black text-slate-900 dark:text-white mt-0.5">
+              <p className="text-2xl font-black text-slate-900 mt-0.5">
                 {toBanglaDigit(stats?.total_applications ?? 0)}
               </p>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 border border-amber-200/80 dark:border-amber-900/50 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 border border-amber-200 dark:border-amber-800">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 border border-amber-200">
               <Clock className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs text-amber-700 dark:text-amber-400 font-bold">অপেক্ষমাণ রিভিউ</p>
-              <p className="text-2xl font-black text-amber-700 dark:text-amber-300 mt-0.5">
+              <p className="text-xs text-amber-700 font-bold">অপেক্ষমাণ রিভিউ</p>
+              <p className="text-2xl font-black text-amber-800 mt-0.5">
                 {toBanglaDigit(stats?.pending_applications ?? 0)}
               </p>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-900/50 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-[#1B4332] flex items-center justify-center shrink-0 border border-emerald-200">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs text-emerald-700 dark:text-emerald-400 font-bold">অনুমোদিত গেটপাস</p>
-              <p className="text-2xl font-black text-emerald-700 dark:text-emerald-400 mt-0.5">
+              <p className="text-xs text-[#1B4332] font-bold">অনুমোদিত গেটপাস</p>
+              <p className="text-2xl font-black text-[#1B4332] mt-0.5">
                 {toBanglaDigit(stats?.approved_applications ?? 0)}
               </p>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 border border-purple-200 dark:border-purple-900/50 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center shrink-0 border border-purple-200">
               <User className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs text-purple-700 dark:text-purple-400 font-bold">বর্তমানে ছুটিতে আছে</p>
-              <p className="text-2xl font-black text-purple-700 dark:text-purple-300 mt-0.5">
+              <p className="text-xs text-purple-700 font-bold">বর্তমানে ছুটিতে আছে</p>
+              <p className="text-2xl font-black text-purple-800 mt-0.5">
                 {toBanglaDigit(stats?.currently_on_leave ?? 0)} জন
               </p>
             </div>
@@ -289,11 +289,11 @@ export default function StudentLeavesPage() {
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm space-y-3">
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-xs space-y-3">
           <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
             
             {/* Status Tabs */}
-            <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl overflow-x-auto">
+            <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl overflow-x-auto">
               {[
                 { id: 'all', label: 'সকল আবেদন' },
                 { id: 'pending', label: 'অপেক্ষমাণ' },
@@ -303,10 +303,10 @@ export default function StudentLeavesPage() {
                 <button
                   key={tab.id}
                   onClick={() => setSelectedStatus(tab.id)}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition cursor-pointer ${
                     selectedStatus === tab.id
-                      ? 'bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 shadow-sm'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                      ? 'bg-[#1B4332] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
                   }`}
                 >
                   {tab.label}
@@ -319,7 +319,7 @@ export default function StudentLeavesPage() {
               <select
                 value={selectedDept}
                 onChange={(e) => setSelectedDept(e.target.value)}
-                className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs rounded-xl px-3 py-2 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="bg-slate-50 border border-slate-300 text-xs rounded-xl px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#1B4332] focus:bg-white"
               >
                 <option value="all">সকল বিভাগ</option>
                 {departments.map((d: any) => (
@@ -334,7 +334,7 @@ export default function StudentLeavesPage() {
                   placeholder="নাম, রোল, গেটপাস বা মোবাইল..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs rounded-xl pl-9 pr-3 py-2 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full bg-slate-50 border border-slate-300 text-xs rounded-xl pl-9 pr-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1B4332] focus:bg-white"
                 />
               </div>
             </div>
@@ -343,10 +343,10 @@ export default function StudentLeavesPage() {
         </div>
 
         {/* Leaves Table */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-white border border-slate-200/90 rounded-2xl shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
-              <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-800">
+            <table className="w-full text-left text-xs text-slate-700">
+              <thead className="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
                 <tr>
                   <th className="p-3.5 pl-5">ট্র্যাকিং নং ও শিক্ষার্থী</th>
                   <th className="p-3.5">বিভাগ ও রোল</th>
@@ -357,7 +357,7 @@ export default function StudentLeavesPage() {
                   <th className="p-3.5 pr-5 text-right">কার্যক্রম</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tbody className="divide-y divide-slate-100">
                 {isLoading ? (
                   <tr>
                     <td colSpan={7} className="text-center py-12 text-slate-400">
@@ -377,12 +377,12 @@ export default function StudentLeavesPage() {
                     const isRejected = leave.status === 'rejected';
 
                     return (
-                      <tr key={leave.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition">
+                      <tr key={leave.id} className="hover:bg-slate-50/80 transition">
                         
                         {/* Student Info */}
                         <td className="p-3.5 pl-5">
                           <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-300 dark:border-emerald-800">
+                            <div className="w-9 h-9 rounded-full bg-slate-100 text-[#1B4332] flex items-center justify-center font-bold text-xs shrink-0 border border-slate-200">
                               {leave.student_photo ? (
                                 <img src={leave.student_photo} alt="" className="w-full h-full object-cover rounded-full" />
                               ) : (
@@ -390,11 +390,11 @@ export default function StudentLeavesPage() {
                               )}
                             </div>
                             <div>
-                              <p className="font-bold text-slate-900 dark:text-white leading-tight">
+                              <p className="font-bold text-slate-900 leading-tight">
                                 {leave.student_name_bn}
                               </p>
                               <p className="text-[11px] text-slate-500 font-mono">
-                                আইডি: {leave.student_uid} • <span className="text-emerald-700 font-semibold">{leave.leave_no}</span>
+                                আইডি: {leave.student_uid} • <span className="text-[#1B4332] font-semibold">{leave.leave_no}</span>
                               </p>
                             </div>
                           </div>
@@ -402,7 +402,7 @@ export default function StudentLeavesPage() {
 
                         {/* Department & Roll */}
                         <td className="p-3.5">
-                          <p className="font-semibold text-slate-800 dark:text-slate-200">
+                          <p className="font-semibold text-slate-800">
                             {leave.department_name_bn || 'হিফজুল কুরআন'}
                           </p>
                           <div className="flex items-center gap-2 mt-0.5 text-[11px] text-slate-500">
@@ -416,7 +416,7 @@ export default function StudentLeavesPage() {
 
                         {/* Leave Type & Duration */}
                         <td className="p-3.5">
-                          <span className="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                          <span className="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                             {leave.leave_type_display || leave.leave_type}
                           </span>
                           <p className="text-[11px] text-slate-500 mt-1">
@@ -426,7 +426,7 @@ export default function StudentLeavesPage() {
 
                         {/* Departure & Return */}
                         <td className="p-3.5 text-[11px]">
-                          <p className="text-amber-700 dark:text-amber-400 font-semibold">
+                          <p className="text-amber-800 font-semibold">
                             ত্যাগ: {leave.departure_time || 'অনুমোদিত সময়'}
                           </p>
                           <p className="text-slate-500 mt-0.5">
@@ -436,10 +436,10 @@ export default function StudentLeavesPage() {
 
                         {/* Guardian */}
                         <td className="p-3.5 text-[11px]">
-                          <p className="font-semibold text-slate-800 dark:text-slate-200">
+                          <p className="font-semibold text-slate-800">
                             {leave.applied_by_guardian} ({leave.relationship || 'অভিভাবক'})
                           </p>
-                          <p className="font-mono text-emerald-700 dark:text-emerald-400 mt-0.5">
+                          <p className="font-mono text-[#1B4332] mt-0.5 font-bold">
                             {leave.guardian_phone}
                           </p>
                         </td>
@@ -449,17 +449,17 @@ export default function StudentLeavesPage() {
                           <div className="space-y-1">
                             <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold ${
                               isApproved 
-                                ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300'
+                                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                                 : isPending
-                                ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300'
-                                : 'bg-red-100 text-red-800 dark:bg-red-950/60 dark:text-red-300 border border-red-300'
+                                ? 'bg-amber-50 text-amber-800 border border-amber-200'
+                                : 'bg-rose-50 text-rose-800 border border-rose-200'
                             }`}>
                               {isApproved ? <CheckCircle2 className="w-3 h-3" /> : isPending ? <Clock className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
                               {isApproved ? 'অনুমোদিত' : isPending ? 'অপেক্ষমাণ' : 'বাতিল'}
                             </span>
 
                             {leave.gate_pass_no && (
-                              <p className="font-mono text-[10px] text-emerald-800 dark:text-emerald-300 font-bold">
+                              <p className="font-mono text-[10px] text-[#1B4332] font-bold">
                                 {leave.gate_pass_no}
                               </p>
                             )}
@@ -474,7 +474,7 @@ export default function StudentLeavesPage() {
                               <>
                                 <button
                                   onClick={() => setActiveGatePass(leave)}
-                                  className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-[11px] font-bold shadow-sm transition"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#1B4332] hover:bg-[#132E23] text-white text-[11px] font-bold shadow-xs transition cursor-pointer"
                                   title="ডিজিটাল গেটপাস দেখুন ও প্রিন্ট করুন"
                                 >
                                   <Printer className="w-3.5 h-3.5" />
@@ -486,7 +486,7 @@ export default function StudentLeavesPage() {
                                     href={leave.whatsapp_link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="p-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-200 transition"
+                                    className="p-1.5 rounded-lg bg-emerald-50 text-[#1B4332] hover:bg-emerald-100 transition border border-emerald-200"
                                     title="হোয়াটসঅ্যাপে গেটপাস লিংক পাঠান"
                                   >
                                     <Share2 className="w-3.5 h-3.5" />
@@ -499,14 +499,14 @@ export default function StudentLeavesPage() {
                               <>
                                 <button
                                   onClick={() => handleOpenApprove(leave)}
-                                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold shadow-sm transition"
+                                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#1B4332] hover:bg-[#132E23] text-white text-[11px] font-bold shadow-xs transition cursor-pointer"
                                 >
                                   <CheckCircle2 className="w-3.5 h-3.5" />
                                   <span>অনুমোদন</span>
                                 </button>
                                 <button
                                   onClick={() => handleOpenReject(leave)}
-                                  className="p-1.5 rounded-lg bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 hover:bg-red-200 transition"
+                                  className="p-1.5 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 transition border border-rose-200 cursor-pointer"
                                   title="আবেদন বাতিল করুন"
                                 >
                                   <XCircle className="w-4 h-4" />
@@ -517,7 +517,7 @@ export default function StudentLeavesPage() {
                             {isRejected && (
                               <button
                                 onClick={() => setActiveGatePass(leave)}
-                                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition"
+                                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition cursor-pointer"
                                 title="বিবরণ দেখুন"
                               >
                                 <Eye className="w-4 h-4" />
@@ -540,73 +540,73 @@ export default function StudentLeavesPage() {
 
       {/* Approve Modal */}
       {isApproveModalOpen && selectedLeave && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-emerald-600" />
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-md rounded-2xl shadow-xl border border-slate-200 p-6 space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-[#1B4332]" />
                 ছুটি অনুমোদন ও গেটপাস ইস্যু
               </h3>
-              <button onClick={() => setIsApproveModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setIsApproveModalOpen(false)} className="text-slate-400 hover:text-slate-600 cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="bg-emerald-50 dark:bg-emerald-950/40 p-3 rounded-xl border border-emerald-200/60 text-xs space-y-1">
-              <p className="font-bold text-emerald-950 dark:text-emerald-200">
+            <div className="bg-emerald-50 p-3 rounded-xl border border-emerald-200 text-xs space-y-1">
+              <p className="font-bold text-[#1B4332]">
                 শিক্ষার্থী: {selectedLeave.student_name_bn} ({selectedLeave.department_name_bn})
               </p>
-              <p className="text-emerald-800 dark:text-emerald-300">
+              <p className="text-emerald-800">
                 ছুটি: {selectedLeave.from_date} হতে {selectedLeave.to_date} ({toBanglaDigit(selectedLeave.total_days)} দিন)
               </p>
-              <p className="text-zinc-600 dark:text-zinc-400 italic">"{selectedLeave.reason}"</p>
+              <p className="text-slate-600 italic">"{selectedLeave.reason}"</p>
             </div>
 
             <div className="space-y-3 text-xs">
               <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">ক্যাম্পাস ত্যাগের সময়</label>
+                <label className="font-bold text-slate-700 block mb-1">ক্যাম্পাস ত্যাগের সময়</label>
                 <input
                   type="text"
                   value={departureTime}
                   onChange={(e) => setDepartureTime(e.target.value)}
                   placeholder="যেমন: বিকাল ৫:৩০ টা"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                 />
               </div>
 
               <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">মাদ্রাসায় উপস্থিতির শেষ সময়</label>
+                <label className="font-bold text-slate-700 block mb-1">মাদ্রাসায় উপস্থিতির শেষ সময়</label>
                 <input
                   type="text"
                   value={expectedReturnTime}
                   onChange={(e) => setExpectedReturnTime(e.target.value)}
                   placeholder="যেমন: পরদিন সকাল ৮:০০ টা"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                 />
               </div>
 
               <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">শিক্ষকের মন্তব্য / শর্ত</label>
+                <label className="font-bold text-slate-700 block mb-1">শিক্ষকের মন্তব্য / শর্ত</label>
                 <textarea
                   value={reviewComment}
                   onChange={(e) => setReviewComment(e.target.value)}
                   rows={2}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
               <button
                 onClick={() => setIsApproveModalOpen(false)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
               >
                 বাতিল
               </button>
               <button
                 onClick={handleConfirmApprove}
                 disabled={approveMutation.isPending}
-                className="px-5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md disabled:opacity-50"
+                className="px-5 py-2 rounded-xl text-xs font-bold bg-[#1B4332] hover:bg-[#132E23] text-white shadow-sm disabled:opacity-50 cursor-pointer"
               >
                 {approveMutation.isPending ? 'অনুমোদন হচ্ছে...' : 'অনুমোদন ও গেটপাস তৈরি করুন'}
               </button>
@@ -617,44 +617,44 @@ export default function StudentLeavesPage() {
 
       {/* Reject Modal */}
       {isRejectModalOpen && selectedLeave && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <h3 className="text-base font-bold text-red-600 flex items-center gap-2">
-                <XCircle className="w-5 h-5 text-red-600" />
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-md rounded-2xl shadow-xl border border-slate-200 p-6 space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-base font-bold text-rose-700 flex items-center gap-2">
+                <XCircle className="w-5 h-5 text-rose-700" />
                 ছুটির আবেদন বাতিল করুন
               </h3>
-              <button onClick={() => setIsRejectModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setIsRejectModalOpen(false)} className="text-slate-400 hover:text-slate-600 cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div className="text-xs space-y-3">
-              <p className="text-slate-600 dark:text-slate-300">
+              <p className="text-slate-700">
                 আপনি কি নিশ্চিত যে <span className="font-bold">{selectedLeave.student_name_bn}</span> এর ছুটির আবেদনটি বাতিল করতে চান?
               </p>
               <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">বাতিলের কারণ:</label>
+                <label className="font-bold text-slate-700 block mb-1">বাতিলের কারণ:</label>
                 <textarea
                   value={rejectReason}
                   onChange={(e) => setRejectReason(e.target.value)}
                   rows={3}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
               <button
                 onClick={() => setIsRejectModalOpen(false)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
               >
                 ফিরে যান
               </button>
               <button
                 onClick={handleConfirmReject}
                 disabled={rejectMutation.isPending}
-                className="px-5 py-2 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-500 text-white shadow-md disabled:opacity-50"
+                className="px-5 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white shadow-sm disabled:opacity-50 cursor-pointer"
               >
                 {rejectMutation.isPending ? 'বাতিল হচ্ছে...' : 'হ্যাঁ, বাতিল করুন'}
               </button>
@@ -665,14 +665,14 @@ export default function StudentLeavesPage() {
 
       {/* New Leave Entry Modal */}
       {isNewLeaveModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 my-auto">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <Plus className="w-5 h-5 text-emerald-600" />
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white w-full max-w-lg rounded-2xl shadow-xl border border-slate-200 p-6 space-y-4 my-auto">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <Plus className="w-5 h-5 text-[#1B4332]" />
                 নতুন ছুটির আবেদন এন্ট্রি
               </h3>
-              <button onClick={() => setIsNewLeaveModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setIsNewLeaveModalOpen(false)} className="text-slate-400 hover:text-slate-600 cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -680,7 +680,7 @@ export default function StudentLeavesPage() {
             <form onSubmit={handleCreateSubmit} className="space-y-3.5 text-xs">
               
               <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">শিক্ষার্থী নির্বাচন করুন *</label>
+                <label className="font-bold text-slate-700 block mb-1">শিক্ষার্থী নির্বাচন করুন *</label>
                 <select
                   value={newStudentId}
                   onChange={(e) => {
@@ -693,7 +693,7 @@ export default function StudentLeavesPage() {
                     }
                   }}
                   required
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                 >
                   <option value="">শিক্ষার্থী সিলেক্ট করুন...</option>
                   {students.map((st: any) => (
@@ -706,11 +706,11 @@ export default function StudentLeavesPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">ছুটির ধরন</label>
+                  <label className="font-bold text-slate-700 block mb-1">ছুটির ধরন</label>
                   <select
                     value={newLeaveType}
                     onChange={(e) => setNewLeaveType(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                   >
                     <option value="sick">অসুস্থতা (Sick Leave)</option>
                     <option value="family">জরুরি পারিবারিক কাজ</option>
@@ -721,86 +721,86 @@ export default function StudentLeavesPage() {
                 </div>
 
                 <div>
-                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">সম্পর্ক</label>
+                  <label className="font-bold text-slate-700 block mb-1">সম্পর্ক</label>
                   <input
                     type="text"
                     value={newRelationship}
                     onChange={(e) => setNewRelationship(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">শুরুর তারিখ</label>
+                  <label className="font-bold text-slate-700 block mb-1">শুরুর তারিখ</label>
                   <input
                     type="date"
                     value={newFromDate}
                     onChange={(e) => setNewFromDate(e.target.value)}
                     required
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                   />
                 </div>
                 <div>
-                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">শেষ তারিখ</label>
+                  <label className="font-bold text-slate-700 block mb-1">শেষ তারিখ</label>
                   <input
                     type="date"
                     value={newToDate}
                     onChange={(e) => setNewToDate(e.target.value)}
                     required
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">অভিভাবকের নাম</label>
+                  <label className="font-bold text-slate-700 block mb-1">অভিভাবকের নাম</label>
                   <input
                     type="text"
                     value={newGuardianName}
                     onChange={(e) => setNewGuardianName(e.target.value)}
                     placeholder="পিতার নাম"
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                   />
                 </div>
                 <div>
-                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">অভিভাবকের ফোন</label>
+                  <label className="font-bold text-slate-700 block mb-1">অভিভাবকের ফোন</label>
                   <input
                     type="text"
                     value={newGuardianPhone}
                     onChange={(e) => setNewGuardianPhone(e.target.value)}
                     placeholder="017XXXXXXXX"
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">ছুটির সুনির্দিষ্ট কারণ *</label>
+                <label className="font-bold text-slate-700 block mb-1">ছুটির সুনির্দিষ্ট কারণ *</label>
                 <textarea
                   value={newReason}
                   onChange={(e) => setNewReason(e.target.value)}
                   placeholder="যেমন: তীব্র জ্বর থাকায় ডাক্তারের পরামর্শে ৩ দিনের বিশ্রাম..."
                   rows={2}
                   required
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4332]"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setIsNewLeaveModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
                 >
                   বাতিল
                 </button>
                 <button
                   type="submit"
                   disabled={createMutation.isPending}
-                  className="px-5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md disabled:opacity-50"
+                  className="px-5 py-2 rounded-xl text-xs font-bold bg-[#1B4332] hover:bg-[#132E23] text-white shadow-sm disabled:opacity-50 cursor-pointer"
                 >
                   {createMutation.isPending ? 'জমা হচ্ছে...' : 'ছুটির আবেদন জমা দিন'}
                 </button>

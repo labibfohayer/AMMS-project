@@ -504,9 +504,9 @@ function TeacherDashboard({ user }: { user: any }) {
     <div className="space-y-6">
       
       {/* Teacher Profile Card */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+      <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl p-1 bg-gradient-to-tr from-amber-400 to-emerald-600 shadow-md shrink-0">
+          <div className="w-16 h-16 rounded-2xl p-1 bg-[#C5A059] shadow-md shrink-0">
             <img
               src="/principal.jpg"
               alt={teacher?.name || user.name}
@@ -522,7 +522,7 @@ function TeacherDashboard({ user }: { user: any }) {
                 {isBangla ? (teacher?.designation_bn || 'সিনিয়র শিক্ষক') : (teacher?.designation || 'Senior Teacher')}
               </span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 mt-1">
               {isBangla ? (teacher?.name_bn || user.name_bn || user.name) : (teacher?.name || user.name || user.name_bn)}
             </h2>
             <p className="text-xs text-slate-500 font-medium">
@@ -555,14 +555,14 @@ function TeacherDashboard({ user }: { user: any }) {
       {/* 4 Bento Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'আজকের ক্লাস' : "Today's Classes"}</span>
             <span className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
               <Clock size={16} />
             </span>
           </div>
-          <h3 className="text-2xl font-black text-slate-900 dark:text-white font-mono">
+          <h3 className="text-2xl font-black text-slate-900 font-mono">
             {isBangla ? `${toBanglaDigit(TEACHER_CLASSES.length)} টি` : `${TEACHER_CLASSES.length} Classes`}
           </h3>
           <p className="text-[11px] text-slate-500 mt-1">
@@ -570,7 +570,7 @@ function TeacherDashboard({ user }: { user: any }) {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'নিজের হাজিরা' : 'My Attendance'}</span>
             <span className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
@@ -585,14 +585,14 @@ function TeacherDashboard({ user }: { user: any }) {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'মাসিক বেতন' : 'Monthly Salary'}</span>
             <span className="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center">
               <DollarSign size={16} />
             </span>
           </div>
-          <h3 className="text-2xl font-black text-emerald-900 dark:text-emerald-400 font-mono">
+          <h3 className="text-2xl font-black text-[#1B4332] font-mono">
             ৳ {isBangla 
                 ? toBanglaDigit(Number(teacher?.monthly_salary || 25000).toLocaleString('en-IN'))
                 : Number(teacher?.monthly_salary || 25000).toLocaleString('en-US')}
@@ -602,7 +602,7 @@ function TeacherDashboard({ user }: { user: any }) {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'ছুটির আবেদন' : 'Leave Requests'}</span>
             <span className="w-8 h-8 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center">
@@ -614,7 +614,7 @@ function TeacherDashboard({ user }: { user: any }) {
               ? `${toBanglaDigit(pendingLeaves.length)} টি অপেক্ষমাণ`
               : `${pendingLeaves.length} Pending`}
           </h3>
-          <Link href="/students/leaves" className="text-[11px] text-emerald-700 font-bold mt-1 inline-block hover:underline">
+          <Link href="/students/leaves" className="text-[11px] text-[#1B4332] font-bold mt-1 inline-block hover:underline">
             {isBangla ? 'রিভিউ করতে ক্লিক করুন →' : 'Click to review →'}
           </Link>
         </div>
@@ -625,11 +625,11 @@ function TeacherDashboard({ user }: { user: any }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left: Today's Assigned Classes */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
-          <div className="flex items-center justify-between mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
             <div>
-              <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
-                <Clock className="w-5 h-5 text-emerald-700" />
+              <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+                <Clock className="w-5 h-5 text-[#1B4332]" />
                 <span>{isBangla ? 'আজকের ক্লাস রুটিন ও হাজিরা তালিকা' : "Today's Class Routine & Attendance"}</span>
               </h3>
               <p className="text-xs text-slate-500">
@@ -638,7 +638,7 @@ function TeacherDashboard({ user }: { user: any }) {
             </div>
             <Link
               href="/attendance"
-              className="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#1B4332] hover:underline flex items-center gap-1"
             >
               <span>{isBangla ? 'সকল হাজিরা' : 'All Attendance'}</span>
               <ChevronRight size={14} />
@@ -649,17 +649,17 @@ function TeacherDashboard({ user }: { user: any }) {
             {TEACHER_CLASSES.map((cls, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-emerald-300 transition"
+                className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-emerald-300 transition"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 font-mono font-bold flex items-center justify-center text-xs shrink-0">
                     {isBangla ? toBanglaDigit(idx + 1) : idx + 1}
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-slate-900 dark:text-white">{cls.subject}</h4>
+                    <h4 className="font-bold text-sm text-slate-900">{cls.subject}</h4>
                     <p className="text-xs text-slate-500 mt-0.5">
                       {cls.section} • {isBangla ? 'শিক্ষার্থী: ' : 'Students: '}
-                      <strong className="text-slate-700 dark:text-slate-300">
+                      <strong className="text-slate-700">
                         {isBangla ? `${toBanglaDigit(cls.count)} জন` : `${cls.count} enrolled`}
                       </strong>
                     </p>
@@ -667,12 +667,12 @@ function TeacherDashboard({ user }: { user: any }) {
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
-                  <span className="font-mono text-xs font-bold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-200">
+                  <span className="font-mono text-xs font-bold text-slate-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
                     {cls.time}
                   </span>
                   <Link
                     href="/attendance"
-                    className="px-3.5 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-sm transition"
+                    className="px-3.5 py-1.5 rounded-xl bg-[#1B4332] hover:bg-[#132E23] text-white font-bold text-xs shadow-sm transition"
                   >
                     {isBangla ? 'হাজিরা নিন' : 'Take Attendance'}
                   </Link>
@@ -683,8 +683,8 @@ function TeacherDashboard({ user }: { user: any }) {
         </div>
 
         {/* Right: Quick Action Tools */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 border-b border-slate-100 pb-2">
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2 border-b border-slate-100 pb-2">
             <Sparkles size={16} className="text-amber-500" />
             <span>{isBangla ? 'শিক্ষক কুইক টুলস' : 'Teacher Quick Tools'}</span>
           </h3>
@@ -790,9 +790,9 @@ function StaffDashboard({ user }: { user: any }) {
     <div className="space-y-6">
       
       {/* Staff Profile Header */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+      <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl p-1 bg-gradient-to-tr from-amber-400 to-indigo-600 shadow-md shrink-0">
+          <div className="w-16 h-16 rounded-2xl p-1 bg-[#C5A059] shadow-md shrink-0">
             <img
               src="/principal.jpg"
               alt={user.name}
@@ -801,14 +801,14 @@ function StaffDashboard({ user }: { user: any }) {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-900 font-mono font-bold text-xs">
+              <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 font-mono font-bold text-xs">
                 {user.user_id || 'STF-001'}
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-bold text-xs">
                 {isBangla ? 'অফিস সহকারী ও ক্যাশিয়ার' : 'Office Assistant & Cashier'}
               </span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 mt-1">
               {isBangla ? (user.name_bn || user.name) : (user.name || user.name_bn)}
             </h2>
             <p className="text-xs text-slate-500 font-medium">
@@ -820,16 +820,16 @@ function StaffDashboard({ user }: { user: any }) {
         <div className="flex items-center gap-2 w-full md:w-auto">
           <Link
             href="/fees"
-            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm shadow-md transition"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#1B4332] hover:bg-[#132E23] text-white font-bold text-xs sm:text-sm shadow-md transition"
           >
-            <DollarSign size={16} className="text-amber-300" />
+            <DollarSign size={16} className="text-[#C5A059]" />
             <span>{isBangla ? 'কাউন্টার ফি আদায়' : 'Counter Collection'}</span>
           </Link>
           <Link
             href="/students/add"
-            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FAF5EB] hover:bg-[#F3EAD5] border border-[#C5A059]/40 text-[#1B4332] font-bold text-xs sm:text-sm shadow-xs transition"
           >
-            <UserPlus size={16} />
+            <UserPlus size={16} className="text-[#C5A059]" />
             <span>{isBangla ? 'নতুন ভর্তি' : 'New Admission'}</span>
           </Link>
         </div>
@@ -838,14 +838,14 @@ function StaffDashboard({ user }: { user: any }) {
       {/* 4 Bento Operational Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'আজকের ফি কালেকশন' : "Today's Collection"}</span>
-            <span className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <span className="w-8 h-8 rounded-full bg-emerald-50 text-[#1B4332] flex items-center justify-center">
               <DollarSign size={16} />
             </span>
           </div>
-          <h3 className="text-2xl font-black text-emerald-800 font-mono">
+          <h3 className="text-2xl font-black text-[#1B4332] font-mono">
             ৳ {isBangla 
                 ? toBanglaDigit(Number(dashboardData?.finances?.total_collected || 18500).toLocaleString('en-IN'))
                 : Number(dashboardData?.finances?.total_collected || 18500).toLocaleString('en-US')}
@@ -853,7 +853,7 @@ function StaffDashboard({ user }: { user: any }) {
           <p className="text-[11px] text-slate-500 mt-1">{isBangla ? 'কাউন্টার ও বিকাশ রসিদ' : 'Counter & bKash Receipts'}</p>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'নতুন ভর্তি আবেদন' : 'Admission Applications'}</span>
             <span className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
@@ -866,7 +866,7 @@ function StaffDashboard({ user }: { user: any }) {
           <p className="text-[11px] text-slate-500 mt-1">{isBangla ? 'সেশন ২০২৭ কার্যক্রম চলমান' : 'Session 2027 ongoing'}</p>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'ছাত্র উপস্থিতি হার' : 'Student Attendance Rate'}</span>
             <span className="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center">
@@ -879,7 +879,7 @@ function StaffDashboard({ user }: { user: any }) {
           <p className="text-[11px] text-slate-500 mt-1">{isBangla ? 'আজকের বায়োমেট্রিক রেকর্ড' : "Today's Biometric Record"}</p>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'গেটপাস ও ক্লিয়ারেন্স' : 'Gatepass & Clearance'}</span>
             <span className="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center">
@@ -889,7 +889,7 @@ function StaffDashboard({ user }: { user: any }) {
           <h3 className="text-2xl font-black text-purple-700 font-mono">
             {isBangla ? `${toBanglaDigit(pendingLeaves.length)} টি অপেক্ষমাণ` : `${pendingLeaves.length} Pending`}
           </h3>
-          <Link href="/students/leaves" className="text-[11px] text-emerald-700 font-bold mt-1 inline-block hover:underline">
+          <Link href="/students/leaves" className="text-[11px] text-[#1B4332] font-bold mt-1 inline-block hover:underline">
             {isBangla ? 'গেট রেজিস্টার দেখুন →' : 'View Gate Register →'}
           </Link>
         </div>

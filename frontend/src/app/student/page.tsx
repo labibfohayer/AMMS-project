@@ -161,7 +161,7 @@ export default function StudentDashboard() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           
           {/* Card 1: Attendance Ring */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
+          <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">উপস্থিতির হার</span>
               <span className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
@@ -179,7 +179,7 @@ export default function StudentDashboard() {
           </div>
 
           {/* Card 2: Academic Exam Result */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
+          <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">সর্বশেষ ফলাফল</span>
               <span className="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center">
@@ -197,7 +197,7 @@ export default function StudentDashboard() {
           </div>
 
           {/* Card 3: Fee Status */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
+          <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">বেতন ও ফি স্ট্যাটাস</span>
               <span className={`w-8 h-8 rounded-full flex items-center justify-center ${isFeePaid ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}`}>
@@ -219,7 +219,7 @@ export default function StudentDashboard() {
           </div>
 
           {/* Card 4: Hostel / Leaves */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
+          <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">ছুটি ও গেটপাস</span>
               <span className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
@@ -249,39 +249,39 @@ export default function StudentDashboard() {
           <div className="lg:col-span-2 space-y-6">
             
             {/* Today's Teaching Routine */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+              <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-[#1B4332] flex items-center justify-center font-bold">
                     <Clock size={18} />
                   </div>
                   <div>
-                    <h2 className="text-base font-black text-slate-900 dark:text-white">আজকের ক্লাস ও পাঠ পরিকল্পনা</h2>
+                    <h2 className="text-base font-black text-slate-900">আজকের ক্লাস ও পাঠ পরিকল্পনা</h2>
                     <p className="text-xs text-slate-500">হিফজ ও ইসলামিক অ্যাকাডেমিক দৈনিক সময়সূচি</p>
                   </div>
                 </div>
-                <span className="px-3 py-1 bg-emerald-50 text-emerald-800 rounded-full text-xs font-bold border border-emerald-200">
+                <span className="px-3 py-1 bg-emerald-50 text-[#1B4332] rounded-full text-xs font-bold border border-emerald-200">
                   আজকের রুটিন
                 </span>
               </div>
 
               <div className="space-y-3">
                 {SAMPLE_ROUTINE.map((r, i) => (
-                  <div key={i} className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 hover:border-emerald-300 transition">
+                  <div key={i} className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 hover:border-emerald-300 transition">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold text-xs shrink-0">
                         {toBanglaDigit(i + 1)}
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">{r.subject}</h4>
+                        <h4 className="text-xs sm:text-sm font-bold text-slate-900">{r.subject}</h4>
                         <p className="text-[11px] text-slate-500 mt-0.5">
-                          ওস্তাদ: <strong className="text-slate-700 dark:text-slate-300">{r.teacher}</strong> • {r.room}
+                          ওস্তাদ: <strong className="text-slate-700">{r.teacher}</strong> • {r.room}
                         </p>
                       </div>
                     </div>
 
                     <div className="text-right shrink-0">
-                      <span className="inline-block px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-xs font-mono font-bold shadow-xs border border-slate-200 dark:border-slate-700">
+                      <span className="inline-block px-2.5 py-1 rounded-lg bg-white text-slate-800 text-xs font-mono font-bold shadow-xs border border-slate-200">
                         {r.time}
                       </span>
                     </div>
@@ -291,18 +291,18 @@ export default function StudentDashboard() {
             </div>
 
             {/* Recent Exam Marks Overview */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+              <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center font-bold">
                     <FileText size={18} />
                   </div>
                   <div>
-                    <h2 className="text-base font-black text-slate-900 dark:text-white">সাম্প্রতিক পরীক্ষার বিষয়ভিত্তিক ফলাফল</h2>
+                    <h2 className="text-base font-black text-slate-900">সাম্প্রতিক পরীক্ষার বিষয়ভিত্তিক ফলাফল</h2>
                     <p className="text-xs text-slate-500">১ম সাময়িক মূল্যায়ন পরীক্ষা ২০২৬</p>
                   </div>
                 </div>
-                <Link href="/exams" className="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1">
+                <Link href="/exams" className="text-xs font-bold text-[#1B4332] hover:underline flex items-center gap-1">
                   <span>পূর্ণ মার্কশিট</span>
                   <ChevronRight size={14} />
                 </Link>
@@ -310,7 +310,7 @@ export default function StudentDashboard() {
 
               <div className="overflow-x-auto">
                 <table className="w-full text-xs text-left">
-                  <thead className="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold">
+                  <thead className="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
                     <tr>
                       <th className="p-2.5 rounded-l-xl">বিষয়</th>
                       <th className="p-2.5 text-center">পূর্ণমান</th>
@@ -318,16 +318,16 @@ export default function StudentDashboard() {
                       <th className="p-2.5 text-center rounded-r-xl">গ্রেড</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                  <tbody className="divide-y divide-slate-100">
                     {SAMPLE_EXAM_MARKS.map((m, idx) => (
                       <tr key={idx} className="hover:bg-slate-50/50">
-                        <td className="p-2.5 font-bold text-slate-800 dark:text-slate-200">{m.subject}</td>
+                        <td className="p-2.5 font-bold text-slate-800">{m.subject}</td>
                         <td className="p-2.5 text-center font-mono text-slate-500">{toBanglaDigit(m.full)}</td>
-                        <td className="p-2.5 text-center font-mono font-bold text-emerald-800 dark:text-emerald-400 text-sm">
+                        <td className="p-2.5 text-center font-mono font-bold text-[#1B4332] text-sm">
                           {toBanglaDigit(m.marks)}
                         </td>
                         <td className="p-2.5 text-center">
-                          <span className="px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold font-mono text-xs">
+                          <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold font-mono text-xs">
                             {m.grade}
                           </span>
                         </td>
@@ -344,35 +344,35 @@ export default function StudentDashboard() {
           <div className="space-y-6">
             
             {/* Student ID & Personal Info Card */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 border-b border-slate-100 pb-2">
-                <User size={16} className="text-emerald-700" />
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2 border-b border-slate-100 pb-2">
+                <User size={16} className="text-[#1B4332]" />
                 <span>ব্যক্তিগত তথ্য বিবরণী</span>
               </h3>
 
               <div className="space-y-2.5 text-xs">
                 <div>
                   <span className="text-slate-500 block">শিক্ষার্থীর নাম:</span>
-                  <span className="font-bold text-slate-900 dark:text-white text-sm">{student?.name_bn || 'আবদুল্লাহ আল মাহদী'}</span>
+                  <span className="font-bold text-slate-900 text-sm">{student?.name_bn || 'আবদুল্লাহ আল মাহদী'}</span>
                 </div>
                 <div>
                   <span className="text-slate-500 block">পিতার নাম:</span>
-                  <span className="font-semibold text-slate-800 dark:text-slate-200">{student?.father_name_bn || student?.guardian_name || 'মুহাম্মদ রফিকুল ইসলাম'}</span>
+                  <span className="font-semibold text-slate-800">{student?.father_name_bn || student?.guardian_name || 'মুহাম্মদ রফিকুল ইসলাম'}</span>
                 </div>
                 <div>
                   <span className="text-slate-500 block">অভিভাবকের মোবাইল:</span>
-                  <span className="font-mono font-bold text-emerald-800 dark:text-emerald-400">{student?.guardian_phone || '০১৮১১-২২৩৩৪۴'}</span>
+                  <span className="font-mono font-bold text-[#1B4332]">{student?.guardian_phone || '০১৮১১-২২৩৩৪۴'}</span>
                 </div>
                 <div>
                   <span className="text-slate-500 block">ঠিকানা:</span>
-                  <span className="text-slate-700 dark:text-slate-300 leading-relaxed">{student?.present_address || 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা'}</span>
+                  <span className="text-slate-700 leading-relaxed">{student?.present_address || 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা'}</span>
                 </div>
               </div>
 
               {student && (
                 <button
                   onClick={() => setShowIdCardModal(true)}
-                  className="w-full mt-2 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition"
+                  className="w-full mt-2 py-2.5 rounded-xl bg-[#1B4332] hover:bg-[#132E23] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition cursor-pointer"
                 >
                   <Printer size={14} />
                   <span>আইডি কার্ড প্রিন্ট করুন</span>
@@ -381,8 +381,8 @@ export default function StudentDashboard() {
             </div>
 
             {/* Quick Links / Shortcuts */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-3">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 border-b border-slate-100 pb-2">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-3">
+              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2 border-b border-slate-100 pb-2">
                 <BookOpen size={16} className="text-amber-600" />
                 <span>প্রয়োজনীয় লিংক ও পোর্টাল</span>
               </h3>
