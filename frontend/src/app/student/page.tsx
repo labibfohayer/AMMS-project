@@ -48,14 +48,6 @@ export default function StudentDashboard() {
     }
   }, [isMounted, router]);
 
-  if (!isMounted) {
-    return (
-      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-8">
-        <div className="w-10 h-10 border-4 border-[#1B4332]/20 border-t-[#1B4332] rounded-full animate-spin" />
-      </div>
-    );
-  }
-
   // 1. Fetch Student Profile
   const { data: student, isLoading: isStudentLoading } = useQuery({
     queryKey: ['student_me_profile'],
@@ -86,6 +78,14 @@ export default function StudentDashboard() {
     },
     enabled: !!student?.student_id
   });
+
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-8">
+        <div className="w-10 h-10 border-4 border-teal-500/20 border-t-teal-600 rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   const totalDueNum = Number(feeStatus?.total_due_this_year || 0);
   const isFeePaid = totalDueNum === 0;

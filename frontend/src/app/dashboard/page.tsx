@@ -38,8 +38,8 @@ export default function Dashboard() {
 
   if (!isMounted || !user) {
     return (
-      <div className="min-h-screen bg-[#FAF6ED] flex items-center justify-center p-8">
-        <div className="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-600 rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-8">
+        <div className="w-10 h-10 border-4 border-teal-500/20 border-t-teal-600 rounded-full animate-spin" />
       </div>
     );
   }

@@ -39,14 +39,6 @@ export default function GuardianDashboard() {
     }
   }, [isMounted, router]);
 
-  if (!isMounted) {
-    return (
-      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-8">
-        <div className="w-10 h-10 border-4 border-teal-500/20 border-t-teal-600 rounded-full animate-spin" />
-      </div>
-    );
-  }
-
   // Selected Student State
   const [selectedStudentIdx, setSelectedStudentIdx] = useState<number>(0);
 
@@ -265,6 +257,14 @@ export default function GuardianDashboard() {
       note: customNote.trim()
     });
   };
+
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-8">
+        <div className="w-10 h-10 border-4 border-teal-500/20 border-t-teal-600 rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (isStudentsLoading) {
     return (
