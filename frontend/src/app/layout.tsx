@@ -37,8 +37,16 @@ export const metadata: Metadata = {
   description: "আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট এর সম্পূর্ণ ডিজিটাল ম্যানেজমেন্ট সিস্টেম",
   manifest: "/manifest.json",
   icons: {
-    icon: "/logo.jpg",
-    apple: "/logo.jpg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/logo.jpg", type: "image/jpeg", sizes: "1024x1024" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
   },
 };
 
