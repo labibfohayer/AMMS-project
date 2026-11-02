@@ -520,8 +520,8 @@ export default function AdmissionPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Desired Program */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    কাঙ্ক্ষিত শ্রেণি / বিভাগ <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    কাঙ্ক্ষিত শ্রেণি / বিভাগ <span className="text-[#C5A059]">*</span>
                   </label>
                   <select
                     name="desired_program"
