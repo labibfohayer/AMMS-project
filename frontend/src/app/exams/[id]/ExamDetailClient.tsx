@@ -9,10 +9,11 @@ import api from '@/lib/api';
 import Link from 'next/link';
 import { 
   Award, ArrowLeft, Printer, Search, CheckCircle, Clock, 
-  BarChart3, Medal, Users, BookOpen, Sparkles, ChevronRight, Send
+  BarChart3, Medal, Users, BookOpen, Sparkles, ChevronRight, Send, PenTool
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import PrintableMarksheet, { MarksheetData } from '@/components/exams/PrintableMarksheet';
+import MarksEntryModal from '@/components/exams/MarksEntryModal';
 import { toBanglaDigit } from '@/lib/numberToBanglaWords';
 
 export default function ExamDetailClient({ params }: { params?: Promise<{ id: string }> }) {
@@ -23,6 +24,7 @@ export default function ExamDetailClient({ params }: { params?: Promise<{ id: st
   const [search, setSearch] = useState('');
   const [loadingStudentId, setLoadingStudentId] = useState<string | null>(null);
   const [isBulkSending, setIsBulkSending] = useState(false);
+  const [isMarksEntryOpen, setIsMarksEntryOpen] = useState(false);
 
   // 1. Fetch Exam Details
   const { data: exam, isLoading: isExamLoading } = useQuery({
@@ -122,6 +124,14 @@ export default function ExamDetailClient({ params }: { params?: Promise<{ id: st
           </Link>
 
           <div className="flex flex-wrap items-center gap-2.5">
+            <button
+              onClick={() => setIsMarksEntryOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-emerald-950 font-bold text-xs shadow-sm transition-all active:scale-95 cursor-pointer"
+            >
+              <PenTool className="w-3.5 h-3.5" />
+              <span>নম্বর এন্ট্রি ও এডিট</span>
+            </button>
+
             <Link
               href={`/exams/${id}/ranking`}
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 font-bold text-xs shadow-sm hover:bg-amber-100 transition-colors"
@@ -356,6 +366,16 @@ export default function ExamDetailClient({ params }: { params?: Promise<{ id: st
           onClose={() => setActiveMarksheet(null)}
         />
       )}
+
+      {/* MARKS ENTRY MODAL */}
+      <MarksEntryModal
+        isOpen={isMarksEntryOpen}
+        examId={id}
+        onClose={() => setIsMarksEntryOpen(false)}
+        onSaved={() => {
+          // Refetch rankings
+        }}
+      />
     </AppLayout>
   );
 }

@@ -10,12 +10,17 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Sum, Q
 
 class ExamListCreateView(generics.ListCreateAPIView):
-    queryset = Exam.objects.all()
+    queryset = Exam.objects.all().order_by('-start_date', '-id')
     serializer_class = ExamSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
 
 class ExamDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exam.objects.all()
     serializer_class = ExamSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 class ExamPublishView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -40,25 +45,135 @@ class ExamPublishView(views.APIView):
         return Response({'status': 'published', 'notifications_sent': count})
 
 class ResultEntryView(views.APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, pk):
+        exam = get_object_or_404(Exam, pk=pk)
+        from apps.academic.models import Subject
+        
+        # 1. Fetch relevant students
+        students_qs = Student.objects.none()
+        if exam.classroom and exam.classroom.department:
+            dept = exam.classroom.department
+            students_qs = Student.objects.filter(
+                Q(general_department=dept) | Q(islamic_department=dept),
+                status='active'
+            )
+        if not students_qs.exists() and exam.classroom:
+            students_qs = Student.objects.filter(
+                Q(general_department__name__icontains=exam.classroom.name) |
+                Q(islamic_department__name__icontains=exam.classroom.name),
+                status='active'
+            )
+        if not students_qs.exists():
+            students_qs = Student.objects.filter(status='active')
+            
+        students = students_qs.order_by('roll_number', 'student_id')
+
+        # 2. Fetch relevant subjects
+        subjects_qs = Subject.objects.none()
+        if exam.classroom:
+            subjects_qs = Subject.objects.filter(classroom=exam.classroom)
+        if not subjects_qs.exists():
+            subjects_qs = Subject.objects.all()
+        subjects = subjects_qs.order_by('code', 'id')
+
+        # 3. Existing marks
+        results = ExamResult.objects.filter(exam=exam).select_related('student', 'subject')
+        results_map = {}
+        for r in results:
+            results_map[f"{r.student_id}_{r.subject_id}"] = {
+                'id': r.id,
+                'marks_obtained': float(r.marks_obtained),
+                'total_marks': r.total_marks,
+                'grade': r.grade,
+                'gpa': float(r.gpa) if r.gpa is not None else None,
+                'is_absent': r.is_absent
+            }
+
+        return Response({
+            'exam': {
+                'id': exam.id,
+                'name': exam.name,
+                'name_bn': exam.name_bn,
+                'exam_type': exam.exam_type,
+                'classroom_id': exam.classroom_id,
+                'classroom_name': exam.classroom.name_bn if exam.classroom else '',
+                'academic_year_id': exam.academic_year_id,
+                'academic_year': exam.academic_year.year if exam.academic_year else '',
+                'start_date': str(exam.start_date),
+                'end_date': str(exam.end_date),
+                'is_published': exam.is_published
+            },
+            'students': [
+                {
+                    'id': s.id,
+                    'student_id': s.student_id,
+                    'roll_number': s.roll_number,
+                    'name': s.name,
+                    'name_bn': s.name_bn,
+                    'photo': s.photo.url if s.photo else None
+                } for s in students
+            ],
+            'subjects': [
+                {
+                    'id': sub.id,
+                    'name': sub.name,
+                    'name_bn': sub.name_bn,
+                    'code': sub.code,
+                    'total_marks': getattr(sub, 'total_marks', 100),
+                    'pass_marks': getattr(sub, 'pass_marks', 33)
+                } for sub in subjects
+            ],
+            'results_map': results_map
+        })
+
     def post(self, request, pk):
         exam = get_object_or_404(Exam, pk=pk)
-        serializer = BulkResultEntrySerializer(data=request.data)
-        if serializer.is_valid():
-            results_data = serializer.validated_data.get('results', [])
-            for r_data in results_data:
-                ExamResult.objects.update_or_create(
-                    exam=exam,
-                    student=r_data['student'],
-                    subject=r_data['subject'],
-                    defaults={
-                        'marks_obtained': r_data['marks_obtained'],
-                        'total_marks': r_data.get('total_marks', 100),
-                        'grade': r_data.get('grade', ''),
-                        'gpa': r_data.get('gpa')
-                    }
-                )
-            return Response({'status': 'saved'})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        from apps.academic.models import Subject
+        entries = request.data.get('results', [])
+        if not isinstance(entries, list):
+            return Response({'error': 'Results must be a list'}, status=status.HTTP_400_BAD_REQUEST)
+
+        saved_count = 0
+        for r_data in entries:
+            student_id = r_data.get('student') or r_data.get('student_id')
+            subject_id = r_data.get('subject') or r_data.get('subject_id')
+            raw_marks = r_data.get('marks_obtained')
+            if student_id is None or subject_id is None or raw_marks is None or raw_marks == '':
+                continue
+
+            try:
+                marks_val = float(raw_marks)
+            except (ValueError, TypeError):
+                continue
+
+            student = Student.objects.filter(id=student_id).first()
+            subject = Subject.objects.filter(id=subject_id).first()
+            if not student or not subject:
+                continue
+
+            total_marks = int(r_data.get('total_marks') or getattr(subject, 'total_marks', 100))
+            is_absent = bool(r_data.get('is_absent', False))
+
+            res_obj, _ = ExamResult.objects.update_or_create(
+                exam=exam,
+                student=student,
+                subject=subject,
+                defaults={
+                    'marks_obtained': marks_val,
+                    'total_marks': total_marks,
+                    'is_absent': is_absent,
+                    'entered_by': request.user if request.user.is_authenticated else None
+                }
+            )
+            saved_count += 1
+
+        return Response({
+            'status': 'saved',
+            'saved_count': saved_count,
+            'message': f'{saved_count} টি ফলাফল সফলভাবে সংরক্ষিত হয়েছে।'
+        })
 
 class StudentMarksheetView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]

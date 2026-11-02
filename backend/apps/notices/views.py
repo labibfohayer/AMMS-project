@@ -16,16 +16,21 @@ class IsPrincipal(permissions.BasePermission):
         return bool(request.user and request.user.is_authenticated and getattr(request.user, 'role', '') in ['principal', 'vice_principal', 'managing_director'])
 
 class NoticeListView(generics.ListAPIView):
-    queryset = Notice.objects.all()
+    queryset = Notice.objects.all().order_by('-created_at')
     serializer_class = NoticeSerializer
 
 class NoticeCreateView(generics.CreateAPIView):
     queryset = Notice.objects.all()
     serializer_class = NoticeCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
 
 class NoticeDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Notice.objects.all()
     serializer_class = NoticeSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 class NoticeWhatsAppBroadcastView(views.APIView):
     permission_classes = [IsPrincipal]
