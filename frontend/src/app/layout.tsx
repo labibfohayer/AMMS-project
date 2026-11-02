@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import QueryProvider from "@/providers/QueryProvider";
 import FaviconWatcher from "@/components/common/FaviconWatcher";
+import ScrollObserver from "@/components/common/ScrollObserver";
 
 const skBishal = localFont({
   src: [
@@ -78,6 +79,7 @@ export default function RootLayout({
       </head>
       <body className={`${skBishal.variable} ${hindSiliguri.variable} font-sans`}>
         <FaviconWatcher />
+        <ScrollObserver />
         <QueryProvider>
           <AuthProvider>
             <LanguageProvider>

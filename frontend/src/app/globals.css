@@ -601,4 +601,42 @@ html[lang="en"] .font-cursive-en span,
   }
 }
 
+/* ============================================================ */
+/* 🌊 Smooth Scroll-Triggered Slide-Up Animations (AOS Style)   */
+/* ============================================================ */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Base state: shifted down by 45px, invisible */
+html.enable-scroll-reveal [data-aos="fade-up"],
+html.enable-scroll-reveal .scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 45px, 0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Active state: slid up to original position, fully visible */
+html.enable-scroll-reveal [data-aos="fade-up"].aos-animate,
+html.enable-scroll-reveal .scroll-reveal.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html.enable-scroll-reveal [data-aos="fade-up"],
+  html.enable-scroll-reveal .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 
