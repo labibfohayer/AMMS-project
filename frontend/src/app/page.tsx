@@ -21,28 +21,29 @@ export default function Home() {
   // Real Al-Madina Model Madrasah Photos & Bilingual Captions
   const slides = [
     { 
-      src: '/images/slider-students-group.jpg', 
-      position: 'center 20%',
+      src: '/images/slider-1-students.jpg', 
       title: isBangla ? 'আল-মদিনা মডেল মাদ্রাসার শিক্ষার্থীবৃন্দ' : 'Students of Al-Madina Model Madrasah',
       subtitle: isBangla ? 'দ্বীনি ও আধুনিক শিক্ষার সমন্বয়ে আগামী দিনের আলোকিত প্রজন্ম গড়ার অঙ্গীকার' : 'Modern holistic education rooted in Islamic moral values'
     },
     { 
-      src: '/images/slider-smart-classroom.png', 
-      position: 'center 45%',
-      title: isBangla ? 'ডিজিটাল ও স্মার্ট মাল্টিমিডিয়া ক্লাসরুম' : 'Digital & Smart Multimedia Classrooms',
-      subtitle: isBangla ? 'শীতাতপ নিয়ন্ত্রিত আধুনিক ও মনোরম পরিবেশে সৃজনশীল শ্রেণি কার্যক্রম' : 'Interactive, technology-empowered learning experience'
+      src: '/images/slider-2-quran-circle.jpg', 
+      title: isBangla ? 'হিফজুল কুরআন ও নাজেরা পাঠদান' : 'Hifzul Quran & Authentic Recitation',
+      subtitle: isBangla ? 'আন্তর্জাতিক মানসম্পন্ন তাজবিদ চর্চা ও সহীহ বিশুদ্ধ কুরআন হেফজ কার্যক্রম' : 'International standard Tajweed and Quran memorization'
     },
     { 
-      src: '/images/slider-director-award.jpg', 
-      position: 'center 85%',
+      src: '/images/slider-3-director-certificate.jpg', 
       title: isBangla ? 'হিফজ ও মেধা মূল্যায়ন স্বীকৃতি' : 'Merit Evaluation & Award Recognition',
       subtitle: isBangla ? 'পরিচালক মাওলানা ওমর ফারুক মুজাহিদীর প্রত্যক্ষ তত্ত্বাবধান ও দিকনির্দেশনা' : 'Direct mentorship and honors under Principal Maulana Omar Faruk'
     },
     { 
-      src: '/images/slider-tarbiyah-award.jpg', 
-      position: 'center 35%',
+      src: '/images/slider-4-tarbiyah-award.jpg', 
       title: isBangla ? 'আদর্শ নৈতিক তারবিয়াহ ও চরিত্র গঠন' : 'Holistic Tarbiyah & Character Building',
       subtitle: isBangla ? 'স্নেহ, যত্ন ও ইসলামিক অনুশাসনে গড়ে উঠছে আগামী দিনের আদর্শ নাগরিক' : 'Nurturing future leadership with care, discipline, and Islamic ethics'
+    },
+    { 
+      src: '/images/slider-5-guardians-assembly.jpg', 
+      title: isBangla ? 'অভিভাবক সম্মেলন ও পরামর্শ সভা' : 'Guardian-Teacher Conferences',
+      subtitle: isBangla ? 'শিক্ষার্থীর সামগ্রিক অগ্রগতি ও সুশিক্ষা নিশ্চিতে শিক্ষক-অভিভাবক যৌথ সমন্বয়' : 'Collaborative partnership ensuring holistic student development'
     },
   ];
 
@@ -310,7 +311,7 @@ export default function Home() {
             <div className="hm-hero__grid" style={{ marginTop: '20px' }}>
               
               {/* Left Column: Hero Slider */}
-              <div className="relative w-full h-[340px] sm:h-[400px] lg:h-[430px] rounded-2xl overflow-hidden shadow-lg bg-slate-900 group">
+              <div className="relative w-full h-[340px] sm:h-[400px] lg:h-[430px] rounded-3xl overflow-hidden shadow-md bg-[#F8FAF9] border border-slate-200/90 group">
                 {slides.map((slide, idx) => (
                   <div 
                     key={idx}
@@ -321,33 +322,39 @@ export default function Home() {
                       height: '100%',
                       opacity: activeSlide === idx ? 1 : 0,
                       zIndex: activeSlide === idx ? 10 : 0,
-                      transition: 'opacity 0.75s ease-in-out, transform 0.75s ease-in-out',
-                      transform: activeSlide === idx ? 'scale(1)' : 'scale(1.03)',
+                      transition: 'opacity 0.6s ease-in-out',
                       pointerEvents: activeSlide === idx ? 'auto' : 'none'
                     }}
                   >
+                    {/* Ambient subtle backdrop to gracefully fit any photo shape without black bars */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center filter blur-2xl opacity-20 scale-110 pointer-events-none"
+                      style={{ backgroundImage: `url(${slide.src})` }}
+                    />
+
+                    {/* 100% Original, Uncropped HD Photo (No Heads or Hands Cut Off, 100% Light) */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
                       src={slide.src} 
                       alt={slide.title} 
-                      className="w-full h-full object-cover"
-                      style={{ objectPosition: slide.position || 'center' }}
+                      className="relative z-10 w-full h-full object-contain mx-auto"
                     />
                     
-                    {/* Gradient Overlay for Text Readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
-                    
-                    {/* Caption Overlay */}
-                    <div className="absolute bottom-6 left-6 right-16 text-white z-20 pointer-events-none">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-teal-600/90 text-white text-[11px] font-bold mb-1.5 backdrop-blur-xs">
-                        {isBangla ? `ক্যাম্পাস দৃশ্যপট • ০${idx + 1}/০${slides.length}` : `Campus View • 0${idx + 1}/0${slides.length}`}
-                      </span>
-                      <h3 className="text-base sm:text-xl font-extrabold text-white leading-snug drop-shadow-sm">
-                        {slide.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-200 mt-1 line-clamp-1 drop-shadow-xs">
-                        {slide.subtitle}
-                      </p>
+                    {/* Clean, Bright Floating Caption Badge (No dark vintage tint over the image) */}
+                    <div className="absolute bottom-3 left-4 right-16 z-20 pointer-events-none">
+                      <div className="inline-flex flex-col bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-md border border-slate-200/80 max-w-lg">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="inline-block px-2 py-0.5 rounded-full bg-teal-50 text-teal-900 border border-teal-200/60 text-[10px] font-bold">
+                            {isBangla ? `ক্যাম্পাস দৃশ্যপট • ০${idx + 1}/০${slides.length}` : `Campus View • 0${idx + 1}/0${slides.length}`}
+                          </span>
+                        </div>
+                        <h3 className="text-xs sm:text-sm font-extrabold text-teal-950 leading-snug">
+                          {slide.title}
+                        </h3>
+                        <p className="text-[10px] sm:text-[11px] text-slate-600 line-clamp-1">
+                          {slide.subtitle}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -356,7 +363,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/45 hover:bg-teal-600 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 backdrop-blur-xs cursor-pointer shadow-md"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white/90 hover:bg-teal-700 hover:text-white text-teal-950 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-md border border-slate-200/60 cursor-pointer"
                   aria-label="Previous slide"
                 >
                   <ChevronLeft size={20} />
@@ -366,14 +373,14 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => setActiveSlide((prev) => (prev + 1) % slides.length)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/45 hover:bg-teal-600 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 backdrop-blur-xs cursor-pointer shadow-md"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white/90 hover:bg-teal-700 hover:text-white text-teal-950 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-md border border-slate-200/60 cursor-pointer"
                   aria-label="Next slide"
                 >
                   <ChevronRight size={20} />
                 </button>
 
                 {/* Slider Pagination Bullets */}
-                <div className="flex items-center justify-center gap-1.5 absolute bottom-3 right-6 z-30">
+                <div className="flex items-center justify-center gap-1.5 absolute bottom-3 right-5 z-30">
                   {slides.map((_, i) => (
                     <button
                       key={i}
@@ -381,8 +388,8 @@ export default function Home() {
                       onClick={() => setActiveSlide(i)}
                       className={`transition-all duration-300 rounded-full cursor-pointer ${
                         activeSlide === i 
-                          ? 'w-7 h-2 bg-teal-400 shadow-sm' 
-                          : 'w-2 h-2 bg-white/60 hover:bg-white/90'
+                          ? 'w-6 h-2 bg-teal-700 shadow-xs' 
+                          : 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
                       }`}
                       aria-label={`Go to slide ${i + 1}`}
                     />
