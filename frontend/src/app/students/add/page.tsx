@@ -396,7 +396,7 @@ export default function AddStudent() {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
-                    অভিভাবকের মোবাইল নম্বর <span className="text-rose-500">*</span>
+                    অভিভাবকের মোবাইল নম্বর (লগইন আইডি) <span className="text-rose-500">*</span>
                   </label>
                   <input
                     type="tel"
@@ -407,6 +407,9 @@ export default function AddStudent() {
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-mono font-bold focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                     required
                   />
+                  <p className="text-[11px] text-teal-800 font-medium mt-1">
+                    💡 অভিভাবক এই মোবাইল নম্বর ও শিক্ষার্থীর জন্মতারিখ (DDMMYYYY) দিয়ে পোর্টালে লগইন করতে পারবেন।
+                  </p>
                 </div>
 
                 <div>

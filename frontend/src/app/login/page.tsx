@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Eye, EyeOff, User, Lock, ArrowLeft, Sparkles, ShieldCheck, GraduationCap } from 'lucide-react';
+import { Eye, EyeOff, User, Lock, ArrowLeft, Sparkles, ShieldCheck, GraduationCap, Users } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
@@ -139,7 +139,7 @@ export default function LoginPage() {
             {/* Phone / User ID */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-gray-700 flex items-center justify-between">
-                <span>{isBangla ? 'মোবাইল নম্বর / স্টুডেন্ট আইডি' : 'Mobile Number / Student ID'}</span>
+                <span>{isBangla ? 'মোবাইল নম্বর / ইউজার আইডি' : 'Mobile Number / User ID'}</span>
               </label>
               <div className="relative group">
                 <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-teal-700 transition-colors" />
@@ -147,7 +147,7 @@ export default function LoginPage() {
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder={isBangla ? "017XXXXXXXX বা স্টুডেন্ট আইডি" : "017XXXXXXXX or Student ID"}
+                  placeholder={isBangla ? "অভিভাবকের মোবাইল / স্টুডেন্ট আইডি" : "Guardian Mobile / Student ID"}
                   className="w-full pl-11 pr-4 py-3 bg-slate-50 focus:bg-white border border-slate-200 focus:border-teal-700 rounded-xl text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20 transition-all font-medium"
                   required
                 />
@@ -201,19 +201,30 @@ export default function LoginPage() {
           </form>
 
           {/* Student & Guardian Instruction Helper Box */}
-          <div className="mt-6 p-3.5 rounded-2xl bg-teal-50/70 border border-teal-100 flex items-start gap-3">
+          <div className="mt-6 p-4 rounded-2xl bg-teal-50/80 border border-teal-200/80 flex items-start gap-3 text-xs leading-relaxed text-teal-950">
             <div className="p-2 rounded-xl bg-teal-100 text-teal-800 shrink-0">
-              <GraduationCap className="w-5 h-5" />
+              <Users className="w-5 h-5" />
             </div>
-            <div className="text-xs leading-relaxed text-teal-950">
-              <span className="font-bold text-teal-950">
-                {isBangla ? 'শিক্ষার্থীদের জন্য নির্দেশনা:' : 'Instructions for Students:'}
+            <div className="space-y-1.5 flex-1">
+              <span className="font-bold text-teal-950 block text-xs sm:text-sm">
+                {isBangla ? 'অভিভাবক ও শিক্ষার্থী লগইন সহায়িকা' : 'Guardian & Student Login Guide'}
               </span>
-              <p className="mt-0.5 text-teal-900/80">
-                {isBangla 
-                  ? 'স্টুডেন্ট আইডি ও পাসওয়ার্ড হিসেবে জন্মতারিখ (DDMMYYYY) দিয়ে সহজেই লগইন করা যাবে।' 
-                  : 'Log in using your Student ID and Date of Birth (DDMMYYYY) as password.'}
-              </p>
+              <div className="text-[11px] sm:text-xs text-teal-900/90 space-y-1">
+                <div>
+                  <strong className="text-teal-950">{isBangla ? 'অভিভাবকদের জন্য:' : 'For Guardians:'}</strong>{' '}
+                  {isBangla 
+                    ? 'আবেদনে দেওয়া মোবাইল নম্বর আইডি হিসেবে এবং পাসওয়ার্ড হিসেবে শিক্ষার্থীর জন্মতারিখ (যেমন: ' 
+                    : 'Use the mobile number from admission and Student Date of Birth (e.g. '}
+                  <span className="font-mono font-bold text-teal-950 bg-teal-200/60 px-1 py-0.5 rounded">15082016</span>
+                  {isBangla ? ') দিন।' : ').'}
+                </div>
+                <div>
+                  <strong className="text-teal-950">{isBangla ? 'শিক্ষার্থীদের জন্য:' : 'For Students:'}</strong>{' '}
+                  {isBangla 
+                    ? 'স্টুডেন্ট আইডি এবং পাসওয়ার্ড হিসেবে জন্মতারিখ (DDMMYYYY) দিন।' 
+                    : 'Use Student ID and Date of Birth (DDMMYYYY) as password.'}
+                </div>
+              </div>
             </div>
           </div>
 

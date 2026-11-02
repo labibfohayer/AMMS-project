@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { 
-  ArrowLeft, CheckCircle2, Sparkles, Printer, User, 
+  ArrowLeft, ArrowRight, CheckCircle2, Sparkles, Printer, User, 
   Phone, MapPin, Calendar, Heart, School, BookOpen, 
   Building, ShieldCheck, Download, RefreshCw, Camera, X
 } from 'lucide-react';
@@ -265,8 +265,45 @@ export default function AdmissionPage() {
                 </div>
               </div>
 
+              {/* Guardian Account Activated Banner */}
+              <div className="mt-6 p-4 rounded-2xl bg-teal-50 border border-teal-200/90 text-teal-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs print:hidden">
+                <div>
+                  <div className="font-bold text-teal-900 flex items-center gap-2 text-sm sm:text-base">
+                    <CheckCircle2 className="w-5 h-5 text-teal-700" />
+                    <span>{isBangla ? 'অভিভাবক অ্যাকাউন্ট স্বয়ংক্রিয়ভাবে সক্রিয় হয়েছে!' : 'Guardian Account Automatically Activated!'}</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-teal-900 mt-1.5 leading-relaxed">
+                    {isBangla ? (
+                      <>
+                        অভিভাবক লগইন আইডি: <strong className="font-mono text-teal-950 px-1.5 py-0.5 bg-teal-200/70 rounded">{submittedData.guardian_phone}</strong>
+                        <span className="mx-1.5">•</span>
+                        পাসওয়ার্ড: <strong className="font-mono text-teal-950 px-1.5 py-0.5 bg-teal-200/70 rounded">শিক্ষার্থীর জন্মতারিখ (DDMMYYYY)</strong>
+                      </>
+                    ) : (
+                      <>
+                        Guardian Login ID: <strong className="font-mono text-teal-950 px-1.5 py-0.5 bg-teal-200/70 rounded">{submittedData.guardian_phone}</strong>
+                        <span className="mx-1.5">•</span>
+                        Password: <strong className="font-mono text-teal-950 px-1.5 py-0.5 bg-teal-200/70 rounded">Student Date of Birth (DDMMYYYY)</strong>
+                      </>
+                    )}
+                  </p>
+                  <p className="text-[11px] text-teal-800/80 mt-1">
+                    {isBangla 
+                      ? 'এই মোবাইল নম্বর ও জন্মতারিখ দিয়ে অভিভাবক পোর্টালে লগইন করে আপনার সন্তানের সকল আপডেট ও ফি সংক্রান্ত তথ্য দেখতে পারবেন।' 
+                      : 'Use this mobile and birth date to log in to the Guardian Portal anytime to view student updates and fees.'}
+                  </p>
+                </div>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-teal-800 hover:bg-teal-900 text-white font-bold text-xs sm:text-sm transition-all shadow-md shrink-0 active:scale-95"
+                >
+                  <span>{isBangla ? 'অভিভাবক লগইন' : 'Guardian Login'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
               {/* Instructions Box */}
-              <div className="mt-6 p-4 rounded-xl bg-white border border-slate-200 text-xs text-slate-600 leading-relaxed print:bg-gray-50 print:border print:border-gray-300 print:text-black">
+              <div className="mt-4 p-4 rounded-xl bg-white border border-slate-200 text-xs text-slate-600 leading-relaxed print:bg-gray-50 print:border print:border-gray-300 print:text-black">
                 <span className="font-bold text-[#1B4332] print:text-black">
                   {isBangla ? 'গুরুত্বপূর্ণ নির্দেশনা:' : 'Important Instructions:'}
                 </span>
@@ -680,7 +717,7 @@ export default function AdmissionPage() {
                 {/* Guardian Phone Number */}
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                    {isBangla ? 'অভিভাবকের মোবাইল নম্বর (WhatsApp)' : "Guardian's Mobile Number (WhatsApp)"} <span className="text-[#C5A059]">*</span>
+                    {isBangla ? 'অভিভাবকের মোবাইল নম্বর (লগইন আইডি)' : "Guardian's Mobile Number (Login ID)"} <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="tel"
@@ -691,6 +728,14 @@ export default function AdmissionPage() {
                     required
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
+                  <p className="text-[11px] text-teal-800 font-medium mt-1.5 flex items-center gap-1.5 bg-teal-50/80 px-2.5 py-1 rounded-lg border border-teal-200/60">
+                    <span className="text-teal-600">🔐</span>
+                    <span>
+                      {isBangla 
+                        ? 'এই নম্বরটি অভিভাবক লগইন আইডি হিসেবে সেভ থাকবে এবং শিক্ষার্থীর জন্মতারিখ হবে পাসওয়ার্ড।' 
+                        : 'This mobile number will be the Guardian Login ID, and the student birth date will be the password.'}
+                    </span>
+                  </p>
                 </div>
 
                 {/* Guardian Relationship */}

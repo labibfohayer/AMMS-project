@@ -80,6 +80,19 @@ export default function GuardianDashboard() {
     }
   });
 
+  // 1b. Fetch Pending Admission Applications for Guardian (if newly applied)
+  const { data: admissionApps = [] } = useQuery({
+    queryKey: ['guardian_admission_apps'],
+    queryFn: async () => {
+      try {
+        const res = await api.get('/api/students/admissions/');
+        return Array.isArray(res.data) ? res.data : (res.data?.results || []);
+      } catch {
+        return [];
+      }
+    }
+  });
+
   const activeStudent = useMemo(() => {
     if (!students || students.length === 0) return null;
     return students[selectedStudentIdx] || students[0];
@@ -805,8 +818,65 @@ export default function GuardianDashboard() {
       </div>
     ) : (
 
-          <div className="bg-white rounded-3xl p-12 text-center text-gray-500 border border-slate-200">
-            কোনো শিক্ষার্থী প্রোফাইল পাওয়া যায়নি।
+          <div className="space-y-6">
+            {admissionApps && admissionApps.length > 0 ? (
+              <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-slate-200 gap-3">
+                  <div>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold mb-2">
+                      <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+                      <span>অনলাইন ভর্তি আবেদন স্ট্যাটাস</span>
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-black text-teal-950">
+                      আপনার সন্তানের ভর্তি আবেদন প্রক্রিয়াধীন রয়েছে
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                      অ্যাডমিশন কমিটি কর্তৃক আবেদন অনুমোদিত হলে শিক্ষার্থীর চূড়ান্ত প্রোফাইল, উপস্থিতি ও ফি হিসাব এখানে দৃশ্যমান হবে।
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {admissionApps.map((app: any, idx: number) => (
+                    <div key={app.id || idx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs font-bold text-teal-900 bg-teal-100/80 px-2.5 py-1 rounded-lg">
+                          {app.application_no}
+                        </span>
+                        <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                          app.status === 'approved' 
+                            ? 'bg-emerald-100 text-emerald-800' 
+                            : app.status === 'rejected' 
+                            ? 'bg-rose-100 text-rose-800' 
+                            : 'bg-amber-100 text-amber-800'
+                        }`}>
+                          {app.status === 'approved' ? 'অনুমোদিত' : app.status === 'rejected' ? 'বাতিল' : 'প্রক্রিয়াধীন (Pending)'}
+                        </span>
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-slate-900">{app.name_bn || app.name}</h4>
+                        <p className="text-xs text-slate-600 mt-0.5">
+                          কাঙ্ক্ষিত বিভাগ: <strong className="text-teal-900">{app.desired_program}</strong> • 
+                          আবাসিক: {app.residential_status === 'residential' ? 'আবাসিক' : 'অনাবাসিক'}
+                        </p>
+                        <p className="text-xs text-slate-500 mt-0.5 font-mono">
+                          জন্ম তারিখ: {app.date_of_birth}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="p-4 rounded-xl bg-teal-50/60 border border-teal-100 text-xs text-teal-900 space-y-1">
+                  <p className="font-bold">জরুরি প্রয়োজনে হেল্পলাইন:</p>
+                  <p>০১৭১২-৬৩৩২৬৪ (ক্যাম্পাস: ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা)</p>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white rounded-3xl p-12 text-center text-gray-500 border border-slate-200">
+                কোনো শিক্ষার্থী বা ভর্তি আবেদন প্রোফাইল পাওয়া যায়নি।
+              </div>
+            )}
           </div>
         )}
 

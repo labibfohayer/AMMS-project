@@ -143,6 +143,30 @@ class AdmissionApplicationCreateView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         instance = serializer.save()
 
+        # Auto-register or sync Guardian User account (Phone as Login ID, Student DOB as Password)
+        try:
+            from django.contrib.auth import get_user_model
+            User = get_user_model()
+            guardian_phone = (instance.guardian_phone or '').strip()
+            if guardian_phone and instance.date_of_birth:
+                dob_str = instance.date_of_birth.strftime('%d%m%Y')
+                g_user = User.objects.filter(phone=guardian_phone).first()
+                g_name = instance.father_name or instance.name or "অভিভাবক"
+                g_name_bn = instance.father_name_bn or instance.name_bn or "অভিভাবক"
+                if not g_user:
+                    User.objects.create_user(
+                        phone=guardian_phone,
+                        password=dob_str,
+                        name=g_name,
+                        name_bn=g_name_bn,
+                        role='guardian'
+                    )
+                elif g_user.role == 'guardian':
+                    g_user.set_password(dob_str)
+                    g_user.save(update_fields=['password'])
+        except Exception as e:
+            print("Auto Guardian Registration Error on Application Apply:", e)
+
         # Trigger WhatsApp notification & logging
         try:
             from apps.notifications.whatsapp import send_admission_application_alert
@@ -152,20 +176,30 @@ class AdmissionApplicationCreateView(generics.CreateAPIView):
 
         return Response({
             "status": "success",
-            "message": "ভর্তি আবেদন সফলভাবে গৃহীত হয়েছে!",
+            "message": "ভর্তি আবেদন সফলভাবে গৃহীত হয়েছে এবং অভিভাবক অ্যাকাউন্ট সক্রিয় করা হয়েছে!",
             "application_no": instance.application_no,
+            "guardian_phone": instance.guardian_phone,
             "data": serializer.data
         }, status=status.HTTP_201_CREATED)
 
 class AdmissionApplicationListView(generics.ListAPIView):
     serializer_class = AdmissionApplicationSerializer
-    permission_classes = [IsAuthenticated, IsPrincipalOrTeacher]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        qs = AdmissionApplication.objects.all().select_related(
-            'reviewed_by', 'enrolled_student', 
-            'enrolled_student__islamic_department', 'enrolled_student__general_department'
-        )
+        user = self.request.user
+        if user.role in ['principal', 'vice_principal', 'managing_director', 'teacher', 'staff']:
+            qs = AdmissionApplication.objects.all().select_related(
+                'reviewed_by', 'enrolled_student', 
+                'enrolled_student__islamic_department', 'enrolled_student__general_department'
+            )
+        elif user.role == 'guardian':
+            qs = AdmissionApplication.objects.filter(guardian_phone=user.phone).select_related(
+                'reviewed_by', 'enrolled_student', 
+                'enrolled_student__islamic_department', 'enrolled_student__general_department'
+            )
+        else:
+            return AdmissionApplication.objects.none()
         status_filter = self.request.query_params.get('status')
         if status_filter and status_filter in ['pending', 'approved', 'rejected']:
             qs = qs.filter(status=status_filter)
@@ -369,7 +403,28 @@ class AdmissionApplicationApproveView(APIView):
             application.reviewed_by = request.user
             application.save()
 
-            # 5. Send WhatsApp notification
+            # 5. Ensure guardian user exists & password is set to student's DOB
+            g_phone = (application.guardian_phone or '').strip()
+            if g_phone:
+                try:
+                    g_user = User.objects.filter(phone=g_phone).first()
+                    g_name = student.guardian_name or student.father_name or "অভিভাবক"
+                    g_name_bn = student.guardian_name or student.father_name_bn or g_name
+                    if not g_user:
+                        User.objects.create_user(
+                            phone=g_phone,
+                            password=dob_str,
+                            name=g_name,
+                            name_bn=g_name_bn,
+                            role='guardian'
+                        )
+                    elif g_user.role == 'guardian':
+                        g_user.set_password(dob_str)
+                        g_user.save(update_fields=['password'])
+                except Exception as e:
+                    print("Auto Guardian Registration Error on Approval:", e)
+
+            # 6. Send WhatsApp notification
             try:
                 from apps.notifications.whatsapp import send_admission_notification
                 send_admission_notification(student, password=dob_str, sent_by=request.user)

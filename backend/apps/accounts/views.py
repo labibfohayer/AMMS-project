@@ -55,6 +55,64 @@ class LoginView(views.APIView):
                             # Sync password so check_password also works in future
                             user.set_password(password)
                             user.save(update_fields=['password'])
+
+            # 3. Guardian Authentication by Guardian Phone & Student Date of Birth
+            if user is None:
+                from apps.students.models import Student, AdmissionApplication
+                # Match students or admission applications having this guardian phone
+                matching_students = list(Student.objects.filter(guardian_phone=identifier))
+                matching_apps = list(AdmissionApplication.objects.filter(guardian_phone=identifier))
+
+                if matching_students or matching_apps:
+                    dob_candidates = []
+                    guardian_name = None
+                    guardian_name_bn = None
+
+                    for s in matching_students:
+                        if s.date_of_birth:
+                            dob_candidates.append(s.date_of_birth)
+                        if not guardian_name:
+                            guardian_name = s.guardian_name or s.father_name
+                            guardian_name_bn = s.guardian_name or s.father_name_bn
+
+                    for a in matching_apps:
+                        if a.date_of_birth:
+                            dob_candidates.append(a.date_of_birth)
+                        if not guardian_name:
+                            guardian_name = a.father_name or a.guardian_relationship
+                            guardian_name_bn = a.father_name_bn or a.guardian_relationship
+
+                    clean_pwd = password.strip().replace('-', '').replace('/', '').replace(' ', '')
+                    matched_dob = False
+                    for dob in dob_candidates:
+                        variants = [
+                            dob.strftime('%d%m%Y'),
+                            dob.strftime('%Y-%m-%d'),
+                            dob.strftime('%d-%m-%Y'),
+                            dob.strftime('%d/%m/%Y'),
+                            dob.strftime('%Y%m%d'),
+                        ]
+                        clean_vars = [v.replace('-', '').replace('/', '') for v in variants]
+                        if password.strip() in variants or clean_pwd in clean_vars:
+                            matched_dob = True
+                            break
+
+                    if matched_dob:
+                        guardian_user = User.objects.filter(phone=identifier).first()
+                        if not guardian_user:
+                            guardian_user = User.objects.create_user(
+                                phone=identifier,
+                                password=password,
+                                name=guardian_name or "অভিভাবক",
+                                name_bn=guardian_name_bn or "অভিভাবক",
+                                role='guardian'
+                            )
+                        else:
+                            if guardian_user.role in ['guardian', 'student']:
+                                guardian_user.role = 'guardian'
+                            guardian_user.set_password(password)
+                            guardian_user.save(update_fields=['password', 'role'])
+                        user = guardian_user
         
         if user is not None:
             refresh = RefreshToken.for_user(user)

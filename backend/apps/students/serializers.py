@@ -71,7 +71,29 @@ class StudentAdmissionSerializer(serializers.ModelSerializer):
             validated_data['admitted_by'] = self.context['request'].user
             
             student = Student.objects.create(**validated_data)
-            
+
+            # Auto-register or sync Guardian User account (Phone as Login ID, Student DOB as Password)
+            guardian_phone = (student.guardian_phone or '').strip()
+            if guardian_phone and student.date_of_birth:
+                try:
+                    dob_str = student.date_of_birth.strftime('%d%m%Y')
+                    g_user = User.objects.filter(phone=guardian_phone).first()
+                    g_name = student.guardian_name or student.father_name or "অভিভাবক"
+                    g_name_bn = student.guardian_name or student.father_name_bn or g_name
+                    if not g_user:
+                        User.objects.create_user(
+                            phone=guardian_phone,
+                            password=dob_str,
+                            name=g_name,
+                            name_bn=g_name_bn,
+                            role='guardian'
+                        )
+                    elif g_user.role == 'guardian':
+                        g_user.set_password(dob_str)
+                        g_user.save(update_fields=['password'])
+                except Exception as e:
+                    print("Auto Guardian Registration Error on Student Admission:", e)
+
             send_admission_notification(student, password)
             
             return student
