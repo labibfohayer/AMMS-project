@@ -548,27 +548,14 @@ html[lang="en"] .font-cursive-en span,
   font-family: 'Great Vibes', 'Caveat', cursive, sans-serif !important;
 }
 
-@keyframes preloaderWaveFloat {
+@keyframes inkPenBlink {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-8px) rotate(-0.35deg);
+    opacity: 1;
+    transform: scaleY(1);
   }
   50% {
-    transform: translateY(3px) rotate(0.25deg);
-  }
-  75% {
-    transform: translateY(-5px) rotate(-0.15deg);
-  }
-}
-
-@keyframes preloaderWordWave {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
+    opacity: 0.2;
+    transform: scaleY(0.7);
   }
 }
 
