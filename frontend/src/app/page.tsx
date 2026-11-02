@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import Preloader from '@/components/common/Preloader';
 import { 
   Phone, Mail, ChevronDown, ChevronRight, ChevronLeft,
   MapPin, Clock, BookOpen, Layers, MessageSquare, HeartHandshake, 
@@ -56,6 +57,8 @@ export default function Home() {
 
   return (
     <div className="hm-page font-sans text-slate-800 bg-white">
+      {/* Full-Screen Welcome Preloader / Splash Screen */}
+      <Preloader />
       
       {/* ============================================================ */}
       {/* 1. TOP HEADER NOTICE (Exact Top Bar) */}

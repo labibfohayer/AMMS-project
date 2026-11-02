@@ -69,6 +69,12 @@ export default function RootLayout({
         <link rel="icon" type="image/jpeg" href="/logo.jpg?v=20261102" />
         <link rel="shortcut icon" href="/favicon-32x32.png?v=20261102" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261102" />
+        <link rel="preload" href="/fonts/Galada-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/GreatVibes-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/Caveat-SemiBold.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Galada&family=Great+Vibes&display=swap" rel="stylesheet" />
       </head>
       <body className={`${skBishal.variable} ${hindSiliguri.variable} font-sans`}>
         <FaviconWatcher />

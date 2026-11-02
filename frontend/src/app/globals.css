@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Galada&family=Great+Vibes&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -47,6 +49,30 @@
   font-family: 'Li SK Bishal Unicode';
   src: url('/fonts/sk-bishal.ttf') format('truetype');
   font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Galada';
+  src: url('/fonts/Galada-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('/fonts/GreatVibes-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('/fonts/Caveat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -501,6 +527,78 @@ html[lang="en"] .font-mono {
   visibility: visible !important;
   pointer-events: auto !important;
   transform: translateY(0);
+}
+
+/* 🌟 Preloader Splash Typography & Wave Animations */
+html.lang-bn .font-cursive-bn,
+html[lang="bn"] .font-cursive-bn,
+.font-cursive-bn,
+html.lang-bn .font-cursive-bn span,
+html[lang="bn"] .font-cursive-bn span,
+.font-cursive-bn span {
+  font-family: 'Galada', 'Li SK Bishal Unicode', 'SK Bishal', cursive, serif !important;
+}
+
+html.lang-en .font-cursive-en,
+html[lang="en"] .font-cursive-en,
+.font-cursive-en,
+html.lang-en .font-cursive-en span,
+html[lang="en"] .font-cursive-en span,
+.font-cursive-en span {
+  font-family: 'Great Vibes', 'Caveat', cursive, sans-serif !important;
+}
+
+@keyframes preloaderWaveFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(-0.35deg);
+  }
+  50% {
+    transform: translateY(3px) rotate(0.25deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-0.15deg);
+  }
+}
+
+@keyframes preloaderWordWave {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes preloaderAura {
+  0%, 100% {
+    transform: scale(1.05);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.7;
+  }
+}
+
+@keyframes preloaderLogoPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes preloaderProgressBar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 
