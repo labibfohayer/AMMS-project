@@ -21,29 +21,28 @@ export default function Home() {
   // Real Al-Madina Model Madrasah Photos & Bilingual Captions
   const slides = [
     { 
-      src: '/images/students-group.png', 
+      src: '/images/slider-students-group.jpg', 
+      position: 'center 20%',
       title: isBangla ? 'আল-মদিনা মডেল মাদ্রাসার শিক্ষার্থীবৃন্দ' : 'Students of Al-Madina Model Madrasah',
-      subtitle: isBangla ? 'নৈতিক তারবিয়াহ ও আনন্দঘন পরিবেশে যুগোপযোগী পাঠদান' : 'Modern holistic education rooted in Islamic moral values'
+      subtitle: isBangla ? 'দ্বীনি ও আধুনিক শিক্ষার সমন্বয়ে আগামী দিনের আলোকিত প্রজন্ম গড়ার অঙ্গীকার' : 'Modern holistic education rooted in Islamic moral values'
     },
     { 
-      src: '/images/smart-classroom.png', 
+      src: '/images/slider-smart-classroom.png', 
+      position: 'center 45%',
       title: isBangla ? 'ডিজিটাল ও স্মার্ট মাল্টিমিডিয়া ক্লাসরুম' : 'Digital & Smart Multimedia Classrooms',
-      subtitle: isBangla ? 'আধুনিক প্রযুক্তিনির্ভর সৃজনশীল শ্রেণি কার্যক্রম' : 'Interactive, technology-empowered learning experience'
+      subtitle: isBangla ? 'শীতাতপ নিয়ন্ত্রিত আধুনিক ও মনোরম পরিবেশে সৃজনশীল শ্রেণি কার্যক্রম' : 'Interactive, technology-empowered learning experience'
     },
     { 
-      src: '/images/principal-class.png', 
-      title: isBangla ? 'অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদীর পাঠদান' : 'Direct Mentorship by Principal Maulana Omar Faruk',
-      subtitle: isBangla ? 'অভিজ্ঞ ও নিবেদিতপ্রাণ ওস্তাদগণের সরাসরি সার্বক্ষণিক তত্ত্বাবধান' : 'Dedicated scholars nurturing academic and spiritual excellence'
+      src: '/images/slider-director-award.jpg', 
+      position: 'center 85%',
+      title: isBangla ? 'হিফজ ও মেধা মূল্যায়ন স্বীকৃতি' : 'Merit Evaluation & Award Recognition',
+      subtitle: isBangla ? 'পরিচালক মাওলানা ওমর ফারুক মুজাহিদীর প্রত্যক্ষ তত্ত্বাবধান ও দিকনির্দেশনা' : 'Direct mentorship and honors under Principal Maulana Omar Faruk'
     },
     { 
-      src: '/images/quran-class.png', 
-      title: isBangla ? 'হিফজুল কুরআন ও নাজেরা বিভাগ' : 'Hifzul Quran & Nazera Department',
-      subtitle: isBangla ? 'আন্তর্জাতিক মানসম্পন্ন তাজবিদ চর্চা ও সহীহ বিশুদ্ধ কুরআন শিক্ষা' : 'International standard Tajweed and authentic Quran memorization'
-    },
-    { 
-      src: '/images/guardians-meeting-1.png', 
-      title: isBangla ? 'নিয়মিত অভিভাবক সমাবেশ ও মতবিনিময়' : 'Regular Guardian-Teacher Conferences',
-      subtitle: isBangla ? 'শিক্ষার্থী অগ্রগতি মূল্যায়নে শিক্ষক-অভিভাবক যৌথ সমন্বয়' : 'Collaborative synergy to ensure holistic student development'
+      src: '/images/slider-tarbiyah-award.jpg', 
+      position: 'center 35%',
+      title: isBangla ? 'আদর্শ নৈতিক তারবিয়াহ ও চরিত্র গঠন' : 'Holistic Tarbiyah & Character Building',
+      subtitle: isBangla ? 'স্নেহ, যত্ন ও ইসলামিক অনুশাসনে গড়ে উঠছে আগামী দিনের আদর্শ নাগরিক' : 'Nurturing future leadership with care, discipline, and Islamic ethics'
     },
   ];
 
@@ -332,6 +331,7 @@ export default function Home() {
                       src={slide.src} 
                       alt={slide.title} 
                       className="w-full h-full object-cover"
+                      style={{ objectPosition: slide.position || 'center' }}
                     />
                     
                     {/* Gradient Overlay for Text Readability */}
