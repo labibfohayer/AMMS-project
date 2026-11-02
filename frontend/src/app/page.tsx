@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { 
   Phone, Mail, ChevronDown, ChevronRight, ChevronLeft,
   MapPin, Clock, BookOpen, Layers, MessageSquare, HeartHandshake, 
@@ -17,32 +18,32 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  // Real Al-Madina Model Madrasah Photos & Captions
+  // Real Al-Madina Model Madrasah Photos & Bilingual Captions
   const slides = [
     { 
       src: '/images/students-group.png', 
-      title: 'আল-মদিনা মডেল মাদ্রাসার শিক্ষার্থীবৃন্দ',
-      subtitle: 'নৈতিক তারবিয়াহ ও আনন্দঘন পরিবেশে যুগোপযোগী পাঠদান'
+      title: isBangla ? 'আল-মদিনা মডেল মাদ্রাসার শিক্ষার্থীবৃন্দ' : 'Students of Al-Madina Model Madrasah',
+      subtitle: isBangla ? 'নৈতিক তারবিয়াহ ও আনন্দঘন পরিবেশে যুগোপযোগী পাঠদান' : 'Modern holistic education rooted in Islamic moral values'
     },
     { 
       src: '/images/smart-classroom.png', 
-      title: 'ডিজিটাল ও স্মার্ট মাল্টিমিডিয়া ক্লাসরুম',
-      subtitle: 'আধুনিক প্রযুক্তিনির্ভর সৃজনশীল শ্রেণি কার্যক্রম'
+      title: isBangla ? 'ডিজিটাল ও স্মার্ট মাল্টিমিডিয়া ক্লাসরুম' : 'Digital & Smart Multimedia Classrooms',
+      subtitle: isBangla ? 'আধুনিক প্রযুক্তিনির্ভর সৃজনশীল শ্রেণি কার্যক্রম' : 'Interactive, technology-empowered learning experience'
     },
     { 
       src: '/images/principal-class.png', 
-      title: 'অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদীর পাঠদান',
-      subtitle: 'অভিজ্ঞ ও নিবেদিতপ্রাণ ওস্তাদগণের সরাসরি সার্বক্ষণিক তত্ত্বাবধান'
+      title: isBangla ? 'অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদীর পাঠদান' : 'Direct Mentorship by Principal Maulana Omar Faruk',
+      subtitle: isBangla ? 'অভিজ্ঞ ও নিবেদিতপ্রাণ ওস্তাদগণের সরাসরি সার্বক্ষণিক তত্ত্বাবধান' : 'Dedicated scholars nurturing academic and spiritual excellence'
     },
     { 
       src: '/images/quran-class.png', 
-      title: 'হিফজুল কুরআন ও নাজেরা বিভাগ',
-      subtitle: 'আন্তর্জাতিক মানসম্পন্ন তাজবিদ চর্চা ও সহীহ বিশুদ্ধ কুরআন শিক্ষা'
+      title: isBangla ? 'হিফজুল কুরআন ও নাজেরা বিভাগ' : 'Hifzul Quran & Nazera Department',
+      subtitle: isBangla ? 'আন্তর্জাতিক মানসম্পন্ন তাজবিদ চর্চা ও সহীহ বিশুদ্ধ কুরআন শিক্ষা' : 'International standard Tajweed and authentic Quran memorization'
     },
     { 
       src: '/images/guardians-meeting-1.png', 
-      title: 'নিয়মিত অভিভাবক সমাবেশ ও মতবিনিময়',
-      subtitle: 'শিক্ষার্থী অগ্রগতি মূল্যায়নে শিক্ষক-অভিভাবক যৌথ সমন্বয়'
+      title: isBangla ? 'নিয়মিত অভিভাবক সমাবেশ ও মতবিনিময়' : 'Regular Guardian-Teacher Conferences',
+      subtitle: isBangla ? 'শিক্ষার্থী অগ্রগতি মূল্যায়নে শিক্ষক-অভিভাবক যৌথ সমন্বয়' : 'Collaborative synergy to ensure holistic student development'
     },
   ];
 
@@ -65,17 +66,22 @@ export default function Home() {
           {/* Contact Info */}
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8 text-xs sm:text-sm text-center md:text-left">
             <div className="flex items-center gap-1.5">
-              <span className="text-orange-400 font-semibold">Call Us:</span>
-              <a href="tel:01712633264" className="hover:text-orange-200 transition-colors">০১৭১২-৬৩৩২৬৪</a>
+              <span className="text-orange-400 font-semibold">{isBangla ? 'হটলাইন:' : 'Call Us:'}</span>
+              <a href="tel:01712633264" className="hover:text-orange-200 transition-colors font-medium">
+                {isBangla ? '০১৭১২-৬৩৩২৬৪' : '+8801712633264'}
+              </a>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="text-orange-400 font-semibold">Email:</span>
+              <span className="text-orange-400 font-semibold">{isBangla ? 'ইমেইল:' : 'Email:'}</span>
               <a href="mailto:info@almadinamadrasa.edu.bd" className="hover:text-orange-200 transition-colors">info@almadinamadrasa.edu.bd</a>
             </div>
           </div>
 
-          {/* Social + Login */}
+          {/* Social + Language + Login */}
           <div className="flex items-center gap-3">
+            {/* Language Switcher */}
+            <LanguageSwitcher variant="glass" className="scale-90 sm:scale-100" />
+
             <div className="flex items-center gap-2">
               <a 
                 href="https://www.facebook.com/AlMadinaModelMadrasaAndResearchInstitute" 
@@ -102,14 +108,14 @@ export default function Home() {
                 href={['principal', 'vice_principal', 'managing_director', 'teacher', 'staff'].includes(user.role) ? '/dashboard' : user.role === 'guardian' ? '/guardian' : '/student'}
                 className="px-3.5 py-1 rounded border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white transition-colors text-xs font-semibold"
               >
-                ড্যাশবোর্ড
+                {isBangla ? 'ড্যাশবোর্ড' : 'Dashboard'}
               </Link>
             ) : (
               <Link
                 href="/login"
                 className="px-3.5 py-1 rounded border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white transition-colors text-xs font-semibold"
               >
-                Login
+                {isBangla ? 'লগইন' : 'Login'}
               </Link>
             )}
           </div>
@@ -134,10 +140,10 @@ export default function Home() {
               />
               <div className="flex flex-col">
                 <span className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">
-                  আল-মদিনা মডেল মাদ্রাসা
+                  {isBangla ? 'আল-মদিনা মডেল মাদ্রাসা' : 'Al-Madina Model Madrasah'}
                 </span>
                 <span className="text-[10px] text-teal-700 font-semibold tracking-wider">
-                  এন্ড রিসার্চ ইনস্টিটিউট • মহাখালী, বনানী
+                  {isBangla ? 'এন্ড রিসার্চ ইনস্টিটিউট • মহাখালী, বনানী' : '& Research Institute • Mohakhali, Banani'}
                 </span>
               </div>
             </Link>
@@ -145,65 +151,74 @@ export default function Home() {
 
           {/* Desktop Menu */}
           <div className="nav-desktop hidden md:flex items-center gap-4 text-gray-700 font-medium text-sm">
-            <Link href="/" className="hover:text-teal-600 text-teal-700 font-bold">হোম</Link>
+            <Link href="/" className="hover:text-teal-600 text-teal-700 font-bold">
+              {isBangla ? 'হোম' : 'Home'}
+            </Link>
 
             <div className="relative group py-2">
               <a href="#about" className="hover:text-teal-600 inline-flex items-center gap-0.5 cursor-pointer">
-                আমাদের সম্পর্কে <ChevronDown size={14} className="ml-0.5" />
+                {isBangla ? 'আমাদের সম্পর্কে' : 'About Us'} <ChevronDown size={14} className="ml-0.5" />
               </a>
               <div className="dropdown-menu absolute left-0 top-full p-2 w-52 bg-white rounded-xl shadow-xl border border-slate-100 z-50">
                 <a href="#about" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
-                  অধ্যক্ষ মহোদয়ের বাণী
+                  {isBangla ? 'অধ্যক্ষ মহোদয়ের বাণী' : "Principal's Message"}
                 </a>
                 <a href="#why" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
-                  আমাদের বিশেষত্ব
+                  {isBangla ? 'আমাদের বিশেষত্ব' : 'Our Features'}
                 </a>
               </div>
             </div>
 
             <div className="relative group py-2">
               <a href="#branches" className="hover:text-teal-600 inline-flex items-center gap-0.5 cursor-pointer">
-                ক্যাম্পাস <ChevronDown size={14} className="ml-0.5" />
+                {isBangla ? 'ক্যাম্পাস' : 'Campus'} <ChevronDown size={14} className="ml-0.5" />
               </a>
               <div className="dropdown-menu absolute left-0 top-full p-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 z-50">
                 <a href="#branches" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
-                  মহাখালী মূল ক্যাম্পাস
+                  {isBangla ? 'মহাখালী মূল ক্যাম্পাস' : 'Mohakhali Main Campus'}
                 </a>
                 <a href="#branches" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
-                  আসন্ন মহিলা শাখা (পরিকল্পনাধীন)
+                  {isBangla ? 'আসন্ন মহিলা শাখা (পরিকল্পনাধীন)' : 'Upcoming Female Branch (Planned)'}
                 </a>
               </div>
             </div>
 
             <div className="relative group py-2">
               <a href="#fac" className="hover:text-teal-600 inline-flex items-center gap-0.5 cursor-pointer">
-                সুযোগ-সুবিধা <ChevronDown size={14} className="ml-0.5" />
+                {isBangla ? 'সুযোগ-সুবিধা' : 'Facilities'} <ChevronDown size={14} className="ml-0.5" />
               </a>
               <div className="dropdown-menu absolute left-0 top-full p-2 w-52 bg-white rounded-xl shadow-xl border border-slate-100 z-50">
                 <a href="#fac" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
-                  শীতাতপ নিয়ন্ত্রিত ক্যাম্পাস
+                  {isBangla ? 'শীতাতপ নিয়ন্ত্রিত ক্যাম্পাস' : 'Air-Conditioned Campus'}
                 </a>
                 <a href="#fac" className="hover:text-teal-600 block px-4 py-2 text-gray-700 hover:bg-slate-50 rounded-lg text-xs font-semibold">
-                  স্মার্ট মাল্টিমিডিয়া ক্লাসরুম
+                  {isBangla ? 'স্মার্ট মাল্টিমিডিয়া ক্লাসরুম' : 'Smart Multimedia Classrooms'}
                 </a>
               </div>
             </div>
 
-            <Link href="/admission" className="hover:text-teal-600">ভর্তি</Link>
-            <a href="#contact" className="hover:text-teal-600">যোগাযোগ</a>
-            <Link href="/notices" className="hover:text-teal-600">নোটিশ</Link>
+            <Link href="/admission" className="hover:text-teal-600">
+              {isBangla ? 'ভর্তি' : 'Admission'}
+            </Link>
+            <a href="#contact" className="hover:text-teal-600">
+              {isBangla ? 'যোগাযোগ' : 'Contact'}
+            </a>
+            <Link href="/notices" className="hover:text-teal-600">
+              {isBangla ? 'নোটিশ' : 'Notices'}
+            </Link>
 
             {/* Pre-Admission CTA Button */}
             <Link 
               href="/admission" 
               className="bg-teal-700 hover:bg-teal-800 text-white px-4 py-2 rounded-md font-semibold text-xs shadow-xs transition-colors ml-1"
             >
-              প্রি-এডমিশন
+              {isBangla ? 'প্রি-এডমিশন' : 'Pre-Admission'}
             </Link>
           </div>
 
           {/* Mobile Hamburger Toggle */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSwitcher variant="light" className="scale-90" />
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-1.5 rounded-lg text-slate-700 hover:bg-slate-100"
@@ -218,15 +233,29 @@ export default function Home() {
         {/* Mobile Slide-down Drawer */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-slate-200 px-4 py-3 space-y-2 shadow-lg">
-            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-teal-700 font-bold border-b border-slate-100">হোম</Link>
-            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">আমাদের সম্পর্কে</a>
-            <a href="#why" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">আমাদের বিশেষত্ব</a>
-            <a href="#branches" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">ক্যাম্পাস ও শাখা</a>
-            <a href="#fac" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">সুযোগ-সুবিধাসমূহ</a>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">যোগাযোগ</a>
-            <Link href="/notices" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">নোটিশ বোর্ড</Link>
+            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-teal-700 font-bold border-b border-slate-100">
+              {isBangla ? 'হোম' : 'Home'}
+            </Link>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'আমাদের সম্পর্কে' : 'About Us'}
+            </a>
+            <a href="#why" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'আমাদের বিশেষত্ব' : 'Our Features'}
+            </a>
+            <a href="#branches" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'ক্যাম্পাস ও শাখা' : 'Campus & Branches'}
+            </a>
+            <a href="#fac" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'সুযোগ-সুবিধাসমূহ' : 'Facilities'}
+            </a>
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'যোগাযোগ' : 'Contact'}
+            </a>
+            <Link href="/notices" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'নোটিশ বোর্ড' : 'Notice Board'}
+            </Link>
             <Link href="/admission" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center py-2.5 bg-teal-700 text-white rounded-md font-bold text-sm">
-              প্রি-এডমিশন আবেদন
+              {isBangla ? 'প্রি-এডমিশন আবেদন' : 'Pre-Admission Application'}
             </Link>
           </div>
         )}
@@ -244,21 +273,33 @@ export default function Home() {
             {/* Top Admission Alert (.hm-admission) */}
             <div className="hm-admission" role="status">
               <div className="hm-admission__text">
-                <h2 className="hm-admission__title">ভর্তির আবেদন চলছে: ২০২৭</h2>
-                <p className="hm-admission__detail">আবেদনের শেষ তারিখ: ১৫ নভেম্বর, ২০২৬</p>
+                <h2 className="hm-admission__title">
+                  {isBangla ? 'ভর্তির আবেদন চলছে: ২০২৭' : 'Admissions Open: Academic Session 2027'}
+                </h2>
+                <p className="hm-admission__detail">
+                  {isBangla ? 'আবেদনের শেষ তারিখ: ১৫ নভেম্বর, ২০২৬' : 'Application Deadline: 15 November, 2026'}
+                </p>
                 <ul className="hm-admission__branches">
                   <li className="hm-admission__branch is-open">
-                    <span className="hm-admission__branch-name">হিফজুল কুরআন বিভাগ:</span>
-                    <span className="hm-admission__branch-status">অনলাইনে আবেদন চলছে</span>
+                    <span className="hm-admission__branch-name">
+                      {isBangla ? 'হিফজুল কুরআন বিভাগ:' : 'Hifzul Quran Dept:'}
+                    </span>
+                    <span className="hm-admission__branch-status">
+                      {isBangla ? 'অনলাইনে আবেদন চলছে' : 'Online Applications Open'}
+                    </span>
                   </li>
                   <li className="hm-admission__branch is-open">
-                    <span className="hm-admission__branch-name">প্লে - ৬ষ্ঠ শ্রেণি জেনারেল:</span>
-                    <span className="hm-admission__branch-status">সাক্ষাৎকারের তারিখ নির্ধারণ চলছে</span>
+                    <span className="hm-admission__branch-name">
+                      {isBangla ? 'প্লে - ৬ষ্ঠ শ্রেণি জেনারেল:' : 'Play - Class 6 General:'}
+                    </span>
+                    <span className="hm-admission__branch-status">
+                      {isBangla ? 'সাক্ষাৎকারের তারিখ নির্ধারণ চলছে' : 'Interviews in Progress'}
+                    </span>
                   </li>
                 </ul>
               </div>
               <Link className="hm-admission__link" href="/admission">
-                <span>আবেদন করুন</span>
+                <span>{isBangla ? 'আবেদন করুন' : 'Apply Now'}</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M5 12h14"></path>
                   <path d="M13 6l6 6-6 6"></path>
@@ -299,7 +340,7 @@ export default function Home() {
                     {/* Caption Overlay */}
                     <div className="absolute bottom-6 left-6 right-16 text-white z-20 pointer-events-none">
                       <span className="inline-block px-2.5 py-0.5 rounded-full bg-teal-600/90 text-white text-[11px] font-bold mb-1.5 backdrop-blur-xs">
-                        ক্যাম্পাস দৃশ্যপট • ০{idx + 1}/০{slides.length}
+                        {isBangla ? `ক্যাম্পাস দৃশ্যপট • ০${idx + 1}/০${slides.length}` : `Campus View • 0${idx + 1}/0${slides.length}`}
                       </span>
                       <h3 className="text-base sm:text-xl font-extrabold text-white leading-snug drop-shadow-sm">
                         {slide.title}
@@ -351,35 +392,53 @@ export default function Home() {
 
               {/* Right Column: Important Notices (.hm-notices) */}
               <div className="hm-notices">
-                <h3 className="hm-notices__title">গুরুত্বপূর্ণ আপডেট</h3>
+                <h3 className="hm-notices__title">
+                  {isBangla ? 'গুরুত্বপূর্ণ আপডেট' : 'Important Updates'}
+                </h3>
                 <div id="notice-container">
                   <Link href="/notices" className="hm-notice">
-                    <p className="hm-notice__date">১০ নভেম্বর, ২০২৬</p>
-                    <h4 className="hm-notice__title">২০২৭ শিক্ষাবর্ষে প্লে থেকে ষষ্ঠ শ্রেণি ও হিফজে ভর্তি সংক্রান্ত বিজ্ঞপ্তি</h4>
+                    <p className="hm-notice__date">
+                      {isBangla ? '১০ নভেম্বর, ২০২৬' : '10 Nov, 2026'}
+                    </p>
+                    <h4 className="hm-notice__title">
+                      {isBangla ? '২০২৭ শিক্ষাবর্ষে প্লে থেকে ষষ্ঠ শ্রেণি ও হিফজে ভর্তি সংক্রান্ত বিজ্ঞপ্তি' : 'Admission Notice for Session 2027: Play to Class 6 & Hifz'}
+                    </h4>
                   </Link>
 
                   <div id="scrolling-wrapper">
                     <div id="tab-notices">
                       <Link href="/notices" className="hm-notice">
-                        <p className="hm-notice__date">২৫ অক্টোবর, ২০২৬</p>
-                        <h4 className="hm-notice__title">অভিভাবক সম্মেলন ও শিক্ষার্থী মূল্যায়ন সংক্রান্ত নোটিশ</h4>
+                        <p className="hm-notice__date">
+                          {isBangla ? '২৫ অক্টোবর, ২০২৬' : '25 Oct, 2026'}
+                        </p>
+                        <h4 className="hm-notice__title">
+                          {isBangla ? 'অভিভাবক সম্মেলন ও শিক্ষার্থী মূল্যায়ন সংক্রান্ত নোটিশ' : 'Parent-Teacher conference & student academic evaluation'}
+                        </h4>
                       </Link>
 
                       <Link href="/notices" className="hm-notice">
-                        <p className="hm-notice__date">১৫ অক্টোবর, ২০২৬</p>
-                        <h4 className="hm-notice__title">সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত আধুনিক ক্লাসরুম ও কম্পিউটার ল্যাব উদ্বোধন</h4>
+                        <p className="hm-notice__date">
+                          {isBangla ? '১৫ অক্টোবর, ২০২৬' : '15 Oct, 2026'}
+                        </p>
+                        <h4 className="hm-notice__title">
+                          {isBangla ? 'সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত আধুনিক ক্লাসরুম ও কম্পিউটার ল্যাব উদ্বোধন' : 'Inauguration of fully air-conditioned modern classrooms & lab'}
+                        </h4>
                       </Link>
 
                       <Link href="/notices" className="hm-notice blink-highlight">
-                        <p className="hm-notice__date">০৫ অক্টোবর, ২০২৬</p>
-                        <h4 className="hm-notice__title">বার্ষিক মূল্যায়ন পরীক্ষা ও ডিজিটাল রেজাল্ট কার্ড প্রকাশ</h4>
+                        <p className="hm-notice__date">
+                          {isBangla ? '০৫ অক্টোবর, ২০২৬' : '05 Oct, 2026'}
+                        </p>
+                        <h4 className="hm-notice__title">
+                          {isBangla ? 'বার্ষিক মূল্যায়ন পরীক্ষা ও ডিজিটাল রেজাল্ট কার্ড প্রকাশ' : 'Annual assessment exam & digital report card publishing'}
+                        </h4>
                       </Link>
                     </div>
                   </div>
                 </div>
 
                 <Link href="/notices" className="hm-notices__all">
-                  <span>সকল নোটিশ দেখুন</span>
+                  <span>{isBangla ? 'সকল নোটিশ দেখুন' : 'View All Notices'}</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
@@ -401,19 +460,25 @@ export default function Home() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/principal-class.png" 
-                  alt="আল-মদিনা মডেল মাদ্রাসা ক্লাসরুম" 
+                  alt={isBangla ? 'আল-মদিনা মডেল মাদ্রাসা ক্লাসরুম' : 'Al-Madina Model Madrasah Classroom'} 
                 />
-                <div className="hm-about__badge">স্থাপিত: ২০২৪ ইং</div>
+                <div className="hm-about__badge">{isBangla ? 'স্থাপিত: ২০২৪ ইং' : 'Est. 2024 AD'}</div>
               </div>
 
               {/* Text Content */}
               <div className="hm-about__text">
-                <h2 className="hm-h2">কেন আল-মদিনা মডেল মাদ্রাসা</h2>
+                <h2 className="hm-h2">
+                  {isBangla ? 'কেন আল-মদিনা মডেল মাদ্রাসা' : 'Why Al-Madina Model Madrasah'}
+                </h2>
                 <p style={{ marginTop: '18px' }}>
-                  সমাজে বিদ্যমান বিভিন্ন শিক্ষাধারার মধ্যে মাদরাসা শিক্ষাধারা সুপ্রাচীন এবং কল্যাণমুখী শিক্ষার ধারক হিসেবে সুবিদিত। এই শিক্ষাধারা ইসলামী জীবন-দর্শনের আলোকে উপমহাদেশে গড়ে তুলছে পরকালমুখী মূল্যবোধসম্পন্ন আদর্শ মানুষ। কিন্তু এই শিক্ষাধারা নৈতিকতা ও মূল্যবোধের মানদণ্ডে উত্তীর্ণ একদল আদর্শ মানুষ ও দক্ষ আলেম তৈরিতে সফল হলেও এর দ্বারা সময়োপযোগী ও সৃজনশীল মানুষ সেভাবে তৈরি হচ্ছে না।
+                  {isBangla 
+                    ? 'সমাজে বিদ্যমান বিভিন্ন শিক্ষাধারার মধ্যে মাদরাসা শিক্ষাধারা সুপ্রাচীন এবং কল্যাণমুখী শিক্ষার ধারক হিসেবে সুবিদিত। এই শিক্ষাধারা ইসলামী জীবন-দর্শনের আলোকে উপমহাদেশে গড়ে তুলছে পরকালমুখী মূল্যবোধসম্পন্ন আদর্শ মানুষ। কিন্তু এই শিক্ষাধারা নৈতিকতা ও মূল্যবোধের মানদণ্ডে উত্তীর্ণ একদল আদর্শ মানুষ ও দক্ষ আলেম তৈরিতে সফল হলেও এর দ্বারা সময়োপযোগী ও সৃজনশীল মানুষ সেভাবে তৈরি হচ্ছে না।'
+                    : 'Among various educational traditions, Madrasah education is historically recognized as the foundation of benevolent character building. It has cultivated generations of righteous scholars in light of Islamic worldview. However, while traditional streams excel in imparting religious piety, modern creative competence and practical technical acumen often require contemporary enhancement.'}
                 </p>
                 <p>
-                  পক্ষান্তরে প্রচলিত সাধারণ শিক্ষাধারা আমাদের সন্তানদের পার্থিব শিক্ষায় শিক্ষিত করছে বটে, কিন্তু এই মাধ্যমে নৈতিকতা এবং প্রকৃত জীবনবোধসম্পন্ন মানুষ গড়ে উঠছে না। এজন্য আমরা মনে করছি এরকম একটি শিক্ষাপ্রতিষ্ঠান দরকার যেটি উন্নত চরিত্রসমৃদ্ধ কুরআন-সুন্নাহর গভীর জ্ঞানসম্পন্ন মানুষ তৈরি করবে, যারা জাগতিক জ্ঞান-বিজ্ঞানেও প্রয়োজনীয় ধারণা রাখবে। এই লক্ষ্য বাস্তবায়নেই আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউটের অভিযাত্রা।
+                  {isBangla
+                    ? 'পক্ষান্তরে প্রচলিত সাধারণ শিক্ষাধারা আমাদের সন্তানদের পার্থিব শিক্ষায় শিক্ষিত করছে বটে, কিন্তু এই মাধ্যমে নৈতিকতা এবং প্রকৃত জীবনবোধসম্পন্ন মানুষ গড়ে উঠছে না। এজন্য আমরা মনে করছি এরকম একটি শিক্ষাপ্রতিষ্ঠান দরকার যেটি উন্নত চরিত্রসমৃদ্ধ কুরআন-সুন্নাহর গভীর জ্ঞানসম্পন্ন মানুষ তৈরি করবে, যারা জাগতিক জ্ঞান-বিজ্ঞানেও প্রয়োজনীয় ধারণা রাখবে। এই লক্ষ্য বাস্তবায়নেই আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউটের অভিযাত্রা।'
+                    : 'Conversely, conventional general education equips children with worldly knowledge, yet frequently lacks foundational moral grounding and divine worldview. Therefore, our visionary institution bridges both paradigms: nurturing righteous souls with deep Quranic mastery alongside modern academic and scientific acumen. This is the noble mission of Al-Madina Model Madrasah & Research Institute.'}
                 </p>
               </div>
 
@@ -426,124 +491,180 @@ export default function Home() {
           <div className="hm-container">
             
             <div className="hm-sec-head">
-              <h2 className="hm-h2">যে কারণে আল-মদিনা মডেল মাদ্রাসা অনন্য</h2>
+              <h2 className="hm-h2">
+                {isBangla ? 'যে কারণে আল-মদিনা মডেল মাদ্রাসা অনন্য' : 'What Makes Al-Madina Model Madrasah Distinctive'}
+              </h2>
             </div>
 
             <div className="hm-why__grid">
               
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০১</span>
+                  <span className="hm-why__num">{isBangla ? '০১' : '01'}</span>
                   <span className="hm-why__ic"><BookOpen size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">সহীহ হিফজুল কুরআন বিভাগ</h3>
-                <p className="hm-why__text">আন্তর্জাতিক মানসম্পন্ন হাফেজ ও ক্বারীদের নিবিড় তত্ত্বাবধানে সহীহ মাখরাজ ও তাজবীদভিত্তিক বিশুদ্ধ হিফজ প্রশিক্ষণ।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'সহীহ হিফজুল কুরআন বিভাগ' : 'Authentic Hifzul Quran Division'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'আন্তর্জাতিক মানসম্পন্ন হাফেজ ও ক্বারীদের নিবিড় তত্ত্বাবধানে সহীহ মাখরাজ ও তাজবীদভিত্তিক বিশুদ্ধ হিফজ প্রশিক্ষণ।' 
+                    : 'Rigorous Quran memorization guided by international award-winning Huffaz with authentic Tajweed and Makharaj precision.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
 
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০২</span>
+                  <span className="hm-why__num">{isBangla ? '০২' : '02'}</span>
                   <span className="hm-why__ic"><Layers size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">সমন্বিত আধুনিক কারিকুলাম</h3>
-                <p className="hm-why__text">দ্বীনি শিক্ষার পাশাপাশি জাতীয় শিক্ষাক্রম অনুসারে বাংলা, ইংরেজি, গণিত ও সাধারণ জ্ঞানের আধুনিক মান নিশ্চিতকরণ।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'সমন্বিত আধুনিক কারিকুলাম' : 'Integrated Modern Curriculum'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'দ্বীনি শিক্ষার পাশাপাশি জাতীয় শিক্ষাক্রম অনুসারে বাংলা, ইংরেজি, গণিত ও সাধারণ জ্ঞানের আধুনিক মান নিশ্চিতকরণ।' 
+                    : 'Harmonious integration of national curriculum (Bangla, English, Math, Science) alongside core Islamic and moral studies.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
 
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০৩</span>
+                  <span className="hm-why__num">{isBangla ? '০৩' : '03'}</span>
                   <span className="hm-why__ic"><MessageSquare size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">আরবি ও ইংরেজি ভাষা চর্চা</h3>
-                <p className="hm-why__text">ব্যবহারিক কথোপকথন, ভাষা ল্যাব ও নিয়মিত ক্লাসরুম উপস্থাপনার মাধ্যমে দুটি আন্তর্জাতিক ভাষার সাবলীল চর্চা।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'আরবি ও ইংরেজি ভাষা চর্চা' : 'Spoken Arabic & English Fluency'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'ব্যবহারিক কথোপকথন, ভাষা ল্যাব ও নিয়মিত ক্লাসরুম উপস্থাপনার মাধ্যমে দুটি আন্তর্জাতিক ভাষার সাবলীল চর্চা।' 
+                    : 'Practical conversational labs and daily interactive presentations to develop effortless fluency in both global languages.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
 
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০৪</span>
+                  <span className="hm-why__num">{isBangla ? '০৪' : '04'}</span>
                   <span className="hm-why__ic"><HeartHandshake size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">নৈতিকতা ও চারিত্রিক তারবিয়াত</h3>
-                <p className="hm-why__text">প্রতিটি শিক্ষার্থীর উত্তম আখলাক গঠন এবং প্রিয় নবীজির সুন্নাহর বাস্তব অনুশীলনে নিয়মিত তারবিয়াত প্রদান।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'নৈতিকতা ও চারিত্রিক তারবিয়াত' : 'Moral Character & Sunnah Tarbiyah'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'প্রতিটি শিক্ষার্থীর উত্তম আখলাক গঠন এবং প্রিয় নবীজির সুন্নাহর বাস্তব অনুশীলনে নিয়মিত তারবিয়াত প্রদান।' 
+                    : 'Dedicated daily mentoring focusing on pristine prophetic character (Akhlaq), empathy, discipline, and pious manners.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
 
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০৫</span>
+                  <span className="hm-why__num">{isBangla ? '০৫' : '05'}</span>
                   <span className="hm-why__ic"><Tv size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">প্রজেক্টর ও স্মার্ট কম্পিউটার ল্যাব</h3>
-                <p className="hm-why__text">কম্পিউটার ল্যাব, মাল্টিমিডিয়া প্রজেক্টর ক্লাসরুম ও যুগোপযোগী তথ্যপ্রযুক্তির সুপরিকল্পিত ব্যবহার।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'প্রজেক্টর ও স্মার্ট কম্পিউটার ল্যাব' : 'Projector & Smart Computer Lab'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'কম্পিউটার ল্যাব, মাল্টিমিডিয়া প্রজেক্টর ক্লাসরুম ও যুগোপযোগী তথ্যপ্রযুক্তির সুপরিকল্পিত ব্যবহার।' 
+                    : 'Cutting-edge digital multimedia classrooms and computer laboratory fostering tech literacy and interactive conceptual learning.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
 
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০৬</span>
+                  <span className="hm-why__num">{isBangla ? '০৬' : '06'}</span>
                   <span className="hm-why__ic"><Users size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">দক্ষ ওস্তাদ ও শিক্ষক পরিষদ</h3>
-                <p className="hm-why__text">অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদীর প্রত্যক্ষ পরিচালনায় শীর্ষ ইসলামিক বিদ্যাপীঠের অভিজ্ঞ শিক্ষক পরিষদ।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'দক্ষ ওস্তাদ ও শিক্ষক পরিষদ' : 'Distinguished Faculty & Mentors'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদীর প্রত্যক্ষ পরিচালনায় শীর্ষ ইসলামিক বিদ্যাপীঠের অভিজ্ঞ শিক্ষক পরিষদ।' 
+                    : 'Supervised directly by Principal Maulana Omar Faruk Mujahidi with veteran Islamic and academic scholars.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
 
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০৭</span>
+                  <span className="hm-why__num">{isBangla ? '০৭' : '07'}</span>
                   <span className="hm-why__ic"><ShieldCheck size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">সম্পূর্ণ AC ক্লাসরুম ও CCTV নিরাপত্তা</h3>
-                <p className="hm-why__text">ক্লান্তিহীন পড়াশোনার জন্য সার্বক্ষণিক এসি ক্লাসরুম, ২৪ ঘণ্টা সিসিটিভি ক্যামেরা ও ডিজিটাল গেটপাস নিয়ন্ত্রণ।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'সম্পূর্ণ AC ক্লাসরুম ও CCTV নিরাপত্তা' : '100% AC Campus & CCTV Surveillance'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'ক্লান্তিহীন পড়াশোনার জন্য সার্বক্ষণিক এসি ক্লাসরুম, ২৪ ঘণ্টা সিসিটিভি ক্যামেরা ও ডিজিটাল গেটপাস নিয়ন্ত্রণ।' 
+                    : 'Fully air-conditioned learning spaces with 24/7 high-definition CCTV security and computerized digital gate-pass access.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
 
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০৮</span>
+                  <span className="hm-why__num">{isBangla ? '০৮' : '08'}</span>
                   <span className="hm-why__ic"><Utensils size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">স্বাস্থ্যসম্মত খাবার ও নিজস্ব ডাইনিং</h3>
-                <p className="hm-why__text">আবাসিক শিক্ষার্থীদের জন্য অভিজ্ঞ বাবুর্চি দ্বারা প্রস্তুতকৃত শতভাগ পরিচ্ছন্ন, সুষম ও পুষ্টিকর খাদ্য ব্যবস্থা।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'স্বাস্থ্যসম্মত খাবার ও নিজস্ব ডাইনিং' : 'Hygienic Dining & Nutritious Meals'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'আবাসিক শিক্ষার্থীদের জন্য অভিজ্ঞ বাবুর্চি দ্বারা প্রস্তুতকৃত শতভাগ পরিচ্ছন্ন, সুষম ও পুষ্টিকর খাদ্য ব্যবস্থা।' 
+                    : 'Strictly balanced, freshly prepared wholesome halal dining curated daily for residential students under strict hygiene.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
 
               <article className="hm-card hm-why__card">
                 <div className="hm-why__top">
-                  <span className="hm-why__num">০৯</span>
+                  <span className="hm-why__num">{isBangla ? '০৯' : '09'}</span>
                   <span className="hm-why__ic"><Award size={24} /></span>
                 </div>
-                <h3 className="hm-why__title">অভিভাবক নিয়মিত মনিটরিং ও রেজাল্ট</h3>
-                <p className="hm-why__text">ডিজিটাল ওয়েব সফটওয়্যার, হাজিরা এসএমএস ও নিয়মিত অভিভাবক বৈঠকের মাধ্যমে সার্বক্ষণিক পারফরম্যান্স ট্র্যাকিং।</p>
+                <h3 className="hm-why__title">
+                  {isBangla ? 'অভিভাবক নিয়মিত মনিটরিং ও রেজাল্ট' : 'Digital Parent Portal & Real-Time Tracking'}
+                </h3>
+                <p className="hm-why__text">
+                  {isBangla 
+                    ? 'ডিজিটাল ওয়েব সফটওয়্যার, হাজিরা এসএমএস ও নিয়মিত অভিভাবক বৈঠকের মাধ্যমে সার্বক্ষণিক পারফরম্যান্স ট্র্যাকিং।' 
+                    : 'Instant SMS attendance alerts, digital web gradebooks, and collaborative guardian conferences for every learner.'}
+                </p>
                 <Link href="/admission" className="hm-link">
-                  <span>বিস্তারিত দেখুন</span>
+                  <span>{isBangla ? 'বিস্তারিত দেখুন' : 'Learn More'}</span>
                   <ChevronRight size={16} />
                 </Link>
               </article>
@@ -558,40 +679,66 @@ export default function Home() {
           <div className="hm-container">
             
             <div className="hm-sec-head">
-              <h2 className="hm-h2">মাদরাসার সুযোগ-সুবিধাসমূহ</h2>
+              <h2 className="hm-h2">
+                {isBangla ? 'মাদরাসার সুযোগ-সুবিধাসমূহ' : 'Campus Facilities & Amenities'}
+              </h2>
             </div>
 
             <div className="hm-fac__grid">
               
               <article className="hm-card hm-fac__card">
                 <span className="hm-fac__ic"><ShieldCheck size={28} /></span>
-                <h3>সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত (AC) ক্লাসরুম</h3>
-                <p>গ্রীষ্ম ও বর্ষায় মনোরম, আরামদায়ক ও ক্লান্তিহীন পড়াশোনার পরিবেশ বজায় রাখতে পুরো ক্যাম্পাসে সেন্ট্রাল শীতাতপ নিয়ন্ত্রণ ব্যবস্থা সক্রিয় রাখা হয়েছে।</p>
+                <h3>
+                  {isBangla ? 'সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত (AC) ক্লাসরুম' : 'Fully Air-Conditioned Classrooms'}
+                </h3>
+                <p>
+                  {isBangla 
+                    ? 'গ্রীষ্ম ও বর্ষায় মনোরম, আরামদায়ক ও ক্লান্তিহীন পড়াশোনার পরিবেশ বজায় রাখতে পুরো ক্যাম্পাসে সেন্ট্রাল শীতাতপ নিয়ন্ত্রণ ব্যবস্থা সক্রিয় রাখা হয়েছে।'
+                    : 'To maintain an optimal, comfortable study atmosphere throughout the year, the entire campus features central air-conditioning.'}
+                </p>
               </article>
 
               <article className="hm-card hm-fac__card">
                 <span className="hm-fac__ic"><Tv size={28} /></span>
-                <h3>প্রজেক্টর ভিত্তিক মাল্টিমিডিয়া পাঠদান</h3>
-                <p>শিক্ষার্থীদের পাঠ্যবিষয় সহজে হৃদয়ঙ্গম করার জন্য প্রজেক্টরের মাধ্যমে ভিজ্যুয়াল প্রেজেন্টেশন ও অডিও-ভিজ্যুয়াল পদ্ধতিতে ক্লাস নেওয়া হয়।</p>
+                <h3>
+                  {isBangla ? 'প্রজেক্টর ভিত্তিক মাল্টিমিডিয়া পাঠদান' : 'Interactive Multimedia Teaching'}
+                </h3>
+                <p>
+                  {isBangla
+                    ? 'শিক্ষার্থীদের পাঠ্যবিষয় সহজে হৃদয়ঙ্গম করার জন্য প্রজেক্টরের মাধ্যমে ভিজ্যুয়াল প্রেজেন্টেশন ও অডিও-ভিজ্যুয়াল পদ্ধতিতে ক্লাস নেওয়া হয়।'
+                    : 'Concepts are presented visually using HD multimedia projectors and audio-visual pedagogical materials for deeper comprehension.'}
+                </p>
               </article>
 
               <article className="hm-card hm-fac__card">
                 <span className="hm-fac__ic"><Users size={28} /></span>
-                <h3>সার্বক্ষণিক ব্যক্তিগত তদারকি ও সিসিটিভি</h3>
-                <p>অধ্যক্ষ মহোদয়ের সরাসরি ক্লাস, সম্মানিত শিক্ষকদের সার্বক্ষণিক উপস্থিতি এবং ২৪ ঘণ্টা সিসিটিভি ক্যামেরায় শিক্ষার্থীদের কঠোর নিরাপত্তা প্রদান করা হয়।</p>
+                <h3>
+                  {isBangla ? 'সার্বক্ষণিক ব্যক্তিগত তদারকি ও সিসিটিভি' : '24/7 Personal Mentoring & Security'}
+                </h3>
+                <p>
+                  {isBangla
+                    ? 'অধ্যক্ষ মহোদয়ের সরাসরি ক্লাস, সম্মানিত শিক্ষকদের সার্বক্ষণিক উপস্থিতি এবং ২৪ ঘণ্টা সিসিটিভি ক্যামেরায় শিক্ষার্থীদের কঠোর নিরাপত্তা প্রদান করা হয়।'
+                    : 'Personal mentoring by the Principal, constant on-campus teacher presence, and round-the-clock CCTV cameras ensure comprehensive student safety.'}
+                </p>
               </article>
 
               <article className="hm-card hm-fac__card">
                 <span className="hm-fac__ic"><Utensils size={28} /></span>
-                <h3>পুষ্টিকর খাদ্য ও মনোরম আবাসন</h3>
-                <p>আবাসিক ও অনাবাসিক শিক্ষার্থীদের শারীরিক সুস্থতা ও স্বাচ্ছন্দ্যের জন্য সম্পূর্ণ পরিচ্ছন্ন পরিবেশে স্বাস্থ্যসম্মত খাবার পরিবেশন নিশ্চিত করা হয়।</p>
+                <h3>
+                  {isBangla ? 'পুষ্টিকর খাদ্য ও মনোরম আবাসন' : 'Wholesome Nutrition & Boarding'}
+                </h3>
+                <p>
+                  {isBangla
+                    ? 'আবাসিক ও অনাবাসিক শিক্ষার্থীদের শারীরিক সুস্থতা ও স্বাচ্ছন্দ্যের জন্য সম্পূর্ণ পরিচ্ছন্ন পরিবেশে স্বাস্থ্যসম্মত খাবার পরিবেশন নিশ্চিত করা হয়।'
+                    : 'A clean, caring home environment with dietitian-supervised balanced meals to nurture physical vitality and mental agility.'}
+                </p>
               </article>
 
             </div>
 
             <div className="hm-fac__cta">
               <Link href="/admission" className="hm-btn hm-btn--primary">
-                <span>অনলাইনে ভর্তি আবেদন করুন</span>
+                <span>{isBangla ? 'অনলাইনে ভর্তি আবেদন করুন' : 'Apply Online for Admission'}</span>
                 <ChevronRight size={18} />
               </Link>
             </div>
@@ -604,7 +751,9 @@ export default function Home() {
           <div className="hm-container">
             
             <div className="hm-sec-head">
-              <h2 className="hm-h2">অধ্যক্ষ মহোদয়ের বাণী</h2>
+              <h2 className="hm-h2">
+                {isBangla ? 'অধ্যক্ষ মহোদয়ের বাণী' : "Principal's Message"}
+              </h2>
             </div>
 
             <div className="hm-card hm-chair__card">
@@ -613,17 +762,23 @@ export default function Home() {
                 <img 
                   className="hm-chair__img" 
                   src="/principal.jpg" 
-                  alt="মাওলানা ওমর ফারুক মুজাহিদী" 
+                  alt={isBangla ? 'মাওলানা ওমর ফারুক মুজাহিদী' : 'Maulana Omar Faruk Mujahidi'} 
                 />
               </div>
               <div>
                 <p className="hm-chair__quote">
                   <span style={{ color: '#0d9488', fontSize: '1.6rem', lineHeight: 0, verticalAlign: '-4px' }}>“</span>
-                  শিশুদের কোমল হৃদয়ে পরকালীন চেতনা জাগাতে না পারলে, দুনিয়ার যত সুন্দর পরিবেশেই লালন-পালন করা হোক না কেন—তারা প্রকৃত মানুষ হয়ে গড়ে উঠবে না। আমরা আল-মদিনা মডেল মাদ্রাসায় এমন একটি পরিবেশ সৃষ্টি করেছি যেখানে প্রতিটি শিক্ষার্থী আল্লাহর কালাম হিফজ করার পাশাপাশি আধুনিক যুগোপযোগী জ্ঞানে বলীয়ান হয়ে সৎ, দক্ষ ও খোদাভীরু মানুষ হিসেবে গড়ে উঠবে।
+                  {isBangla
+                    ? 'শিশুদের কোমল হৃদয়ে পরকালীন চেতনা জাগাতে না পারলে, দুনিয়ার যত সুন্দর পরিবেশেই লালন-পালন করা হোক না কেন—তারা প্রকৃত মানুষ হয়ে গড়ে উঠবে না। আমরা আল-মদিনা মডেল মাদ্রাসায় এমন একটি পরিবেশ সৃষ্টি করেছি যেখানে প্রতিটি শিক্ষার্থী আল্লাহর কালাম হিফজ করার পাশাপাশি আধুনিক যুগোপযোগী জ্ঞানে বলীয়ান হয়ে সৎ, দক্ষ ও খোদাভীরু মানুষ হিসেবে গড়ে উঠবে।'
+                    : 'Unless we awaken spiritual consciousness and moral devotion within young hearts, worldly comforts alone cannot nurture true humanity. At Al-Madina Model Madrasah, we cultivate an enriching environment where learners memorize the Holy Quran while mastering modern knowledge—emerging as righteous, skilled, and God-fearing leaders.'}
                   <span style={{ color: '#0d9488', fontSize: '1.6rem', lineHeight: 0, verticalAlign: '-4px' }}>”</span>
                 </p>
-                <h3 className="hm-chair__name">মাওলানা ওমর ফারুক মুজাহিদী</h3>
-                <p className="hm-chair__role">প্রতিষ্ঠাতা ও অধ্যক্ষ, আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট</p>
+                <h3 className="hm-chair__name">
+                  {isBangla ? 'মাওলানা ওমর ফারুক মুজাহিদী' : 'Maulana Omar Faruk Mujahidi'}
+                </h3>
+                <p className="hm-chair__role">
+                  {isBangla ? 'প্রতিষ্ঠাতা ও অধ্যক্ষ, আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট' : 'Founder & Principal, Al-Madina Model Madrasah & Research Institute'}
+                </p>
               </div>
             </div>
 
@@ -635,33 +790,41 @@ export default function Home() {
           <div className="hm-container">
             
             <div className="hm-sec-head">
-              <h2 className="hm-h2">আমাদের সাথে যোগাযোগ</h2>
+              <h2 className="hm-h2">
+                {isBangla ? 'আমাদের সাথে যোগাযোগ' : 'Get in Touch With Us'}
+              </h2>
             </div>
 
             <div className="hm-contact__cards">
               
               <div className="hm-card hm-contact__card">
                 <span className="hm-contact__ic"><Phone size={24} /></span>
-                <h3>ফোন ও হটলাইন</h3>
-                <p>০১৭১২-৬৩৩২৬৪</p>
-                <p>সকাল ৮:০০ - বিকাল ৫:০০</p>
-                <a href="tel:01712633264">সরাসরি কল করুন</a>
+                <h3>{isBangla ? 'ফোন ও হটলাইন' : 'Phone & Hotline'}</h3>
+                <p>{isBangla ? '০১৭১২-৬৩৩২৬৪' : '+8801712633264'}</p>
+                <p>{isBangla ? 'সকাল ৮:০০ - বিকাল ৫:০০' : '8:00 AM - 5:00 PM'}</p>
+                <a href="tel:01712633264">
+                  {isBangla ? 'সরাসরি কল করুন' : 'Call Directly'}
+                </a>
               </div>
 
               <div className="hm-card hm-contact__card">
                 <span className="hm-contact__ic"><Mail size={24} /></span>
-                <h3>ইমেইল ঠিকানা</h3>
+                <h3>{isBangla ? 'ইমেইল ঠিকানা' : 'Email Address'}</h3>
                 <p>info@almadinamadrasa.edu.bd</p>
-                <p>সার্বক্ষণিক ইমেইল সাপোর্ট</p>
-                <a href="mailto:info@almadinamadrasa.edu.bd">ইমেইল পাঠান</a>
+                <p>{isBangla ? 'সার্বক্ষণিক ইমেইল সাপোর্ট' : '24/7 Email Support'}</p>
+                <a href="mailto:info@almadinamadrasa.edu.bd">
+                  {isBangla ? 'ইমেইল পাঠান' : 'Send an Email'}
+                </a>
               </div>
 
               <div className="hm-card hm-contact__card">
                 <span className="hm-contact__ic"><MapPin size={24} /></span>
-                <h3>ক্যাম্পাস অবস্থান</h3>
-                <p>ক-৭৫/২, মহাখালী দক্ষিণপাড়া</p>
-                <p>বনানী, ঢাকা-১২১২</p>
-                <a href="#map">গুগল ম্যাপে দেখুন</a>
+                <h3>{isBangla ? 'ক্যাম্পাস অবস্থান' : 'Campus Location'}</h3>
+                <p>{isBangla ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া' : 'Ka-75/2, Mohakhali Dakshinpara'}</p>
+                <p>{isBangla ? 'বনানী, ঢাকা-১২১২' : 'Banani, Dhaka-1212'}</p>
+                <a href="#map">
+                  {isBangla ? 'গুগল ম্যাপে দেখুন' : 'View on Google Maps'}
+                </a>
               </div>
 
             </div>
@@ -669,15 +832,23 @@ export default function Home() {
             {/* Split Form & Google Map (.hm-contact__split) */}
             <div className="hm-contact__split" id="map">
               <div>
-                <h3>যেকোনো তথ্যের জন্য লিখুন</h3>
-                <form className="hm-form" onSubmit={(e) => { e.preventDefault(); alert('ধন্যবাদ! আপনার বার্তাটি গৃহীত হয়েছে।'); }}>
+                <h3>{isBangla ? 'যেকোনো তথ্যের জন্য লিখুন' : 'Send Us an Inquiry'}</h3>
+                <form 
+                  className="hm-form" 
+                  onSubmit={(e) => { 
+                    e.preventDefault(); 
+                    alert(isBangla ? 'ধন্যবাদ! আপনার বার্তাটি গৃহীত হয়েছে।' : 'Thank you! Your message has been received.'); 
+                  }}
+                >
                   <div className="hm-form__row">
-                    <input type="text" placeholder="আপনার নাম *" required />
-                    <input type="tel" placeholder="মোবাইল নম্বর *" required />
+                    <input type="text" placeholder={isBangla ? 'আপনার নাম *' : 'Your Name *'} required />
+                    <input type="tel" placeholder={isBangla ? 'মোবাইল নম্বর *' : 'Phone Number *'} required />
                   </div>
-                  <input type="email" placeholder="ইমেইল (ঐচ্ছিক)" />
-                  <textarea placeholder="আপনার বার্তা বা প্রশ্ন লিখুন *" required></textarea>
-                  <button type="submit" className="hm-form__submit">বার্তা পাঠান</button>
+                  <input type="email" placeholder={isBangla ? 'ইমেইল (ঐচ্ছিক)' : 'Email (Optional)'} />
+                  <textarea placeholder={isBangla ? 'আপনার বার্তা বা প্রশ্ন লিখুন *' : 'Your Message or Question *'} required></textarea>
+                  <button type="submit" className="hm-form__submit">
+                    {isBangla ? 'বার্তা পাঠান' : 'Send Message'}
+                  </button>
                 </form>
               </div>
 
@@ -702,10 +873,16 @@ export default function Home() {
           <div className="hm-container">
             
             <div className="hm-sec-head text-center max-w-2xl mx-auto mb-10">
-              <span className="hm-eyebrow">ক্যাম্পাস ও সম্প্রসারণ পরিকল্পনা</span>
-              <h2 className="hm-h2">আমাদের ক্যাম্পাস ও শাখা পরিকল্পনা</h2>
+              <span className="hm-eyebrow">
+                {isBangla ? 'ক্যাম্পাস ও সম্প্রসারণ পরিকল্পনা' : 'Campus & Expansion Vision'}
+              </span>
+              <h2 className="hm-h2">
+                {isBangla ? 'আমাদের ক্যাম্পাস ও শাখা পরিকল্পনা' : 'Our Campus & Branch Roadmap'}
+              </h2>
               <p className="hm-sub text-sm sm:text-base leading-relaxed text-slate-600 mt-2">
-                আল-মদিনা মডেল মাদ্রাসার শিক্ষা কার্যক্রম বর্তমানে মহাখালী মূল ক্যাম্পাসে পরিচালিত হচ্ছে। অভিভাবকদের দীর্ঘদিনের দাবি ও শিক্ষার্থীদের ক্রমবর্ধমান চাহিদার প্রেক্ষিতে অত্র এলাকায় একটি স্বতন্ত্র আধুনিক মহিলা শাখা খোলার বিশেষ পরিকল্পনা গ্রহণ করা হয়েছে।
+                {isBangla
+                  ? 'আল-মদিনা মডেল মাদ্রাসার শিক্ষা কার্যক্রম বর্তমানে মহাখালী মূল ক্যাম্পাসে পরিচালিত হচ্ছে। অভিভাবকদের দীর্ঘদিনের দাবি ও শিক্ষার্থীদের ক্রমবর্ধমান চাহিদার প্রেক্ষিতে অত্র এলাকায় একটি স্বতন্ত্র আধুনিক মহিলা শাখা খোলার বিশেষ পরিকল্পনা গ্রহণ করা হয়েছে।'
+                  : 'Academic activities are currently headquartered at our Mohakhali Main Campus. In response to consistent guardian demand and community needs, comprehensive plans are underway to establish an exclusive modern female campus nearby.'}
               </p>
             </div>
 
@@ -717,36 +894,48 @@ export default function Home() {
                   <div className="flex items-center justify-between gap-2 mb-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                      সক্রিয় মূল ক্যাম্পাস
+                      {isBangla ? 'সক্রিয় মূল ক্যাম্পাস' : 'Active Main Campus'}
                     </span>
-                    <span className="text-xs text-slate-400 font-mono">ক্যাম্পাস ০১</span>
+                    <span className="text-xs text-slate-400 font-mono">
+                      {isBangla ? 'ক্যাম্পাস ০১' : 'Campus 01'}
+                    </span>
                   </div>
 
                   <h3 className="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
                     <Building2 className="w-5 h-5 text-teal-600 shrink-0" />
-                    <span>মহাখালী মূল ক্যাম্পাস (বালক ও হিফজ শাখা)</span>
+                    <span>
+                      {isBangla ? 'মহাখালী মূল ক্যাম্পাস (বালক ও হিফজ শাখা)' : 'Mohakhali Main Campus (Boys & Hifz)'}
+                    </span>
                   </h3>
                   
                   <p className="text-xs text-teal-700 font-medium mb-4">
-                    প্লে - ৬ষ্ঠ শ্রেণি জেনারেল ও আন্তর্জাতিক মানের হিফজুল কুরআন বিভাগ
+                    {isBangla ? 'প্লে - ৬ষ্ঠ শ্রেণি জেনারেল ও আন্তর্জাতিক মানের হিফজুল কুরআন বিভাগ' : 'Play to Class 6 General & International-Standard Hifzul Quran'}
                   </p>
 
                   <div className="space-y-2.5 text-xs text-slate-600 mb-6">
                     <div className="flex items-start gap-2">
                       <MapPin className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                      <span><strong>ঠিকানা:</strong> ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২ (মহাখালী ওয়্যারলেস গেট সংলগ্ন)</span>
+                      <span>
+                        <strong>{isBangla ? 'ঠিকানা:' : 'Address:'}</strong> {isBangla ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২ (মহাখালী ওয়্যারলেস গেট সংলগ্ন)' : 'Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka-1212 (Near Wireless Gate)'}
+                      </span>
                     </div>
                     <div className="flex items-start gap-2">
                       <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                      <span><strong>সুবিধাসমূহ:</strong> সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত আধুনিক ক্যাম্পাস, স্মার্ট মাল্টিমিডিয়া ক্লাসরুম, নিরিবিলি লাইব্রেরি ও আবাসিক হোস্টেল</span>
+                      <span>
+                        <strong>{isBangla ? 'সুবিধাসমূহ:' : 'Facilities:'}</strong> {isBangla ? 'সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত আধুনিক ক্যাম্পাস, স্মার্ট মাল্টিমিডিয়া ক্লাসরুম, নিরিবিলি লাইব্রেরি ও আবাসিক হোস্টেল' : 'Fully air-conditioned modern campus, smart multimedia classrooms, library & boarding'}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Phone className="w-4 h-4 text-teal-600 shrink-0" />
-                      <span><strong>হটলাইন:</strong> <a href="tel:01712633264" className="text-teal-700 font-bold hover:underline">০১৭১২-৬৩৩২৬৪</a></span>
+                      <span>
+                        <strong>{isBangla ? 'হটলাইন:' : 'Hotline:'}</strong> <a href="tel:01712633264" className="text-teal-700 font-bold hover:underline">{isBangla ? '০১৭১২-৬৩৩২৬৪' : '+8801712633264'}</a>
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-teal-600 shrink-0" />
-                      <span><strong>ইমেইল:</strong> <a href="mailto:info@almadinamadrasa.edu.bd" className="text-teal-700 font-bold hover:underline">info@almadinamadrasa.edu.bd</a></span>
+                      <span>
+                        <strong>{isBangla ? 'ইমেইল:' : 'Email:'}</strong> <a href="mailto:info@almadinamadrasa.edu.bd" className="text-teal-700 font-bold hover:underline">info@almadinamadrasa.edu.bd</a>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -756,13 +945,13 @@ export default function Home() {
                     href="#contact" 
                     className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1 hover:underline"
                   >
-                    ম্যাপ লোকেশন দেখুন <ChevronRight size={14} />
+                    {isBangla ? 'ম্যাপ লোকেশন দেখুন' : 'View Location Map'} <ChevronRight size={14} />
                   </a>
                   <Link 
                     href="/admission" 
                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold transition shadow-xs"
                   >
-                    <span>ভর্তি আবেদন</span>
+                    <span>{isBangla ? 'ভর্তি আবেদন' : 'Apply for Admission'}</span>
                     <ChevronRight size={14} />
                   </Link>
                 </div>
@@ -774,36 +963,46 @@ export default function Home() {
                   <div className="flex items-center justify-between gap-2 mb-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
                       <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                      ভবিষ্যৎ সম্প্রসারণ পরিকল্পনা
+                      {isBangla ? 'ভবিষ্যৎ সম্প্রসারণ পরিকল্পনা' : 'Future Expansion Plan'}
                     </span>
-                    <span className="text-xs text-amber-600 font-mono font-semibold">আসন্ন শাখা</span>
+                    <span className="text-xs text-amber-600 font-mono font-semibold">
+                      {isBangla ? 'আসন্ন শাখা' : 'Upcoming Branch'}
+                    </span>
                   </div>
 
                   <h3 className="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
                     <School className="w-5 h-5 text-amber-600 shrink-0" />
-                    <span>আসন্ন মহিলা শাখা (পরিকল্পনাধীন)</span>
+                    <span>{isBangla ? 'আসন্ন মহিলা শাখা (পরিকল্পনাধীন)' : 'Upcoming Female Campus (Planned)'}</span>
                   </h3>
                   
                   <p className="text-xs text-amber-700 font-medium mb-4">
-                    ছাত্রীদের জন্য সম্পূর্ণ পর্দাপূর্ণ ও স্বতন্ত্র ইসলামিক আধুনিক শিক্ষাকেন্দ্র
+                    {isBangla ? 'ছাত্রীদের জন্য সম্পূর্ণ পর্দাপূর্ণ ও স্বতন্ত্র ইসলামিক আধুনিক শিক্ষাকেন্দ্র' : 'Dedicated, secure Islamic & modern educational institution for girls'}
                   </p>
 
                   <div className="space-y-2.5 text-xs text-slate-600 mb-6">
                     <div className="flex items-start gap-2">
                       <BookOpen className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                      <span><strong>পরিকল্পনার উদ্দেশ্য:</strong> দ্বীনি ইলম ও নৈতিক তারবিয়াহর সাথে সাধারণ শিক্ষার সমন্বয়ে আদর্শ নারী নেতৃত্ব গড়ে তোলা</span>
+                      <span>
+                        <strong>{isBangla ? 'পরিকল্পনার উদ্দেশ্য:' : 'Vision:'}</strong> {isBangla ? 'দ্বীনি ইলম ও নৈতিক তারবিয়াহর সাথে সাধারণ শিক্ষার সমন্বয়ে আদর্শ নারী নেতৃত্ব গড়ে তোলা' : 'Developing exemplary female leadership integrating Islamic sciences with modern curriculum'}
+                      </span>
                     </div>
                     <div className="flex items-start gap-2">
                       <Layers className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                      <span><strong>প্রস্তাবিত বিভাগ:</strong> নূরানী, নাজেরা, বালিকা হিফজুল কুরআন ও স্কুল কারিকুলাম ভিত্তিক জেনারেল বিভাগ</span>
+                      <span>
+                        <strong>{isBangla ? 'প্রস্তাবিত বিভাগ:' : 'Proposed Sections:'}</strong> {isBangla ? 'নূরানী, নাজেরা, বালিকা হিফজুল কুরআন ও স্কুল কারিকুলাম ভিত্তিক জেনারেল বিভাগ' : 'Noorani, Nazera, Girls Hifz, and School-Curriculum General Sections'}
+                      </span>
                     </div>
                     <div className="flex items-start gap-2">
                       <Users className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                      <span><strong>পরিচালনা পর্ষদ:</strong> দক্ষ ও অভিজ্ঞ নারী শিক্ষিকাবৃন্দের সার্বক্ষণিক তত্ত্বাবধান ও নিরবচ্ছিন্ন নিরাপত্তা</span>
+                      <span>
+                        <strong>{isBangla ? 'পরিচালনা পর্ষদ:' : 'Supervision:'}</strong> {isBangla ? 'দক্ষ ও অভিজ্ঞ নারী শিক্ষিকাবৃন্দের সার্বক্ষণিক তত্ত্বাবধান ও নিরবচ্ছিন্ন নিরাপত্তা' : 'Exclusive female faculty supervision with rigorous security safeguards'}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span><strong>বর্তমান অবস্থা:</strong> প্রাথমিক রূপরেখা প্রণয়ন সম্পন্ন; ইনশাআল্লাহ দ্রুত বিস্তারিত জানানো হবে</span>
+                      <span>
+                        <strong>{isBangla ? 'বর্তমান অবস্থা:' : 'Current Status:'}</strong> {isBangla ? 'প্রাথমিক রূপরেখা প্রণয়ন সম্পন্ন; ইনশাআল্লাহ দ্রুত বিস্তারিত জানানো হবে' : 'Initial framework established; official launch announcement coming soon InshaAllah'}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -813,13 +1012,13 @@ export default function Home() {
                     href="#contact" 
                     className="text-xs font-bold text-amber-700 hover:text-amber-800 flex items-center gap-1 hover:underline"
                   >
-                    মতামত ও পরামর্শ দিন <ChevronRight size={14} />
+                    {isBangla ? 'মতামত ও পরামর্শ দিন' : 'Share Feedback'} <ChevronRight size={14} />
                   </a>
                   <a 
                     href="tel:01712633264" 
                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-xs"
                   >
-                    <span>যোগাযোগ করুন</span>
+                    <span>{isBangla ? 'যোগাযোগ করুন' : 'Contact Us'}</span>
                     <Phone size={12} />
                   </a>
                 </div>
@@ -845,35 +1044,37 @@ export default function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src="/logo.jpg" 
-                alt="আল-মদিনা মডেল মাদ্রাসা" 
+                alt={isBangla ? 'আল-মদিনা মডেল মাদ্রাসা' : 'Al-Madina Model Madrasah'} 
                 className="ft-logo rounded-full p-1 border-2 border-teal-400" 
                 style={{ height: '65px', width: '65px', objectFit: 'cover' }}
               />
               <p className="ft-about">
-                দ্বীনি নৈতিকতা ও আধুনিক জ্ঞানের এক অপূর্ব সমন্বয়ে আলোকিত প্রতিষ্ঠান ‘আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট’। কুরআন-সুন্নাহ ও যুগোপযোগী শিক্ষার মাধ্যমে আমরা এমন সচেতন ও আদর্শ প্রজন্ম গড়ে তোলার প্রত্যয়ে অবিচল—যারা উম্মাহর কল্যাণ ও মানবসেবায় নেতৃত্ব দেবে, ইন-শা-আল্লাহ।
+                {isBangla
+                  ? 'দ্বীনি নৈতিকতা ও আধুনিক জ্ঞানের এক অপূর্ব সমন্বয়ে আলোকিত প্রতিষ্ঠান ‘আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট’। কুরআন-সুন্নাহ ও যুগোপযোগী শিক্ষার মাধ্যমে আমরা এমন সচেতন ও আদর্শ প্রজন্ম গড়ে তোলার প্রত্যয়ে অবিচল—যারা উম্মাহর কল্যাণ ও মানবসেবায় নেতৃত্ব দেবে, ইন-শা-আল্লাহ।'
+                  : "'Al-Madina Model Madrasah & Research Institute' represents an exquisite synthesis of divine moral values and contemporary excellence. Rooted in Quran and Sunnah, our mission is to nurture an enlightened generation dedicated to global human welfare and pious leadership, InshaAllah."}
               </p>
             </div>
 
             {/* Important Links */}
-            <nav className="ft-col" aria-label="গুরুত্বপূর্ণ লিংক">
-              <h4 className="ft-title">গুরুত্বপূর্ণ লিংক</h4>
+            <nav className="ft-col" aria-label={isBangla ? 'গুরুত্বপূর্ণ লিংক' : 'Quick Links'}>
+              <h4 className="ft-title">{isBangla ? 'গুরুত্বপূর্ণ লিংক' : 'Quick Links'}</h4>
               <ul className="ft-links">
-                <li><Link href="/admission">এডমিশন</Link></li>
-                <li><Link href="/notices">নোটিশ</Link></li>
-                <li><a href="#about">আমাদের সম্পর্কে</a></li>
-                <li><a href="#fac">সুযোগ-সুবিধা</a></li>
-                <li><a href="#contact">যোগাযোগ</a></li>
-                <li><Link href="/login">ম্যানেজমেন্ট পোর্টাল</Link></li>
+                <li><Link href="/admission">{isBangla ? 'এডমিশন' : 'Admission'}</Link></li>
+                <li><Link href="/notices">{isBangla ? 'নোটিশ' : 'Notices'}</Link></li>
+                <li><a href="#about">{isBangla ? 'আমাদের সম্পর্কে' : 'About Us'}</a></li>
+                <li><a href="#fac">{isBangla ? 'সুযোগ-সুবিধা' : 'Facilities'}</a></li>
+                <li><a href="#contact">{isBangla ? 'যোগাযোগ' : 'Contact'}</a></li>
+                <li><Link href="/login">{isBangla ? 'ম্যানেজমেন্ট পোর্টাল' : 'Staff Portal'}</Link></li>
               </ul>
             </nav>
 
             {/* Contact */}
             <div className="ft-col">
-              <h4 className="ft-title">যোগাযোগ</h4>
+              <h4 className="ft-title">{isBangla ? 'যোগাযোগ' : 'Contact'}</h4>
               <ul className="ft-contact">
                 <li>
                   <Phone size={16} />
-                  <a href="tel:01712633264">০১৭১২-৬৩৩২৬৪</a>
+                  <a href="tel:01712633264">{isBangla ? '০১৭১২-৬৩৩২৬৪' : '+8801712633264'}</a>
                 </li>
                 <li>
                   <Mail size={16} />
@@ -881,21 +1082,31 @@ export default function Home() {
                 </li>
                 <li>
                   <MapPin size={16} />
-                  <span>ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২</span>
+                  <span>{isBangla ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২' : 'Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka-1212'}</span>
                 </li>
               </ul>
             </div>
 
             {/* Facebook / Community Box */}
             <div className="ft-col ft-fb-col">
-              <h4 className="ft-title">ক্যাম্পাস অবস্থান</h4>
+              <h4 className="ft-title">{isBangla ? 'ক্যাম্পাস অবস্থান' : 'Campus Location'}</h4>
               <div className="ft-fb p-3 text-xs leading-relaxed text-slate-300">
-                <p className="font-bold text-white mb-1">আল-মদিনা মডেল মাদ্রাসা</p>
-                <p>গুলশান, বনানী ও মহাখালী এলাকার কেন্দ্রবিন্দুতে মনোরম ও নিরাপদ পরিবেশে অবস্থিত।</p>
+                <p className="font-bold text-white mb-1">
+                  {isBangla ? 'আল-মদিনা মডেল মাদ্রাসা' : 'Al-Madina Model Madrasah'}
+                </p>
+                <p>
+                  {isBangla 
+                    ? 'গুলশান, বনানী ও মহাখালী এলাকার কেন্দ্রবিন্দুতে মনোরম ও নিরাপদ পরিবেশে অবস্থিত।'
+                    : 'Conveniently situated in the prime heart of Gulshan, Banani, and Mohakhali in a serene and secure environment.'}
+                </p>
                 <div className="mt-3 pt-3 border-t border-white/10 flex gap-2">
-                  <a href="https://www.facebook.com/AlMadinaModelMadrasaAndResearchInstitute" target="_blank" rel="noreferrer" className="text-teal-400 hover:underline">ফেসবুক পেজ</a>
+                  <a href="https://www.facebook.com/AlMadinaModelMadrasaAndResearchInstitute" target="_blank" rel="noreferrer" className="text-teal-400 hover:underline">
+                    {isBangla ? 'ফেসবুক পেজ' : 'Facebook Page'}
+                  </a>
                   <span>•</span>
-                  <a href="https://www.youtube.com/@al_madina_model_madrasha" target="_blank" rel="noreferrer" className="text-teal-400 hover:underline">ইউটিউব চ্যানেল</a>
+                  <a href="https://www.youtube.com/@al_madina_model_madrasha" target="_blank" rel="noreferrer" className="text-teal-400 hover:underline">
+                    {isBangla ? 'ইউটিউব চ্যানেল' : 'YouTube Channel'}
+                  </a>
                 </div>
               </div>
             </div>
@@ -905,11 +1116,15 @@ export default function Home() {
           {/* Bottom Copyright */}
           <div className="ft-bottom">
             <div className="ft-bottom__inner">
-              <p>© {new Date().getFullYear()} আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট। সর্বস্বত্ব সংরক্ষিত।</p>
+              <p>
+                {isBangla 
+                  ? `© ${new Date().getFullYear()} আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট। সর্বস্বত্ব সংরক্ষিত।`
+                  : `© ${new Date().getFullYear()} Al-Madina Model Madrasah & Research Institute. All rights reserved.`}
+              </p>
               <div className="ft-bottom__links">
-                <Link href="/privacy">গোপনীয়তা নীতি</Link>
-                <Link href="/terms">শর্তাবলী</Link>
-                <Link href="/login">এডমিন লগইন</Link>
+                <Link href="/privacy">{isBangla ? 'গোপনীয়তা নীতি' : 'Privacy Policy'}</Link>
+                <Link href="/terms">{isBangla ? 'শর্তাবলী' : 'Terms of Service'}</Link>
+                <Link href="/login">{isBangla ? 'এডমিন লগইন' : 'Admin Login'}</Link>
               </div>
             </div>
           </div>
