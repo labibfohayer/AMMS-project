@@ -47,7 +47,7 @@ export default function Dashboard() {
   return (
     <AppLayout title={isBangla ? 'ড্যাশবোর্ড' : 'Dashboard'}>
       {/* Executive Welcome Hero Banner */}
-      <div className="relative mb-8 rounded-3xl p-6 sm:p-8 bg-[#132A20] text-white border border-[#1F4233] shadow-lg overflow-hidden">
+      <div className="relative mb-8 rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-teal-950 via-teal-900 to-teal-950 text-white border border-teal-700/40 shadow-xl overflow-hidden">
         <div 
           className="absolute inset-0 opacity-[0.03] pointer-events-none" 
           style={{
@@ -57,20 +57,20 @@ export default function Dashboard() {
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4 sm:gap-5">
-            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-[2px] bg-[#C5A059] shadow-md shrink-0">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-[2px] bg-teal-500 shadow-md shrink-0">
               <img 
                 src={user.role === 'managing_director' ? '/md.jpg' : '/principal.jpg'} 
                 alt={user.name_bn || (user.role === 'managing_director' ? 'লাবিব ফোহায়ের' : 'মাওলানা ওমর ফারুক')} 
                 className="w-full h-full object-cover object-top rounded-2xl border border-white/20"
               />
-              <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-2 border-[#132A20] rounded-full flex items-center justify-center text-[10px] text-white font-bold" title={isBangla ? "সক্রিয়" : "Active"}>
+              <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-teal-500 border-2 border-teal-950 rounded-full flex items-center justify-center text-[10px] text-white font-bold" title={isBangla ? "সক্রিয়" : "Active"}>
                 ✓
               </span>
             </div>
 
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#E5C985] text-xs font-semibold mb-2">
-                <Sparkles size={13} className="text-[#C5A059]" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-200 text-xs font-semibold mb-2">
+                <Sparkles size={13} className="text-teal-300" />
                 <span>
                   {user.role === 'managing_director' 
                     ? t('dashboard.mdView')
@@ -85,14 +85,14 @@ export default function Dashboard() {
               </div>
               
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">
-                {t('dashboard.greeting')} <span className="text-[#E5C985]">
+                {t('dashboard.greeting')} <span className="text-teal-200">
                   {isBangla 
                     ? (user.name_bn || (user.role === 'managing_director' ? 'লাবিব ফোহায়ের' : 'মাওলানা ওমর ফারুক মুজাহিদী'))
                     : (user.name || (user.role === 'managing_director' ? 'Labib Fohayer' : 'Principal Omar Faruk Mujahidi'))}!
                 </span>
               </h2>
               
-              <p className="text-xs sm:text-sm text-emerald-100/80 max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-teal-100/90 max-w-2xl leading-relaxed">
                 {t('dashboard.subtitle')}
               </p>
             </div>
@@ -101,7 +101,7 @@ export default function Dashboard() {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/students/add"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#C5A059] hover:bg-[#B38E46] text-[#0D2319] shadow-md transition-all active:scale-95"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-teal-600 hover:bg-teal-500 text-white shadow-md transition-all active:scale-95"
             >
               <UserPlus size={16} />
               <span>{isBangla ? 'নতুন শিক্ষার্থী ভর্তি' : 'New Admission'}</span>
@@ -111,7 +111,7 @@ export default function Dashboard() {
               href="/attendance"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/15 border border-white/20 text-white transition-all"
             >
-              <UserCheck size={16} className="text-emerald-300" />
+              <UserCheck size={16} className="text-teal-300" />
               <span>{isBangla ? 'উপস্থিতি নিন' : 'Take Attendance'}</span>
             </Link>
           </div>
@@ -147,8 +147,8 @@ function PrincipalDashboard() {
 
   if (isLoading && !data) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 text-emerald-800">
-        <div className="w-8 h-8 border-4 border-emerald-500/30 border-t-emerald-600 rounded-full animate-spin mb-3" />
+      <div className="flex flex-col items-center justify-center p-12 text-teal-800">
+        <div className="w-8 h-8 border-4 border-teal-500/30 border-t-teal-600 rounded-full animate-spin mb-3" />
         <span className="text-sm font-medium">{isBangla ? 'তথ্য লোড হচ্ছে...' : 'Loading data...'}</span>
       </div>
     );
@@ -276,7 +276,7 @@ function PrincipalDashboard() {
                   {isBangla ? 'আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট' : 'Al-Madinah Model Madrasah & Research Institute'}
                 </p>
               </div>
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-800 border border-teal-200/80">
                 {isBangla ? 'সক্রিয় সেশন ২০২৭' : 'Active Session 2027'}
               </span>
             </div>
@@ -391,7 +391,7 @@ function PrincipalDashboard() {
 
           <div className="mt-6 pt-5 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
             <span>{isBangla ? 'ঠিকানা: ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা' : 'Address: Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka'}</span>
-            <Link href="/students" className="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1">
+            <Link href="/students" className="font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1">
               <span>{isBangla ? 'সকল ছাত্র তালিকা' : 'All Students Directory'}</span>
               <ChevronRight size={14} />
             </Link>
@@ -408,7 +408,7 @@ function PrincipalDashboard() {
               </div>
               <Link 
                 href="/notices/add"
-                className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
+                className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1"
               >
                 <span>{isBangla ? '+ নতুন দিন' : '+ Add Notice'}</span>
               </Link>
@@ -420,7 +420,7 @@ function PrincipalDashboard() {
                   <Link 
                     key={notice.id} 
                     href="/notices" 
-                    className="block p-3.5 rounded-2xl bg-slate-50 hover:bg-emerald-50/50 border border-slate-100 hover:border-emerald-200 transition-all"
+                    className="block p-3.5 rounded-2xl bg-slate-50 hover:bg-teal-50/50 border border-slate-100 hover:border-teal-200 transition-all"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <h5 className="font-semibold text-sm text-gray-800 truncate">
@@ -444,7 +444,7 @@ function PrincipalDashboard() {
                 </p>
                 <Link
                   href="/notices/add"
-                  className="inline-block mt-3 text-xs font-bold text-emerald-700 hover:text-emerald-800"
+                  className="inline-block mt-3 text-xs font-bold text-teal-700 hover:text-teal-800"
                 >
                   {isBangla ? 'প্রথম নোটিশ প্রকাশ করুন →' : 'Publish First Notice →'}
                 </Link>
@@ -455,7 +455,7 @@ function PrincipalDashboard() {
           <div className="mt-6 pt-4 border-t border-gray-100">
             <Link 
               href="/notices" 
-              className="text-xs font-semibold text-gray-600 hover:text-emerald-700 flex items-center justify-between"
+              className="text-xs font-semibold text-gray-600 hover:text-teal-700 flex items-center justify-between"
             >
               <span>{isBangla ? 'সকল নোটিশ দেখুন' : 'View All Notices'}</span>
               <ArrowUpRight size={14} />
@@ -506,7 +506,7 @@ function TeacherDashboard({ user }: { user: any }) {
       {/* Teacher Profile Card */}
       <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl p-1 bg-[#C5A059] shadow-md shrink-0">
+          <div className="w-16 h-16 rounded-2xl p-1 bg-teal-600 shadow-md shrink-0">
             <img
               src="/principal.jpg"
               alt={teacher?.name || user.name}
@@ -515,7 +515,7 @@ function TeacherDashboard({ user }: { user: any }) {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-mono font-bold text-xs">
+              <span className="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 font-mono font-bold text-xs">
                 {teacher?.teacher_id || 'TCH-001'}
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-900 font-bold text-xs">
@@ -537,7 +537,7 @@ function TeacherDashboard({ user }: { user: any }) {
         <div className="flex items-center gap-2 w-full md:w-auto">
           <Link
             href="/attendance"
-            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm shadow-md transition"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs sm:text-sm shadow-md transition"
           >
             <UserCheck size={16} className="text-amber-300" />
             <span>{isBangla ? 'আজকের হাজিরা নিন' : 'Take Attendance'}</span>
@@ -573,11 +573,11 @@ function TeacherDashboard({ user }: { user: any }) {
         <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'নিজের হাজিরা' : 'My Attendance'}</span>
-            <span className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <span className="w-8 h-8 rounded-full bg-teal-50 text-teal-700 flex items-center justify-center">
               <CheckCircle2 size={16} />
             </span>
           </div>
-          <h3 className="text-2xl font-black text-emerald-700 font-mono">
+          <h3 className="text-2xl font-black text-teal-700 font-mono">
             {isBangla ? 'উপস্থিত ✓' : 'Present ✓'}
           </h3>
           <p className="text-[11px] text-slate-500 mt-1">
@@ -592,7 +592,7 @@ function TeacherDashboard({ user }: { user: any }) {
               <DollarSign size={16} />
             </span>
           </div>
-          <h3 className="text-2xl font-black text-[#1B4332] font-mono">
+          <h3 className="text-2xl font-black text-teal-900 font-mono">
             ৳ {isBangla 
                 ? toBanglaDigit(Number(teacher?.monthly_salary || 25000).toLocaleString('en-IN'))
                 : Number(teacher?.monthly_salary || 25000).toLocaleString('en-US')}
@@ -614,7 +614,7 @@ function TeacherDashboard({ user }: { user: any }) {
               ? `${toBanglaDigit(pendingLeaves.length)} টি অপেক্ষমাণ`
               : `${pendingLeaves.length} Pending`}
           </h3>
-          <Link href="/students/leaves" className="text-[11px] text-[#1B4332] font-bold mt-1 inline-block hover:underline">
+          <Link href="/students/leaves" className="text-[11px] text-teal-700 font-bold mt-1 inline-block hover:underline">
             {isBangla ? 'রিভিউ করতে ক্লিক করুন →' : 'Click to review →'}
           </Link>
         </div>
@@ -629,7 +629,7 @@ function TeacherDashboard({ user }: { user: any }) {
           <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
             <div>
               <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
-                <Clock className="w-5 h-5 text-[#1B4332]" />
+                <Clock className="w-5 h-5 text-teal-800" />
                 <span>{isBangla ? 'আজকের ক্লাস রুটিন ও হাজিরা তালিকা' : "Today's Class Routine & Attendance"}</span>
               </h3>
               <p className="text-xs text-slate-500">
@@ -638,7 +638,7 @@ function TeacherDashboard({ user }: { user: any }) {
             </div>
             <Link
               href="/attendance"
-              className="text-xs font-bold text-[#1B4332] hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-teal-700 hover:underline flex items-center gap-1"
             >
               <span>{isBangla ? 'সকল হাজিরা' : 'All Attendance'}</span>
               <ChevronRight size={14} />
@@ -649,10 +649,10 @@ function TeacherDashboard({ user }: { user: any }) {
             {TEACHER_CLASSES.map((cls, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-emerald-300 transition"
+                className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-teal-300 transition"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 font-mono font-bold flex items-center justify-center text-xs shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 font-mono font-bold flex items-center justify-center text-xs shrink-0">
                     {isBangla ? toBanglaDigit(idx + 1) : idx + 1}
                   </div>
                   <div>
@@ -672,7 +672,7 @@ function TeacherDashboard({ user }: { user: any }) {
                   </span>
                   <Link
                     href="/attendance"
-                    className="px-3.5 py-1.5 rounded-xl bg-[#1B4332] hover:bg-[#132E23] text-white font-bold text-xs shadow-sm transition"
+                    className="px-3.5 py-1.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs shadow-sm transition"
                   >
                     {isBangla ? 'হাজিরা নিন' : 'Take Attendance'}
                   </Link>
@@ -792,7 +792,7 @@ function StaffDashboard({ user }: { user: any }) {
       {/* Staff Profile Header */}
       <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl p-1 bg-[#C5A059] shadow-md shrink-0">
+          <div className="w-16 h-16 rounded-2xl p-1 bg-teal-600 shadow-md shrink-0">
             <img
               src="/principal.jpg"
               alt={user.name}
@@ -804,7 +804,7 @@ function StaffDashboard({ user }: { user: any }) {
               <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 font-mono font-bold text-xs">
                 {user.user_id || 'STF-001'}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-bold text-xs">
+              <span className="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 font-bold text-xs">
                 {isBangla ? 'অফিস সহকারী ও ক্যাশিয়ার' : 'Office Assistant & Cashier'}
               </span>
             </div>
@@ -820,16 +820,16 @@ function StaffDashboard({ user }: { user: any }) {
         <div className="flex items-center gap-2 w-full md:w-auto">
           <Link
             href="/fees"
-            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#1B4332] hover:bg-[#132E23] text-white font-bold text-xs sm:text-sm shadow-md transition"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs sm:text-sm shadow-md transition"
           >
-            <DollarSign size={16} className="text-[#C5A059]" />
+            <DollarSign size={16} className="text-teal-200" />
             <span>{isBangla ? 'কাউন্টার ফি আদায়' : 'Counter Collection'}</span>
           </Link>
           <Link
             href="/students/add"
-            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FAF5EB] hover:bg-[#F3EAD5] border border-[#C5A059]/40 text-[#1B4332] font-bold text-xs sm:text-sm shadow-xs transition"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-teal-50 hover:bg-teal-100/70 border border-teal-200 text-teal-800 font-bold text-xs sm:text-sm shadow-xs transition"
           >
-            <UserPlus size={16} className="text-[#C5A059]" />
+            <UserPlus size={16} className="text-teal-600" />
             <span>{isBangla ? 'নতুন ভর্তি' : 'New Admission'}</span>
           </Link>
         </div>
@@ -841,11 +841,11 @@ function StaffDashboard({ user }: { user: any }) {
         <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-bold">{isBangla ? 'আজকের ফি কালেকশন' : "Today's Collection"}</span>
-            <span className="w-8 h-8 rounded-full bg-emerald-50 text-[#1B4332] flex items-center justify-center">
+            <span className="w-8 h-8 rounded-full bg-teal-50 text-teal-700 flex items-center justify-center">
               <DollarSign size={16} />
             </span>
           </div>
-          <h3 className="text-2xl font-black text-[#1B4332] font-mono">
+          <h3 className="text-2xl font-black text-teal-800 font-mono">
             ৳ {isBangla 
                 ? toBanglaDigit(Number(dashboardData?.finances?.total_collected || 18500).toLocaleString('en-IN'))
                 : Number(dashboardData?.finances?.total_collected || 18500).toLocaleString('en-US')}
@@ -889,7 +889,7 @@ function StaffDashboard({ user }: { user: any }) {
           <h3 className="text-2xl font-black text-purple-700 font-mono">
             {isBangla ? `${toBanglaDigit(pendingLeaves.length)} টি অপেক্ষমাণ` : `${pendingLeaves.length} Pending`}
           </h3>
-          <Link href="/students/leaves" className="text-[11px] text-[#1B4332] font-bold mt-1 inline-block hover:underline">
+          <Link href="/students/leaves" className="text-[11px] text-teal-700 font-bold mt-1 inline-block hover:underline">
             {isBangla ? 'গেট রেজিস্টার দেখুন →' : 'View Gate Register →'}
           </Link>
         </div>
@@ -898,7 +898,7 @@ function StaffDashboard({ user }: { user: any }) {
 
       {/* Staff Quick Action Cards Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <QuickAction href="/fees" icon={<DollarSign size={22} />} title={isBangla ? "কাউন্টার ফি আদায়" : "Counter Fee Collection"} desc={isBangla ? "ক্যাশ ও বিকাশ রসিদ" : "Cash & bKash Receipts"} color="emerald" />
+        <QuickAction href="/fees" icon={<DollarSign size={22} />} title={isBangla ? "কাউন্টার ফি আদায়" : "Counter Fee Collection"} desc={isBangla ? "ক্যাশ ও বিকাশ রসিদ" : "Cash & bKash Receipts"} color="teal" />
         <QuickAction href="/students/add" icon={<UserPlus size={22} />} title={isBangla ? "নতুন ছাত্র ভর্তি" : "New Student Admission"} desc={isBangla ? "অফিসিয়াল ভর্তি ফর্ম" : "Official Admission Form"} color="amber" />
         <QuickAction href="/students/id-cards" icon={<Printer size={22} />} title={isBangla ? "আইডি কার্ড প্রিন্ট" : "Print ID Card"} desc={isBangla ? "পিভিসি আইডি কার্ড" : "PVC ID Card"} color="purple" />
         <QuickAction href="/reports" icon={<FileText size={22} />} title={isBangla ? "ক্যাশ খাতা ও রিপোর্ট" : "Cash Book & Reports"} desc={isBangla ? "দৈনিক আয়-ব্যয়" : "Daily Income-Expense"} color="blue" />
@@ -914,7 +914,7 @@ function QuickAction({
   icon, 
   title, 
   desc, 
-  color = 'emerald' 
+  color = 'teal' 
 }: { 
   href: string; 
   icon: React.ReactNode; 
@@ -923,6 +923,7 @@ function QuickAction({
   color?: string;
 }) {
   const colorMap: Record<string, { bg: string; text: string; border: string }> = {
+    teal: { bg: 'bg-teal-50', text: 'text-teal-700', border: 'hover:border-teal-300' },
     emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'hover:border-emerald-300' },
     blue: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'hover:border-blue-300' },
     amber: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'hover:border-amber-300' },
@@ -931,7 +932,7 @@ function QuickAction({
     cyan: { bg: 'bg-cyan-50', text: 'text-cyan-700', border: 'hover:border-cyan-300' },
   };
 
-  const style = colorMap[color] || colorMap.emerald;
+  const style = colorMap[color] || colorMap.teal;
 
   return (
     <Link 
@@ -942,7 +943,7 @@ function QuickAction({
         {icon}
       </div>
       <div>
-        <h5 className="font-bold text-sm text-gray-800 group-hover:text-emerald-700 transition-colors">
+        <h5 className="font-bold text-sm text-gray-800 group-hover:text-teal-700 transition-colors">
           {title}
         </h5>
         {desc && <p className="text-[11px] text-gray-400 mt-0.5">{desc}</p>}

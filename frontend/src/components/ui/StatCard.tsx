@@ -23,11 +23,17 @@ export default function StatCard({
       text: 'text-blue-700',
       iconBg: 'bg-blue-500/10 text-blue-600',
     },
+    teal: {
+      bg: 'bg-teal-50/50',
+      border: 'border-teal-200/80 hover:border-teal-400',
+      text: 'text-teal-700',
+      iconBg: 'bg-teal-500/10 text-teal-600',
+    },
     green: {
-      bg: 'bg-emerald-50/50',
-      border: 'border-emerald-200/80 hover:border-emerald-400',
-      text: 'text-emerald-700',
-      iconBg: 'bg-emerald-500/10 text-emerald-600',
+      bg: 'bg-teal-50/50',
+      border: 'border-teal-200/80 hover:border-teal-400',
+      text: 'text-teal-700',
+      iconBg: 'bg-teal-500/10 text-teal-600',
     },
     red: {
       bg: 'bg-rose-50/50',

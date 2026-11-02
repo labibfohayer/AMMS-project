@@ -80,14 +80,14 @@ export default function Students() {
                             শিক্ষার্থী তালিকা ও আইডি কার্ড পোর্টাল
                         </h2>
                         <p className="text-xs text-gray-500">
-                            মোট শিক্ষার্থী: <span className="font-bold text-emerald-800">{toBanglaDigit(students.length)} জন</span> • যেকোনো শিক্ষার্থীর আইডি কার্ড ১-ক্লিকে প্রিন্ট করুন
+                            মোট শিক্ষার্থী: <span className="font-bold text-teal-800">{toBanglaDigit(students.length)} জন</span> • যেকোনো শিক্ষার্থীর আইডি কার্ড ১-ক্লিকে প্রিন্ট করুন
                         </p>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
                         <Link
                             href="/students/leaves"
-                            className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all active:scale-95"
+                            className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all active:scale-95"
                             title="শিক্ষার্থী ছুটির আবেদন ও গেটপাস পোর্টাল"
                         >
                             <CalendarCheck size={16} className="text-amber-300" />
@@ -96,16 +96,16 @@ export default function Students() {
 
                         <Link
                             href="/hostel"
-                            className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-all active:scale-95"
+                            className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-teal-50 hover:bg-teal-100 text-teal-900 border border-teal-300 rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-all active:scale-95"
                             title="হোস্টেল ও আবাসিক শিক্ষার্থী রুম ও মিল শিট"
                         >
-                            <Bed size={16} className="text-emerald-700" />
+                            <Bed size={16} className="text-teal-700" />
                             <span>হোস্টেল ও মেস</span>
                         </Link>
 
                         <Link
                             href="/students/id-cards"
-                            className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-emerald-950 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95"
                         >
                             <Printer size={16} />
                             <span>বাল্ক আইডি কার্ড প্রিন্ট</span>
@@ -119,7 +119,7 @@ export default function Students() {
                             <Sparkles size={16} className="text-amber-600" />
                             <span>অনলাইন ভর্তি আবেদন</span>
                             {Number(admissionStats?.pending || 0) > 0 && (
-                                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-amber-500 text-emerald-950 font-black animate-pulse">
+                                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-amber-500 text-slate-950 font-black animate-pulse">
                                     {toBanglaDigit(admissionStats.pending)}
                                 </span>
                             )}
@@ -127,7 +127,7 @@ export default function Students() {
 
                         <Link
                             href="/students/add"
-                            className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 bg-teal-700 hover:bg-teal-800 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95"
                         >
                             <Plus size={16} />
                             <span>নতুন শিক্ষার্থী ভর্তি</span>
@@ -143,7 +143,7 @@ export default function Students() {
                         placeholder="শিক্ষার্থীর নাম, আইডি, রোল অথবা বিভাগ দিয়ে খুঁজুন..." 
                         value={search} 
                         onChange={e => setSearch(e.target.value)} 
-                        className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 shadow-sm" 
+                        className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 shadow-sm" 
                     />
                 </div>
 

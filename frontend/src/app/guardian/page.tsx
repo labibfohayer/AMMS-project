@@ -41,8 +41,8 @@ export default function GuardianDashboard() {
 
   if (!isMounted) {
     return (
-      <div className="min-h-screen bg-[#FAF6ED] flex items-center justify-center p-8">
-        <div className="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-600 rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-8">
+        <div className="w-10 h-10 border-4 border-teal-500/20 border-t-teal-600 rounded-full animate-spin" />
       </div>
     );
   }
@@ -270,7 +270,7 @@ export default function GuardianDashboard() {
     return (
       <AppLayout title={isBangla ? "অভিভাবক ড্যাশবোর্ড" : "Guardian Portal"}>
         <div className="flex flex-col items-center justify-center p-16 space-y-4">
-          <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-600 rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-teal-500/20 border-t-teal-600 rounded-full animate-spin" />
           <p className="text-gray-500 text-sm font-semibold">আপনার সন্তানের তথ্য লোড হচ্ছে...</p>
         </div>
       </AppLayout>
@@ -282,7 +282,7 @@ export default function GuardianDashboard() {
       <div className="space-y-6">
         
         {/* ===================== HERO HEADER BANNER ===================== */}
-        <div className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-[#02200d] text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-emerald-500/20">
+        <div className="bg-gradient-to-r from-teal-950 via-teal-900 to-teal-950 text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-teal-700/40">
           <div className="absolute top-0 right-0 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
           
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -295,12 +295,12 @@ export default function GuardianDashboard() {
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 সম্মানিত অভিভাবক ড্যাশবোর্ড ও ডিজিটাল পেমেন্ট পোর্টাল
               </h1>
-              <p className="text-emerald-200/85 text-xs sm:text-sm mt-1 max-w-2xl">
+              <p className="text-teal-200/85 text-xs sm:text-sm mt-1 max-w-2xl">
                 আপনার সন্তানের অ্যাকাডেমিক অগ্রগতি, মাসিক ফি হিসাব ও সরাসরি বিকাশ/নগদে ঘরে বসেই ফি পরিশোধের কেন্দ্রীয় অনলাইন গেটওয়ে।
               </p>
 
               <div className="flex flex-wrap items-center gap-3 mt-4 text-xs font-semibold">
-                <span className="px-3 py-1 rounded-xl bg-white/10 border border-white/10 text-emerald-200">
+                <span className="px-3 py-1 rounded-xl bg-white/10 border border-white/10 text-teal-200">
                   মোট সন্তান: {toBanglaDigit(students.length)} জন
                 </span>
                 <span className="px-3 py-1 rounded-xl bg-white/10 border border-white/10 text-amber-300">
@@ -313,9 +313,9 @@ export default function GuardianDashboard() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
               <button
                 onClick={() => setIsPayModalOpen(true)}
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-emerald-950 font-black text-xs sm:text-sm shadow-xl shadow-amber-950/40 transition-transform active:scale-95"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-amber-950/40 transition-transform active:scale-95"
               >
-                <CreditCard className="w-4 h-4 text-emerald-950" />
+                <CreditCard className="w-4 h-4 text-slate-950" />
                 <span>বিকাশ / নগদে ফি পরিশোধ করুন</span>
               </button>
             </div>
@@ -331,7 +331,7 @@ export default function GuardianDashboard() {
                 onClick={() => setSelectedStudentIdx(idx)}
                 className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                   selectedStudentIdx === idx
-                    ? 'bg-emerald-800 text-white shadow-md'
+                    ? 'bg-teal-700 text-white shadow-md'
                     : 'bg-slate-50 text-gray-700 hover:bg-slate-100'
                 }`}
               >
@@ -350,7 +350,7 @@ export default function GuardianDashboard() {
             {/* Student Profile Overview Card */}
             <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-1 bg-gradient-to-tr from-amber-400 to-emerald-600 shadow-md shrink-0">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-1 bg-gradient-to-tr from-amber-400 to-teal-600 shadow-md shrink-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={activeStudent.photo ? (activeStudent.photo.startsWith('http') || activeStudent.photo.startsWith('/') ? activeStudent.photo : `/${activeStudent.photo}`) : '/logo.jpg'} 
@@ -360,7 +360,7 @@ export default function GuardianDashboard() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-mono font-bold text-xs">
+                    <span className="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 font-mono font-bold text-xs">
                       {activeStudent.student_id}
                     </span>
                     <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold text-xs">
@@ -372,7 +372,7 @@ export default function GuardianDashboard() {
                     {activeStudent.name_bn || activeStudent.name}
                   </h2>
                   <p className="text-xs sm:text-sm text-gray-600 font-medium">
-                    বিভাগ: <strong className="text-emerald-950">{activeStudent.islamic_department_name || activeStudent.general_department_name || 'জেনারেল ও হিফজ বিভাগ'}</strong>
+                    বিভাগ: <strong className="text-teal-950">{activeStudent.islamic_department_name || activeStudent.general_department_name || 'জেনারেল ও হিফজ বিভাগ'}</strong>
                     {activeStudent.roll_number ? ` • রোল: ${toBanglaDigit(activeStudent.roll_number)}` : ''}
                   </p>
                   <p className="text-[11px] text-gray-500 mt-0.5">
@@ -385,7 +385,7 @@ export default function GuardianDashboard() {
               <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
                 <button
                   onClick={() => setIsPayModalOpen(true)}
-                  className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95"
+                  className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95"
                 >
                   <CreditCard size={15} className="text-amber-300" />
                   <span>অনলাইনে ফি পরিশোধ</span>
@@ -411,7 +411,7 @@ export default function GuardianDashboard() {
                 onClick={() => setActiveTab('fees')}
                 className={`flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all ${
                   activeTab === 'fees'
-                    ? 'bg-emerald-900 text-amber-300 shadow-md'
+                    ? 'bg-teal-900 text-amber-300 shadow-md'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -422,7 +422,7 @@ export default function GuardianDashboard() {
                 onClick={() => setActiveTab('leaves')}
                 className={`flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all ${
                   activeTab === 'leaves'
-                    ? 'bg-emerald-900 text-amber-300 shadow-md'
+                    ? 'bg-teal-900 text-amber-300 shadow-md'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -460,7 +460,7 @@ export default function GuardianDashboard() {
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
                   <span className="text-gray-600">মাসিক নির্ধারিত ফি:</span>
-                  <span className="font-mono text-emerald-950 font-bold">৳ {toBanglaDigit(activeStudent.monthly_fee || 1500)}</span>
+                  <span className="font-mono text-teal-950 font-bold">৳ {toBanglaDigit(activeStudent.monthly_fee || 1500)}</span>
                 </div>
               </div>
 
@@ -469,11 +469,11 @@ export default function GuardianDashboard() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">পরিশোধিত মোট ফি</span>
-                    <span className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                    <span className="w-8 h-8 rounded-full bg-teal-50 text-teal-700 flex items-center justify-center">
                       <CheckCircle2 size={18} />
                     </span>
                   </div>
-                  <h3 className="text-3xl font-black text-emerald-800 font-mono">
+                  <h3 className="text-3xl font-black text-teal-800 font-mono">
                     ৳ {toBanglaDigit(Number(feeStatus?.total_paid_this_year || 0).toLocaleString('en-IN'))}
                   </h3>
                   <p className="text-xs text-gray-500 mt-1">
@@ -483,7 +483,7 @@ export default function GuardianDashboard() {
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
                   <span className="text-gray-600">হালনাগাদ বছর:</span>
-                  <span className="font-mono text-emerald-950 font-bold">{toBanglaDigit(new Date().getFullYear())}</span>
+                  <span className="font-mono text-teal-950 font-bold">{toBanglaDigit(new Date().getFullYear())}</span>
                 </div>
               </div>
 
@@ -492,11 +492,11 @@ export default function GuardianDashboard() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs text-amber-900 font-bold uppercase tracking-wider">বিকাশ / নগদ পেমেন্ট</span>
-                    <span className="px-2 py-0.5 rounded-full bg-amber-400 text-emerald-950 font-black text-[10px]">
+                    <span className="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[10px]">
                       ইন্সট্যান্ট রিসিট
                     </span>
                   </div>
-                  <h4 className="text-lg font-black text-emerald-950 leading-snug">
+                  <h4 className="text-lg font-black text-teal-950 leading-snug">
                     ঘরে বসেই সহজ ও নিরাপদ ফি প্রদান
                   </h4>
                   <p className="text-xs text-gray-600 mt-1 leading-relaxed">
@@ -506,7 +506,7 @@ export default function GuardianDashboard() {
 
                 <button
                   onClick={() => setIsPayModalOpen(true)}
-                  className="mt-4 w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-emerald-950 font-black text-xs shadow-md transition-transform active:scale-95 flex items-center justify-center gap-1.5"
+                  className="mt-4 w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow-md transition-transform active:scale-95 flex items-center justify-center gap-1.5"
                 >
                   <Smartphone size={14} />
                   <span>পেমেন্ট ফর্ম খুলুন</span>
@@ -554,7 +554,7 @@ export default function GuardianDashboard() {
             <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <h3 className="font-bold text-base text-gray-900 flex items-center gap-2">
-                  <CreditCard className="w-5 h-5 text-emerald-700" />
+                  <CreditCard className="w-5 h-5 text-teal-700" />
                   <span>পরিশোধিত ফি ও ডিজিটাল রিসিটসমূহ (Payment History)</span>
                 </h3>
                 <span className="text-xs text-gray-500 font-medium">
@@ -564,15 +564,15 @@ export default function GuardianDashboard() {
 
               <div className="overflow-x-auto">
                 <table className="w-full text-xs text-left border-collapse border border-slate-200">
-                  <thead className="bg-[#032410] text-white uppercase text-[11px] font-bold">
+                  <thead className="bg-teal-900 text-white uppercase text-[11px] font-bold">
                     <tr>
-                      <th className="py-2.5 px-3 border border-emerald-800 text-center w-12">নং</th>
-                      <th className="py-2.5 px-3 border border-emerald-800">রশিদ নম্বর</th>
-                      <th className="py-2.5 px-3 border border-emerald-800">তারিখ</th>
-                      <th className="py-2.5 px-3 border border-emerald-800">ফি-এর বিবরণ</th>
-                      <th className="py-2.5 px-3 border border-emerald-800 text-right">পরিশোধিত টাকা</th>
-                      <th className="py-2.5 px-3 border border-emerald-800">পেমেন্ট মেথড ও TrxID</th>
-                      <th className="py-2.5 px-3 border border-emerald-800 text-center">রিসিট ডাউনলোড</th>
+                      <th className="py-2.5 px-3 border border-teal-800 text-center w-12">নং</th>
+                      <th className="py-2.5 px-3 border border-teal-800">রশিদ নম্বর</th>
+                      <th className="py-2.5 px-3 border border-teal-800">তারিখ</th>
+                      <th className="py-2.5 px-3 border border-teal-800">ফি-এর বিবরণ</th>
+                      <th className="py-2.5 px-3 border border-teal-800 text-right">পরিশোধিত টাকা</th>
+                      <th className="py-2.5 px-3 border border-teal-800">পেমেন্ট মেথড ও TrxID</th>
+                      <th className="py-2.5 px-3 border border-teal-800 text-center">রিসিট ডাউনলোড</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200 text-gray-800">
@@ -594,7 +594,7 @@ export default function GuardianDashboard() {
                           <td className="py-2.5 px-3 text-center font-mono border border-slate-200">
                             {toBanglaDigit(pIdx + 1)}
                           </td>
-                          <td className="py-2.5 px-3 font-mono font-bold text-emerald-950 border border-slate-200">
+                          <td className="py-2.5 px-3 font-mono font-bold text-teal-950 border border-slate-200">
                             {item.receipt_number}
                           </td>
                           <td className="py-2.5 px-3 font-mono border border-slate-200 text-gray-600">
@@ -610,7 +610,7 @@ export default function GuardianDashboard() {
                               </span>
                             )}
                           </td>
-                          <td className="py-2.5 px-3 text-right font-mono font-bold text-emerald-900 border border-slate-200 text-sm">
+                          <td className="py-2.5 px-3 text-right font-mono font-bold text-teal-900 border border-slate-200 text-sm">
                             ৳ {toBanglaDigit(Number(item.amount_paid).toLocaleString('en-IN'))}
                           </td>
                           <td className="py-2.5 px-3 border border-slate-200 text-gray-600 text-[11px]">
@@ -619,7 +619,7 @@ export default function GuardianDashboard() {
                           <td className="py-2.5 px-3 text-center border border-slate-200">
                             <button
                               onClick={() => handleOpenReceiptFromHistory(item)}
-                              className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold rounded-lg text-[10px] border border-emerald-200 transition-colors flex items-center justify-center gap-1 mx-auto"
+                              className="px-2.5 py-1 bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold rounded-lg text-[10px] border border-teal-200 transition-colors flex items-center justify-center gap-1 mx-auto"
                             >
                               <Printer size={12} />
                               <span>মানি রিসিট</span>
@@ -643,7 +643,7 @@ export default function GuardianDashboard() {
             {/* Leave Metric Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
+                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold">
                   <CalendarCheck className="w-6 h-6" />
                 </div>
                 <div>
@@ -654,13 +654,13 @@ export default function GuardianDashboard() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-3xl p-5 shadow-sm border border-emerald-200 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+              <div className="bg-white rounded-3xl p-5 shadow-sm border border-teal-200 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center font-bold">
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-xs text-emerald-700 font-bold">অনুমোদিত গেটপাস</p>
-                  <h4 className="text-2xl font-black text-emerald-800 mt-0.5">
+                  <p className="text-xs text-teal-700 font-bold">অনুমোদিত গেটপাস</p>
+                  <h4 className="text-2xl font-black text-teal-800 mt-0.5">
                     {toBanglaDigit(studentLeaves.filter((l: any) => l.status === 'approved').length)} টি
                   </h4>
                 </div>
@@ -684,7 +684,7 @@ export default function GuardianDashboard() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <h3 className="text-lg font-black text-gray-900 flex items-center gap-2">
-                    <CalendarCheck className="w-5 h-5 text-emerald-700" />
+                    <CalendarCheck className="w-5 h-5 text-teal-700" />
                     <span>ছুটির আবেদন ও অনুমোদনের তালিকা</span>
                   </h3>
                   <p className="text-xs text-gray-500 mt-0.5">
@@ -706,15 +706,15 @@ export default function GuardianDashboard() {
 
               <div className="overflow-x-auto">
                 <table className="w-full text-xs text-left border-collapse border border-slate-200">
-                  <thead className="bg-[#032410] text-white uppercase text-[11px] font-bold">
+                  <thead className="bg-teal-900 text-white uppercase text-[11px] font-bold">
                     <tr>
-                      <th className="py-2.5 px-3 border border-emerald-800 text-center w-12">নং</th>
-                      <th className="py-2.5 px-3 border border-emerald-800">ট্র্যাকিং ও গেটপাস</th>
-                      <th className="py-2.5 px-3 border border-emerald-800">ছুটির ধরন ও মেয়াদ</th>
-                      <th className="py-2.5 px-3 border border-emerald-800">ক্যাম্পাস ত্যাগের সময়</th>
-                      <th className="py-2.5 px-3 border border-emerald-800">আবেদনকৃত কারণ</th>
-                      <th className="py-2.5 px-3 border border-emerald-800 text-center">স্ট্যাটাস</th>
-                      <th className="py-2.5 px-3 border border-emerald-800 text-center">গেটপাস</th>
+                      <th className="py-2.5 px-3 border border-teal-800 text-center w-12">নং</th>
+                      <th className="py-2.5 px-3 border border-teal-800">ট্র্যাকিং ও গেটপাস</th>
+                      <th className="py-2.5 px-3 border border-teal-800">ছুটির ধরন ও মেয়াদ</th>
+                      <th className="py-2.5 px-3 border border-teal-800">ক্যাম্পাস ত্যাগের সময়</th>
+                      <th className="py-2.5 px-3 border border-teal-800">আবেদনকৃত কারণ</th>
+                      <th className="py-2.5 px-3 border border-teal-800 text-center">স্ট্যাটাস</th>
+                      <th className="py-2.5 px-3 border border-teal-800 text-center">গেটপাস</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -743,7 +743,7 @@ export default function GuardianDashboard() {
                             <td className="py-2.5 px-3 border border-slate-200">
                               <span className="font-mono font-bold text-slate-900 block">{lv.leave_no}</span>
                               {lv.gate_pass_no && (
-                                <span className="font-mono text-[10px] text-emerald-800 font-bold block mt-0.5">
+                                <span className="font-mono text-[10px] text-teal-800 font-bold block mt-0.5">
                                   🎫 {lv.gate_pass_no}
                                 </span>
                               )}
@@ -761,7 +761,7 @@ export default function GuardianDashboard() {
                             <td className="py-2.5 px-3 border border-slate-200 max-w-xs text-gray-700 italic">
                               "{lv.reason}"
                               {lv.review_comment && (
-                                <span className="block not-italic text-emerald-800 font-semibold text-[10px] mt-1">
+                                <span className="block not-italic text-teal-800 font-semibold text-[10px] mt-1">
                                   ওস্তাদের মন্তব্য: {lv.review_comment}
                                 </span>
                               )}
@@ -769,7 +769,7 @@ export default function GuardianDashboard() {
                             <td className="py-2.5 px-3 border border-slate-200 text-center">
                               <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                                 isApproved 
-                                  ? 'bg-emerald-100 text-emerald-800' 
+                                  ? 'bg-teal-100 text-teal-800' 
                                   : isPending 
                                   ? 'bg-amber-100 text-amber-800' 
                                   : 'bg-red-100 text-red-800'
@@ -781,7 +781,7 @@ export default function GuardianDashboard() {
                               {isApproved ? (
                                 <button
                                   onClick={() => setActiveGatePass(lv)}
-                                  className="px-2.5 py-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg text-[10px] transition shadow-sm flex items-center justify-center gap-1 mx-auto"
+                                  className="px-2.5 py-1 bg-teal-700 hover:bg-teal-800 text-white font-bold rounded-lg text-[10px] transition shadow-sm flex items-center justify-center gap-1 mx-auto"
                                 >
                                   <Printer size={12} />
                                   <span>গেটপাস</span>
@@ -818,14 +818,14 @@ export default function GuardianDashboard() {
           <div className="bg-white rounded-3xl max-w-xl w-full shadow-2xl overflow-hidden border border-slate-200 animate-in fade-in zoom-in-95 duration-150">
             
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-[#02200d] text-white p-5 flex items-center justify-between border-b-2 border-amber-400">
+            <div className="bg-gradient-to-r from-teal-950 via-teal-900 to-teal-950 text-white p-5 flex items-center justify-between border-b-2 border-teal-500">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-bold shadow-md">
+                <div className="w-10 h-10 rounded-xl bg-teal-500 text-white flex items-center justify-center font-bold shadow-md">
                   <CreditCard className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="font-extrabold text-base text-white">বিকাশ / নগদ অনলাইন ফি পেমেন্ট</h3>
-                  <p className="text-xs text-emerald-300">
+                  <p className="text-xs text-teal-300">
                     শিক্ষার্থী: {activeStudent.name_bn || activeStudent.name} (রোল: {toBanglaDigit(activeStudent.roll_number || '—')})
                   </p>
                 </div>
@@ -887,21 +887,21 @@ export default function GuardianDashboard() {
               </div>
 
               {/* Instructions Box with Copyable Number */}
-              <div className="p-4 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-2 text-xs">
+              <div className="p-4 bg-teal-50/70 border border-teal-200 rounded-2xl space-y-2 text-xs">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-emerald-950">
+                  <span className="font-bold text-teal-950">
                     মাদ্রাসার অফিসিয়াল {paymentMethod === 'bkash' ? 'বিকাশ' : (paymentMethod === 'nagad' ? 'নগদ' : 'রকেট')} নম্বর:
                   </span>
                   <button
                     type="button"
                     onClick={() => handleCopy('01712633264', 'মার্চেন্ট নম্বর')}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-emerald-300 rounded-lg text-emerald-900 font-bold hover:bg-emerald-100"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-teal-300 rounded-lg text-teal-900 font-bold hover:bg-teal-100"
                   >
                     <Copy size={11} />
                     <span>কপি করুন</span>
                   </button>
                 </div>
-                <div className="font-mono text-base font-black text-emerald-950 bg-white p-2 rounded-xl text-center border border-emerald-200 tracking-wider">
+                <div className="font-mono text-base font-black text-teal-950 bg-white p-2 rounded-xl text-center border border-teal-200 tracking-wider">
                   ০১৭১২-৬৩৩২৬৪
                 </div>
                 <p className="text-[11px] text-gray-600 leading-relaxed">
@@ -963,7 +963,7 @@ export default function GuardianDashboard() {
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="যেমন: ১৫০০"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-black font-mono text-emerald-950 focus:outline-none focus:border-emerald-600"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-black font-mono text-teal-950 focus:outline-none focus:border-teal-600"
                   />
                 </div>
 
@@ -974,7 +974,7 @@ export default function GuardianDashboard() {
                     value={senderPhone}
                     onChange={(e) => setSenderPhone(e.target.value)}
                     placeholder="০১৭১১..."
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-mono focus:outline-none focus:border-emerald-600"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-mono focus:outline-none focus:border-teal-600"
                   />
                 </div>
               </div>
@@ -991,7 +991,7 @@ export default function GuardianDashboard() {
                   value={trxId}
                   onChange={(e) => setTrxId(e.target.value)}
                   placeholder="যেমন: 9X7A2B4C1E"
-                  className="w-full px-4 py-2.5 bg-slate-50 border-2 border-amber-300 rounded-xl text-xs sm:text-sm font-black font-mono tracking-wider text-slate-900 focus:outline-none focus:border-emerald-600 uppercase"
+                  className="w-full px-4 py-2.5 bg-slate-50 border-2 border-amber-300 rounded-xl text-xs sm:text-sm font-black font-mono tracking-wider text-slate-900 focus:outline-none focus:border-teal-600 uppercase"
                 />
               </div>
 
@@ -1011,7 +1011,7 @@ export default function GuardianDashboard() {
               <button
                 type="submit"
                 disabled={payMutation.isPending || !trxId.trim() || !amount}
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-800 via-emerald-700 to-amber-600 hover:from-emerald-700 hover:to-amber-500 text-white font-extrabold text-xs sm:text-sm shadow-xl shadow-emerald-950/20 transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
+                className="w-full py-3.5 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white font-extrabold text-xs sm:text-sm shadow-xl shadow-teal-950/20 transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
               >
                 <CheckCircle2 size={16} className="text-amber-300" />
                 <span>{payMutation.isPending ? 'পেমেন্ট ভেরিফাই করা হচ্ছে...' : 'পেমেন্ট নিশ্চিত করুন ও ডিজিটাল মানি রিসিট গ্রহণ করুন'}</span>
@@ -1036,14 +1036,14 @@ export default function GuardianDashboard() {
           <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200 animate-in fade-in zoom-in-95 duration-150 my-auto">
             
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-[#02200d] text-white p-5 flex items-center justify-between border-b-2 border-amber-400">
+            <div className="bg-gradient-to-r from-teal-950 via-teal-900 to-teal-950 text-white p-5 flex items-center justify-between border-b-2 border-teal-500">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-bold shadow-md">
+                <div className="w-10 h-10 rounded-xl bg-teal-500 text-white flex items-center justify-center font-bold shadow-md">
                   <CalendarCheck className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-black tracking-tight">ছুটির আবেদন জমা দিন</h3>
-                  <p className="text-xs text-emerald-200">
+                  <p className="text-xs text-teal-200">
                     শিক্ষার্থী: {activeStudent.name_bn} ({activeStudent.student_id})
                   </p>
                 </div>
@@ -1085,7 +1085,7 @@ export default function GuardianDashboard() {
                 <select
                   value={leaveType}
                   onChange={(e) => setLeaveType(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-emerald-600"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-teal-600"
                 >
                   <option value="sick">অসুস্থতা (Sick Leave)</option>
                   <option value="family">জরুরি পারিবারিক কাজ (Family Emergency)</option>
@@ -1103,7 +1103,7 @@ export default function GuardianDashboard() {
                     required
                     value={leaveFromDate}
                     onChange={(e) => setLeaveFromDate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-600"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-teal-600"
                   />
                 </div>
                 <div>
@@ -1113,7 +1113,7 @@ export default function GuardianDashboard() {
                     required
                     value={leaveToDate}
                     onChange={(e) => setLeaveToDate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-600"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-teal-600"
                   />
                 </div>
               </div>
@@ -1126,7 +1126,7 @@ export default function GuardianDashboard() {
                     value={leaveDepartureTime}
                     onChange={(e) => setLeaveDepartureTime(e.target.value)}
                     placeholder="যেমন: বিকাল ৫:০০ টা"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-600"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-teal-600"
                   />
                 </div>
                 <div>
@@ -1136,7 +1136,7 @@ export default function GuardianDashboard() {
                     value={leaveExpectedReturnTime}
                     onChange={(e) => setLeaveExpectedReturnTime(e.target.value)}
                     placeholder="যেমন: পরদিন সকাল ৮:০০ টা"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-600"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-teal-600"
                   />
                 </div>
               </div>
@@ -1148,7 +1148,7 @@ export default function GuardianDashboard() {
                   value={leaveEmergencyContact}
                   onChange={(e) => setLeaveEmergencyContact(e.target.value)}
                   placeholder="017XXXXXXXX"
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-emerald-600"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-teal-600"
                 />
               </div>
 
@@ -1160,7 +1160,7 @@ export default function GuardianDashboard() {
                   value={leaveReason}
                   onChange={(e) => setLeaveReason(e.target.value)}
                   placeholder="যেমন: তীব্র জ্বর থাকায় বাড়িতে এনে চিকিৎসার জন্য ছুটি প্রয়োজন..."
-                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-600"
+                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-teal-600"
                 />
               </div>
 
@@ -1168,7 +1168,7 @@ export default function GuardianDashboard() {
                 <button
                   type="submit"
                   disabled={leaveMutation.isPending}
-                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-800 via-emerald-700 to-amber-600 hover:from-emerald-700 hover:to-amber-500 text-white font-extrabold text-xs sm:text-sm shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full py-3.5 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white font-extrabold text-xs sm:text-sm shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <CheckCircle2 size={16} className="text-amber-300" />
                   <span>{leaveMutation.isPending ? 'আবেদন জমা হচ্ছে...' : 'ছুটির আবেদন জমা দিন'}</span>

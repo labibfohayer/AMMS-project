@@ -421,7 +421,7 @@ export default function Teachers() {
       <div className="space-y-6 max-w-7xl mx-auto">
         
         {/* 🌟 Header Banner */}
-        <div className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-[#02200d] text-white p-6 rounded-3xl shadow-xl relative overflow-hidden border border-emerald-500/20 no-print">
+        <div className="bg-gradient-to-r from-teal-950 via-teal-900 to-teal-950 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden border border-teal-700/40 no-print">
           <div className="absolute top-0 right-0 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -433,7 +433,7 @@ export default function Teachers() {
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 শিক্ষক ও স্টাফ ডিজিটাল হাজিরা ও বেতন-ভাতা শিট
               </h1>
-              <p className="text-emerald-200/80 text-xs sm:text-sm mt-1 max-w-2xl">
+              <p className="text-teal-200/90 text-xs sm:text-sm mt-1 max-w-2xl">
                 শিক্ষক ও কর্মচারীদের দৈনিক উপস্থিতি ট্র্যাক করুন, মাসিক সম্মানী শিট প্রস্তুত করুন এবং ১-ক্লিকে পে-স্লিপ প্রিন্ট করুন।
               </p>
             </div>
@@ -444,8 +444,8 @@ export default function Teachers() {
                 onClick={() => setActiveTab('directory')}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                   activeTab === 'directory'
-                    ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 shadow-md scale-102'
-                    : 'text-emerald-200 hover:text-white'
+                    ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-md scale-102'
+                    : 'text-teal-200 hover:text-white'
                 }`}
               >
                 <UserCheck className="w-4 h-4" />
@@ -456,8 +456,8 @@ export default function Teachers() {
                 onClick={() => setActiveTab('attendance')}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                   activeTab === 'attendance'
-                    ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 shadow-md scale-102'
-                    : 'text-emerald-200 hover:text-white'
+                    ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-md scale-102'
+                    : 'text-teal-200 hover:text-white'
                 }`}
               >
                 <CalendarCheck className="w-4 h-4" />
@@ -468,8 +468,8 @@ export default function Teachers() {
                 onClick={() => setActiveTab('salary')}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                   activeTab === 'salary'
-                    ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 shadow-md scale-102'
-                    : 'text-emerald-200 hover:text-white'
+                    ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-md scale-102'
+                    : 'text-teal-200 hover:text-white'
                 }`}
               >
                 <DollarSign className="w-4 h-4" />
@@ -564,7 +564,7 @@ export default function Teachers() {
                       className="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md hover:border-emerald-500/40 transition-all flex flex-col justify-between relative overflow-hidden group"
                     >
                       {isChiefPrincipal && (
-                        <div className="absolute top-0 right-0 bg-amber-400 text-emerald-950 text-[10px] font-black px-3 py-0.5 rounded-bl-xl shadow-xs">
+                        <div className="absolute top-0 right-0 bg-amber-400 text-slate-950 text-[10px] font-black px-3 py-0.5 rounded-bl-xl shadow-xs">
                           অধ্যক্ষ ও মুহতামিম
                         </div>
                       )}
@@ -843,7 +843,7 @@ export default function Teachers() {
                                 }))}
                                 className={`px-2.5 py-1.5 rounded-lg font-bold text-xs transition-all flex items-center gap-1 ${
                                   currentStatus === 'late'
-                                    ? 'bg-amber-500 text-emerald-950 font-black shadow-sm'
+                                    ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
                                     : 'bg-slate-100 text-slate-600 hover:bg-amber-50'
                                 }`}
                               >
@@ -931,7 +931,7 @@ export default function Teachers() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => window.print()}
-                  className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-emerald-950 font-black text-xs sm:text-sm shadow-md transition-all active:scale-95"
+                  className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs sm:text-sm shadow-md transition-all active:scale-95"
                 >
                   <Printer className="w-4 h-4" />
                   <span>বেতন শিট প্রিন্ট করুন</span>
@@ -1170,14 +1170,14 @@ export default function Teachers() {
             <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200">
               
               {/* Modal Header */}
-              <div className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-[#02200d] text-white p-5 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-teal-950 via-teal-900 to-teal-950 text-white p-5 flex items-center justify-between border-b-2 border-teal-500">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-bold">
+                  <div className="w-9 h-9 rounded-xl bg-teal-500 text-white flex items-center justify-center font-bold">
                     <CreditCard className="w-5 h-5" />
                   </div>
                   <div>
                     <h3 className="text-base sm:text-lg font-bold">শিক্ষক বেতন পরিশোধ</h3>
-                    <p className="text-xs text-emerald-200/80">
+                    <p className="text-xs text-teal-200/90">
                       {MONTH_OPTIONS.find(m => m.value === salaryMonth)?.label} {salaryYear}
                     </p>
                   </div>

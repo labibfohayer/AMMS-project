@@ -106,12 +106,12 @@ export default function LoginPage() {
       <div className="relative z-20 w-full max-w-md mx-auto">
         <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-200/90 relative overflow-hidden">
           {/* Subtle Top Brass Light Beam */}
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-teal-600 to-transparent" />
 
           {/* Logo Emblem */}
           <div className="flex flex-col items-center text-center mb-8">
             <div className="relative mb-3 group">
-              <div className="relative w-20 h-20 rounded-full p-[2px] bg-[#C5A059] shadow-md overflow-hidden">
+              <div className="relative w-20 h-20 rounded-full p-[2px] bg-teal-600 shadow-md overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo.jpg"
@@ -121,12 +121,12 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F4EEDF] border border-[#E2D4BA] text-[#8C6D28] text-xs font-semibold mb-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold mb-2">
+              <ShieldCheck className="w-3.5 h-3.5 text-teal-600" />
               <span>নিরাপদ লগইন পোর্টাল</span>
             </div>
 
-            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#16382C]">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-teal-950">
               আল-মদিনা মডেল মাদ্রাসা
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
@@ -142,13 +142,13 @@ export default function LoginPage() {
                 <span>{isBangla ? 'মোবাইল নম্বর / স্টুডেন্ট আইডি' : 'Mobile Number / Student ID'}</span>
               </label>
               <div className="relative group">
-                <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#1B4332] transition-colors" />
+                <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-teal-700 transition-colors" />
                 <input
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder={isBangla ? "017XXXXXXXX বা স্টুডেন্ট আইডি" : "017XXXXXXXX or Student ID"}
-                  className="w-full pl-11 pr-4 py-3 bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#1B4332] rounded-xl text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#1B4332]/20 transition-all font-medium"
+                  className="w-full pl-11 pr-4 py-3 bg-slate-50 focus:bg-white border border-slate-200 focus:border-teal-700 rounded-xl text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20 transition-all font-medium"
                   required
                 />
               </div>
@@ -160,19 +160,19 @@ export default function LoginPage() {
                 <span>{isBangla ? 'পাসওয়ার্ড' : 'Password'}</span>
               </label>
               <div className="relative group">
-                <Lock className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#1B4332] transition-colors" />
+                <Lock className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-teal-700 transition-colors" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={isBangla ? "আপনার পাসওয়ার্ড লিখুন" : "Enter your password"}
-                  className="w-full pl-11 pr-12 py-3 bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#1B4332] rounded-xl text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#1B4332]/20 transition-all font-medium"
+                  className="w-full pl-11 pr-12 py-3 bg-slate-50 focus:bg-white border border-slate-200 focus:border-teal-700 rounded-xl text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20 transition-all font-medium"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-3.5 text-gray-400 hover:text-[#1B4332] transition-colors cursor-pointer"
+                  className="absolute right-3.5 top-3.5 text-gray-400 hover:text-teal-700 transition-colors cursor-pointer"
                   aria-label="Toggle password visibility"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -184,7 +184,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 mt-2 rounded-xl text-white font-bold text-base bg-[#1B4332] hover:bg-[#16382C] active:scale-[0.99] shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3.5 mt-2 rounded-xl text-white font-bold text-base bg-teal-700 hover:bg-teal-800 active:scale-[0.99] shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
             >
               {loading ? (
                 <>
@@ -194,22 +194,22 @@ export default function LoginPage() {
               ) : (
                 <>
                   <span>{isBangla ? 'লগ-ইন করুন' : 'Log In'}</span>
-                  <Sparkles className="w-4 h-4 text-[#C5A059]" />
+                  <Sparkles className="w-4 h-4 text-teal-300" />
                 </>
               )}
             </button>
           </form>
 
           {/* Student & Guardian Instruction Helper Box */}
-          <div className="mt-6 p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-100 flex items-start gap-3">
-            <div className="p-2 rounded-xl bg-emerald-100 text-[#1B4332] shrink-0">
+          <div className="mt-6 p-3.5 rounded-2xl bg-teal-50/70 border border-teal-100 flex items-start gap-3">
+            <div className="p-2 rounded-xl bg-teal-100 text-teal-800 shrink-0">
               <GraduationCap className="w-5 h-5" />
             </div>
-            <div className="text-xs leading-relaxed text-emerald-950">
-              <span className="font-bold text-[#16382C]">
+            <div className="text-xs leading-relaxed text-teal-950">
+              <span className="font-bold text-teal-950">
                 {isBangla ? 'শিক্ষার্থীদের জন্য নির্দেশনা:' : 'Instructions for Students:'}
               </span>
-              <p className="mt-0.5 text-emerald-900/80">
+              <p className="mt-0.5 text-teal-900/80">
                 {isBangla 
                   ? 'স্টুডেন্ট আইডি ও পাসওয়ার্ড হিসেবে জন্মতারিখ (DDMMYYYY) দিয়ে সহজেই লগইন করা যাবে।' 
                   : 'Log in using your Student ID and Date of Birth (DDMMYYYY) as password.'}

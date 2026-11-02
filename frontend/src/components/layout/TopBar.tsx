@@ -54,12 +54,12 @@ export default function TopBar({
             type="button"
             onClick={onToggleMobileMenu}
             aria-label={isMobileMenuOpen ? (isBangla ? "মেনু বন্ধ করুন" : "Close menu") : (isBangla ? "মেনু খুলুন" : "Open menu")}
-            className="md:hidden p-2 -ml-1 text-gray-700 hover:text-emerald-700 hover:bg-emerald-50 active:bg-emerald-100 rounded-xl transition-colors cursor-pointer shrink-0"
+            className="md:hidden p-2 -ml-1 text-gray-700 hover:text-teal-700 hover:bg-teal-50 active:bg-teal-100 rounded-xl transition-colors cursor-pointer shrink-0"
           >
-            {isMobileMenuOpen ? <X size={22} className="text-emerald-700" /> : <Menu size={22} className="text-gray-800" />}
+            {isMobileMenuOpen ? <X size={22} className="text-teal-700" /> : <Menu size={22} className="text-gray-800" />}
           </button>
 
-          <Link href="/dashboard" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1.5px] bg-[#C5A059] flex items-center justify-center md:hidden shrink-0 shadow-sm">
+          <Link href="/dashboard" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1.5px] bg-teal-600 flex items-center justify-center md:hidden shrink-0 shadow-sm">
             <img 
               src="/logo.jpg" 
               alt="আল মদিনা মডেল মাদ্রাসা" 
@@ -82,8 +82,8 @@ export default function TopBar({
           <LanguageSwitcher variant="light" />
 
           {/* Admission Pill */}
-          <div className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-semibold">
-            <Sparkles size={13} className="text-amber-500" />
+          <div className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/80 text-teal-800 text-xs font-semibold">
+            <Sparkles size={13} className="text-teal-600" />
             <span>{t('brand.admissionBanner')}</span>
           </div>
 
@@ -92,9 +92,9 @@ export default function TopBar({
             href="/" 
             target="_blank"
             title={t('nav.liveSite')}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/60 transition-colors"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-200/60 transition-colors"
           >
-            <Globe size={14} className="text-emerald-600" />
+            <Globe size={14} className="text-teal-600" />
             <span>{t('nav.liveSite')}</span>
           </Link>
 
@@ -102,17 +102,17 @@ export default function TopBar({
           <Link 
             href="/notices" 
             title="নোটিশ দেখুন"
-            className="relative p-2 rounded-xl text-gray-500 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors"
+            className="relative p-2 rounded-xl text-gray-500 hover:text-teal-700 hover:bg-teal-50/60 transition-colors"
           >
             <Bell size={20} />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-500 rounded-full ring-2 ring-white"></span>
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-teal-500 rounded-full ring-2 ring-white"></span>
           </Link>
 
           {/* Profile Icon */}
           <Link 
             href="/profile" 
             title="প্রোফাইল সেটিংস"
-            className="w-9 h-9 rounded-full p-[1.5px] bg-[#C5A059] overflow-hidden flex items-center justify-center cursor-pointer shadow-sm hover:ring-2 hover:ring-[#C5A059] transition-all shrink-0"
+            className="w-9 h-9 rounded-full p-[1.5px] bg-teal-600 overflow-hidden flex items-center justify-center cursor-pointer shadow-sm hover:ring-2 hover:ring-teal-500 transition-all shrink-0"
           >
             {user?.photo ? (
               <img 

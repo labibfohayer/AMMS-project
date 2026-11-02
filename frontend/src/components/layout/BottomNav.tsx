@@ -108,13 +108,13 @@ export default function BottomNav({
   return (
     <>
       {/* ============================================================ */}
-      {/* 1. DESKTOP SIDEBAR: 100% untouched layout for >= md screens */}
+      {/* 1. DESKTOP SIDEBAR: Matches Homepage Teal Palette */}
       {/* ============================================================ */}
-      <aside className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:left-0 md:w-64 bg-[#132A20] text-white border-r border-[#1F4233] p-4 z-40 shadow-xl transition-all">
+      <aside className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:left-0 md:w-64 bg-teal-950 text-white border-r border-teal-800/40 p-4 z-40 shadow-xl transition-all">
         {/* Desktop Brand Header */}
-        <div className="flex flex-col gap-2 p-3 mb-6 border-b border-[#1F4233]">
+        <div className="flex flex-col gap-2 p-3 mb-6 border-b border-teal-800/40">
           <Link href="/dashboard" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-full p-[2px] bg-[#C5A059] shadow-md group-hover:scale-105 transition-transform shrink-0">
+            <div className="w-11 h-11 rounded-full p-[2px] bg-teal-600 shadow-md group-hover:scale-105 transition-transform shrink-0">
               <img 
                 src="/logo.jpg" 
                 alt="আল মদিনা মডেল মাদ্রাসা" 
@@ -125,7 +125,7 @@ export default function BottomNav({
               <h1 className="font-bold text-sm tracking-tight text-white leading-tight">
                 {isBangla ? 'আল-মদিনা মডেল' : 'Al-Madinah Model'}
               </h1>
-              <p className="text-[#C5A059] text-[10px] font-semibold tracking-wider">
+              <p className="text-teal-300 text-[10px] font-semibold tracking-wider">
                 {isBangla ? 'মাদ্রাসার এডমিন প্যানেল' : 'Madrasah Admin Panel'}
               </p>
             </div>
@@ -143,49 +143,49 @@ export default function BottomNav({
                 href={tab.href} 
                 className={`flex items-center px-3.5 py-2.5 rounded-xl transition-all duration-200 group ${
                   isActive 
-                    ? 'text-white bg-[#1B4332] border border-[#2D6A4F]/60 shadow-xs' 
-                    : 'text-emerald-100/75 hover:text-white hover:bg-white/[0.08]'
+                    ? 'text-white bg-teal-700 border border-teal-500/60 shadow-xs' 
+                    : 'text-teal-100/75 hover:text-white hover:bg-white/[0.08]'
                 }`}
               >
                 <Icon 
                   size={20} 
                   className={`mr-3 transition-transform group-hover:scale-110 ${
-                    isActive ? 'text-[#C5A059]' : 'text-emerald-200/70 group-hover:text-[#C5A059]'
+                    isActive ? 'text-teal-200' : 'text-teal-300/70 group-hover:text-teal-200'
                   }`} 
                 />
                 <span className="text-xs font-medium tracking-wide flex-1">{tab.name}</span>
                 {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] shadow-xs" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-300 shadow-xs" />
                 )}
               </Link>
             );
           })}
 
           {/* Quick Link to Public Website on Desktop */}
-          <div className="pt-4 border-t border-[#1F4233] mt-3">
+          <div className="pt-4 border-t border-teal-800/40 mt-3">
             <Link
               href="/"
               target="_blank"
-              className="flex items-center p-2.5 px-3.5 rounded-xl text-emerald-100/80 hover:text-[#C5A059] hover:bg-white/[0.08] transition-all text-xs font-medium gap-3"
+              className="flex items-center p-2.5 px-3.5 rounded-xl text-teal-100/80 hover:text-teal-300 hover:bg-white/[0.08] transition-all text-xs font-medium gap-3"
             >
-              <Globe size={18} className="text-[#C5A059]" />
+              <Globe size={18} className="text-teal-300" />
               <span>{isBangla ? 'পাবলিক ওয়েবসাইট' : 'Public Website'}</span>
             </Link>
           </div>
         </div>
         
         {/* Desktop User Profile Footer */}
-        <div className="mt-auto pt-3 border-t border-[#1F4233]">
-          <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.04] border border-[#1F4233]">
+        <div className="mt-auto pt-3 border-t border-teal-800/40">
+          <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.04] border border-teal-800/40">
             <Link href="/profile" className="flex items-center gap-2.5 overflow-hidden flex-1 group">
-              <div className="w-9 h-9 rounded-full bg-[#C5A059] p-[1.5px] shrink-0 overflow-hidden">
+              <div className="w-9 h-9 rounded-full bg-teal-600 p-[1.5px] shrink-0 overflow-hidden">
                 {userAvatarImg}
               </div>
               <div className="overflow-hidden">
-                <p className="text-white font-semibold text-xs truncate group-hover:text-[#C5A059] transition-colors">
+                <p className="text-white font-semibold text-xs truncate group-hover:text-teal-300 transition-colors">
                   {isBangla ? (user.name_bn || user.name || 'ইউজার') : (user.name || user.name_bn || 'User')}
                 </p>
-                <p className="text-emerald-200/70 text-[10px] truncate capitalize">
+                <p className="text-teal-200/70 text-[10px] truncate capitalize">
                   {getRoleLabel()}
                 </p>
               </div>
@@ -194,7 +194,7 @@ export default function BottomNav({
             <button
               onClick={() => logoutUser()}
               title="লগ-আউট করুন"
-              className="p-1.5 text-emerald-400/60 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors ml-1 cursor-pointer"
+              className="p-1.5 text-teal-400/60 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors ml-1 cursor-pointer"
             >
               <LogOut size={16} />
             </button>
@@ -216,19 +216,19 @@ export default function BottomNav({
 
       {/* Mobile Sliding Drawer */}
       <aside 
-        className={`fixed inset-y-0 left-0 w-[285px] sm:w-[320px] bg-[#132A20] text-white z-50 md:hidden flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 w-[285px] sm:w-[320px] bg-teal-950 text-white z-50 md:hidden flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         aria-label="Mobile Navigation Menu"
       >
         {/* Mobile Header with Logo & Close Button */}
-        <div className="flex items-center justify-between p-4 border-b border-[#1F4233] bg-white/[0.02]">
+        <div className="flex items-center justify-between p-4 border-b border-teal-800/40 bg-white/[0.02]">
           <Link 
             href="/dashboard" 
             onClick={() => setMobileOpen?.(false)} 
             className="flex items-center gap-3"
           >
-            <div className="w-10 h-10 rounded-full p-[2px] bg-[#C5A059] shadow-md shrink-0">
+            <div className="w-10 h-10 rounded-full p-[2px] bg-teal-600 shadow-md shrink-0">
               <img 
                 src="/logo.jpg" 
                 alt="আল মদিনা মডেল মাদ্রাসা" 
@@ -239,7 +239,7 @@ export default function BottomNav({
               <h2 className="font-bold text-sm tracking-tight text-white leading-tight">
                 {isBangla ? 'আল-মদিনা মডেল' : 'Al-Madinah Model'}
               </h2>
-              <p className="text-[#C5A059] text-[10px] font-semibold">
+              <p className="text-teal-300 text-[10px] font-semibold">
                 {isBangla ? 'মাদ্রাসার এডমিন প্যানেল' : 'Admin Panel'}
               </p>
             </div>
@@ -248,7 +248,7 @@ export default function BottomNav({
           <button
             type="button"
             onClick={() => setMobileOpen?.(false)}
-            className="p-2 text-emerald-200/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
+            className="p-2 text-teal-200/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
             aria-label="Close menu"
           >
             <X size={20} />
@@ -256,13 +256,13 @@ export default function BottomNav({
         </div>
 
         {/* User Card inside Mobile Drawer */}
-        <div className="p-3 border-b border-[#1F4233] bg-white/[0.02]">
+        <div className="p-3 border-b border-teal-800/40 bg-white/[0.02]">
           <Link 
             href="/profile" 
             onClick={() => setMobileOpen?.(false)}
-            className="flex items-center gap-3 p-2.5 rounded-2xl bg-white/[0.04] border border-[#1F4233] hover:bg-white/[0.08] transition-colors"
+            className="flex items-center gap-3 p-2.5 rounded-2xl bg-white/[0.04] border border-teal-800/40 hover:bg-white/[0.08] transition-colors"
           >
-            <div className="w-11 h-11 rounded-full bg-[#C5A059] p-[1.5px] shrink-0 overflow-hidden shadow-sm">
+            <div className="w-11 h-11 rounded-full bg-teal-600 p-[1.5px] shrink-0 overflow-hidden shadow-sm">
               {userAvatarImg}
             </div>
             <div className="overflow-hidden flex-1">
@@ -270,10 +270,10 @@ export default function BottomNav({
                 {isBangla ? (user.name_bn || user.name || 'ইউজার') : (user.name || user.name_bn || 'User')}
               </p>
               <div className="flex items-center gap-2 mt-0.5">
-                <span className="text-emerald-200/80 text-[11px] font-medium truncate capitalize">
+                <span className="text-teal-200/80 text-[11px] font-medium truncate capitalize">
                   {getRoleLabel()}
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-[#C5A059] shrink-0">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-teal-300 shrink-0">
                   {user.user_id}
                 </span>
               </div>
@@ -293,38 +293,38 @@ export default function BottomNav({
                 onClick={() => setMobileOpen?.(false)}
                 className={`flex items-center px-3.5 py-2.5 rounded-xl transition-all text-xs font-medium gap-3 ${
                   isActive 
-                    ? 'text-white bg-[#1B4332] border border-[#2D6A4F]/60 shadow-xs' 
-                    : 'text-emerald-100/75 hover:text-white hover:bg-white/[0.06]'
+                    ? 'text-white bg-teal-700 border border-teal-500/60 shadow-xs' 
+                    : 'text-teal-100/75 hover:text-white hover:bg-white/[0.06]'
                 }`}
               >
                 <Icon 
                   size={19} 
-                  className={`shrink-0 ${isActive ? 'text-[#C5A059]' : 'text-emerald-300/70'}`} 
+                  className={`shrink-0 ${isActive ? 'text-teal-200' : 'text-teal-300/70'}`} 
                 />
                 <span className="tracking-wide flex-1">{tab.name}</span>
                 {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] shadow-xs" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-300 shadow-xs" />
                 )}
               </Link>
             );
           })}
 
           {/* Public Website Link in Mobile Drawer */}
-          <div className="pt-2 mt-2 border-t border-[#1F4233]">
+          <div className="pt-2 mt-2 border-t border-teal-800/40">
             <Link
               href="/"
               target="_blank"
               onClick={() => setMobileOpen?.(false)}
-              className="flex items-center px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:text-[#C5A059] hover:bg-white/[0.05] transition-all text-xs font-medium gap-3"
+              className="flex items-center px-3.5 py-2.5 rounded-xl text-teal-100/80 hover:text-teal-300 hover:bg-white/[0.05] transition-all text-xs font-medium gap-3"
             >
-              <Globe size={18} className="text-[#C5A059] shrink-0" />
+              <Globe size={18} className="text-teal-300 shrink-0" />
               <span>{isBangla ? 'পাবলিক ওয়েবসাইট' : 'Public Website'}</span>
             </Link>
           </div>
         </div>
 
         {/* Mobile Drawer Logout Footer */}
-        <div className="p-3 border-t border-[#1F4233]">
+        <div className="p-3 border-t border-teal-800/40">
           <button
             type="button"
             onClick={() => {
