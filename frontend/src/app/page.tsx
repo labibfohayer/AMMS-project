@@ -11,7 +11,7 @@ import {
   Award, MessageSquare, Clock, Users, Building, ChevronRight, 
   Phone, MapPin, CheckCircle2, Star, Layers, Calendar, Tv, 
   Wind, Video, Utensils, HeartHandshake, Smile, Target, Compass,
-  ChevronUp, Maximize2, X
+  ChevronUp, Maximize2, X, Menu, Mail, ExternalLink, Send
 } from 'lucide-react';
 
 export default function Home() {
@@ -20,12 +20,22 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [previewImage, setPreviewImage] = useState<{ src: string; title: string; alt: string } | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
   const lenisRef = useRef<Lenis | null>(null);
 
+  // Auto-advancing Hero Carousel (every 5 seconds)
   useEffect(() => {
-    // 🏎️ 120 FPS High-Performance Smooth Momentum Scroll (Zero-Lag Tuned)
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % 3);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    // 🏎️ 120 FPS High-Performance Smooth Momentum Scroll
     const lenis = new Lenis({
-      duration: 0.65, // Instant response, zero lag or sluggish delay
+      duration: 0.65,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
@@ -36,7 +46,6 @@ export default function Home() {
     });
     lenisRef.current = lenis;
 
-    // Zero-lag state debouncing: only trigger state update when threshold booleans flip!
     let lastScrolled = false;
     let lastShowTop = false;
 
@@ -71,6 +80,7 @@ export default function Home() {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       if (lenisRef.current) {
@@ -99,24 +109,154 @@ export default function Home() {
     }
   };
 
+  const heroSlides = [
+    {
+      title: isBangla ? "দ্বীনি নৈতিকতা ও আধুনিক জ্ঞানের এক অপূর্ব সমন্বয়" : "Synthesizing Islamic Morals & Modern Education",
+      subtitle: isBangla 
+        ? "সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত (AC) ক্লাসরুম, প্রজেক্টর ভিত্তিক আধুনিক পাঠদান এবং আন্তর্জাতিক মানের সহীহ হিফজুল কুরআন বিভাগ।" 
+        : "Fully air-conditioned classrooms, projector-based multimedia lessons, and international-standard Sahih Hifzul Quran.",
+      badge: isBangla ? "নতুন শিক্ষাবর্ষে ভর্তি চলছে" : "Admissions Open for 2027",
+      image: "/principal-class.png"
+    },
+    {
+      title: isBangla ? "আন্তর্জাতিক মানের তাজবীদ ও সমৃদ্ধ হিফজখানা" : "International Standard Tajweed & Hifz Division",
+      subtitle: isBangla 
+        ? "অভিজ্ঞ হাফেজ ও স্কলারদের প্রত্যক্ষ পরিচালনায় বিশুদ্ধ কুরআন তিলাওয়াত, মাশক ও নিবিড় আবাসিক তারবিয়াত।" 
+        : "Direct mentorship by experienced Huffaz, pure Quranic recitation, and dedicated residential tarbiyah.",
+      badge: isBangla ? "সীমিত আসন সংখ্যা" : "Limited Seats Available",
+      image: "/quran-class.png"
+    },
+    {
+      title: isBangla ? "প্লে-গ্রুপ থেকে ষষ্ঠ শ্রেণি পর্যন্ত আধুনিক শিক্ষাক্রম" : "Modern Curriculum: Play-Group to Class 6",
+      subtitle: isBangla 
+        ? "বাংলা ও ইংরেজি মাধ্যমের চমৎকার সমন্বয়, কম্পিউটার ল্যাব, স্পোকেন ল্যাঙ্গুয়েজ ও চারিত্রিক গঠন।" 
+        : "Balanced synthesis of Bengali & English mediums, computer literacy, spoken language, and moral growth.",
+      badge: isBangla ? "অভিভাবকদের আস্থার বিদ্যাপীঠ" : "Trusted by Guardians",
+      image: "/guardians-meeting-1.png"
+    }
+  ];
+
+  const ninePillars = [
+    {
+      num: "০১",
+      title: isBangla ? "হিফজুল কুরআন বিভাগ" : "Hifzul Quran Department",
+      desc: isBangla 
+        ? "আন্তর্জাতিক মানসম্পন্ন হাফেজ ও ক্বারীদের নিবিড় তত্ত্বাবধানে তাজবীদ ও মশকের মাধ্যমে বিশুদ্ধ হিফজ প্রশিক্ষণ।" 
+        : "Pure Hifz training under certified international Huffaz with comprehensive Tajweed and Mashq."
+    },
+    {
+      num: "০২",
+      title: isBangla ? "সমন্বিত আধুনিক কারিকুলাম" : "Integrated Modern Curriculum",
+      desc: isBangla 
+        ? "দ্বীনি শিক্ষার পাশাপাশি জাতীয় শিক্ষাক্রম অনুসারে বাংলা, ইংরেজি, গণিত ও বিজ্ঞানের উচ্চমান নিশ্চিতকরণ।" 
+        : "National curriculum standards in Bengali, English, Math, and Science alongside deep Islamic grounding."
+    },
+    {
+      num: "০৩",
+      title: isBangla ? "সম্পূর্ণ AC ক্লাসরুম" : "Fully Air-Conditioned Classrooms",
+      desc: isBangla 
+        ? "গ্রীষ্ম ও বর্ষায় মনোরম, আরামদায়ক ও ক্লান্তিহীন পড়াশোনার জন্য সার্বক্ষণিক শীতাতপ নিয়ন্ত্রিত শ্রেণিকক্ষ।" 
+        : "Ergonomic, climate-controlled, air-conditioned rooms ensuring student focus and comfort year-round."
+    },
+    {
+      num: "০৪",
+      title: isBangla ? "প্রজেক্টর ও মাল্টিমিডিয়া শিক্ষা" : "Projector & Multimedia Lessons",
+      desc: isBangla 
+        ? "প্রতিটি ক্লাসে ভিজ্যুয়াল কন্টেন্ট, ডিজিটাল প্রজেক্টর ও অডিও-ভিজ্যুয়াল উপকরণের মাধ্যমে আকর্ষণীয় পাঠদান।" 
+        : "Interactive visual teaching using digital multimedia projectors for high cognitive retention."
+    },
+    {
+      num: "০৫",
+      title: isBangla ? "আরবি ও ইংরেজি ভাষা চর্চা" : "Spoken Arabic & English Lab",
+      desc: isBangla 
+        ? "ব্যবহারিক কথোপকথন, ভাষা ল্যাব ও নিয়মিত উপস্থাপনার মাধ্যমে আন্তর্জাতিক ভাষায় কথা বলার দক্ষতা অর্জন।" 
+        : "Practical conversational practice, daily spoken vocabulary, and trilingual fluency."
+    },
+    {
+      num: "০৬",
+      title: isBangla ? "অভিজ্ঞ ওস্তাদ ও শিক্ষকমণ্ডলী" : "Experienced Faculty Council",
+      desc: isBangla 
+        ? "অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদীর প্রত্যক্ষ পরিচালনায় শীর্ষ ইসলামিক বিদ্যাপীঠের অভিজ্ঞ শিক্ষক পরিষদ।" 
+        : "Led directly by Principal Maulana Omar Faruk Mujahidi with certified scholars and educators."
+    },
+    {
+      num: "০৭",
+      title: isBangla ? "২৪ ঘণ্টা CCTV সার্বিক নিরাপত্তা" : "24/7 CCTV & Digital Security",
+      desc: isBangla 
+        ? "ক্যাম্পাস ও হোস্টেলে সার্বক্ষণিক সিসিটিভি ক্যামেরা নজরদারি এবং ডিজিটাল কিউআর গেটপাস নিয়ন্ত্রণ ব্যবস্থা।" 
+        : "Full campus surveillance, digital QR gatepass tracking, and strict parent verification protocols."
+    },
+    {
+      num: "০৮",
+      title: isBangla ? "স্বাস্থ্যসম্মত খাবার ও ডাইনিং" : "Hygienic Dining & Boarding",
+      desc: isBangla 
+        ? "আবাসিক শিক্ষার্থীদের জন্য অভিজ্ঞ বাবুর্চি দ্বারা প্রস্তুতকৃত পুষ্টিকর, পরিচ্ছন্ন ও সুষম খাদ্য ব্যবস্থা।" 
+        : "Balanced, nutritious meals prepared under strict hygiene standards in our private campus dining."
+    },
+    {
+      num: "০৯",
+      title: isBangla ? "ডিজিটাল মনিটরিং ও রেজাল্ট" : "Digital Monitoring & Reports",
+      desc: isBangla 
+        ? "ওয়েব পোর্টাল, এসএমএস নোটিফিকেশন ও ডিজিটাল মার্কশিটের মাধ্যমে অভিভাবকদের সার্বক্ষণিক অগ্রগতি আপডেট।" 
+        : "Real-time attendance SMS, instant online gradecards, and transparent parent portal tracking."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-slate-800 selection:bg-[#C5A059] selection:text-white overflow-x-hidden relative font-sans">
-      {/* Subtle Islamic Geometric Canvas Background */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" style={{ contain: 'strict' }}>
-        <div 
-          className="absolute inset-0 opacity-[0.025]" 
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231B4332' stroke-width='1'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
+      
+      {/* 1. TOP INSTITUTIONAL UTILITY BAR */}
+      <div className="bg-[#132A20] text-emerald-100 py-2 px-4 text-xs font-medium border-b border-[#1F4233] relative z-50">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+          
+          {/* Contact Hotlines */}
+          <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
+            <a href="tel:01712633264" className="flex items-center gap-1.5 hover:text-[#C5A059] transition-colors">
+              <Phone size={13} className="text-[#C5A059]" />
+              <span>{isBangla ? '০১৭১২-৬৩৩২৬৪ (হটলাইন)' : '01712-633264 (Hotline)'}</span>
+            </a>
+            <span className="hidden md:flex items-center gap-1.5 text-emerald-200/80">
+              <MapPin size={13} className="text-[#C5A059]" />
+              <span>{isBangla ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা' : 'Mohakhali Dakshinpara, Banani, Dhaka'}</span>
+            </span>
+          </div>
+
+          {/* Quick Actions & Language */}
+          <div className="flex items-center gap-3">
+            <span className="hidden lg:inline text-emerald-200/80 text-[11px] font-semibold">
+              {isBangla ? '✨ সেশন ২০২৭ ভর্তি কার্যক্রম চলমান' : '✨ Admissions Open for 2027'}
+            </span>
+            <LanguageSwitcher variant="light" />
+            
+            {isAuthenticated && user ? (
+              <Link
+                href={['principal', 'vice_principal', 'managing_director', 'teacher', 'staff'].includes(user.role) ? '/dashboard' : user.role === 'guardian' ? '/guardian' : '/student'}
+                className="bg-[#C5A059] hover:bg-[#B38E46] text-slate-900 px-3.5 py-1 rounded-full text-xs font-bold shadow-xs transition-all flex items-center gap-1"
+              >
+                <span>{isBangla ? 'ড্যাশবোর্ড' : 'Dashboard'}</span>
+                <ArrowRight size={13} />
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="bg-[#C5A059] hover:bg-[#B38E46] text-slate-900 px-3.5 py-1 rounded-full text-xs font-bold shadow-xs transition-all flex items-center gap-1"
+              >
+                <span>{isBangla ? 'লগইন পোর্টাল' : 'Portal Login'}</span>
+                <ArrowRight size={13} />
+              </Link>
+            )}
+          </div>
+
+        </div>
       </div>
 
-      {/* Floating Institutional Top Navigation */}
-      <header className={`fixed top-0 left-0 right-0 z-50 py-3.5 transition-all duration-200 ${scrolled ? 'bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs' : 'bg-transparent border-b border-transparent'}`}>
+      {/* 2. MAIN INSTITUTIONAL NAVBAR */}
+      <header className={`sticky top-0 z-40 transition-all duration-200 ${scrolled ? 'bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-xs py-2.5' : 'bg-white border-b border-slate-200 py-3.5'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo & Brand */}
+          
+          {/* Logo & Brand Emblem */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 sm:w-13 sm:h-13 rounded-full overflow-hidden p-[1.5px] bg-[#C5A059] shadow-md group-hover:scale-105 transition-all shrink-0">
+            <div className="relative w-12 h-12 sm:w-13 sm:h-13 rounded-full overflow-hidden p-[2px] bg-[#C5A059] shadow-md group-hover:scale-105 transition-all shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src="/logo.jpg" 
@@ -128,24 +268,25 @@ export default function Home() {
               <div className="font-extrabold text-sm sm:text-base tracking-tight text-[#132A20] leading-tight">
                 {isBangla ? 'আল-মদিনা মডেল মাদ্রাসা' : 'Al-Madinah Model Madrasah'}
               </div>
-              <div className="text-[11px] text-slate-600 font-medium tracking-wide">
+              <div className="text-[11px] text-slate-500 font-medium tracking-wide">
                 {isBangla ? 'এন্ড রিসার্চ ইনস্টিটিউট • বনানী, ঢাকা' : '& Research Institute • Banani, Dhaka'}
               </div>
             </div>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-700">
-            <Link href="/admission" className="text-[#B38E46] font-semibold hover:text-[#C5A059] transition-colors flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-[#C5A059]" />
-              <span>{isBangla ? 'অনলাইন ভর্তি আবেদন' : 'Online Admission'}</span>
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-700">
+            <Link href="/" className="text-[#1B4332] font-bold">{isBangla ? 'হোম' : 'Home'}</Link>
+            <Link href="/admission" className="text-[#B38E46] font-bold hover:text-[#C5A059] transition-colors flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+              <span>{isBangla ? 'ভর্তি তথ্য' : 'Admissions'}</span>
             </Link>
             <a 
-              href="#about" 
-              onClick={(e) => scrollToSection(e, 'about')}
+              href="#pillars" 
+              onClick={(e) => scrollToSection(e, 'pillars')}
               className="hover:text-[#1B4332] transition-colors"
             >
-              {isBangla ? 'অধ্যক্ষ ও পরিচিতি' : 'Principal & About'}
+              {isBangla ? 'আমাদের বিশেষত্ব' : 'Why Al-Madina'}
             </a>
             <a 
               href="#curriculum" 
@@ -155,11 +296,11 @@ export default function Home() {
               {isBangla ? 'কী কী পড়ানো হয়' : 'Curriculum'}
             </a>
             <a 
-              href="#facilities" 
-              onClick={(e) => scrollToSection(e, 'facilities')}
+              href="#about" 
+              onClick={(e) => scrollToSection(e, 'about')}
               className="hover:text-[#1B4332] transition-colors"
             >
-              {isBangla ? 'সুযোগ-সুবিধা' : 'Facilities'}
+              {isBangla ? 'অধ্যক্ষের বাণী' : 'Principal'}
             </a>
             <a 
               href="#gallery" 
@@ -177,318 +318,291 @@ export default function Home() {
             </a>
           </nav>
 
-          {/* Action Button & Hotline & Language Switcher */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Top Language Switcher */}
-            <LanguageSwitcher variant="light" />
-
-            <a 
-              href="tel:01712633264" 
-              className="hidden xl:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-semibold text-slate-700 transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>{isBangla ? '০১৭১২-৬৩৩২৬৪' : '01712-633264'}</span>
-            </a>
-
-            {isAuthenticated && user ? (
-              <Link
-                href={['principal', 'vice_principal', 'managing_director', 'teacher', 'staff'].includes(user.role) ? '/dashboard' : user.role === 'guardian' ? '/guardian' : '/student'}
-                className="inline-flex items-center gap-2 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1B4332] hover:bg-[#132E23] text-white shadow-xs transition-all hover:-translate-y-0.5"
-              >
-                <span>{isBangla ? 'ড্যাশবোর্ডে যান' : 'Dashboard'}</span>
-                <ArrowRight className="w-4 h-4 text-[#C5A059]" />
-              </Link>
-            ) : (
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1B4332] hover:bg-[#132E23] text-white shadow-xs transition-all hover:-translate-y-0.5"
-              >
-                <span>{isBangla ? 'লগইন পোর্টাল' : 'Login'}</span>
-                <ArrowRight className="w-4 h-4 text-[#C5A059]" />
-              </Link>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content Area */}
-      <main className="relative z-10 pt-28 sm:pt-36">
-        
-        {/* HERO SECTION */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
-          <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
-            
-            {/* Madrasah Official Big Emblem with Golden Ring */}
-            <div className="relative mb-5 group">
-              <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full p-[3px] bg-[#C5A059] shadow-lg shrink-0 group-hover:scale-105 transition-transform">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src="/logo.jpg" 
-                  alt={isBangla ? 'আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট' : 'Al Madina Model Madrasa & Research Institute'} 
-                  className="w-full h-full object-cover rounded-full bg-white shadow-inner" 
-                />
-              </div>
-            </div>
-
-            {/* Top Welcome / Bismillah Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1B4332]/10 border border-[#1B4332]/20 text-[#1B4332] text-xs sm:text-sm font-semibold mb-4">
-              <Sparkles className="w-4 h-4 text-[#C5A059]" />
-              <span className="tracking-wide">
-                {isBangla ? 'بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ • অফিসিয়াল ওয়েবসাইট' : 'بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ • Official Website'}
-              </span>
-            </div>
-
-            {/* User Request Invariant: Big Prominent Institution Title */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.15] mb-3 text-slate-900">
-              <span className="text-[#1B4332]">
-                {isBangla ? 'আল মদিনা মডেল মাদ্রাসা' : 'Al Madina Model Madrasah'}
-              </span>
-              <br className="hidden sm:inline" />
-              <span className="text-slate-800 sm:text-4xl lg:text-5xl font-extrabold sm:ml-3">
-                {isBangla ? 'অ্যান্ড রিসার্চ ইনস্টিটিউট' : '& Research Institute'}
-              </span>
-            </h1>
-
-            {/* Sub-headline in English & Official Location */}
-            <p className="text-sm sm:text-base font-semibold text-[#B38E46] tracking-wider mb-4 uppercase">
-              Al Madina Model Madrasa and Research Institute
-            </p>
-
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs sm:text-sm font-medium mb-6">
-              <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>
-                {isBangla 
-                  ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২ • স্থাপিত: ২০২৪ ইং' 
-                  : 'Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka-1212 • Estd: 2024'}
-              </span>
-            </div>
-
-            {/* Slogan & Vision */}
-            <div className="relative mb-6 max-w-3xl">
-              <p className="text-lg sm:text-2xl font-bold text-[#132A20] leading-snug">
-                {isBangla 
-                  ? '“দ্বীনি নৈতিকতা ও আধুনিক জ্ঞানের এক অপূর্ব সমন্বয়ে আলোকিত ক্যাম্পাস”'
-                  : '“An enlightened campus synthesizing Islamic morals and modern education”'}
-              </p>
-              <p className="text-xs sm:text-sm text-slate-600 mt-2.5 max-w-2xl mx-auto leading-relaxed">
-                {isBangla
-                  ? 'সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত (AC) পরিবেশে প্রজেক্টর ভিত্তিক আধুনিক পাঠদান, জেনারেল শিক্ষার পাশাপাশি সমৃদ্ধ হিফজুল কুরআন বিভাগ। অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদীর প্রত্যক্ষ পরিচালনায় পরিচালিত এক আদর্শ বিদ্যাপীঠ।'
-                  : 'Projector-based modern teaching in fully air-conditioned (AC) classrooms, an enriched Hifzul Quran section alongside general education under the direct leadership of Principal Maulana Omar Faruk Mujahidi.'}
-              </p>
-            </div>
-
-            {/* Admission Notification Pill */}
+          {/* Action Button & Mobile Hamburger Toggle */}
+          <div className="flex items-center gap-3">
             <Link 
               href="/admission" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FAF5EB] hover:bg-[#F3EAD5] border border-[#C5A059]/50 text-[#8C6D23] text-xs sm:text-sm font-bold mb-8 transition-all hover:scale-105 shadow-xs"
+              className="hidden sm:inline-flex items-center gap-2 bg-[#1B4332] hover:bg-[#132E23] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-all hover:-translate-y-0.5 active:scale-95"
             >
-              <Sparkles className="w-4 h-4 text-[#C5A059]" />
-              <span>
-                {isBangla
-                  ? 'ভর্তি বিজ্ঞপ্তি: ২০২৭ শিক্ষাবর্ষে প্লে থেকে ষষ্ঠ ও হিফজে ভর্তি চলছে — আবেদন করতে ক্লিক করুন'
-                  : 'Admission Notice: Admissions open for 2027 in Play to Class 6 & Hifz — Click to Apply'}
-              </span>
-              <ChevronRight className="w-4 h-4 text-[#C5A059]" />
+              <Sparkles size={15} className="text-[#C5A059]" />
+              <span>{isBangla ? 'অনলাইন ভর্তি আবেদন' : 'Online Admission'}</span>
             </Link>
 
-            {/* Quick Feature Chips */}
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-10 max-w-3xl text-xs sm:text-sm text-slate-700">
-              <span className="px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-xs flex items-center gap-1.5">
-                <span>❄️</span>
-                <span>{isBangla ? 'সম্পূর্ণ AC ক্লাসরুম' : 'Fully AC Classrooms'}</span>
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-xs flex items-center gap-1.5">
-                <span>📽️</span>
-                <span>{isBangla ? 'প্রজেক্টর ভিত্তিক পাঠদান' : 'Projector-based Multimedia'}</span>
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-xs flex items-center gap-1.5">
-                <span>📹</span>
-                <span>{isBangla ? '২৪ ঘণ্টা CCTV নিরাপত্তা' : '24/7 CCTV Security'}</span>
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-xs flex items-center gap-1.5">
-                <span>📖</span>
-                <span>{isBangla ? 'নূরানী, নাজেরা ও হিফজ' : 'Noorani, Nazera & Hifz'}</span>
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-xs flex items-center gap-1.5">
-                <span>🗣️</span>
-                <span>{isBangla ? 'বাংলা, ইংরেজি ও আরবি ভাষার সমন্বয়' : 'Trilingual Curriculum'}</span>
-              </span>
-            </div>
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors"
+              aria-label="Toggle Navigation Menu"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
-              <Link
-                href="/admission"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl text-base font-bold bg-[#1B4332] hover:bg-[#132E23] text-white shadow-md transition-all hover:-translate-y-0.5 active:scale-95"
-              >
-                <Sparkles className="w-5 h-5 text-[#C5A059]" />
-                <span>{isBangla ? 'অনলাইন ভর্তি আবেদন ফরম' : 'Online Admission Form'}</span>
-                <ChevronRight className="w-5 h-5 text-[#C5A059]" />
-              </Link>
-              <Link
-                href="/login"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl text-base font-bold bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 shadow-xs transition-all hover:-translate-y-0.5"
-              >
-                <span>{isBangla ? 'শিক্ষার্থী / শিক্ষক পোর্টাল' : 'Portal Login'}</span>
-                <ChevronRight className="w-5 h-5 text-[#1B4332]" />
-              </Link>
-              <a
-                href="tel:01712633264"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl text-sm font-semibold bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 shadow-xs transition-all hover:-translate-y-0.5"
-              >
-                <Phone className="w-4 h-4 text-[#C5A059]" />
-                <span>{isBangla ? '০১৭১২-৬৩৩২৬৪' : '01712-633264'}</span>
-              </a>
-            </div>
+        </div>
 
-            {/* Interactive Showcase Bento Card */}
-            <div className="w-full mt-14 sm:mt-16 relative">
-              <div className="relative mx-auto max-w-4xl rounded-3xl p-1 bg-white border border-slate-200 shadow-lg">
-                <div className="relative rounded-2xl bg-[#F8F9FA] border border-slate-200/80 p-6 sm:p-10 overflow-hidden">
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 text-left">
-                    {/* Feature 1 */}
-                    <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-[#C5A059] transition-colors">
-                      <div className="w-12 h-12 rounded-xl bg-[#C5A059]/15 border border-[#C5A059]/30 flex items-center justify-center text-[#B38E46] mb-4">
-                        <GraduationCap className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-bold text-lg text-slate-900 mb-2">
-                        {isBangla ? 'প্লে - ৬ষ্ঠ শ্রেণি জেনারেল' : 'Play to Class 6 (General)'}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        {isBangla 
-                          ? 'Play-group থেকে ৬ষ্ঠ শ্রেণি পর্যন্ত আধুনিক সিলেবাস, বাংলা ও ইংরেজি মাধ্যমের চমৎকার সমন্বয়।' 
-                          : 'Modern curriculum from Play-group to Class 6, harmonizing Bengali and English mediums.'}
-                      </p>
-                    </div>
+        {/* Mobile Slide-down Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-3 shadow-lg">
+            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-[#1B4332] font-bold border-b border-slate-100">
+              {isBangla ? 'হোম' : 'Home'}
+            </Link>
+            <Link href="/admission" onClick={() => setMobileMenuOpen(false)} className="block py-2 text-[#B38E46] font-bold border-b border-slate-100 flex items-center gap-2">
+              <Sparkles size={16} className="text-[#C5A059]" />
+              <span>{isBangla ? 'অনলাইন ভর্তি তথ্য' : 'Admissions'}</span>
+            </Link>
+            <a href="#pillars" onClick={(e) => scrollToSection(e, 'pillars')} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'আমাদের বিশেষত্ব (৯ স্তম্ভ)' : 'Our 9 Core Pillars'}
+            </a>
+            <a href="#curriculum" onClick={(e) => scrollToSection(e, 'curriculum')} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'কী কী পড়ানো হয় (পাঠ্যক্রম)' : 'Curriculum'}
+            </a>
+            <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'অধ্যক্ষ মহোদয়ের বাণী' : 'Principal Message'}
+            </a>
+            <a href="#gallery" onClick={(e) => scrollToSection(e, 'gallery')} className="block py-2 text-slate-700 font-semibold border-b border-slate-100">
+              {isBangla ? 'ক্যাম্পাস ফটো গ্যালারি' : 'Campus Gallery'}
+            </a>
+            <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="block py-2 text-slate-700 font-semibold">
+              {isBangla ? 'যোগাযোগ ও ঠিকানা' : 'Contact & Address'}
+            </a>
+            <Link href="/admission" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center py-3 bg-[#1B4332] text-white rounded-xl font-bold shadow-xs">
+              {isBangla ? 'অনলাইন ভর্তি ফরম পূরণ করুন' : 'Apply Online Now'}
+            </Link>
+          </div>
+        )}
+      </header>
 
-                    {/* Feature 2 */}
-                    <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-[#C5A059] transition-colors">
-                      <div className="w-12 h-12 rounded-xl bg-[#1B4332]/15 border border-[#1B4332]/30 flex items-center justify-center text-[#1B4332] mb-4">
-                        <BookOpen className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-bold text-lg text-slate-900 mb-2">
-                        {isBangla ? 'সমৃদ্ধ হিফজুল কুরআন' : 'Enriched Hifzul Quran'}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        {isBangla 
-                          ? 'জেনারেল শিক্ষার পাশাপাশি নূরানী, নাজেরা ও আন্তর্জাতিক মানের সহীহ হিফজুল কুরআন বিভাগ।' 
-                          : 'Noorani, Nazera and international-standard Sahih Hifzul Quran alongside general education.'}
-                      </p>
-                    </div>
+      {/* 3. DUAL SPLIT HERO SECTION (Madrasatus Sunnah REA Layout) */}
+      <section className="relative overflow-hidden py-6 sm:py-10 bg-gradient-to-b from-[#F0FDF4]/60 to-[#F8F9FA] border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-7 gap-6 items-stretch">
+            
+            {/* Left 5-Columns: High-Impact Carousel Banner */}
+            <div className="lg:col-span-5 bg-[#132A20] text-white rounded-3xl p-6 sm:p-10 shadow-md border border-[#1F4233] relative overflow-hidden flex flex-col justify-between min-h-[420px] transition-all">
+              
+              {/* Subtle Ambient Glow and Geometric Ring Pattern */}
+              <div className="absolute -bottom-16 -right-16 opacity-10 pointer-events-none">
+                <div className="w-96 h-96 rounded-full border-[28px] border-white" />
+              </div>
 
-                    {/* Feature 3 */}
-                    <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-[#C5A059] transition-colors">
-                      <div className="w-12 h-12 rounded-xl bg-[#1B4332]/15 border border-[#1B4332]/30 flex items-center justify-center text-[#1B4332] mb-4">
-                        <Tv className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-bold text-lg text-slate-900 mb-2">
-                        {isBangla ? 'প্রজেক্টর ও AC ক্যাম্পাস' : 'Projector & AC Campus'}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        {isBangla 
-                          ? 'মাল্টিমিডিয়া প্রজেক্টরে চিত্র ও উপকরণের মাধ্যমে পাঠদান এবং সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত শ্রেণিকক্ষ।' 
-                          : 'Multimedia projector lessons with visual aids and fully air-conditioned modern classrooms.'}
-                      </p>
-                    </div>
-                  </div>
+              <div className="relative z-10 space-y-4 max-w-2xl">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-emerald-200 border border-white/15 text-xs font-semibold">
+                  <Sparkles size={13} className="text-[#C5A059]" />
+                  <span>{heroSlides[activeSlide].badge}</span>
+                </div>
 
-                  {/* Highlights Bar */}
-                  <div className="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm text-slate-700">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
-                      <span>{isBangla ? 'অধ্যক্ষ মহোদয়ের সরাসরি ক্লাস ও ব্যক্তিগত তদারকি' : 'Direct classes & personal supervision by Principal'}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
-                      <span>{isBangla ? '২৪ ঘণ্টা সিসিটিভি নিরাপত্তা ও পরিচ্ছন্ন পরিবেশ' : '24/7 CCTV surveillance & hygienic campus'}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
-                      <span>{isBangla ? 'মাসিক অভিভাবক সমাবেশ (Guardians Meeting)' : 'Monthly Guardians Meetings'}</span>
-                    </div>
-                  </div>
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.2] text-white">
+                  {heroSlides[activeSlide].title}
+                </h1>
 
+                <p className="text-emerald-100/85 text-xs sm:text-sm md:text-base leading-relaxed">
+                  {heroSlides[activeSlide].subtitle}
+                </p>
+
+                {/* Quick Feature Chips */}
+                <div className="pt-2 flex flex-wrap gap-2 text-xs">
+                  <span className="px-3 py-1 rounded-full bg-white/10 text-white font-medium border border-white/15">
+                    ❄️ সম্পূর্ণ AC ক্লাসরুম
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-white/10 text-white font-medium border border-white/15">
+                    📽️ প্রজেক্টর পাঠদান
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-white/10 text-white font-medium border border-white/15">
+                    📖 নুরানী, নাজেরা ও হিফজ
+                  </span>
                 </div>
               </div>
 
-              {/* Smooth Scroll Down Indicator */}
-              <div className="mt-8 flex justify-center">
-                <a
-                  href="#curriculum"
-                  onClick={(e) => scrollToSection(e, 'curriculum')}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 hover:text-[#1B4332] transition-all hover:-translate-y-0.5 shadow-xs"
-                >
-                  <span>{isBangla ? 'বিস্তারিত জানতে নিচে স্ক্রোল করুন' : 'Scroll down to explore'}</span>
-                  <ChevronRight className="w-3.5 h-3.5 rotate-90 text-[#C5A059]" />
-                </a>
+              {/* Action Buttons & Indicator Dots */}
+              <div className="relative z-10 pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 mt-6">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link 
+                    href="/admission" 
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#C5A059] hover:bg-[#B38E46] text-slate-900 rounded-xl font-bold text-xs sm:text-sm shadow-sm transition-all"
+                  >
+                    <span>{isBangla ? 'অনলাইনে এখনই আবেদন করুন' : 'Apply Online Now'}</span>
+                    <ChevronRight size={16} />
+                  </Link>
+
+                  <a 
+                    href="tel:01712633264" 
+                    className="inline-flex items-center gap-2 px-4 py-3 bg-white/10 hover:bg-white/15 text-white rounded-xl font-semibold text-xs transition-colors"
+                  >
+                    <Phone size={14} className="text-[#C5A059]" />
+                    <span>{isBangla ? 'হটলাইন: ০১৭১২-৬৩৩২৬৪' : 'Call 01712-633264'}</span>
+                  </a>
+                </div>
+
+                {/* Carousel Indicator Dots */}
+                <div className="flex items-center gap-2">
+                  {heroSlides.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveSlide(i)}
+                      aria-label={`Slide ${i + 1}`}
+                      className={`h-2.5 rounded-full transition-all cursor-pointer ${
+                        activeSlide === i ? 'w-8 bg-[#C5A059]' : 'w-2.5 bg-white/30 hover:bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
+
             </div>
 
-          </div>
-        </section>
+            {/* Right 2-Columns: Live Admission Bento Card (hm-admission) */}
+            <div className="lg:col-span-2 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xs flex flex-col justify-between border-l-4 border-l-[#16A34A]">
+              
+              <div className="space-y-4">
+                {/* Live Indicator */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-600"></span>
+                    </span>
+                    <span className="text-xs font-bold text-green-800 uppercase tracking-wider">
+                      {isBangla ? 'লাইভ ভর্তি তথ্য' : 'Live Admission'}
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-green-50 text-green-700 border border-green-200">
+                    ২০২৭ শিক্ষাবর্ষ
+                  </span>
+                </div>
 
-        {/* INFINITE MARQUEE TICKER */}
-        <div className="py-4 border-y border-[#1F4233] bg-[#132A20] text-emerald-100 overflow-hidden relative shadow-inner">
-          <div className="animate-marquee whitespace-nowrap text-xs sm:text-sm font-semibold tracking-wider uppercase flex items-center gap-8">
-            <span>✨ {isBangla ? 'আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট' : 'Al Madina Model Madrasa & Research Institute'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? '২০২৭ শিক্ষাবর্ষে ভর্তি চলছে' : 'Admissions Open for Session 2027'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'প্লে-গ্রুপ থেকে ষষ্ঠ শ্রেণি' : 'Play-Group to Class 6'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'জেনারেল শিক্ষার পাশাপাশি হিফজুল কুরআন' : 'General Education & Hifzul Quran'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত (AC) ক্লাসরুম' : 'Fully Air-Conditioned (AC) Classrooms'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'প্রজেক্টর ভিত্তিক আধুনিক পাঠদান' : 'Projector-Based Multimedia Education'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? '২৪ ঘণ্টা CCTV সার্বিক নিরাপত্তা' : '24/7 CCTV Campus Surveillance'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা' : 'Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'ফোন: ০১৭১২-৬৩৩২৬৪' : 'Phone: 01712-633264'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>✨ {isBangla ? 'আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট' : 'Al Madina Model Madrasa & Research Institute'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? '২০২৭ শিক্ষাবর্ষে ভর্তি চলছে' : 'Admissions Open for Session 2027'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'প্লে-গ্রুপ থেকে ষষ্ঠ শ্রেণি' : 'Play-Group to Class 6'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'জেনারেল শিক্ষার পাশাপাশি হিফজুল কুরআন' : 'General Education & Hifzul Quran'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত (AC) ক্লাসরুম' : 'Fully Air-Conditioned (AC) Classrooms'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'প্রজেক্টর ভিত্তিক আধুনিক পাঠদান' : 'Projector-Based Multimedia Education'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? '২৪ ঘণ্টা CCTV সার্বিক নিরাপত্তা' : '24/7 CCTV Campus Surveillance'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা' : 'Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka'}</span>
-            <span className="text-[#C5A059]">•</span>
-            <span>{isBangla ? 'ফোন: ০১৭১২-৬৩৩২৬৪' : 'Phone: 01712-633264'}</span>
+                <div>
+                  <h2 className="font-extrabold text-base sm:text-lg text-slate-900 leading-snug">
+                    {isBangla ? 'প্লে থেকে ষষ্ঠ ও হিফজে ভর্তি চলছে' : 'Admissions Open: Play to Class 6 & Hifz'}
+                  </h2>
+                  <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                    {isBangla 
+                      ? 'নাজেরা, হিফজুল কুরআন ও জেনারেল কিতাব বিভাগে সীমিত আসনে সাক্ষাৎকার ও মৌখিক পরীক্ষা চলছে।' 
+                      : 'Oral interviews and assessments are ongoing for limited seats in Nazera, Hifz, and General grades.'}
+                  </p>
+                </div>
+
+                {/* Status Badges */}
+                <div className="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                  <div className="flex items-center justify-between py-1.5 px-3 rounded-xl bg-green-50/80 text-green-900 font-semibold border border-green-100">
+                    <span>{isBangla ? 'হিফজুল কুরআন বিভাগ:' : 'Hifzul Quran:'}</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-green-200 text-green-800 font-bold">চলমান</span>
+                  </div>
+                  <div className="flex items-center justify-between py-1.5 px-3 rounded-xl bg-green-50/80 text-green-900 font-semibold border border-green-100">
+                    <span>{isBangla ? 'প্লে - ৬ষ্ঠ শ্রেণি জেনারেল:' : 'Play - Class 6 General:'}</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-green-200 text-green-800 font-bold">চলমান</span>
+                  </div>
+                  <div className="flex items-center justify-between py-1.5 px-3 rounded-xl bg-green-50/80 text-green-900 font-semibold border border-green-100">
+                    <span>{isBangla ? 'নূরানী ও নাজেরা বিভাগ:' : 'Noorani & Nazera:'}</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-green-200 text-green-800 font-bold">চলমান</span>
+                  </div>
+                  <div className="flex items-center justify-between py-1.5 px-3 rounded-xl bg-green-50/80 text-green-900 font-semibold border border-green-100">
+                    <span>{isBangla ? 'আবাসিক ও ডে-কেয়ার:' : 'Boarding & Day-Care:'}</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-green-200 text-green-800 font-bold">চলমান</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Instant CTA Button */}
+              <div className="pt-4 mt-4 border-t border-slate-100">
+                <Link 
+                  href="/admission" 
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-[#16A34A] hover:bg-green-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs group"
+                >
+                  <span>{isBangla ? 'অনলাইন ভর্তি ফরম পূরণ করুন' : 'Fill Online Admission Form'}</span>
+                  <ChevronRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+
+            </div>
+
           </div>
         </div>
+      </section>
 
-        {/* ACADEMIC PROGRAMS & CURRICULUM SECTION */}
-        <section id="curriculum" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 sm:scroll-mt-28">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#8C6D23] text-xs font-semibold mb-3">
-              <Layers className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Academic Programs & Curriculum</span>
+      {/* 4. INFINITE RUNNING NOTICE TICKER */}
+      <div className="py-3 border-y border-[#1F4233] bg-[#132A20] text-emerald-100 overflow-hidden relative shadow-inner">
+        <div className="animate-marquee whitespace-nowrap text-xs sm:text-sm font-semibold tracking-wider flex items-center gap-8">
+          <span>📢 {isBangla ? 'ভর্তি বিজ্ঞপ্তি: ২০২৭ শিক্ষাবর্ষে প্লে থেকে ষষ্ঠ শ্রেণি ও হিফজুল কুরআন বিভাগে ভর্তি চলছে' : 'Admission Notice: Admissions Open for 2027 in Play to Class 6 & Hifzul Quran'}</span>
+          <span className="text-[#C5A059]">•</span>
+          <span>{isBangla ? 'ক্যাম্পাস: ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২' : 'Campus: Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka'}</span>
+          <span className="text-[#C5A059]">•</span>
+          <span>{isBangla ? 'হটলাইন: ০১৭১২-৬৩৩২৬৪' : 'Hotline: 01712-633264'}</span>
+          <span className="text-[#C5A059]">•</span>
+          <span>{isBangla ? 'সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত (AC) আধুনিক ক্লাসরুম ও প্রজেক্টর পাঠদান' : 'Fully AC Classrooms & Projector Multimedia Teaching'}</span>
+          <span className="text-[#C5A059]">•</span>
+          <span>{isBangla ? '২৪ ঘণ্টা CCTV সার্বিক নিরাপত্তা ও ডিজিটাল গেটপাস' : '24/7 CCTV Campus Surveillance & Digital Gatepass'}</span>
+          <span className="text-[#C5A059]">•</span>
+          <span>📢 {isBangla ? 'ভর্তি বিজ্ঞপ্তি: ২০২৭ শিক্ষাবর্ষে প্লে থেকে ষষ্ঠ শ্রেণি ও হিফজুল কুরআন বিভাগে ভর্তি চলছে' : 'Admission Notice: Admissions Open for 2027 in Play to Class 6 & Hifzul Quran'}</span>
+          <span className="text-[#C5A059]">•</span>
+          <span>{isBangla ? 'ক্যাম্পাস: ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২' : 'Campus: Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka'}</span>
+          <span className="text-[#C5A059]">•</span>
+          <span>{isBangla ? 'হটলাইন: ০১৭১২-৬৩৩২৬৪' : 'Hotline: 01712-633264'}</span>
+        </div>
+      </div>
+
+      {/* 5. NINE CORE EDUCATIONAL PILLARS (Why Al-Madina?) */}
+      <section id="pillars" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <span className="inline-block px-3.5 py-1 rounded-full bg-emerald-50 text-[#1B4332] border border-emerald-200 text-xs font-bold">
+            {isBangla ? 'আমাদের বিশেষত্ব ও অঙ্গীকার' : 'Our Distinctive Strengths'}
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            {isBangla ? 'কেন আল-মদিনা মডেল মাদ্রাসাকে বেছে নেবেন?' : 'Why Choose Al-Madina Model Madrasah?'}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            {isBangla
+              ? 'দ্বীনি নৈতিকতা ও আধুনিক জ্ঞানের সুষম সমন্বয়ে পরিচালিত একটি আদর্শ বিদ্যাপীঠ।'
+              : 'An ideal institution fostering Islamic values and contemporary academic excellence.'}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {ninePillars.map((item, idx) => (
+            <div 
+              key={idx}
+              className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-mono font-black px-2.5 py-1 rounded-lg bg-emerald-50 text-[#1B4332] border border-emerald-100">
+                    {item.num}
+                  </span>
+                  <CheckCircle2 size={18} className="text-[#C5A059] group-hover:scale-110 transition-transform" />
+                </div>
+                <h3 className="font-extrabold text-base text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-4">
-              {isBangla ? 'কী কী পড়ানো হয় ও আমাদের শিক্ষাক্রম' : 'What We Teach & Our Curriculum'}
+          ))}
+        </div>
+      </section>
+
+      {/* 6. ACADEMIC PROGRAMS & CURRICULUM SECTION */}
+      <section id="curriculum" className="py-16 sm:py-24 bg-white border-y border-slate-200 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#8C6D23] text-xs font-semibold">
+              <Layers className="w-3.5 h-3.5 text-[#C5A059]" />
+              <span>{isBangla ? 'শিক্ষাক্রম ও বিভাগসমূহ' : 'Curriculum & Programs'}</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              {isBangla ? 'কী কী পড়ানো হয় ও আমাদের শিক্ষাক্রম' : 'What We Teach & Our Academic Programs'}
             </h2>
-            <p className="text-sm sm:text-base text-slate-600">
+            <p className="text-xs sm:text-sm text-slate-600">
               {isBangla
-                ? 'কুরআন ও সুন্নাহ ভিত্তিক নৈতিক ও আদর্শিক শিক্ষার সাথে বাংলা, ইংরেজি ও আরবি ভাষার চমৎকার সমন্বয়ে পাঠদান।'
+                ? 'কুরআন ও সুন্নাহ ভিত্তিক নৈতিক শিক্ষার সাথে বাংলা, ইংরেজি ও আরবি ভাষার সমন্বিত পাঠদান।'
                 : 'Quran & Sunnah-based moral education harmonized with Bengali, English, and Arabic mediums.'}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 */}
-            <div className="glass-card rounded-3xl p-6 glass-card-hover flex flex-col justify-between">
+            
+            {/* Program 1 */}
+            <div className="bg-[#F8F9FA] border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-12 h-12 rounded-2xl bg-[#1B4332]/10 border border-[#1B4332]/20 flex items-center justify-center text-[#1B4332] mb-5">
                   <GraduationCap className="w-6 h-6" />
@@ -496,992 +610,403 @@ export default function Home() {
                 <h3 className="text-lg font-bold text-slate-900 mb-2">
                   {isBangla ? 'জেনারেল শিক্ষা (প্লে - ৬ষ্ঠ)' : 'General Education (Play - 6th)'}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                  {isBangla
-                    ? 'Play-group থেকে শুরু করে ষষ্ঠ শ্রেণি পর্যন্ত জাতীয় শিক্ষাক্রমের আধুনিক পাঠদান। শিশুদের ভিত্তি মজবুত করার সুপরিকল্পিত ব্যবস্থা।'
-                    : 'Modern national curriculum education from Play-group to Class 6, strengthening each child’s foundation.'}
+                <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                  {isBangla 
+                    ? 'Play-group থেকে ৬ষ্ঠ শ্রেণি পর্যন্ত জাতীয় শিক্ষাক্রম অনুযায়ী বাংলা ও ইংরেজি ভার্সনের সমন্বয়ে আধুনিক পাঠদান।' 
+                    : 'Modern curriculum from Play to Class 6 adhering to national standards with strong English skills.'}
                 </p>
               </div>
-              <div className="text-xs text-[#8C6D23] font-semibold flex items-center gap-1.5 pt-3 border-t border-slate-100">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>{isBangla ? 'প্লে থেকে ষষ্ঠ শ্রেণি' : 'Play to Class 6'}</span>
-              </div>
+              <ul className="space-y-1.5 text-xs text-slate-700 pt-3 border-t border-slate-200">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={13} className="text-[#C5A059]" />
+                  <span>বোর্ড স্ট্যান্ডার্ড পাঠ্যপুস্তক</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={13} className="text-[#C5A059]" />
+                  <span>প্রজেক্টরে অডিও-ভিজ্যুয়াল ক্লাস</span>
+                </li>
+              </ul>
             </div>
 
-            {/* Card 2 */}
-            <div className="glass-card rounded-3xl p-6 glass-card-hover flex flex-col justify-between border-[#C5A059]/40">
+            {/* Program 2 */}
+            <div className="bg-[#F8F9FA] border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-all flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#C5A059]/15 border border-[#C5A059]/30 flex items-center justify-center text-[#8C6D23] mb-5">
+                <div className="w-12 h-12 rounded-2xl bg-[#C5A059]/15 border border-[#C5A059]/30 flex items-center justify-center text-[#B38E46] mb-5">
                   <BookOpen className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {isBangla ? 'হিফজুল কুরআন বিভাগ' : 'Hifzul Quran Section'}
+                  {isBangla ? 'হিফজুল কুরআন বিভাগ' : 'Hifzul Quran Division'}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                  {isBangla
-                    ? 'জেনারেল শিক্ষার পাশাপাশি আন্তর্জাতিক মান অনুযায়ী তাজবীদ ও তারতীলের সাথে সম্পূর্ণ কুরআন হিফজের সুবর্ণ সুযোগ।'
-                    : 'Golden opportunity for full Quran Hifz with Tajweed and Tarteel according to international standards alongside general studies.'}
+                <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                  {isBangla 
+                    ? 'সহীহ মাখরাজ ও তাজবীদভিত্তিক বিশুদ্ধ হিফজুল কুরআন বিভাগ। দ্রুত ও নিখুঁত হিফজের আধুনিক পদ্ধতি।' 
+                    : 'Authentic Tajweed, precise pronunciation, and structured memorization under expert Huffaz.'}
                 </p>
               </div>
-              <div className="text-xs text-[#8C6D23] font-semibold flex items-center gap-1.5 pt-3 border-t border-slate-100">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>{isBangla ? 'জেনারেল + হিফজ সমন্বয়' : 'General + Hifz Combined'}</span>
-              </div>
+              <ul className="space-y-1.5 text-xs text-slate-700 pt-3 border-t border-slate-200">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={13} className="text-[#C5A059]" />
+                  <span>আবাসিক ও অনাবাসিক ব্যবস্থা</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={13} className="text-[#C5A059]" />
+                  <span>দৈনিক ছবক ও নিয়মিত রিভিশন</span>
+                </li>
+              </ul>
             </div>
 
-            {/* Card 3 */}
-            <div className="glass-card rounded-3xl p-6 glass-card-hover flex flex-col justify-between">
+            {/* Program 3 */}
+            <div className="bg-[#F8F9FA] border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-12 h-12 rounded-2xl bg-[#1B4332]/10 border border-[#1B4332]/20 flex items-center justify-center text-[#1B4332] mb-5">
-                  <Award className="w-6 h-6" />
+                  <Layers className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {isBangla ? 'সমৃদ্ধ নূরানী ও নাজেরা' : 'Enriched Noorani & Nazera'}
+                  {isBangla ? 'নূরানী ও নাজেরা বিভাগ' : 'Noorani & Nazera'}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                  {isBangla
-                    ? 'সহীহ মাখরাজ ও তাজবীদ সহকারে কুরআন মাজীদ তিলাওয়াত, প্রয়োজনীয় দোয়া-কালাম ও সুন্দর হস্তাক্ষর প্রশিক্ষণ।'
-                    : 'Accurate Makhraj and Tajweed Quran recitation, essential duas, and fine handwriting practice.'}
+                <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                  {isBangla 
+                    ? 'ছোট সোনামণিদের জন্য আনন্দের সাথে নূরানী পদ্ধতিতে কায়দা, আমপারা ও পূর্ণ কুরআন নাজেরা সম্পন্নকরণ।' 
+                    : 'Gentle, joyful foundational Quran reading through Noorani methods for early learners.'}
                 </p>
               </div>
-              <div className="text-xs text-[#8C6D23] font-semibold flex items-center gap-1.5 pt-3 border-t border-slate-100">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>{isBangla ? 'দৃঢ় বুনিয়াদী শিক্ষা' : 'Solid Foundational Training'}</span>
-              </div>
+              <ul className="space-y-1.5 text-xs text-slate-700 pt-3 border-t border-slate-200">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={13} className="text-[#C5A059]" />
+                  <span>মাসনুন দোয়া ও আদব শিক্ষা</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={13} className="text-[#C5A059]" />
+                  <span>সহজ সুন্দর উচ্চারণ প্রশিক্ষণ</span>
+                </li>
+              </ul>
             </div>
 
-            {/* Card 4 */}
-            <div className="glass-card rounded-3xl p-6 glass-card-hover flex flex-col justify-between">
+            {/* Program 4 */}
+            <div className="bg-[#F8F9FA] border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-all flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#1B4332]/10 border border-[#1B4332]/20 flex items-center justify-center text-[#1B4332] mb-5">
-                  <Compass className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {isBangla ? 'ত্রি-ভাষিক ও নৈতিক শিক্ষা' : 'Trilingual & Moral Education'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                  {isBangla
-                    ? 'বাংলা, ইংরেজি ও আরবি ভাষার চমৎকার সমন্বয়ে শিক্ষাদান। কুরআন ও সুন্নাহ ভিত্তিক চারিত্রিক ও আদর্শিক মূল্যবোধ গঠন।'
-                    : 'Balanced education combining Bengali, English, and Arabic. Cultivating Islamic values based on Quran & Sunnah.'}
-                </p>
-              </div>
-              <div className="text-xs text-[#8C6D23] font-semibold flex items-center gap-1.5 pt-3 border-t border-slate-100">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>{isBangla ? 'নৈতিক ও আত্মবিশ্বাসী বিকাশ' : 'Ethical & Confident Growth'}</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FACILITIES & FEATURES SECTION */}
-        <section id="facilities" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 sm:scroll-mt-28">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1B4332]/10 border border-[#1B4332]/20 text-[#1B4332] text-xs font-semibold mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Facilities & Features</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-4">
-              {isBangla ? 'সুযোগ-সুবিধা ও অনন্য বৈশিষ্ট্যসমূহ' : 'Facilities & Key Features'}
-            </h2>
-            <p className="text-sm sm:text-base text-slate-600">
-              {isBangla 
-                ? 'শিশুদের জন্য আনন্দময়, পরিচ্ছন্ন, নিরাপদ ও বিশ্বমানের আধুনিক শিক্ষাবান্ধব পরিবেশ।'
-                : 'Joyful, clean, safe, and world-class learning-friendly environment for children.'}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Feature 1 */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 mb-5">
+                <div className="w-12 h-12 rounded-2xl bg-[#C5A059]/15 border border-[#C5A059]/30 flex items-center justify-center text-[#B38E46] mb-5">
                   <Tv className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2.5">
-                  {isBangla ? 'প্রজেক্টর ভিত্তিক আধুনিক পাঠদান' : 'Projector-Based Modern Teaching'}
-                </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  {isBangla
-                    ? 'পাঠদানকে সহজ, বোধগম্য ও আকর্ষণীয় করতে মাল্টিমিডিয়া প্রজেক্টর, রঙিন চিত্র, প্রেজেন্টেশন ও আধুনিক শিক্ষামূলক উপকরণ ব্যবহার করা হয়।'
-                    : 'Using multimedia projectors, visual presentations, and modern learning kits to make lessons engaging and comprehensible.'}
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-[#1B4332] font-semibold">
-                {isBangla ? 'ইন্টারেক্টিভ ও আধুনিক শিক্ষা' : 'Interactive & Modern Learning'}
-              </div>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#1B4332] mb-5">
-                  <Wind className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2.5">
-                  {isBangla ? 'সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত (AC) ক্লাসরুম' : 'Fully Air-Conditioned (AC) Classrooms'}
-                </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  {isBangla
-                    ? 'শিক্ষার্থীদের শারীরিক সুস্থতা ও দীর্ঘক্ষণ মনোযোগ ধরে রাখতে প্রতিটি শ্রেণিকক্ষ সম্পূর্ণ আধুনিক এয়ার কন্ডিশনড (AC) সুবিধাসম্পন্ন।'
-                    : 'Every classroom is equipped with modern air conditioning to ensure physical comfort and sustained focus.'}
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-[#1B4332] font-semibold">
-                {isBangla ? 'ক্লান্তিহীন মনোরম পরিবেশ' : 'Fatigue-Free Pleasant Atmosphere'}
-              </div>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#8C6D23] mb-5">
-                  <Video className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2.5">
-                  {isBangla ? '২৪ ঘণ্টা CCTV নিরাপত্তা নজরদারি' : '24/7 CCTV Security Surveillance'}
-                </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  {isBangla
-                    ? 'শিক্ষার্থীদের সর্বোচ্চ সুরক্ষা ও শৃঙ্খলা বজায় রাখতে পুরো ক্যাম্পাস ও শ্রেণিকক্ষগুলো দিন-রাত ২৪ ঘণ্টা ক্লোজড-সার্কিট ক্যামেরার আওতায় সংরক্ষিত।'
-                    : 'Entire campus and classrooms are monitored around the clock with closed-circuit cameras for maximum child safety and discipline.'}
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-[#8C6D23] font-semibold">
-                {isBangla ? 'নিরাপদ ও শঙ্কাহীন ক্যাম্পাস' : 'Safe & Protected Campus'}
-              </div>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-orange-50 border border-orange-200 flex items-center justify-center text-orange-700 mb-5">
-                  <Utensils className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2.5">
-                  {isBangla ? 'মানসম্মত পুষ্টিকর খাবার' : 'Hygienic & Nutritious Meals'}
-                </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  {isBangla
-                    ? 'শিক্ষার্থীদের স্বাস্থ্য সুরক্ষায় স্বাস্থ্যকর, পরিচ্ছন্ন ও পুষ্টিকর খাবারের সুব্যবস্থা রাখা হয়েছে। প্রতিটি শিশুর খাদ্যাভ্যাস যত্ন সহকারে দেখা হয়।'
-                    : 'Hygienic and healthy meals prepared with high quality standards. Dietary habits of every child are carefully monitored.'}
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-orange-700 font-semibold">
-                {isBangla ? 'স্বাস্থ্যকর ও হাইজিন নিশ্চিত' : 'Hygiene & Health Assured'}
-              </div>
-            </div>
-
-            {/* Feature 5 */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 mb-5">
-                  <Smile className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2.5">
-                  {isBangla ? 'খেলাধুলা ও মানসিক বিকাশ' : 'Sports & Mental Well-being'}
-                </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  {isBangla
-                    ? 'পড়ালেখার পাশাপাশি শিক্ষার্থীদের শারীরিক ও মানসিক বিকাশের জন্য আনন্দদায়ক খেলাধুলা, বিনোদন ও এক্সট্রা-কারিকুলার কার্যক্রম।'
-                    : 'Engaging sports, indoor games, and extra-curricular activities designed for holistic mental and physical development.'}
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-teal-700 font-semibold">
-                {isBangla ? 'শিশুবান্ধব ও আনন্দময় পাঠশালা' : 'Child-Friendly Joyful Schooling'}
-              </div>
-            </div>
-
-            {/* Feature 6 */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-700 mb-5">
-                  <Target className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2.5">
-                  {isBangla ? 'প্রতিভা ও আত্মবিশ্বাস বিকাশ' : 'Talent & Confidence Building'}
-                </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  {isBangla
-                    ? 'প্রতিটি শিক্ষার্থীর মেধা, স্বকীয় প্রতিভা ও আত্মবিশ্বাস জাগ্রত করতে বিশেষ গুরুত্ব দেওয়া হয় এবং দুর্বল শিক্ষার্থীদের প্রতি নেওয়া হয় নিবিড় পরিচর্যা।'
-                    : 'Focused mentorship to unlock every student’s potential and confidence, with special care for weaker learners.'}
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-purple-700 font-semibold">
-                {isBangla ? 'ব্যক্তিগত পরিচর্যা ও মনিটরিং' : 'Personal Care & Monitoring'}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* PRINCIPAL & GUARDIANS MEETING SECTION */}
-        <section id="about" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 sm:scroll-mt-28">
-          <div className="rounded-3xl p-8 sm:p-12 bg-white border border-slate-200/90 shadow-md relative overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-              {/* Left Column: Principal Bio & Supervision */}
-              <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#8C6D23] text-xs font-semibold mb-4">
-                  <Star className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>{isBangla ? 'অধ্যক্ষ মহোদয়ের ব্যক্তিগত তত্ত্বাবধান' : 'Personal Supervision by Principal'}</span>
-                </div>
-
-                <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-4 leading-snug">
-                  {isBangla ? 'অধ্যক্ষ নিজে সরাসরি ক্লাস নেন ও' : 'The Principal Directly Teaches &'} <br />
-                  <span className="text-[#1B4332]">
-                    {isBangla ? 'পড়ালেখার মান ব্যক্তিগতভাবে তদারকি করেন' : 'Personally Monitors Academic Quality'}
-                  </span>
-                </h2>
-
-                <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-6">
-                  <span className="font-bold text-slate-900">
-                    {isBangla ? 'প্রিন্সিপাল মাওলানা ওমর ফারুক মুজাহিদী' : 'Principal Maulana Omar Faruk Mujahidi'}
-                  </span>
-                  {isBangla
-                    ? '-এর দক্ষ ও প্রত্যক্ষ নির্দেশনায় পরিচালিত হচ্ছে এই প্রতিষ্ঠান। শিক্ষার্থীদের পাঠোন্নতি ও নৈতিক মান নিশ্চিতে প্রতিটি ছাত্রের প্রতি বিশেষ মনোযোগ প্রদান করা হয়।'
-                    : ' directly leads the institution. Special attention is given to every student to guarantee academic progress and moral excellence.'}
-                </p>
-
-                <div className="space-y-3.5 text-xs sm:text-sm text-slate-700">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
-                    <span>
-                      <strong className="text-slate-900">
-                        {isBangla ? 'মাসিক অভিভাবক সমাবেশ (Guardians Meeting):' : 'Monthly Guardians Meetings:'}
-                      </strong>{' '}
-                      {isBangla 
-                        ? 'শিক্ষার্থীদের সার্বিক উন্নতি ও পড়ালেখা নিয়ে প্রতি মাসে অভিভাবকদের সাথে পরামর্শ সভা।'
-                        : 'Monthly consultation meetings with parents regarding academic growth and student progress.'}
-                    </span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
-                    <span>
-                      <strong className="text-slate-900">
-                        {isBangla ? 'নিবিড় পরিচর্যা ও কেয়ার:' : 'Intensive Care & Monitoring:'}
-                      </strong>{' '}
-                      {isBangla
-                        ? 'পড়ালেখার অগ্রগতির জন্য প্রতিটি শিক্ষার্থীর জন্য বিশেষ যত্ন ও ব্যক্তিগত ডায়রি মনিটরিং।'
-                        : 'Special personal care and student diary tracking to ensure sustained learning progress.'}
-                    </span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
-                    <span>
-                      <strong className="text-slate-900">
-                        {isBangla ? 'সুশৃঙ্খল ও শিশুবান্ধব পরিবেশ:' : 'Disciplined & Child-Friendly Atmosphere:'}
-                      </strong>{' '}
-                      {isBangla
-                        ? 'পরিচ্ছন্ন, নিরাপদ ও ভয়ভীতিমুক্ত আনন্দময় শিক্ষা পরিবেশ।'
-                        : 'Clean, safe, anxiety-free, and joyful Islamic learning environment.'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Real Photo: Principal Teaching Class */}
-                <div className="mt-8 rounded-2xl p-2 bg-slate-50 border border-slate-200 shadow-xs overflow-hidden group">
-                  <div 
-                    className="relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                    onClick={() => setPreviewImage({
-                      src: '/images/principal-class.png',
-                      alt: isBangla ? 'শ্রেণিকক্ষে শিশুদের সরাসরি পাঠদান করছেন অধ্যক্ষ মাওলানা ওমর ফারুক' : 'Principal Maulana Omar Faruk directly teaching in classroom',
-                      title: isBangla ? 'অধ্যক্ষ মাওলানা ওমর ফারুক নিজে ক্লাসরুমে শিশুদের সাথে বসে নিবিড় পাঠদান করছেন' : 'Principal Maulana Omar Faruk directly mentoring students in class'
-                    })}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/images/principal-class.png"
-                      alt={isBangla ? 'শ্রেণিকক্ষে শিশুদের সরাসরি পাঠদান করছেন অধ্যক্ষ মাওলানা ওমর ফারুক' : 'Principal Maulana Omar Faruk directly teaching in classroom'}
-                      className="w-full h-full object-contain"
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#C5A059] text-[#132A20] text-[11px] font-bold shadow-md">
-                        <Sparkles className="w-3 h-3" />
-                        <span>{isBangla ? 'সরাসরি তত্ত্বাবধান' : 'Direct Supervision'}</span>
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                      title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                    >
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                  <div className="p-3 pt-2.5">
-                    <p className="text-xs sm:text-sm font-semibold text-slate-800">
-                      {isBangla
-                        ? 'অধ্যক্ষ মাওলানা ওমর ফারুক নিজে ক্লাসরুমে শিশুদের সাথে বসে নিবিড় পাঠদান করছেন'
-                        : 'Principal Maulana Omar Faruk sitting with children in classroom providing intensive teaching'}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Principal Profile Card */}
-              <div className="lg:col-span-5">
-                <div className="p-6 sm:p-8 rounded-3xl bg-[#132A20] text-white border border-[#1F4233] text-center shadow-lg relative overflow-hidden">
-                  <div className="w-36 h-36 mx-auto rounded-full bg-[#C5A059] p-[3px] mb-5 shadow-lg relative overflow-hidden flex items-center justify-center">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/principal.jpg"
-                      alt={isBangla ? 'প্রিন্সিপাল মাওলানা ওমর ফারুক মুজাহিদী' : 'Principal Maulana Omar Faruk Mujahidi'}
-                      className="w-full h-full object-contain rounded-full relative z-10 bg-white p-0.5"
-                    />
-                  </div>
-                  <h3 className="text-xl font-extrabold text-white mb-1">
-                    {isBangla ? 'প্রিন্সিপাল মাওলানা ওমর ফারুক মুজাহিদী' : 'Principal Maulana Omar Faruk Mujahidi'}
-                  </h3>
-                  <p className="text-xs text-[#C5A059] font-semibold mb-4">
-                    {isBangla ? 'অধ্যক্ষ, আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট' : 'Principal, Al-Madinah Model Madrasah & Research Institute'}
-                  </p>
-                  
-                  <div className="p-4 rounded-xl bg-white/10 border border-white/15 text-xs text-emerald-100 leading-relaxed text-left">
-                    {isBangla
-                      ? '“আমরা কেবল সাধারণ পাঠদান করি না, বরং প্রতিটি শিশুকে কুরআন-সুন্নাহর নৈতিকতায় গড়ে তুলে আধুনিক জ্ঞান ও আত্মবিশ্বাসে সমৃদ্ধ করে গড়ে তুলতে প্রতিশ্রুতিবদ্ধ।”'
-                      : '“We do not merely teach textbooks; we are committed to nurturing each child with Quranic values while equipping them with modern knowledge and confidence.”'}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* REAL CAMPUS GALLERY & ACTIVITIES SECTION */}
-        <section id="gallery" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 sm:scroll-mt-28">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#8C6D23] text-xs font-semibold mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Campus Moments & Activities</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mb-4">
-              {isBangla ? 'বাস্তব ক্যাম্পাসের আলোকিত মুহূর্ত ও কার্যক্রম অ্যালবাম' : 'Campus Moments & Activities Album'}
-            </h2>
-            <p className="text-sm sm:text-base text-slate-600">
-              {isBangla
-                ? 'আল-মদিনা মডেল মাদ্রাসার ডিজিটাল স্মার্ট ক্লাসরুম, তাজবীদ পাঠদান, হিফজুল কুরআন বিভাগ, অভিভাবক সমাবেশ ও মেধা সম্মাননার স্থিরচিত্র অ্যালবাম।'
-                : 'Photographic album of smart digital classrooms, Tajweed recitation, Hifz department, guardians meetings, and academic honors.'}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Card 1: Smart Digital Classroom (Hero Wide Card) */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col md:flex-row hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md lg:col-span-2">
-              <div 
-                className="relative md:w-1/2 aspect-square overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/smart-classroom.png',
-                  alt: isBangla ? 'প্রজেক্টরে আধুনিক মাল্টিমিডিয়া ক্লাসরুম ও পাঠদান' : 'Modern projector-based multimedia smart classroom',
-                  title: isBangla ? 'প্রজেক্টরে আধুনিক ও আকর্ষণীয় মাল্টিমিডিয়া পাঠদান' : 'Projector-Based Interactive Smart Teaching'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/smart-classroom.png"
-                  alt={isBangla ? 'প্রজেক্টরে আধুনিক মাল্টিমিডিয়া ক্লাসরুম ও পাঠদান' : 'Modern projector-based multimedia smart classroom'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold shadow-md">
-                    <Tv className="w-3.5 h-3.5 text-white" />
-                    <span>{isBangla ? 'ডিজিটাল মাল্টিমিডিয়া ক্লাসরুম' : 'Smart Digital Classroom'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6 md:p-8 md:w-1/2 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#1B4332] transition-colors">
-                    {isBangla ? 'প্রজেক্টরে আধুনিক ও আকর্ষণীয় মাল্টিমিডিয়া পাঠদান' : 'Projector-Based Interactive Smart Teaching'}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                    {isBangla
-                      ? 'বড় ডিজিটাল প্রজেক্টর স্ক্রিন, শীতাতপ নিয়ন্ত্রিত আধুনিক শ্রেণিকক্ষ এবং অভিজ্ঞ শিক্ষকের পরিচালনায় আকর্ষণীয় পাঠদান। আধুনিক প্রযুক্তি ও ধর্মীয় মূল্যবোধের অপূর্ব সমন্বয়ে শিক্ষার্থীরা এখানে আনন্দ নিয়ে পড়াশোনা করে।'
-                      : 'Modern AC classroom equipped with high-definition digital projector screens and audiovisual aids, synthesizing modern technology with Quranic education.'}
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-[#8C6D23] font-semibold">
-                  <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
-                  <span>{isBangla ? 'সম্পূর্ণ এসি ও মাল্টিমিডিয়া প্রযুক্তি' : 'Fully AC & Multimedia Enabled'}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: Foundational Early Learning */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md">
-              <div 
-                className="relative aspect-square w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/child-reading.png',
-                  alt: isBangla ? 'মনোযোগ ও স্নেহের সাথে প্রাথমিক বুনিয়াদ পাঠ' : 'Attentive early childhood foundational learning',
-                  title: isBangla ? 'স্নেহ ও গভীর মনোযোগে প্রাথমিক বুনিয়াদ গঠন' : 'Loving Guidance & Focused Early Learning'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/child-reading.png"
-                  alt={isBangla ? 'মনোযোগ ও স্নেহের সাথে প্রাথমিক বুনিয়াদ পাঠ' : 'Attentive early childhood foundational learning'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1B4332] text-white text-xs font-bold shadow-md">
-                    <BookOpen className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>{isBangla ? 'নূরানী বুনিয়াদ' : 'Foundational Noorani'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'স্নেহ ও গভীর মনোযোগে প্রাথমিক বুনিয়াদ গঠন' : 'Loving Guidance & Focused Early Learning'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'ছোট বয়সেই শিশুদের আরবি হরফ চেনা, বিশুদ্ধ উচ্চারণ ও বই পড়ার গভীর মনোযোগ তৈরিতে অভিজ্ঞ শিক্ষকমণ্ডলীর নিবিড় যত্ন ও আন্তরিক দিকনির্দেশনা।'
-                    : 'Dedicated teachers provide personal care to help young learners master Arabic phonetics, correct pronunciation, and attentive study habits.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 3: Pure Tajweed & Recitation */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md">
-              <div 
-                className="relative aspect-square w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/quran-recitation.png',
-                  alt: isBangla ? 'তাজবীদ ও মাখরাজের বিশুদ্ধ চর্চা' : 'Quran recitation with Tajweed and Makhraj',
-                  title: isBangla ? 'মাখরাজ ও সুরের বিশুদ্ধতায় কুরআন চর্চা' : 'Mastery of Quranic Tajweed & Articulation'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/quran-recitation.png"
-                  alt={isBangla ? 'তাজবীদ ও মাখরাজের বিশুদ্ধ চর্চা' : 'Quran recitation with Tajweed and Makhraj'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C5A059] text-[#132A20] text-xs font-bold shadow-md">
-                    <Award className="w-3.5 h-3.5 text-[#132A20]" />
-                    <span>{isBangla ? 'বিশুদ্ধ তাজবীদ' : 'Pure Tajweed'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'মাখরাজ ও সুরের বিশুদ্ধতায় কুরআন চর্চা' : 'Mastery of Quranic Tajweed & Articulation'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'সহীহ-শুদ্ধভাবে কুরআনুল কারীম তিলাওয়াত নিশ্চিত করতে আন্তর্জাতিক মানের তাজবীদ ও মাখরাজের নিয়মাবলীর সুবিন্যস্ত ও নিয়মিত অনুশীলন।'
-                    : 'Systematic daily practice in authentic Tajweed and Makhraj rules under certified Qaris, ensuring flawless and melodious recitation.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 4: Dedicated Hifz Circle */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md">
-              <div 
-                className="relative aspect-square w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/hifz-students.png',
-                  alt: isBangla ? 'হিফজুল কুরআন বিভাগের শিক্ষার্থীগণ' : 'Students in Hifzul Quran Department',
-                  title: isBangla ? 'সুশৃঙ্খল পরিবেশে হিফজের নিয়মিত হালকাহ' : 'Structured Daily Routine in Hifz Circles'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/hifz-students.png"
-                  alt={isBangla ? 'হিফজুল কুরআন বিভাগের শিক্ষার্থীগণ' : 'Students in Hifzul Quran Department'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1B4332] text-white text-xs font-bold shadow-md">
-                    <GraduationCap className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>{isBangla ? 'হিফজুল কুরআন' : 'Hifzul Quran'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'সুশৃঙ্খল পরিবেশে হিফজের নিয়মিত হালকাহ' : 'Structured Daily Routine in Hifz Circles'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'শান্ত ও আধ্যাত্মিক পরিবেশে প্রতিদিনের সবক, সাত ছবক ও আমোখতা রিভিশন। আধুনিক স্মৃতি সংরক্ষণ কৌশল প্রয়োগে দ্রুত কুরআন হিফজ সম্পন্ন হয়।'
-                    : 'Daily memorization circles following rigorous revision techniques in a tranquil environment, empowering students to retain the Quran with ease.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 5: Vibrant Student Body & Uniform */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md">
-              <div 
-                className="relative aspect-square w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/students-group.png',
-                  alt: isBangla ? 'মার্জিত ও সুশৃঙ্খল শিক্ষার্থীবৃন্দ' : 'Disciplined and cheerful madrasah students',
-                  title: isBangla ? 'আমাদের মার্জিত, প্রাণবন্ত ও আদর্শ শিক্ষার্থীরা' : 'Our Disciplined & Bright Young Students'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/students-group.png"
-                  alt={isBangla ? 'মার্জিত ও সুশৃঙ্খল শিক্ষার্থীবৃন্দ' : 'Disciplined and cheerful madrasah students'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-700 text-white text-xs font-bold shadow-md">
-                    <Users className="w-3.5 h-3.5 text-white" />
-                    <span>{isBangla ? 'সুশৃঙ্খল ক্যাম্পাস' : 'Campus Community'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'আমাদের মার্জিত, প্রাণবন্ত ও আদর্শ শিক্ষার্থীরা' : 'Our Disciplined & Bright Young Students'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'মার্জিত মাদ্রাসা ইউনিফর্ম, পারস্পরিক ভ্রাতৃত্ববোধ ও সুন্দর শিষ্টাচার। কুরআনকে হৃদয়ে ধারণ করে নৈতিক চরিত্রবান আদর্শ প্রজন্ম গড়ে উঠছে এখানে।'
-                    : 'A community of polite, disciplined, and cheerful students reflecting Islamic manners, brotherhood, and a passion for holistic learning.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 6: Awards & Crests */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md">
-              <div 
-                className="relative aspect-[16/9] w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/awards-crests.png',
-                  alt: isBangla ? 'ছাত্রদের জন্য মেধা সম্মাননা ও পুরস্কার ক্রেস্ট' : 'Academic achievement crests and awards for students',
-                  title: isBangla ? 'পরীক্ষা ও প্রতিযোগিতায় পুরস্কার বিতরণ' : 'Award Ceremonies & Competitions'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/awards-crests.png"
-                  alt={isBangla ? 'ছাত্রদের জন্য মেধা সম্মাননা ও পুরস্কার ক্রেস্ট' : 'Academic achievement crests and awards for students'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C5A059] text-[#132A20] text-xs font-bold shadow-md">
-                    <Award className="w-3.5 h-3.5 text-[#132A20]" />
-                    <span>{isBangla ? 'মেধা সম্মাননা ক্রেস্ট' : 'Academic Award Crest'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'পরীক্ষা ও প্রতিযোগিতায় পুরস্কার বিতরণ' : 'Award Ceremonies & Competitions'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'প্রতিটি সেমিস্টার পরীক্ষা, মেধা যাচাই ও বিভিন্ন কুরআন তিলাওয়াত প্রতিযোগিতায় শীর্ষ স্থান অধিকারী শিক্ষার্থীদের আকর্ষণীয় ক্রেস্ট ও উপহার দিয়ে অনুপ্রাণিত করা হয়।'
-                    : 'Top performers in exams, talent assessments, and Quran recitation competitions are honored with crests and awards.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 7: Hifz & Quran Class */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md">
-              <div 
-                className="relative aspect-[16/9] w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/quran-class.png',
-                  alt: isBangla ? 'হিফজুল কুরআন ও নাজেরা ক্লাস' : 'Hifzul Quran & Nazera Class',
-                  title: isBangla ? 'রেহাল পেতে সহীহ কুরআন তিলাওয়াত' : 'Sahih Quran Recitation'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/quran-class.png"
-                  alt={isBangla ? 'হিফজুল কুরআন ও নাজেরা ক্লাস' : 'Hifzul Quran & Nazera Class'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1B4332] text-white text-xs font-bold shadow-md">
-                    <BookOpen className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>{isBangla ? 'হিফজ ও নূরানী বিভাগ' : 'Hifz & Noorani Section'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'রেহাল পেতে সহীহ কুরআন তিলাওয়াত' : 'Sahih Quran Recitation'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'অভিজ্ঞ হাফেজ ও ক্বারীদের সরাসরি তত্ত্বাবধানে তাজবীদ ও মাখরাজের বিশুদ্ধ নিয়মে নূরানী, নাজেরা এবং আন্তর্জাতিক মানের হিফজুল কুরআন পাঠদান।'
-                    : 'Noorani, Nazera, and international-standard Hifz taught with pure Makhraj and Tajweed under experienced Qaris.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 8: Principal Teaching Direct */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md">
-              <div 
-                className="relative aspect-[16/9] w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/principal-class.png',
-                  alt: isBangla ? 'অধ্যক্ষ মাওলানা ওমর ফারুক ক্লাসে শিশুদের পাঠদান করছেন' : 'Principal Maulana Omar Faruk teaching children in class',
-                  title: isBangla ? 'অধ্যক্ষের প্রত্যক্ষ তত্ত্বাবধানে পাঠোন্নতি' : 'Direct Academic Mentorship'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/principal-class.png"
-                  alt={isBangla ? 'অধ্যক্ষ মাওলানা ওমর ফারুক ক্লাসে শিশুদের পাঠদান করছেন' : 'Principal Maulana Omar Faruk teaching children in class'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C5A059] text-[#132A20] text-xs font-bold shadow-md">
-                    <GraduationCap className="w-3.5 h-3.5 text-[#132A20]" />
-                    <span>{isBangla ? 'ব্যক্তিগত পাঠদান' : 'Direct Tutoring'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'অধ্যক্ষের প্রত্যক্ষ তত্ত্বাবধানে পাঠোন্নতি' : 'Direct Academic Mentorship'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'শিশুদের পাঠের বুনিয়াদ মজবুত করতে এবং প্রতিটি ছাত্রের ব্যক্তিত্ব গঠনে অধ্যক্ষ মাওলানা ওমর ফারুক মুজাহিদী নিজেই ক্লাসে বসে নিবিড় পাঠদান করেন।'
-                    : 'Principal Maulana Omar Faruk Mujahidi directly sits with students to solidify learning foundations and build character.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 9: Grand Guardians Meeting 1 */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md lg:col-span-2">
-              <div 
-                className="relative aspect-[21/9] sm:aspect-[2.2/1] w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/guardians-meeting-1.png',
-                  alt: isBangla ? 'মাদ্রাসার অডিটোরিয়ামে মাসিক অভিভাবক সমাবেশ' : 'Monthly Guardians Meeting at Madrasah Auditorium',
-                  title: isBangla ? 'মাসিক অভিভাবক সমাবেশ — নিয়মিত পরামর্শ ও মতবিনিময়' : 'Monthly Guardians Meeting — Regular Dialogue & Guidance'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/guardians-meeting-1.png"
-                  alt={isBangla ? 'মাদ্রাসার অডিটোরিয়ামে মাসিক অভিভাবক সমাবেশ' : 'Monthly Guardians Meeting at Madrasah Auditorium'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1B4332] text-white text-xs font-bold shadow-md">
-                    <Users className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>Guardians Meeting</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'মাসিক অভিভাবক সমাবেশ — নিয়মিত পরামর্শ ও মতবিনিময়' : 'Monthly Guardians Meeting — Regular Dialogue & Guidance'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'মাদ্রাসার সেন্ট্রাল কনফারেন্স হলে শিক্ষার্থীদের পড়াশোনার অগ্রগতি ও নৈতিক চরিত্র নিয়ে প্রতি মাসে আয়োজিত হয় বৃহৎ অভিভাবক সম্মেলন। সম্মানিত শিক্ষকমণ্ডলী ও বিশিষ্ট স্কলারদের উপস্থিতিতে উন্মুক্ত প্রশ্নোত্তর ও দিকনির্দেশনা প্রদান করা হয়।'
-                    : 'Monthly parent-teacher conferences discussing students’ progress and character in the central hall with open Q&A sessions.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 10: Grand Guardians Meeting 2 */}
-            <div className="group rounded-3xl glass-card border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md">
-              <div 
-                className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 flex items-center justify-center cursor-pointer"
-                onClick={() => setPreviewImage({
-                  src: '/images/guardians-meeting-2.png',
-                  alt: isBangla ? 'সচেতন অভিভাবকদের আন্তরিক অংশগ্রহণ' : 'Active participation of conscious parents',
-                  title: isBangla ? 'শতাধিক অভিভাবকের স্বতঃস্ফূর্ত অংশগ্রহণ' : 'Enthusiastic Participation by Guardians'
-                })}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/guardians-meeting-2.png"
-                  alt={isBangla ? 'সচেতন অভিভাবকদের আন্তরিক অংশগ্রহণ' : 'Active participation of conscious parents'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C5A059] text-[#132A20] text-xs font-bold shadow-md">
-                    <HeartHandshake className="w-3.5 h-3.5 text-[#132A20]" />
-                    <span>{isBangla ? 'সচেতন অভিভাবকবৃন্দ' : 'Conscious Guardians'}</span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/80 hover:text-white transition-colors"
-                  title={isBangla ? 'বড় করে দেখুন' : 'Click to enlarge'}
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1B4332] transition-colors">
-                  {isBangla ? 'শতাধিক অভিভাবকের স্বতঃস্ফূর্ত অংশগ্রহণ' : 'Enthusiastic Participation by Guardians'}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {isBangla
-                    ? 'সন্তানের উজ্জ্বল ভবিষ্যৎ ও দ্বীনি শিক্ষা নিশ্চিত করতে অভিভাবক ও মাদ্রাসার সম্মিলিত অংশীদারিত্ব আমাদের প্রতিষ্ঠানের অন্যতম বড় শক্তি।'
-                    : 'The active partnership between parents and madrasah is our greatest strength in ensuring children’s bright future.'}
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* CONTACT INFORMATION SECTION */}
-        <section id="contact" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 sm:scroll-mt-28">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#8C6D23] text-xs font-semibold mb-3">
-              <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Contact Information</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-3">
-              {isBangla ? 'যোগাযোগ ও ক্যাম্পাস ঠিকানা' : 'Contact & Campus Address'}
-            </h2>
-            <p className="text-sm text-slate-600">
-              {isBangla 
-                ? '২০২৭ শিক্ষাবর্ষে আপনার সন্তানের ভর্তি ও যেকোনো তথ্যের জন্য আমাদের সাথে সরাসরি যোগাযোগ করুন।'
-                : 'Contact us directly for admission inquiries and information for the 2027 academic session.'}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Address Card */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#1B4332] mb-5">
-                  <MapPin className="w-6 h-6" />
-                </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {isBangla ? 'ক্যাম্পাস ঠিকানা' : 'Campus Address'}
+                  {isBangla ? 'ভাষা ও কম্পিউটার ল্যাব' : 'Language & Tech Lab'}
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {isBangla ? (
-                    <>
-                      ক-৭৫/২, মহাখালী দক্ষিণপাড়া,<br />
-                      বনানী, ঢাকা।
-                    </>
-                  ) : (
-                    <>
-                      Ka-75/2, Mohakhali Dakshinpara,<br />
-                      Banani, Dhaka.
-                    </>
-                  )}
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-[#8C6D23] font-semibold">
-                {isBangla ? 'ঢাকা শহরের প্রাণকেন্দ্রে নিরাপদ ক্যাম্পাস' : 'Secure campus in the heart of Dhaka'}
-              </div>
-            </div>
-
-            {/* Phone Card */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between border-[#C5A059]/40">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#C5A059]/15 border border-[#C5A059]/30 flex items-center justify-center text-[#8C6D23] mb-5">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {isBangla ? 'সরাসরি ফোন ও হোয়াটসঅ্যাপ' : 'Direct Call & WhatsApp'}
-                </h3>
-                <p className="text-xl font-extrabold text-[#1B4332] mt-2">
-                  {isBangla ? '০১৭১২-৬৩৩২৬৪' : '01712-633264'}
-                </p>
-                <p className="text-xs text-slate-500 mt-1">
-                  {isBangla ? 'সরাসরি কল বা WhatsApp-এ মেসেজ দিন' : 'Call directly or message on WhatsApp'}
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-slate-100">
-                <a 
-                  href="tel:01712633264" 
-                  className="inline-flex items-center gap-2 text-xs font-bold text-[#8C6D23] hover:text-[#C5A059] transition-colors"
-                >
-                  <span>{isBangla ? 'এখনই কল করুন' : 'Call Now'}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Admission Card */}
-            <div className="p-7 rounded-3xl glass-card glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#1B4332] mb-5">
-                  <Calendar className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {isBangla ? 'ভর্তি কার্যক্রম' : 'Admission Procedures'}
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  <strong className="text-slate-900">
-                    {isBangla ? '২০২৭ শিক্ষাবর্ষে' : 'Session 2027'}
-                  </strong>{' '}
+                <p className="text-xs text-slate-600 leading-relaxed mb-4">
                   {isBangla 
-                    ? 'প্লে-গ্রুপ থেকে ষষ্ঠ শ্রেণি ও হিফজ বিভাগে নতুন ভর্তি চলছে। আসন সংখ্যা সীমিত।' 
-                    : 'Admissions open for Play to Class 6 & Hifz. Limited seats available.'}
+                    ? 'স্পোকেন অ্যারাবিক, দৈনন্দিন ইংরেজি কথোপকথন ও মৌলিক কম্পিউটার চালনায় দক্ষ করে গড়ে তোলা।' 
+                    : 'Spoken Arabic fluency, communicative English, and hands-on digital computer education.'}
                 </p>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-100">
-                <Link 
-                  href="/login" 
-                  className="inline-flex items-center gap-2 text-xs font-bold text-[#1B4332] hover:text-[#132E23] transition-colors"
-                >
-                  <span>{isBangla ? 'অনলাইন পোর্টাল লগইন' : 'Online Portal Login'}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
+              <ul className="space-y-1.5 text-xs text-slate-700 pt-3 border-t border-slate-200">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={13} className="text-[#C5A059]" />
+                  <span>ব্যবহারিক স্পোকেন প্র্যাকটিস</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={13} className="text-[#C5A059]" />
+                  <span>স্মার্ট ল্যাব সুবিধা</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 7. PRINCIPAL'S MESSAGE & LEADERSHIP (About Al-Madina) */}
+      <section id="about" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        
+        {/* Principal Card */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-xs border-b-4 border-b-[#1B4332] flex flex-col md:flex-row items-center gap-8 mb-10">
+          <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full border-4 border-[#C5A059] p-1 shrink-0 overflow-hidden shadow-md">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="/principal.jpg" 
+              alt="মাওলানা ওমর ফারুক মুজাহিদী - অধ্যক্ষ" 
+              className="w-full h-full object-cover rounded-full" 
+            />
+          </div>
+          <div className="space-y-4 text-center md:text-left">
+            <span className="text-xs font-bold text-[#1B4332] uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+              {isBangla ? 'অধ্যক্ষ মহোদয়ের বাণী' : 'Message from Principal'}
+            </span>
+            <p className="text-base sm:text-lg text-slate-800 font-medium leading-relaxed italic">
+              {isBangla 
+                ? '“আমরা আল-মদিনা মডেল মাদ্রাসায় এমন একটি পরিবেশ সৃষ্টি করেছি যেখানে প্রতিটি শিক্ষার্থী আল্লাহর কালাম হিফজ করার পাশাপাশি যুগোপযোগী জ্ঞানে বলীয়ান হয়ে সৎ, দক্ষ ও খোদাভীরু মানুষ হিসেবে গড়ে উঠবে। আমাদের পুরো ক্যাম্পাস সম্পূর্ণ এসি, সিসিটিভি নিয়ন্ত্রিত এবং ব্যক্তিগত তদারকিতে পরিচালিত।”' 
+                : '“At Al-Madina Model Madrasah, we have established an ecosystem where every student memorizes the Quran while gaining contemporary academic skills to become an ethical, proficient, and God-conscious leader.”'}
+            </p>
+            <div>
+              <h3 className="font-extrabold text-xl text-slate-900">মাওলানা ওমর ফারুক মুজাহিদী</h3>
+              <p className="text-xs text-[#8C6D23] font-semibold">প্রতিষ্ঠাতা ও অধ্যক্ষ • আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট</p>
             </div>
           </div>
-        </section>
+        </div>
 
-      </main>
-
-      {/* FOOTER */}
-      <footer className="border-t border-[#1F4233] bg-[#11241B] text-white py-12 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-full overflow-hidden p-[1.5px] bg-[#C5A059] shadow-md shrink-0">
+        {/* Managing Director & Administration Insight */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex items-center gap-5">
+            <div className="w-20 h-20 rounded-full border-2 border-[#C5A059] p-0.5 shrink-0 overflow-hidden shadow-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src="/logo.jpg" 
-                alt={isBangla ? 'আল-মদিনা মডেল মাদ্রাসা লোগো' : 'AMMS Logo'} 
-                className="w-full h-full object-cover rounded-full bg-white" 
-              />
+              <img src="/md.jpg" alt="লাবিব ফোহায়ের" className="w-full h-full object-cover rounded-full object-top" />
             </div>
             <div>
-              <div className="font-bold text-lg text-white">
-                Al Madina Model Madrasa and Research Institute
-              </div>
-              <p className="text-xs text-emerald-100/70 mt-0.5">
-                {isBangla 
-                  ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা • ফোন: ০১৭১২-৬৩৩২৬৪' 
-                  : 'Ka-75/2, Mohakhali Dakshinpara, Banani, Dhaka • Phone: 01712-633264'}
-              </p>
-              <p className="text-xs text-[#C5A059] mt-0.5">
-                {isBangla ? 'অধ্যক্ষ: প্রিন্সিপাল মাওলানা ওমর ফারুক মুজাহিদী' : 'Principal: Maulana Omar Faruk Mujahidi'}
-              </p>
+              <span className="text-[11px] font-bold text-[#8C6D23] uppercase">প্রশাসন ও ব্যবস্থাপনা</span>
+              <h4 className="font-bold text-base text-slate-900">লাবিব ফোহায়ের</h4>
+              <p className="text-xs text-slate-500">ম্যানেজিং ডিরেক্টর • গভর্নিং বডি ও ট্রাস্টি</p>
             </div>
           </div>
-          <div className="flex items-center gap-6 text-xs text-emerald-100/80">
-            <a href="tel:01712633264" className="hover:text-[#C5A059] transition-colors">
-              {isBangla ? 'হটলাইন' : 'Hotline'}
+
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex flex-col justify-center">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#1B4332] mb-1">
+              <Building size={16} className="text-[#C5A059]" />
+              <span>ক্যাম্পাস অবস্থান</span>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২।<br />
+              <span className="text-slate-500 text-xs">গুলশান, বনানী ও মহাখালী এলাকার কেন্দ্রবিন্দুতে মনোরম ও নিরাপদ পরিবেশে অবস্থিত।</span>
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      {/* 8. CAMPUS GALLERY WITH ZOOM MODAL */}
+      <section id="gallery" className="py-16 sm:py-24 bg-white border-y border-slate-200 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+            <span className="inline-block px-3.5 py-1 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#8C6D23] text-xs font-bold">
+              {isBangla ? 'ক্যাম্পাস স্থিরচিত্র' : 'Campus Photo Gallery'}
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              {isBangla ? 'আমাদের ক্লাসরুম ও ক্যাম্পাস দৃশ্য' : 'Our Campus & Classroom Moments'}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              {isBangla ? 'ছবিগুলোর উপর ক্লিক করে বড় করে দেখুন।' : 'Click on any photo to view in high resolution.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <div 
+              onClick={() => setPreviewImage({ src: '/principal-class.png', title: 'অধ্যক্ষ মহোদয়ের পাঠদান', alt: 'ক্লাসরুম' })}
+              className="group relative rounded-2xl overflow-hidden border border-slate-200 shadow-xs cursor-pointer h-64"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/principal-class.png" alt="ক্লাসরুম" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-4">
+                <span className="text-white text-xs font-bold flex items-center justify-between w-full">
+                  <span>অধ্যক্ষ মহোদয়ের সরাসরি ক্লাস</span>
+                  <Maximize2 size={14} className="text-[#C5A059]" />
+                </span>
+              </div>
+            </div>
+
+            <div 
+              onClick={() => setPreviewImage({ src: '/quran-class.png', title: 'হিফজুল কুরআন বিভাগ', alt: 'হিফজখানা' })}
+              className="group relative rounded-2xl overflow-hidden border border-slate-200 shadow-xs cursor-pointer h-64"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/quran-class.png" alt="হিফজখানা" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-4">
+                <span className="text-white text-xs font-bold flex items-center justify-between w-full">
+                  <span>সহীহ হিফজুল কুরআন প্রশিক্ষণ</span>
+                  <Maximize2 size={14} className="text-[#C5A059]" />
+                </span>
+              </div>
+            </div>
+
+            <div 
+              onClick={() => setPreviewImage({ src: '/guardians-meeting-1.png', title: 'অভিভাবক সম্মেলন', alt: 'অভিভাবক সমাবেশ' })}
+              className="group relative rounded-2xl overflow-hidden border border-slate-200 shadow-xs cursor-pointer h-64"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/guardians-meeting-1.png" alt="অভিভাবক সমাবেশ" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-4">
+                <span className="text-white text-xs font-bold flex items-center justify-between w-full">
+                  <span>নিয়মিত অভিভাবক সমাবেশ</span>
+                  <Maximize2 size={14} className="text-[#C5A059]" />
+                </span>
+              </div>
+            </div>
+
+            <div 
+              onClick={() => setPreviewImage({ src: '/awards-crests.png', title: 'পুরস্কার ও সম্মাননা', alt: 'ক্রেস্ট ও সনদ' })}
+              className="group relative rounded-2xl overflow-hidden border border-slate-200 shadow-xs cursor-pointer h-64"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/awards-crests.png" alt="ক্রেস্ট ও সনদ" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-4">
+                <span className="text-white text-xs font-bold flex items-center justify-between w-full">
+                  <span>শিক্ষার্থীদের মেধা সম্মাননা ক্রেস্ট</span>
+                  <Maximize2 size={14} className="text-[#C5A059]" />
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 9. CONTACT & INQUIRY SECTION */}
+      <section id="contact" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        
+        <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+          <span className="inline-block px-3.5 py-1 rounded-full bg-emerald-50 text-[#1B4332] border border-emerald-200 text-xs font-bold">
+            {isBangla ? 'সরাসরি যোগাযোগ' : 'Contact Us'}
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            {isBangla ? 'ক্যাম্পাস পরিদর্শন ও যোগাযোগ' : 'Visit Our Campus & Reach Out'}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600">
+            {isBangla ? 'যেকোনো তথ্যের জন্য কল করুন বা ক্যাম্পাসে সরাসরি চলে আসুন।' : 'Call our hotline or visit our Mohakhali campus anytime.'}
+          </p>
+        </div>
+
+        {/* 3 Contact Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-xs border-b-4 border-b-[#1B4332]">
+            <div className="w-12 h-12 rounded-full bg-emerald-50 text-[#1B4332] flex items-center justify-center mx-auto mb-3">
+              <Phone size={22} className="text-[#C5A059]" />
+            </div>
+            <h3 className="font-bold text-slate-900 text-base mb-1">অফিসিয়াল হটলাইন</h3>
+            <p className="text-xs text-slate-500 mb-2">সকাল ৮:০০ থেকে রাত ৯:০০ পর্যন্ত</p>
+            <a href="tel:01712633264" className="text-sm font-extrabold text-[#1B4332] hover:underline">
+              ০১৭১২-৬৩৩২৬৪
             </a>
-            <span>•</span>
-            <Link href="/login" className="hover:text-[#C5A059] transition-colors">
-              {isBangla ? 'ম্যানেজমেন্ট লগইন' : 'Management Login'}
+          </div>
+
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-xs border-b-4 border-b-[#C5A059]">
+            <div className="w-12 h-12 rounded-full bg-[#FAF5EB] text-[#8C6D23] flex items-center justify-center mx-auto mb-3">
+              <MapPin size={22} className="text-[#C5A059]" />
+            </div>
+            <h3 className="font-bold text-slate-900 text-base mb-1">ক্যাম্পাস ঠিকানা</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২
+            </p>
+          </div>
+
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-xs border-b-4 border-b-[#1B4332]">
+            <div className="w-12 h-12 rounded-full bg-emerald-50 text-[#1B4332] flex items-center justify-center mx-auto mb-3">
+              <Sparkles size={22} className="text-[#C5A059]" />
+            </div>
+            <h3 className="font-bold text-slate-900 text-base mb-1">ভর্তি সহায়তা</h3>
+            <p className="text-xs text-slate-500 mb-2">অনলাইন ও সরাসরি ফর্ম সংগ্রহ</p>
+            <Link href="/admission" className="text-xs font-bold text-[#8C6D23] hover:underline">
+              অনলাইনে আবেদন করুন →
             </Link>
           </div>
-          <div className="text-xs text-emerald-200/50">
-            &copy; 2026-2027 Al Madina Model Madrasa. All rights reserved.
+
+        </div>
+
+        {/* Location & Map Embed */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 shadow-xs overflow-hidden">
+          <div className="rounded-2xl overflow-hidden h-72 sm:h-96 w-full border border-slate-200">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.054366657906!2d90.4005!3d23.781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c00000001%3A0x1!2sMohakhali%20Dakshinpara!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              title="Madrasah Location Map"
+            />
           </div>
+        </div>
+
+      </section>
+
+      {/* 10. INSTITUTIONAL 4-COLUMN FOOTER */}
+      <footer className="bg-[#0F172A] text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+          
+          <div className="space-y-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-full bg-[#C5A059] p-0.5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover rounded-full bg-white" />
+              </div>
+              <h4 className="font-bold text-white text-sm">আল-মদিনা মডেল মাদ্রাসা</h4>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              এন্ড রিসার্চ ইনস্টিটিউট • দ্বীনি নৈতিকতা ও আধুনিক জ্ঞানের অনন্য সমন্বয়ে পরিচালিত এক আদর্শ ইসলামিক বিদ্যাপীঠ।
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-3">গুরুত্বপূর্ণ পাতা</h4>
+            <ul className="space-y-2 text-xs">
+              <li><Link href="/" className="hover:text-white transition-colors">হোম পেজ</Link></li>
+              <li><Link href="/admission" className="hover:text-white transition-colors">অনলাইন ভর্তি তথ্য</Link></li>
+              <li><a href="#pillars" onClick={(e) => scrollToSection(e, 'pillars')} className="hover:text-white transition-colors">আমাদের বিশেষত্ব</a></li>
+              <li><a href="#curriculum" onClick={(e) => scrollToSection(e, 'curriculum')} className="hover:text-white transition-colors">কী কী পড়ানো হয়</a></li>
+              <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="hover:text-white transition-colors">অধ্যক্ষ মহোদয়ের বাণী</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-3">ম্যানেজমেন্ট পোর্টাল</h4>
+            <ul className="space-y-2 text-xs">
+              <li><Link href="/login" className="hover:text-white transition-colors">অ্যাডমিন / শিক্ষক লগইন</Link></li>
+              <li><Link href="/login" className="hover:text-white transition-colors">শিক্ষার্থী ও অভিভাবক লগইন</Link></li>
+              <li><Link href="/students/leaves" className="hover:text-white transition-colors">ডিজিটাল গেটপাস ও ছুটি</Link></li>
+              <li><Link href="/exams" className="hover:text-white transition-colors">পরীক্ষা ও ফলাফল</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-3">ক্যাম্পাস ও যোগাযোগ</h4>
+            <p className="text-xs leading-relaxed text-slate-400">
+              ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা-১২১২<br />
+              হটলাইন: ০১৭১২-৬৩৩২৬৪<br />
+              খোলা: শনিবার - বৃহস্পতিবার (সকাল ৮:০০ - বিকাল ৫:০০)
+            </p>
+          </div>
+
+        </div>
+
+        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p>© {new Date().getFullYear()} আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট। সর্বস্বত্ব সংরক্ষিত।</p>
+          <p className="text-emerald-500/80">নিরাপদ ও আধুনিক ক্যাম্পাস ম্যানেজমেন্ট সিস্টেম (AMMS)</p>
         </div>
       </footer>
 
-      {/* Floating Smooth Scroll to Top Button */}
+      {/* Floating Scroll-to-Top Button */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          aria-label={isBangla ? 'পৃষ্ঠার শুরুতে যান' : 'Scroll to top'}
-          title={isBangla ? 'পৃষ্ঠার শুরুতে যান' : 'Scroll to top'}
-          className="fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-[#C5A059] hover:bg-[#B38E46] text-[#132A20] font-bold border border-[#E5C985] shadow-lg backdrop-blur-md transition-all hover:scale-110 active:scale-95 group cursor-pointer"
+          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-[#1B4332] text-white shadow-lg hover:bg-[#132E23] transition-all hover:scale-110 active:scale-95 cursor-pointer"
+          aria-label="Scroll to top"
         >
-          <ChevronUp className="w-5 h-5 text-[#132A20] group-hover:-translate-y-0.5 transition-transform" />
+          <ChevronUp size={20} />
         </button>
       )}
 
-      {/* FULLSCREEN IMAGE LIGHTBOX MODAL */}
+      {/* High-Resolution Photo Zoom Modal */}
       {previewImage && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4 sm:p-8 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setPreviewImage(null)}
         >
-          <button
-            onClick={() => setPreviewImage(null)}
-            className="absolute top-5 right-5 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-50"
-            aria-label="Close Preview"
-          >
-            <X className="w-6 h-6" />
-          </button>
-          
-          <div 
-            className="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="relative max-w-4xl max-h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl p-2" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setPreviewImage(null)}
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/60 text-white hover:bg-black transition-colors"
+            >
+              <X size={20} />
+            </button>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={previewImage.src}
-              alt={previewImage.alt}
-              className="max-h-[75vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl border border-emerald-400/30"
-            />
-            <p className="mt-4 text-center text-sm sm:text-base font-semibold text-emerald-100/90 bg-black/60 px-4 py-2 rounded-full border border-emerald-500/20">
+            <img src={previewImage.src} alt={previewImage.alt} className="max-h-[80vh] w-auto mx-auto object-contain rounded-xl" />
+            <div className="p-3 text-center text-xs font-bold text-slate-800">
               {previewImage.title}
-            </p>
+            </div>
           </div>
         </div>
       )}
+
     </div>
   );
 }
