@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import QueryProvider from "@/providers/QueryProvider";
+import FaviconWatcher from "@/components/common/FaviconWatcher";
 
 const skBishal = localFont({
   src: [
@@ -70,6 +71,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261102" />
       </head>
       <body className={`${skBishal.variable} ${hindSiliguri.variable} font-sans`}>
+        <FaviconWatcher />
         <QueryProvider>
           <AuthProvider>
             <LanguageProvider>

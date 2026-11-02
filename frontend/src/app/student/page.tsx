@@ -50,8 +50,8 @@ export default function StudentDashboard() {
 
   if (!isMounted) {
     return (
-      <div className="min-h-screen bg-[#021307] flex items-center justify-center p-8">
-        <div className="w-10 h-10 border-4 border-amber-400/20 border-t-amber-400 rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-8">
+        <div className="w-10 h-10 border-4 border-[#1B4332]/20 border-t-[#1B4332] rounded-full animate-spin" />
       </div>
     );
   }

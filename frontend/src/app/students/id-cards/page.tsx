@@ -107,10 +107,10 @@ export default function BulkIdCardsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 font-sans print:bg-white print:text-black">
+    <div className="min-h-screen bg-[#F8F9FA] text-slate-800 font-sans print:bg-white print:text-black">
       
       {/* ======================= TOP CONTROL BAR (HIDDEN IN PRINT) ======================= */}
-      <header className="print:hidden sticky top-0 z-50 bg-[#031c0b]/95 backdrop-blur-xl border-b border-emerald-500/20 shadow-2xl p-4 sm:px-8">
+      <header className="print:hidden sticky top-0 z-50 bg-[#132A20] backdrop-blur-xl border-b border-[#1F4233] shadow-md p-4 sm:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           
           {/* Left: Back Link & Title */}

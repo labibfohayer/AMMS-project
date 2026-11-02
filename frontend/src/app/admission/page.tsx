@@ -100,25 +100,28 @@ export default function AdmissionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#021307] text-white selection:bg-amber-400 selection:text-black py-8 px-4 sm:px-6 lg:px-8 relative font-sans">
-      {/* Ambient Bokeh Lights (Hidden in Print) */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 print:hidden">
-        <div className="absolute top-0 left-1/4 w-[35rem] h-[35rem] bg-emerald-600/15 rounded-full blur-[140px] animate-pulse-glow" />
-        <div className="absolute top-1/2 -right-20 w-[30rem] h-[30rem] bg-amber-500/10 rounded-full blur-[140px] animate-pulse-glow" />
-      </div>
+    <div className="min-h-screen bg-[#F8F9FA] text-slate-800 selection:bg-[#C5A059]/30 selection:text-slate-900 py-8 px-4 sm:px-6 lg:px-8 relative font-sans">
+      {/* Subtle Islamic Geometric Canvas Background Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-[0.025] z-0 print:hidden"
+        style={{
+          backgroundImage: `radial-gradient(#1B4332 1.5px, transparent 1.5px)`,
+          backgroundSize: '24px 24px',
+        }}
+      />
 
       {/* Top Navbar / Back Link (Hidden in Print) */}
       <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between relative z-20 print:hidden">
         <Link 
           href="/" 
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-emerald-200 text-xs sm:text-sm font-medium backdrop-blur-md transition-all hover:-translate-x-1"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm font-medium shadow-xs transition-all hover:-translate-x-1"
         >
-          <ArrowLeft className="w-4 h-4 text-amber-400" />
+          <ArrowLeft className="w-4 h-4 text-[#C5A059]" />
           <span>প্রধান পাতা</span>
         </Link>
         <Link
           href="/login"
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-semibold transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FAF5EB] hover:bg-[#F3EAD5] border border-[#C5A059]/40 text-[#1B4332] text-xs sm:text-sm font-semibold transition-colors shadow-xs"
         >
           <span>ম্যানেজমেন্ট লগইন</span>
         </Link>
@@ -127,8 +130,8 @@ export default function AdmissionPage() {
       <div className="max-w-4xl mx-auto relative z-10">
         
         {/* HEADER: BIG INSTITUTION TITLE & APPLICATION NOTICE */}
-        <div className="text-center mb-8 bg-gradient-to-b from-[#031c0b] to-[#021307] p-6 sm:p-8 rounded-3xl border border-emerald-500/30 shadow-2xl relative overflow-hidden print:bg-white print:text-black print:border-b-2 print:border-black print:rounded-none print:shadow-none print:p-4">
-          <div className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden p-[2px] bg-gradient-to-tr from-amber-400 to-emerald-400 shadow-xl print:w-16 print:h-16">
+        <div className="text-center mb-8 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-xs relative overflow-hidden print:bg-white print:text-black print:border-b-2 print:border-black print:rounded-none print:shadow-none print:p-4">
+          <div className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden p-[2px] bg-[#C5A059] shadow-md print:w-16 print:h-16">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="/logo.jpg" 
@@ -138,43 +141,43 @@ export default function AdmissionPage() {
           </div>
 
           {/* User's Exact Requirement: Big prominent institution title */}
-          <h1 className="text-2xl sm:text-4xl font-extrabold gold-gradient-text tracking-tight print:text-2xl print:text-black print:font-bold">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#1B4332] tracking-tight print:text-2xl print:text-black print:font-bold">
             আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট
           </h1>
-          <p className="text-xs sm:text-base text-emerald-200/90 font-medium mt-1 tracking-wide print:text-black print:text-xs">
+          <p className="text-xs sm:text-base text-[#C5A059] font-bold mt-1 tracking-wide print:text-black print:text-xs">
             Al Madina Model Madrasa and Research Institute
           </p>
-          <p className="text-xs text-emerald-300/70 mt-1 print:text-gray-700">
+          <p className="text-xs text-slate-500 mt-1 print:text-gray-700">
             ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা • হেল্পলাইন: ০১৭১২-৬৩৩২৬৪
           </p>
 
-          <div className="inline-block mt-4 px-5 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 font-bold text-sm sm:text-base print:bg-gray-100 print:text-black print:border-black">
+          <div className="inline-block mt-4 px-5 py-1.5 rounded-full bg-[#FAF5EB] border border-[#C5A059]/40 text-[#1B4332] font-bold text-sm sm:text-base print:bg-gray-100 print:text-black print:border-black">
             📋 অনলাইন ভর্তি আবেদন ফরম — সেশন ২০২৭
           </div>
         </div>
 
         {/* CONDITION 1: SUCCESSFUL SUBMISSION - DISPLAY APPLICATION SLIP */}
         {submittedData ? (
-          <div className="bg-[#031c0b]/95 border border-emerald-400/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-xl print:bg-white print:text-black print:border print:border-black print:rounded-none print:shadow-none print:p-4">
+          <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-sm relative overflow-hidden print:bg-white print:text-black print:border print:border-black print:rounded-none print:shadow-none print:p-4">
             
             {/* Top Success Badge (Hidden in Print) */}
             <div className="text-center mb-6 print:hidden">
-              <div className="w-14 h-14 bg-emerald-500/20 text-emerald-400 border border-emerald-400/40 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+              <div className="w-14 h-14 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full flex items-center justify-center mx-auto mb-3 shadow-xs">
                 <CheckCircle2 size={32} />
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-white">ভর্তি আবেদন সফলভাবে গৃহীত হয়েছে!</h2>
-              <p className="text-xs sm:text-sm text-emerald-200/80 mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900">ভর্তি আবেদন সফলভাবে গৃহীত হয়েছে!</h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1">
                 নিচের আবেদন স্লিপটি প্রিন্ট অথবা স্ক্রিনশট নিয়ে সংরক্ষণ করুন।
               </p>
             </div>
 
             {/* Official Slip Content */}
-            <div className="p-6 rounded-2xl bg-black/40 border border-emerald-500/25 print:bg-white print:border print:border-gray-400 print:text-black">
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 print:bg-white print:border print:border-gray-400 print:text-black">
               
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-emerald-500/20 print:border-b print:border-black gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 print:border-b print:border-black gap-2">
                 <div className="flex items-center gap-4">
                   {(photoPreview || submittedData.photo) && (
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 border-amber-400 print:border-black shrink-0">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 border-[#C5A059] print:border-black shrink-0">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={photoPreview || submittedData.photo}
@@ -184,71 +187,71 @@ export default function AdmissionPage() {
                     </div>
                   )}
                   <div>
-                    <span className="text-xs text-gray-400 print:text-gray-600 uppercase font-semibold">আবেদন ট্র্যাকিং নম্বর (Application No)</span>
-                    <div className="text-2xl sm:text-3xl font-extrabold gold-gradient-text font-mono print:text-black print:text-2xl">
+                    <span className="text-xs text-slate-500 print:text-gray-600 uppercase font-semibold">আবেদন ট্র্যাকিং নম্বর (Application No)</span>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#1B4332] font-mono print:text-black print:text-2xl">
                       {submittedData.application_no}
                     </div>
                   </div>
                 </div>
-                <div className="text-left sm:text-right text-xs text-emerald-300/80 print:text-gray-700">
+                <div className="text-left sm:text-right text-xs text-slate-500 print:text-gray-700">
                   <p>আবেদনের তারিখ: {new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                  <p className="font-semibold text-amber-300 print:text-black">শিক্ষাবর্ষ: ২০২৭</p>
+                  <p className="font-semibold text-[#1B4332] print:text-black">শিক্ষাবর্ষ: ২০২৭</p>
                 </div>
               </div>
 
               {/* Grid of Student Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs sm:text-sm">
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">শিক্ষার্থীর নাম (বাংলা):</span>
-                  <p className="font-bold text-white print:text-black text-base">{submittedData.name_bn}</p>
+                  <span className="text-slate-500 print:text-gray-600">শিক্ষার্থীর নাম (বাংলা):</span>
+                  <p className="font-bold text-slate-900 print:text-black text-base">{submittedData.name_bn}</p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">শিক্ষার্থীর নাম (English):</span>
-                  <p className="font-bold text-white print:text-black text-base uppercase">{submittedData.name}</p>
+                  <span className="text-slate-500 print:text-gray-600">শিক্ষার্থীর নাম (English):</span>
+                  <p className="font-bold text-slate-900 print:text-black text-base uppercase">{submittedData.name}</p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">কাঙ্ক্ষিত বিভাগ / শ্রেণি:</span>
-                  <p className="font-semibold text-amber-300 print:text-black">{submittedData.desired_program}</p>
+                  <span className="text-slate-500 print:text-gray-600">কাঙ্ক্ষিত বিভাগ / শ্রেণি:</span>
+                  <p className="font-semibold text-[#1B4332] print:text-black">{submittedData.desired_program}</p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">আবাসিক স্ট্যাটাস:</span>
-                  <p className="font-semibold text-white print:text-black">
+                  <span className="text-slate-500 print:text-gray-600">আবাসিক স্ট্যাটাস:</span>
+                  <p className="font-semibold text-slate-900 print:text-black">
                     {submittedData.residential_status === 'residential' ? 'আবাসিক (Residential)' : 'অনাবাসিক (Day Scholar)'}
                   </p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">জন্ম তারিখ:</span>
-                  <p className="font-semibold text-white print:text-black">{submittedData.date_of_birth}</p>
+                  <span className="text-slate-500 print:text-gray-600">জন্ম তারিখ:</span>
+                  <p className="font-semibold text-slate-900 print:text-black">{submittedData.date_of_birth}</p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">রক্তের গ্রুপ:</span>
-                  <p className="font-semibold text-white print:text-black">{submittedData.blood_group || 'N/A'}</p>
+                  <span className="text-slate-500 print:text-gray-600">রক্তের গ্রুপ:</span>
+                  <p className="font-semibold text-slate-900 print:text-black">{submittedData.blood_group || 'N/A'}</p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">পিতার নাম:</span>
-                  <p className="font-semibold text-white print:text-black">{submittedData.father_name_bn || submittedData.father_name}</p>
+                  <span className="text-slate-500 print:text-gray-600">পিতার নাম:</span>
+                  <p className="font-semibold text-slate-900 print:text-black">{submittedData.father_name_bn || submittedData.father_name}</p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">মাতার নাম:</span>
-                  <p className="font-semibold text-white print:text-black">{submittedData.mother_name_bn || submittedData.mother_name}</p>
+                  <span className="text-slate-500 print:text-gray-600">মাতার নাম:</span>
+                  <p className="font-semibold text-slate-900 print:text-black">{submittedData.mother_name_bn || submittedData.mother_name}</p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">অভিভাবকের মোবাইল:</span>
-                  <p className="font-bold text-amber-300 print:text-black font-mono">{submittedData.guardian_phone}</p>
+                  <span className="text-slate-500 print:text-gray-600">অভিভাবকের মোবাইল:</span>
+                  <p className="font-bold text-[#1B4332] print:text-black font-mono">{submittedData.guardian_phone}</p>
                 </div>
                 <div>
-                  <span className="text-gray-400 print:text-gray-600">বর্তমান ঠিকানা:</span>
-                  <p className="font-semibold text-white print:text-black">{submittedData.present_address}</p>
+                  <span className="text-slate-500 print:text-gray-600">বর্তমান ঠিকানা:</span>
+                  <p className="font-semibold text-slate-900 print:text-black">{submittedData.present_address}</p>
                 </div>
               </div>
 
               {/* Instructions Box */}
-              <div className="mt-6 p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/20 text-xs text-emerald-200/90 leading-relaxed print:bg-gray-50 print:border print:border-gray-300 print:text-black">
-                <span className="font-bold text-amber-300 print:text-black">গুরুত্বপূর্ণ নির্দেশনা:</span>
+              <div className="mt-6 p-4 rounded-xl bg-white border border-slate-200 text-xs text-slate-600 leading-relaxed print:bg-gray-50 print:border print:border-gray-300 print:text-black">
+                <span className="font-bold text-[#1B4332] print:text-black">গুরুত্বপূর্ণ নির্দেশনা:</span>
                 <ul className="list-disc list-inside mt-1 space-y-1">
                   <li>আবেদন যাচাই-বাছাইয়ের পর সাক্ষাৎকারের সময়সূচি অভিভাবকের মোবাইল নম্বরে SMS/WhatsApp-এর মাধ্যমে জানানো হবে।</li>
                   <li>মৌখিক পরীক্ষার দিন শিক্ষার্থীর ২ কপি পাসপোর্ট সাইজ ছবি ও জন্ম সনদের ফটোকপি সাথে আনতে হবে।</li>
-                  <li>যেকোনো প্রয়োজনে যোগাযোগ: <strong className="text-white print:text-black">০১৭১২-৬৩৩২৬৪</strong> (ক্যাম্পাস: ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা)।</li>
+                  <li>যেকোনো প্রয়োজনে যোগাযোগ: <strong className="text-slate-900 print:text-black">০১৭১২-৬৩৩২৬৪</strong> (ক্যাম্পাস: ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা)।</li>
                 </ul>
               </div>
 
@@ -271,7 +274,7 @@ export default function AdmissionPage() {
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 print:hidden">
               <button
                 onClick={handlePrint}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-bold text-sm shadow-lg shadow-amber-950/40 transition-all active:scale-95"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1B4332] hover:bg-[#132E23] text-white font-bold text-sm shadow-md transition-all active:scale-95"
               >
                 <Printer size={18} />
                 <span>স্লিপ প্রিন্ট করুন / PDF ডাউনলোড</span>
@@ -279,7 +282,7 @@ export default function AdmissionPage() {
 
               <button
                 onClick={() => setSubmittedData(null)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/[0.08] hover:bg-white/[0.15] border border-white/20 text-white font-semibold text-sm transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 font-semibold text-sm transition-all"
               >
                 <RefreshCw size={16} />
                 <span>নতুন আরেকটি আবেদন করুন</span>
@@ -335,13 +338,13 @@ export default function AdmissionPage() {
             
             {/* SECTION 1: STUDENT INFO */}
             <div>
-              <div className="flex items-center gap-2 pb-3 mb-5 border-b border-emerald-500/20 text-emerald-300 font-bold text-base sm:text-lg">
-                <User className="text-amber-400 w-5 h-5" />
+              <div className="flex items-center gap-2 pb-3 mb-5 border-b border-slate-200 text-[#1B4332] font-bold text-base sm:text-lg">
+                <User className="text-[#C5A059] w-5 h-5" />
                 <span>১. শিক্ষার্থীর ব্যক্তিগত তথ্য</span>
               </div>
 
               {/* Photo Upload Box (Mobile Camera / PC Files) */}
-              <div className="mb-5 p-4 rounded-2xl bg-white/[0.04] border border-emerald-500/20 flex flex-col sm:flex-row items-center gap-4">
+              <div className="mb-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center gap-4">
                 <div className="relative group shrink-0">
                   {photoPreview ? (
                     <div className="relative">
@@ -349,7 +352,7 @@ export default function AdmissionPage() {
                       <img
                         src={photoPreview}
                         alt="শিক্ষার্থীর ছবি"
-                        className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover border-2 border-amber-400 shadow-md"
+                        className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover border-2 border-[#C5A059] shadow-md"
                       />
                       <button
                         type="button"
@@ -361,28 +364,28 @@ export default function AdmissionPage() {
                       </button>
                     </div>
                   ) : (
-                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/[0.03] border-2 border-dashed border-emerald-500/40 flex flex-col items-center justify-center text-emerald-300">
-                      <Camera className="w-8 h-8 text-amber-400/80 mb-1" />
-                      <span className="text-[10px] font-bold text-emerald-200/60">ছবি নেই</span>
+                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white border-2 border-dashed border-slate-300 flex flex-col items-center justify-center text-slate-400">
+                      <Camera className="w-8 h-8 text-slate-400 mb-1" />
+                      <span className="text-[10px] font-bold text-slate-400">ছবি নেই</span>
                     </div>
                   )}
                 </div>
 
                 <div className="flex-1 text-center sm:text-left space-y-1.5">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <h4 className="text-xs sm:text-sm font-bold text-white">
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900">
                       শিক্ষার্থীর ছবি আপলোড (পাসপোর্ট সাইজ)
                     </h4>
-                    <span className="text-[10px] font-semibold text-amber-300 bg-amber-400/15 border border-amber-400/30 px-2 py-0.5 rounded-full inline-block">
+                    <span className="text-[10px] font-semibold text-[#1B4332] bg-[#FAF5EB] border border-[#C5A059]/30 px-2 py-0.5 rounded-full inline-block">
                       ডিজিটাল আইডি ও ভর্তি ফর্ম
                     </span>
                   </div>
-                  <p className="text-[11px] text-emerald-200/70">
+                  <p className="text-[11px] text-slate-500">
                     মোবাইল ক্যামেরা দিয়ে সরাসরি ছবি তুলুন অথবা মোবাইল/পিসির ফাইল থেকে সিলেক্ট করুন (সর্বোচ্চ 5MB)।
                   </p>
                   <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
-                    <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-sm cursor-pointer transition active:scale-95">
-                      <Camera className="w-3.5 h-3.5 text-amber-300" />
+                    <label className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#1B4332] hover:bg-[#132E23] text-white text-xs font-bold shadow-xs cursor-pointer transition active:scale-95">
+                      <Camera className="w-3.5 h-3.5 text-[#C5A059]" />
                       <span>{photoPreview ? 'ছবি পরিবর্তন করুন' : 'ক্যামেরা বা ফাইল থেকে ছবি আপলোড'}</span>
                       <input
                         type="file"
@@ -395,7 +398,7 @@ export default function AdmissionPage() {
                       <button
                         type="button"
                         onClick={handleRemovePhoto}
-                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-rose-500/20 border border-white/10 text-rose-300 text-xs font-bold transition"
+                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-200 hover:bg-rose-100 border border-slate-300 text-rose-600 text-xs font-bold transition"
                       >
                         <X className="w-3.5 h-3.5" />
                         <span>ছবি মুছুন</span>
@@ -408,8 +411,8 @@ export default function AdmissionPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Name Bengali */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    শিক্ষার্থীর নাম (বাংলায়) <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    শিক্ষার্থীর নাম (বাংলায়) <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="text"
@@ -418,14 +421,14 @@ export default function AdmissionPage() {
                     onChange={handleChange}
                     placeholder="যেমন: আবদুল্লাহ আল মাহদী"
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
                 </div>
 
                 {/* Name English */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    শিক্ষার্থীর নাম (English in Capital) <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    শিক্ষার্থীর নাম (English in Capital) <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="text"
@@ -434,14 +437,14 @@ export default function AdmissionPage() {
                     onChange={handleChange}
                     placeholder="e.g. ABDULLAH AL MAHDI"
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 uppercase"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332] uppercase"
                   />
                 </div>
 
                 {/* Date of Birth */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    জন্মতারিখ (Date of Birth) <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    জন্মতারিখ (Date of Birth) <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="date"
@@ -449,20 +452,20 @@ export default function AdmissionPage() {
                     value={formData.date_of_birth}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
                 </div>
 
                 {/* Blood Group */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     রক্তের গ্রুপ (Blood Group)
                   </label>
                   <select
                     name="blood_group"
                     value={formData.blood_group}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#031c0b] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   >
                     <option value="A+">A+ (A Positive)</option>
                     <option value="A-">A- (A Negative)</option>
@@ -477,7 +480,7 @@ export default function AdmissionPage() {
 
                 {/* Birth Reg No */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     জন্ম নিবন্ধন নম্বর (১৭ ডিজিট)
                   </label>
                   <input
@@ -486,13 +489,13 @@ export default function AdmissionPage() {
                     value={formData.birth_reg_no}
                     onChange={handleChange}
                     placeholder="জন্ম সনদ নম্বর"
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
                 </div>
 
                 {/* Previous School */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     পূর্ববর্তী স্কুল / মাদ্রাসার নাম (যদি থাকে)
                   </label>
                   <input
@@ -501,7 +504,7 @@ export default function AdmissionPage() {
                     value={formData.previous_school}
                     onChange={handleChange}
                     placeholder="আগে যেখানে পড়তো"
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
                 </div>
               </div>
@@ -509,8 +512,8 @@ export default function AdmissionPage() {
 
             {/* SECTION 2: ADMISSION PROGRAM & CLASS */}
             <div>
-              <div className="flex items-center gap-2 pb-3 mb-5 border-b border-emerald-500/20 text-emerald-300 font-bold text-base sm:text-lg">
-                <BookOpen className="text-amber-400 w-5 h-5" />
+              <div className="flex items-center gap-2 pb-3 mb-5 border-b border-slate-200 text-[#1B4332] font-bold text-base sm:text-lg">
+                <BookOpen className="text-[#C5A059] w-5 h-5" />
                 <span>২. যে বিভাগে ভর্তি হতে ইচ্ছুক</span>
               </div>
 
@@ -524,7 +527,7 @@ export default function AdmissionPage() {
                     name="desired_program"
                     value={formData.desired_program}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#031c0b] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 font-medium"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332] font-medium"
                   >
                     <optgroup label="জেনারেল একাডেমি (প্লে থেকে ষষ্ঠ)">
                       <option value="প্লে-গ্রুপ">প্লে-গ্রুপ (Play-Group)</option>
@@ -546,14 +549,14 @@ export default function AdmissionPage() {
 
                 {/* Residential / Day Scholar */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    আবাসিক নাকি অনাবাসিক? <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    আবাসিক নাকি অনাবাসিক? <span className="text-[#C5A059]">*</span>
                   </label>
                   <select
                     name="residential_status"
                     value={formData.residential_status}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#031c0b] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 font-medium"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332] font-medium"
                   >
                     <option value="day">অনাবাসিক (Day Scholar - ডে-কেয়ার)</option>
                     <option value="residential">আবাসিক (Residential - হোস্টেল সুবিধা)</option>
@@ -564,16 +567,16 @@ export default function AdmissionPage() {
 
             {/* SECTION 3: GUARDIAN INFO */}
             <div>
-              <div className="flex items-center gap-2 pb-3 mb-5 border-b border-emerald-500/20 text-emerald-300 font-bold text-base sm:text-lg">
-                <Phone className="text-amber-400 w-5 h-5" />
+              <div className="flex items-center gap-2 pb-3 mb-5 border-b border-slate-200 text-[#1B4332] font-bold text-base sm:text-lg">
+                <Phone className="text-[#C5A059] w-5 h-5" />
                 <span>৩. পিতা, মাতা ও অভিভাবকের তথ্য</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Father's Name BN */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    পিতার নাম (বাংলায়) <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    পিতার নাম (বাংলায়) <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="text"
@@ -582,14 +585,14 @@ export default function AdmissionPage() {
                     onChange={handleChange}
                     placeholder="পিতার নাম বাংলায়"
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
                 </div>
 
                 {/* Father's Name EN */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    Father&apos;s Name (in English) <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Father&apos;s Name (in English) <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="text"
@@ -598,14 +601,14 @@ export default function AdmissionPage() {
                     onChange={handleChange}
                     placeholder="Father's name in English"
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 uppercase"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332] uppercase"
                   />
                 </div>
 
                 {/* Mother's Name BN */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    মাতার নাম (বাংলায়) <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    মাতার নাম (বাংলায়) <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="text"
@@ -614,14 +617,14 @@ export default function AdmissionPage() {
                     onChange={handleChange}
                     placeholder="মাতার নাম বাংলায়"
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
                 </div>
 
                 {/* Mother's Name EN */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    Mother&apos;s Name (in English) <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Mother&apos;s Name (in English) <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="text"
@@ -630,14 +633,14 @@ export default function AdmissionPage() {
                     onChange={handleChange}
                     placeholder="Mother's name in English"
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 uppercase"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332] uppercase"
                   />
                 </div>
 
                 {/* Guardian Phone Number */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    অভিভাবকের মোবাইল নম্বর (WhatsApp) <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    অভিভাবকের মোবাইল নম্বর (WhatsApp) <span className="text-[#C5A059]">*</span>
                   </label>
                   <input
                     type="tel"
@@ -646,20 +649,20 @@ export default function AdmissionPage() {
                     onChange={handleChange}
                     placeholder="01XXXXXXXXX"
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
                 </div>
 
                 {/* Guardian Relationship */}
                 <div>
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     অভিভাবকের সাথে সম্পর্ক
                   </label>
                   <select
                     name="guardian_relationship"
                     value={formData.guardian_relationship}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#031c0b] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   >
                     <option value="পিতা">পিতা</option>
                     <option value="মাতা">মাতা</option>
@@ -671,8 +674,8 @@ export default function AdmissionPage() {
 
                 {/* Present Address */}
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-semibold text-emerald-100 mb-1.5">
-                    বর্তমান যোগাযোগের ঠিকানা <span className="text-amber-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    বর্তমান যোগাযোগের ঠিকানা <span className="text-[#C5A059]">*</span>
                   </label>
                   <textarea
                     rows={2}
@@ -681,22 +684,22 @@ export default function AdmissionPage() {
                     onChange={handleChange}
                     placeholder="বাসা নং, রোড নং, এলাকা, থানা, জেলা..."
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/10 text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#1B4332] focus:bg-white focus:ring-1 focus:ring-[#1B4332]"
                   />
                 </div>
               </div>
             </div>
 
             {/* SUBMIT BUTTON */}
-            <div className="pt-4 border-t border-emerald-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-xs text-emerald-200/60 text-center sm:text-left">
+            <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-xs text-slate-500 text-center sm:text-left">
                 * তথ্যগুলো যাচাই করে &ldquo;আবেদন জমা দিন&rdquo; বাটনে ক্লিক করুন।
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-amber-500 hover:from-emerald-500 hover:to-amber-400 text-white font-bold text-base shadow-lg shadow-emerald-950/60 hover:shadow-emerald-500/25 transition-all active:scale-95 disabled:opacity-60"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#1B4332] hover:bg-[#132E23] text-white font-bold text-base shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-60 cursor-pointer"
               >
                 {loading ? (
                   <>
@@ -706,7 +709,7 @@ export default function AdmissionPage() {
                 ) : (
                   <>
                     <span>ভর্তি আবেদন জমা দিন</span>
-                    <Sparkles className="w-4 h-4 text-amber-200" />
+                    <Sparkles className="w-4 h-4 text-[#C5A059]" />
                   </>
                 )}
               </button>
