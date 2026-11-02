@@ -8,7 +8,7 @@ export default function AppLayout({ children, title = 'AMMS' }: { children: Reac
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#FAF6ED] md:flex font-sans">
+    <div className="min-h-screen bg-[#F8F9FA] md:flex font-sans text-slate-800">
       <BottomNav mobileOpen={mobileMenuOpen} setMobileOpen={setMobileMenuOpen} />
       <div className="flex-1 md:ml-64 flex flex-col min-h-screen transition-all duration-300">
         <TopBar 

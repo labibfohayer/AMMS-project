@@ -59,7 +59,7 @@ export default function TopBar({
             {isMobileMenuOpen ? <X size={22} className="text-emerald-700" /> : <Menu size={22} className="text-gray-800" />}
           </button>
 
-          <Link href="/dashboard" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1px] bg-gradient-to-tr from-amber-400 to-emerald-500 flex items-center justify-center md:hidden shrink-0 shadow-sm">
+          <Link href="/dashboard" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1.5px] bg-[#C5A059] flex items-center justify-center md:hidden shrink-0 shadow-sm">
             <img 
               src="/logo.jpg" 
               alt="আল মদিনা মডেল মাদ্রাসা" 
@@ -112,7 +112,7 @@ export default function TopBar({
           <Link 
             href="/profile" 
             title="প্রোফাইল সেটিংস"
-            className="w-9 h-9 rounded-full p-[1px] bg-gradient-to-tr from-amber-400 to-emerald-500 overflow-hidden flex items-center justify-center cursor-pointer shadow-sm hover:ring-2 hover:ring-emerald-400 transition-all shrink-0"
+            className="w-9 h-9 rounded-full p-[1.5px] bg-[#C5A059] overflow-hidden flex items-center justify-center cursor-pointer shadow-sm hover:ring-2 hover:ring-[#C5A059] transition-all shrink-0"
           >
             {user?.photo ? (
               <img 

@@ -38,20 +38,21 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
-      { url: "/logo.jpg", type: "image/jpeg", sizes: "1024x1024" },
+      { url: "/favicon-32x32.png?v=20261102", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png?v=20261102", type: "image/png", sizes: "16x16" },
+      { url: "/logo.jpg?v=20261102", type: "image/jpeg", sizes: "512x512" },
+      { url: "/icon.png?v=20261102", type: "image/png", sizes: "512x512" },
+      { url: "/favicon.ico?v=20261102", sizes: "any" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=20261102", sizes: "180x180", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "/favicon-32x32.png?v=20261102",
   },
 };
 
 export const viewport = {
-  themeColor: "#2E7D32",
+  themeColor: "#1B4332",
 };
 
 export default function RootLayout({
@@ -61,6 +62,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="bn" suppressHydrationWarning>
+      <head>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261102" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261102" />
+        <link rel="icon" type="image/jpeg" href="/logo.jpg?v=20261102" />
+        <link rel="shortcut icon" href="/favicon-32x32.png?v=20261102" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261102" />
+      </head>
       <body className={`${skBishal.variable} ${hindSiliguri.variable} font-sans`}>
         <QueryProvider>
           <AuthProvider>

@@ -47,11 +47,9 @@ export default function Dashboard() {
   return (
     <AppLayout title={isBangla ? 'ড্যাশবোর্ড' : 'Dashboard'}>
       {/* Executive Welcome Hero Banner */}
-      <div className="relative mb-8 rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-[#032410] via-[#053d1b] to-[#032410] text-white border border-emerald-500/25 shadow-xl overflow-hidden">
-        {/* Subtle Background Glow & Pattern */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="relative mb-8 rounded-3xl p-6 sm:p-8 bg-[#132A20] text-white border border-[#1F4233] shadow-lg overflow-hidden">
         <div 
-          className="absolute inset-0 opacity-[0.04] pointer-events-none" 
+          className="absolute inset-0 opacity-[0.03] pointer-events-none" 
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20 Z' fill='%23ffffff'/%3E%3C/svg%3E")`,
           }}
@@ -59,20 +57,20 @@ export default function Dashboard() {
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4 sm:gap-5">
-            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-[2px] bg-gradient-to-tr from-amber-400 via-emerald-400 to-amber-500 shadow-xl shadow-emerald-950/80 shrink-0">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-[2px] bg-[#C5A059] shadow-md shrink-0">
               <img 
                 src={user.role === 'managing_director' ? '/md.jpg' : '/principal.jpg'} 
                 alt={user.name_bn || (user.role === 'managing_director' ? 'লাবিব ফোহায়ের' : 'মাওলানা ওমর ফারুক')} 
                 className="w-full h-full object-cover object-top rounded-2xl border border-white/20"
               />
-              <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-2 border-[#032410] rounded-full flex items-center justify-center text-[10px] text-white font-bold" title={isBangla ? "সক্রিয়" : "Active"}>
+              <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-2 border-[#132A20] rounded-full flex items-center justify-center text-[10px] text-white font-bold" title={isBangla ? "সক্রিয়" : "Active"}>
                 ✓
               </span>
             </div>
 
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-2">
-                <Sparkles size={13} className="text-amber-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#E5C985] text-xs font-semibold mb-2">
+                <Sparkles size={13} className="text-[#C5A059]" />
                 <span>
                   {user.role === 'managing_director' 
                     ? t('dashboard.mdView')
@@ -87,7 +85,7 @@ export default function Dashboard() {
               </div>
               
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">
-                {t('dashboard.greeting')} <span className="gold-gradient-text">
+                {t('dashboard.greeting')} <span className="text-[#E5C985]">
                   {isBangla 
                     ? (user.name_bn || (user.role === 'managing_director' ? 'লাবিব ফোহায়ের' : 'মাওলানা ওমর ফারুক মুজাহিদী'))
                     : (user.name || (user.role === 'managing_director' ? 'Labib Fohayer' : 'Principal Omar Faruk Mujahidi'))}!
@@ -103,7 +101,7 @@ export default function Dashboard() {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/students/add"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black shadow-lg shadow-amber-950/40 transition-all hover:-translate-y-0.5 active:scale-95"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#C5A059] hover:bg-[#B38E46] text-[#0D2319] shadow-md transition-all active:scale-95"
             >
               <UserPlus size={16} />
               <span>{isBangla ? 'নতুন শিক্ষার্থী ভর্তি' : 'New Admission'}</span>
@@ -111,7 +109,7 @@ export default function Dashboard() {
             
             <Link
               href="/attendance"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/15 border border-white/20 text-white backdrop-blur-md transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/15 border border-white/20 text-white transition-all"
             >
               <UserCheck size={16} className="text-emerald-300" />
               <span>{isBangla ? 'উপস্থিতি নিন' : 'Take Attendance'}</span>

@@ -78,48 +78,40 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 md:p-8 bg-[#021307] overflow-hidden">
-      {/* Ambient 3D Bokeh Lights & Subtle Grid Background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute top-1/2 -right-40 w-[30rem] h-[30rem] bg-amber-500/15 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '3s' }} />
-        <div className="absolute -bottom-40 left-1/3 w-[28rem] h-[28rem] bg-emerald-700/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '6s' }} />
-        
-        {/* Subtle Islamic Geometric Mesh Overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.04]" 
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2334d399' stroke-width='1'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z'/%3E%3Cpath d='M40 15 L65 40 L40 65 L15 40 Z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+    <div className="min-h-screen relative flex items-center justify-center p-4 md:p-8 bg-[#F8F9FA] overflow-hidden">
+      {/* Subtle Islamic Geometric Mesh Overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231B4332' stroke-width='1'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
 
       {/* Top Floating Back Link & Language Switcher */}
       <div className="absolute top-6 left-6 z-30">
         <Link 
           href="/" 
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-emerald-200 text-sm font-medium backdrop-blur-md transition-all hover:-translate-x-1"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-sm font-semibold shadow-xs transition-all hover:-translate-x-0.5"
         >
-          <ArrowLeft className="w-4 h-4 text-amber-400" />
+          <ArrowLeft className="w-4 h-4 text-[#C5A059]" />
           <span>{isBangla ? 'প্রধান পাতা' : 'Home'}</span>
         </Link>
       </div>
 
       <div className="absolute top-6 right-6 z-30">
-        <LanguageSwitcher variant="dark" />
+        <LanguageSwitcher variant="light" />
       </div>
 
-      {/* Main Glassmorphic Card */}
+      {/* Main Institutional Card */}
       <div className="relative z-20 w-full max-w-md mx-auto">
-        <div className="glass-card rounded-3xl p-6 sm:p-10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] border border-emerald-500/25 relative overflow-hidden backdrop-blur-2xl">
-          {/* Subtle Top Specular Light Beam */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400/80 to-transparent" />
+        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-200/90 relative overflow-hidden">
+          {/* Subtle Top Brass Light Beam */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent" />
 
-          {/* 3D Animated Logo Emblem */}
+          {/* Logo Emblem */}
           <div className="flex flex-col items-center text-center mb-8">
-            <div className="relative mb-4 group cursor-pointer">
-              <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500 rounded-full blur-lg opacity-50 group-hover:opacity-80 transition duration-500 animate-pulse-glow" />
-              <div className="relative w-24 h-24 rounded-full p-[2px] bg-gradient-to-tr from-amber-400 via-amber-300 to-emerald-400 shadow-2xl overflow-hidden">
+            <div className="relative mb-3 group">
+              <div className="relative w-20 h-20 rounded-full p-[2px] bg-[#C5A059] shadow-md overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo.jpg"
@@ -129,15 +121,15 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-300 text-xs font-medium mb-2.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F4EEDF] border border-[#E2D4BA] text-[#8C6D28] text-xs font-semibold mb-2">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
               <span>নিরাপদ লগইন পোর্টাল</span>
             </div>
 
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight gold-gradient-text">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#16382C]">
               আল-মদিনা মডেল মাদ্রাসা
             </h1>
-            <p className="text-xs sm:text-sm text-emerald-200/80 mt-1">
+            <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
               এন্ড রিসার্চ ইনস্টিটিউট • ডিজিটাল ম্যানেজমেন্ট
             </p>
           </div>
@@ -146,17 +138,17 @@ export default function LoginPage() {
           <form onSubmit={handleLogin} className="space-y-4">
             {/* Phone / User ID */}
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-emerald-200/90 flex items-center justify-between">
+              <label className="text-xs font-bold text-gray-700 flex items-center justify-between">
                 <span>{isBangla ? 'মোবাইল নম্বর / স্টুডেন্ট আইডি' : 'Mobile Number / Student ID'}</span>
               </label>
               <div className="relative group">
-                <User className="absolute left-3.5 top-3.5 w-5 h-5 text-emerald-400/60 group-focus-within:text-amber-400 transition-colors" />
+                <User className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#1B4332] transition-colors" />
                 <input
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder={isBangla ? "017XXXXXXXX বা স্টুডেন্ট আইডি" : "017XXXXXXXX or Student ID"}
-                  className="w-full pl-11 pr-4 py-3 bg-white/[0.06] hover:bg-white/[0.08] focus:bg-black/40 border border-white/10 focus:border-amber-400/80 rounded-xl text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#1B4332] rounded-xl text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#1B4332]/20 transition-all font-medium"
                   required
                 />
               </div>
@@ -164,23 +156,23 @@ export default function LoginPage() {
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-emerald-200/90 flex items-center justify-between">
+              <label className="text-xs font-bold text-gray-700 flex items-center justify-between">
                 <span>{isBangla ? 'পাসওয়ার্ড' : 'Password'}</span>
               </label>
               <div className="relative group">
-                <Lock className="absolute left-3.5 top-3.5 w-5 h-5 text-emerald-400/60 group-focus-within:text-amber-400 transition-colors" />
+                <Lock className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-[#1B4332] transition-colors" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={isBangla ? "আপনার পাসওয়ার্ড লিখুন" : "Enter your password"}
-                  className="w-full pl-11 pr-12 py-3 bg-white/[0.06] hover:bg-white/[0.08] focus:bg-black/40 border border-white/10 focus:border-amber-400/80 rounded-xl text-white placeholder-emerald-100/30 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all"
+                  className="w-full pl-11 pr-12 py-3 bg-slate-50 focus:bg-white border border-slate-200 focus:border-[#1B4332] rounded-xl text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#1B4332]/20 transition-all font-medium"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-3.5 text-emerald-400/60 hover:text-amber-400 transition-colors"
+                  className="absolute right-3.5 top-3.5 text-gray-400 hover:text-[#1B4332] transition-colors cursor-pointer"
                   aria-label="Toggle password visibility"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -192,7 +184,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 mt-2 rounded-xl text-white font-bold text-base bg-gradient-to-r from-emerald-600 via-emerald-500 to-amber-500 hover:from-emerald-500 hover:to-amber-400 active:scale-[0.99] shadow-lg shadow-emerald-950/60 hover:shadow-emerald-500/25 transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2"
+              className="w-full py-3.5 mt-2 rounded-xl text-white font-bold text-base bg-[#1B4332] hover:bg-[#16382C] active:scale-[0.99] shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
             >
               {loading ? (
                 <>
@@ -202,22 +194,22 @@ export default function LoginPage() {
               ) : (
                 <>
                   <span>{isBangla ? 'লগ-ইন করুন' : 'Log In'}</span>
-                  <Sparkles className="w-4 h-4 text-amber-200" />
+                  <Sparkles className="w-4 h-4 text-[#C5A059]" />
                 </>
               )}
             </button>
           </form>
 
           {/* Student & Guardian Instruction Helper Box */}
-          <div className="mt-6 p-3.5 rounded-2xl bg-white/[0.04] border border-emerald-500/20 flex items-start gap-3">
-            <div className="p-2 rounded-xl bg-amber-400/10 text-amber-400 shrink-0">
+          <div className="mt-6 p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-100 flex items-start gap-3">
+            <div className="p-2 rounded-xl bg-emerald-100 text-[#1B4332] shrink-0">
               <GraduationCap className="w-5 h-5" />
             </div>
-            <div className="text-xs leading-relaxed text-emerald-100/80">
-              <span className="font-semibold text-amber-300">
+            <div className="text-xs leading-relaxed text-emerald-950">
+              <span className="font-bold text-[#16382C]">
                 {isBangla ? 'শিক্ষার্থীদের জন্য নির্দেশনা:' : 'Instructions for Students:'}
               </span>
-              <p className="mt-0.5">
+              <p className="mt-0.5 text-emerald-900/80">
                 {isBangla 
                   ? 'স্টুডেন্ট আইডি ও পাসওয়ার্ড হিসেবে জন্মতারিখ (DDMMYYYY) দিয়ে সহজেই লগইন করা যাবে।' 
                   : 'Log in using your Student ID and Date of Birth (DDMMYYYY) as password.'}
@@ -226,7 +218,7 @@ export default function LoginPage() {
           </div>
 
           {/* Footer Info */}
-          <div className="mt-6 text-center text-xs text-emerald-200/50 space-y-1">
+          <div className="mt-6 text-center text-xs text-slate-400 space-y-1 font-medium">
             <p>{isBangla ? 'ক-৭৫/২, মহাখালী দক্ষিণপাড়া, বনানী, ঢাকা • ফোন: ০১৭১২-৬৩৩২৬৪' : 'Ka-75/2, Mohakhali, Banani, Dhaka • Phone: 01712-633264'}</p>
             <p>{isBangla ? '© ২০২৬-২০২৭ আল-মদিনা মডেল মাদ্রাসা এন্ড রিসার্চ ইনস্টিটিউট' : '© 2026-2027 Al-Madinah Model Madrasah & Research Institute'}</p>
           </div>
