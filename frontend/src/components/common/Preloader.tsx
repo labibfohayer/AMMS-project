@@ -34,39 +34,50 @@ export default function Preloader() {
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
-    // 2. Handwriting / Signature Writing Cadence (Starts at 120ms)
+    // 2. Handwriting / Signature Writing Cadence (Graceful, deliberate slow penmanship)
     let current = 0;
+    let writeInterval: ReturnType<typeof setInterval> | null = null;
     const writeStart = setTimeout(() => {
-      const charDelay = isBangla ? 18 : 13;
-      const interval = setInterval(() => {
+      // Slower, smooth calligraphy stroke delay: 56ms for Bengali graphemes, 36ms for English letters
+      const charDelay = isBangla ? 56 : 36;
+      writeInterval = setInterval(() => {
         current++;
         setCharIndex(current);
         if (current >= graphemes.length) {
-          clearInterval(interval);
+          if (writeInterval) clearInterval(writeInterval);
         }
       }, charDelay);
+    }, 150);
 
-      return () => clearInterval(interval);
-    }, 120);
-
-    // 3. Exact visible duration before smooth fade-out starts (2.8s)
+    // 3. Exact visible duration before smooth fade-out starts (~4.6s total: ~3.6s writing + ~1.0s reading pause)
     const fadeTimer = setTimeout(() => {
       setIsFading(true);
-    }, 2800);
+    }, 4600);
 
-    // 4. Complete fade-out after 3.3s and restore page scrolling
+    // 4. Complete fade-out after ~5.2s and restore page scrolling
     const unmountTimer = setTimeout(() => {
       setIsVisible(false);
       document.body.style.overflow = prevOverflow || '';
-    }, 3350);
+    }, 5200);
 
     return () => {
       clearTimeout(writeStart);
+      if (writeInterval) clearInterval(writeInterval);
       clearTimeout(fadeTimer);
       clearTimeout(unmountTimer);
       document.body.style.overflow = prevOverflow || '';
     };
   }, [graphemes.length, isBangla]);
+
+  const handleDismiss = () => {
+    setIsFading(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+      }
+    }, 500);
+  };
 
   if (!isVisible) return null;
 
@@ -76,7 +87,8 @@ export default function Preloader() {
   return (
     <div
       aria-label="Welcome Splash Screen"
-      className={`fixed inset-0 w-screen h-screen z-[999999] flex flex-col items-center justify-center select-none transition-all duration-500 ease-in-out ${
+      onClick={handleDismiss}
+      className={`fixed inset-0 w-screen h-screen z-[999999] flex flex-col items-center justify-center select-none transition-all duration-600 ease-in-out cursor-pointer ${
         isFading ? 'opacity-0 pointer-events-none scale-[1.01]' : 'opacity-100 pointer-events-auto scale-100'
       }`}
       style={{
@@ -151,12 +163,12 @@ export default function Preloader() {
           <span className="h-px w-8 sm:w-12 bg-emerald-300/60" />
         </div>
 
-        {/* Smooth Linear 2.7s Progress Indicator */}
+        {/* Smooth Linear 4.6s Progress Indicator */}
         <div className="mt-6 w-44 sm:w-64 h-1 bg-emerald-100/90 rounded-full overflow-hidden shadow-inner">
           <div
             className="h-full bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-700 rounded-full"
             style={{
-              animation: 'preloaderProgressBar 2.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+              animation: 'preloaderProgressBar 4.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
             }}
           />
         </div>
