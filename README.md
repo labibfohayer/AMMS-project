@@ -1,5 +1,7 @@
 # AMMS - Al Modina Model Madrasah & Research Institute Management System
 
+[![Live Production Portal](https://img.shields.io/badge/Live_Portal-almadinamadrasa.pages.dev-success?style=for-the-badge&logo=cloudflare&logoColor=white)](https://almadinamadrasa.pages.dev/)
+
 An enterprise-grade, full-stack educational institution management platform and Progressive Web Application (PWA). Engineered with a Django REST Framework backend, a Next.js 16 frontend, and a Node.js WhatsApp automation microservice.
 
 ---
@@ -133,7 +135,7 @@ cd ../frontend
 npm install
 npm run dev
 ```
-The frontend portal will be live at `http://localhost:3000`.
+The frontend portal will run locally at `http://localhost:3000`. The official live production portal is deployed at **[almadinamadrasa.pages.dev](https://almadinamadrasa.pages.dev/)**.
 
 ### 4. WhatsApp Service Setup (Optional)
 ```bash
