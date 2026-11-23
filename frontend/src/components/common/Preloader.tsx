@@ -20,6 +20,9 @@ export default function Preloader() {
     // 1. Lock scrolling on body while preloader is active
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    if (typeof window !== 'undefined' && (window as any).lenis) {
+      (window as any).lenis.stop();
+    }
 
     // 2. Smooth, graceful upward float entrance from bottom
     const enterTimer = setTimeout(() => {
@@ -35,6 +38,9 @@ export default function Preloader() {
     const unmountTimer = setTimeout(() => {
       setIsVisible(false);
       document.body.style.overflow = prevOverflow || '';
+      if (typeof window !== 'undefined' && (window as any).lenis) {
+        (window as any).lenis.start();
+      }
     }, 4450);
 
     return () => {
@@ -42,6 +48,9 @@ export default function Preloader() {
       clearTimeout(fadeTimer);
       clearTimeout(unmountTimer);
       document.body.style.overflow = prevOverflow || '';
+      if (typeof window !== 'undefined' && (window as any).lenis) {
+        (window as any).lenis.start();
+      }
     };
   }, []);
 
@@ -51,6 +60,9 @@ export default function Preloader() {
       setIsVisible(false);
       if (typeof document !== 'undefined') {
         document.body.style.overflow = '';
+      }
+      if (typeof window !== 'undefined' && (window as any).lenis) {
+        (window as any).lenis.start();
       }
     }, 450);
   };
