@@ -574,6 +574,69 @@ html[lang="en"] .font-cursive-en span,
   }
 }
 
+/* 💫 Preloader 3D Flip Line Animations */
+@keyframes preloaderFlipDown {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) rotateX(70deg) translateY(-22px);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0deg) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes preloaderFlipUp {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-70deg) translateY(26px);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0deg) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes preloaderFlipIn {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) rotateX(60deg) translateY(18px);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0deg) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes preloaderBadgeFade {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @keyframes preloaderAura {
   0%, 100% {
     transform: scale(1.05);
