@@ -559,6 +559,21 @@ html[lang="en"] .font-cursive-en span,
   }
 }
 
+@keyframes preloaderWaveFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-6px) rotate(-0.25deg);
+  }
+  50% {
+    transform: translateY(3px) rotate(0.2deg);
+  }
+  75% {
+    transform: translateY(-4px) rotate(-0.1deg);
+  }
+}
+
 @keyframes preloaderAura {
   0%, 100% {
     transform: scale(1.05);
